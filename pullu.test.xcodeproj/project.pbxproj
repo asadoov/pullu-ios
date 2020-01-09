@@ -18,6 +18,8 @@
 		B6951DC423C503230020C7EE /* logIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC323C503230020C7EE /* logIn.swift */; };
 		B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC523C503EE0020C7EE /* dbSelect.swift */; };
 		B6951DC823C507570020C7EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC723C507570020C7EE /* User.swift */; };
+		B6EEC70F23C76A5300B9AEC9 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */; };
+		B6EEC71323C76DA200B9AEC9 /* ConnectionCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		B6951DC523C503EE0020C7EE /* dbSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbSelect.swift; sourceTree = "<group>"; };
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
+		B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheckController.swift; sourceTree = "<group>"; };
 		F1EF8223C6CF9078A62CDA7C /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,9 +75,9 @@
 		0458299923C452D3004F6FA9 /* pullu.test */ = {
 			isa = PBXGroup;
 			children = (
-				045829A023C452D3004F6FA9 /* Main.storyboard */,
 				045829A623C452D5004F6FA9 /* Assets.xcassets */,
 				045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */,
+				045829A023C452D3004F6FA9 /* Main.storyboard */,
 				045829AB23C452D5004F6FA9 /* Info.plist */,
 				045829A323C452D3004F6FA9 /* pullu_test.xcdatamodeld */,
 				B6951DC323C503230020C7EE /* logIn.swift */,
@@ -82,6 +86,8 @@
 				B6951DC523C503EE0020C7EE /* dbSelect.swift */,
 				B6951DC723C507570020C7EE /* User.swift */,
 				04EFB7DA23C7190700042E5C /* HomePageController.swift */,
+				B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */,
+				B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */,
 			);
 			path = pullu.test;
 			sourceTree = "<group>";
@@ -223,6 +229,8 @@
 				04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */,
 				B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */,
 				B6951DC823C507570020C7EE /* User.swift in Sources */,
+				B6EEC71323C76DA200B9AEC9 /* ConnectionCheckController.swift in Sources */,
+				B6EEC70F23C76A5300B9AEC9 /* ConnectionCheck.swift in Sources */,
 				041E1E3E23C72F9500AD02E6 /* SideMenuNavigationController.swift in Sources */,
 				045829A523C452D3004F6FA9 /* pullu_test.xcdatamodeld in Sources */,
 			);

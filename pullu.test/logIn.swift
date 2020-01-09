@@ -29,8 +29,12 @@ class logIn: UIViewController {
         
         if ConnectionCheck.isConnectedToNetwork() {
             print("Connected")
+            
         }
         else{
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "offline", sender: self)
+            }
             print("disConnected")
         }
         // Do any additional setup after loading the view.
@@ -69,7 +73,7 @@ class logIn: UIViewController {
                             let jsonData = try jsonEncoder.encode(usrList)
                             let jsonString = String(data: jsonData, encoding: .utf8)
                             self.defaults.set(jsonString, forKey: "uData")
-                           
+                            
                             // print("JSON String : " + jsonString!)
                         }
                         catch {

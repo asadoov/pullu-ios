@@ -121,43 +121,43 @@
                         <outlet property="pass" destination="u7v-y0-iHs" id="OWW-s1-mEP"/>
                         <outlet property="uName" destination="txs-F1-Ydg" id="MIx-Fn-Bcg"/>
                         <segue destination="yZa-x2-djM" kind="show" identifier="segue" id="l6n-9p-XSQ"/>
-                        <segue destination="dAz-ZE-bjh" kind="show" id="BOl-gM-Eqx"/>
+                        <segue destination="dAz-ZE-bjh" kind="show" identifier="offline" id="BOl-gM-Eqx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1842.4000000000001" y="954.67980295566508"/>
         </scene>
-        <!--View Controller-->
+        <!--Connection Check Controller-->
         <scene sceneID="9g2-oG-c9z">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="dAz-ZE-bjh" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="dAz-ZE-bjh" customClass="ConnectionCheckController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rSL-4c-gzd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Unknown" translatesAutoresizingMaskIntoConstraints="NO" id="j8X-ZA-Ydy">
                                 <rect key="frame" x="67" y="342" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Internet Yoxdur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p5-tS-dhg">
                                 <rect key="frame" x="73" y="522" width="229" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1f3-zA-gNr">
                                 <rect key="frame" x="170" y="622" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="Unknown-1"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="C63-Uk-6ie"/>
+                                    <action selector="retryButton:" destination="dAz-ZE-bjh" eventType="touchUpInside" id="dNn-3f-96J"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Təkrar yoxlayın" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KH-oT-ynS">
                                 <rect key="frame" x="130" y="667" width="116" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -167,6 +167,9 @@
                         <viewLayoutGuide key="safeArea" id="gv5-xE-Ucb"/>
                     </view>
                     <navigationItem key="navigationItem" id="ItR-qV-kmI"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="logInPage" id="pVH-Xi-lNI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJa-lx-Sz4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
