@@ -240,7 +240,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="sI2-Pk-E5o"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Axtar" id="g78-op-39g"/>
+                    <tabBarItem key="tabBarItem" title="Axtar" image="magnifyingglass" catalog="system" id="g78-op-39g"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJR-Yr-lT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -249,7 +249,7 @@
         <!--Əsas-->
         <scene sceneID="DVQ-hw-k6a">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Puv-Qr-h87" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Puv-Qr-h87" customClass="HomePageController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zVP-ml-EtL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,7 +279,7 @@
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vpi-Er-7i4">
                                 <rect key="frame" x="0.0" y="154" width="375" height="575"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKm-uE-H28">
                                         <rect key="frame" x="16" y="46" width="343" height="318"/>
@@ -351,7 +351,7 @@
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j75-J5-8mz">
                                         <rect key="frame" x="16" y="0.0" width="88" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="ÖDƏNİŞLİ"/>
@@ -363,7 +363,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87d-B9-Z2u">
                                         <rect key="frame" x="143" y="0.0" width="88" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="ÖDƏNİŞSİZ"/>
@@ -375,7 +375,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlt-Mk-ja7">
                                         <rect key="frame" x="257" y="0.0" width="102" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="İZLƏDİKLƏRİM"/>
@@ -393,7 +393,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Elg-VD-GRI"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Əsas" largeContentSizeImage="Group 5" id="7zA-lN-H0x"/>
+                    <tabBarItem key="tabBarItem" title="Əsas" image="house.fill" catalog="system" largeContentSizeImage="Group 5" id="7zA-lN-H0x"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ngh-2n-i7w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -421,7 +421,7 @@
             </objects>
             <point key="canvasLocation" x="-810" y="1282"/>
         </scene>
-        <!--+-->
+        <!--View Controller-->
         <scene sceneID="PPe-tQ-crj">
             <objects>
                 <viewController id="Qhl-hQ-h1j" sceneMemberID="viewController">
@@ -431,7 +431,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="n5k-9f-x67"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="+" id="dvd-mE-ZU9"/>
+                    <tabBarItem key="tabBarItem" title="" image="plus.app.fill" catalog="system" id="dvd-mE-ZU9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WIf-yq-g0i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -447,7 +447,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="iTW-mC-ES7"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Bildiriş" id="hyM-qS-XfR"/>
+                    <tabBarItem key="tabBarItem" title="Bildiriş" image="bell.fill" catalog="system" id="hyM-qS-XfR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAo-lj-k66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -463,7 +463,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="gHg-eo-foQ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profil" id="ClI-2p-rec"/>
+                    <tabBarItem key="tabBarItem" title="Profil" image="person.fill" catalog="system" id="ClI-2p-rec"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iRt-5M-Y66" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -753,6 +753,11 @@
     </scenes>
     <resources>
         <image name="Group 5" width="27" height="38"/>
+        <image name="bell.fill" catalog="system" width="64" height="62"/>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="menu" width="24" height="17"/>
+        <image name="person.fill" catalog="system" width="64" height="60"/>
+        <image name="plus.app.fill" catalog="system" width="64" height="56"/>
     </resources>
 </document>
