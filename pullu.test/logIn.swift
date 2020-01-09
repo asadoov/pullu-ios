@@ -96,20 +96,21 @@ class logIn: UIViewController {
                     
                 else{
                     DispatchQueue.main.async {
-                        
-                        let alert = UIAlertController(title: "Bildiriş", message: "Məlumat səhfdi", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)}
+                        self.dismiss(animated: false){
+                            let alert = UIAlertController(title: "Bildiriş", message: "Məlumat səhfdi", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)}}
                     
                 }
                 
             }
         }
         else {
-            let alert = UIAlertController(title: "Bildiriş", message: "Bütün boşluqları doldurun", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            
+            self.dismiss(animated: false){
+                let alert = UIAlertController(title: "Bildiriş", message: "Bütün boşluqları doldurun", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
         
         
