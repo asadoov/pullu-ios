@@ -6,4 +6,7 @@
 //  Copyright © 2020 Javidan Mirza. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import SideMenu
+
+    
