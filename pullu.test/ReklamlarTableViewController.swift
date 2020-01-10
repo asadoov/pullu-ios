@@ -11,17 +11,73 @@ import UIKit
 class ReklamlarTableViewController: UITableViewController {
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
+    
+    @IBOutlet weak var ReklamCount: UILabel!
+    
+    @IBOutlet weak var headerView: UIView!
+    var notPaid:Array<Advertisement>?
+    var Paid:Array<Advertisement>?
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        headerView.layer.backgroundColor = UIColor.white.cgColor
+        
+        headerView.layer.masksToBounds = false
+        headerView.layer.shadowColor = UIColor.gray.cgColor
+        headerView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        headerView.layer.shadowOpacity = 1.0
+        headerView.layer.shadowRadius = 0.0
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.getProducts()
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        self.getProducts(type:1)
+         
     }
-    private func getProducts() {
+    
+    
+    @IBAction func paidClick(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+
+        self.dataArray.removeAll()
+        self.getProducts(type:1)
+        
+        
+    }
+    @IBAction func notPaidClick(_ sender: Any) {
+       let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        self.dataArray.removeAll()
+        self.getProducts(type:0)
+         
+    }
+    
+    private func getProducts(type:Int) {
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
@@ -31,15 +87,30 @@ class ReklamlarTableViewController: UITableViewController {
         db.getAds(username: mail!, pass: pass!){
             (list) in
             for advert in list{
+                if (advert.isPaid==type) {
+                    
+                    self.dataArray.append(advert)
+                    
+                    
+                }
                 
-                self.dataArray.append(advert)
                 
                 // print(advert.name)
             }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()}
             
-        }
+            DispatchQueue.main.async {
+                self.dismiss(animated: false){
+                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                    self.tableView.reloadData()
+                    
+                }
+            
+            }
+          
+                
+            }
+        
+            
     }
     // MARK: - Table view data source
     

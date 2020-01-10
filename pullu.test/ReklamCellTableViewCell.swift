@@ -11,7 +11,8 @@ import UIKit
 class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var ReklamImage: UIImageView!
     @IBOutlet weak var ReklamTitle: UILabel!
-    @IBOutlet weak var ReklamInfo: UITextView!
+
+    @IBOutlet weak var ReklamInfo: UILabel!
     @IBOutlet weak var ReklamDate: UILabel!
     @IBOutlet weak var ReklamType: UILabel!
     @IBOutlet weak var ReklamBaxish: UILabel!
@@ -29,6 +30,7 @@ class ReklamCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+   
     func reloadData() {
         
         
