@@ -32,7 +32,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Giriş et və ya qeydiyyatdan keç" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOh-AO-fX9">
-                                <rect key="frame" x="29" y="258" width="317" height="34"/>
+                                <rect key="frame" x="29" y="259" width="317" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -148,7 +148,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Təkrar yoxlayın" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KH-oT-ynS">
-                                <rect key="frame" x="130" y="666" width="116" height="21"/>
+                                <rect key="frame" x="130" y="667" width="116" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -159,7 +159,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Internet Yoxdur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p5-tS-dhg">
-                                <rect key="frame" x="73" y="323" width="302" height="39"/>
+                                <rect key="frame" x="73" y="324" width="302" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
@@ -663,7 +663,7 @@
         <!--Əsas-->
         <scene sceneID="W4C-q7-NgC">
             <objects>
-                <tableViewController id="jW2-wY-jtl" customClass="ReklamlarTableViewController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ReklamlarTableViewController" id="jW2-wY-jtl" customClass="ReklamlarTableViewController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="405" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1tj-GJ-mEJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -770,6 +770,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="ReklamBaxish" destination="UEz-SZ-f09" id="IGG-h6-geo"/>
+                                    <outlet property="ReklamCategory" destination="cmx-I0-Nq9" id="gtf-NZ-hy4"/>
                                     <outlet property="ReklamDate" destination="cvE-4g-2Ml" id="xMg-Ju-SCb"/>
                                     <outlet property="ReklamImage" destination="ToS-ec-vSB" id="FUU-gL-R35"/>
                                     <outlet property="ReklamInfo" destination="sDP-S1-HAe" id="yu8-Pw-Pf8"/>
