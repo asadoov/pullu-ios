@@ -310,7 +310,7 @@
         <!--Əsas-->
         <scene sceneID="DVQ-hw-k6a">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="Puv-Qr-h87" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Puv-Qr-h87" customClass="HomePageController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zVP-ml-EtL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,7 +335,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EKm-uE-H28">
                                         <rect key="frame" x="16" y="46" width="343" height="318"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NbD-Sf-1h5">
                                                 <rect key="frame" x="0.0" y="-5" width="343" height="181"/>
@@ -417,8 +417,9 @@
                                         <rect key="frame" x="143" y="0.0" width="88" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="ÖDƏNİŞSİZ"/>
+                                        <state key="normal" title="ÖDƏNİŞSİZ">
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="15"/>
@@ -446,6 +447,9 @@
                         <viewLayoutGuide key="safeArea" id="Elg-VD-GRI"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Əsas" image="house.fill" catalog="system" id="7zA-lN-H0x"/>
+                    <connections>
+                        <outlet property="adverisementCount" destination="zVP-ml-EtL" id="3dr-e3-Us9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ngh-2n-i7w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -771,7 +775,7 @@
         <!--Menyu-->
         <scene sceneID="rkk-9A-vRR">
             <objects>
-                <navigationController storyboardIdentifier="LeftMenuNavigationController" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="cmO-QG-b0E" customClass="UISideMenuNavigationController" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="cmO-QG-b0E" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Menyu" image="line.horizontal.3" catalog="system" id="1dn-AU-zAm"/>
                     <navigationItem key="navigationItem" id="YKy-lN-OaY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fgB-yo-hwM">
@@ -782,9 +786,6 @@
                         <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="wrb-1m-evd" kind="relationship" relationship="rootViewController" id="DNG-qm-jUE"/>
                     </connections>

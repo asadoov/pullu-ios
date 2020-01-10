@@ -9,22 +9,14 @@
 import Foundation
 struct Advertisement : Codable {
     
-    var id: Int
-       var name: String
-       var welcomeDescription: String
-       var price: String
-       var aTypeID: Int
-       var aTypeName: String
-       var isPaid, mediaTpID, catID: Int
-       var catName: String
-       var cDate: Date
+    var id: Int?
+    var name: String?
+    var description: String?
+    var price: String?
+    var aTypeId: Int?
+    var aTypeName: String?
+    var isPaid, mediaTpId, catId: Int?
+    var catName: String?
+    var photoUrl: String?
     
-    /*init (json:[String: Any]){
-        name=json["name"] as? String ?? ""
-        surname=json["surname"] as? String ?? ""
-        username=json["username"] as? String ?? ""
-        mail=json["mail"] as? String ?? ""
-        phone=json["phone"] as? String ?? ""
-    }
-    */
 }
