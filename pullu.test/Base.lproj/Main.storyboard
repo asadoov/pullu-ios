@@ -32,7 +32,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Giriş et və ya qeydiyyatdan keç" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOh-AO-fX9">
-                                <rect key="frame" x="29" y="259" width="317" height="34"/>
+                                <rect key="frame" x="29" y="258" width="317" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -148,7 +148,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Təkrar yoxlayın" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KH-oT-ynS">
-                                <rect key="frame" x="130" y="667" width="116" height="21"/>
+                                <rect key="frame" x="130" y="666" width="116" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -159,7 +159,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Internet Yoxdur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p5-tS-dhg">
-                                <rect key="frame" x="73" y="324" width="302" height="39"/>
+                                <rect key="frame" x="73" y="323" width="302" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                 <nil key="textColor"/>
@@ -663,13 +663,13 @@
         <!--Əsas-->
         <scene sceneID="W4C-q7-NgC">
             <objects>
-                <tableViewController id="jW2-wY-jtl" sceneMemberID="viewController">
+                <tableViewController id="jW2-wY-jtl" customClass="ReklamlarTableViewController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="405" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1tj-GJ-mEJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="405" id="BeB-vn-gyd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="405" id="BeB-vn-gyd" customClass="ReklamCellTableViewCell" customModule="pullu_test" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="405"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BeB-vn-gyd" id="hHB-lK-vI5">
@@ -769,15 +769,21 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="descLabel" destination="XNN-zQ-ywI" id="FJr-e0-gpq"/>
-                                    <outlet property="photoView" destination="ToS-ec-vSB" id="FYj-HA-Nb4"/>
-                                    <outlet property="titleLabel" destination="cmx-I0-Nq9" id="zzI-bZ-bKz"/>
+                                    <outlet property="ReklamBaxish" destination="UEz-SZ-f09" id="IGG-h6-geo"/>
+                                    <outlet property="ReklamDate" destination="cvE-4g-2Ml" id="xMg-Ju-SCb"/>
+                                    <outlet property="ReklamImage" destination="ToS-ec-vSB" id="FUU-gL-R35"/>
+                                    <outlet property="ReklamInfo" destination="sDP-S1-HAe" id="yu8-Pw-Pf8"/>
+                                    <outlet property="ReklamTitle" destination="XNN-zQ-ywI" id="Nqt-cE-rcZ"/>
+                                    <outlet property="ReklamType" destination="VbS-kE-YJW" id="dRe-9r-EDf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Əsas" image="house.fill" catalog="system" id="YuQ-3y-6jH"/>
                     <navigationItem key="navigationItem" id="36Z-c3-WWY"/>
+                    <connections>
+                        <outlet property="ReklamList" destination="1tj-GJ-mEJ" id="XCj-ze-gA8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FCV-4S-VxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

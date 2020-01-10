@@ -19,21 +19,21 @@ class HomePageController: UIViewController {
         let userData = defaults.string(forKey: "uData")
         
         let  db:dbSelect=dbSelect()
-        db.getAds(username: mail!, pass: pass!){
+        /*db.getAds(username: mail!, pass: pass!){
             (list) in
             for advert in list{
                 
-               /* let tutunController: ProductContentController = storyboard
+                let tutunController: ProductContentController = storyboard
                     .instantiateViewController(withIdentifier: "ProductContentController") as! ProductContentController
                 tutunController.title = item["title"] as? String
                 tutunController.catId = item["id"] as? String
                 viewControllers.append(tutunController)
- */
- print(advert.name)
+                
+                print(advert.name)
             }
             
             
-        }
+        }*/
         let data = Data(userData!.utf8)
         
         do{
