@@ -16,6 +16,8 @@
 		6E465D7B219C5A1E12FCF1CF /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */; };
 		B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1A423C84A0E0089C894 /* Advertisement.swift */; };
 		B66CA1A823C852AC0089C894 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1A623C852AC0089C894 /* MenuController.swift */; };
+		B66CA1AF23C88AA80089C894 /* ReklamlarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1AE23C88AA80089C894 /* ReklamlarTableViewController.swift */; };
+		B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */; };
 		B6951DC423C503230020C7EE /* logIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC323C503230020C7EE /* logIn.swift */; };
 		B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC523C503EE0020C7EE /* dbSelect.swift */; };
 		B6951DC823C507570020C7EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC723C507570020C7EE /* User.swift */; };
@@ -36,6 +38,8 @@
 		9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66CA1A423C84A0E0089C894 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
 		B66CA1A623C852AC0089C894 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		B66CA1AE23C88AA80089C894 /* ReklamlarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReklamlarTableViewController.swift; path = ../../../../Documents/ReklamlarTableViewController.swift; sourceTree = "<group>"; };
+		B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamCellTableViewCell.swift; sourceTree = "<group>"; };
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		B6951DC523C503EE0020C7EE /* dbSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbSelect.swift; sourceTree = "<group>"; };
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -91,6 +95,8 @@
 				B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */,
 				B66CA1A423C84A0E0089C894 /* Advertisement.swift */,
 				B66CA1A623C852AC0089C894 /* MenuController.swift */,
+				B66CA1AE23C88AA80089C894 /* ReklamlarTableViewController.swift */,
+				B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */,
 			);
 			path = pullu.test;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 				04C8751423C736B400E84091 /* AppDelegate.swift in Sources */,
 				B6951DC423C503230020C7EE /* logIn.swift in Sources */,
 				04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */,
+				B66CA1AF23C88AA80089C894 /* ReklamlarTableViewController.swift in Sources */,
 				B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */,
 				B6951DC823C507570020C7EE /* User.swift in Sources */,
 				B66CA1A823C852AC0089C894 /* MenuController.swift in Sources */,
@@ -237,6 +244,7 @@
 				B6EEC70F23C76A5300B9AEC9 /* ConnectionCheck.swift in Sources */,
 				B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */,
 				045829A523C452D3004F6FA9 /* pullu_test.xcdatamodeld in Sources */,
+				B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
