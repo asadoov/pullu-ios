@@ -315,15 +315,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nny-3Z-jiR">
-                                <rect key="frame" x="20" y="49" width="24" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" image="menu"/>
-                                <connections>
-                                    <segue destination="cmO-QG-b0E" kind="modal" id="axd-NF-aqX"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Əsas səhifə" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0e-2H-Y3a">
                                 <rect key="frame" x="20" y="84" width="161" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -476,6 +467,7 @@
                         <segue destination="Qhl-hQ-h1j" kind="relationship" relationship="viewControllers" id="FgE-ZN-ygQ"/>
                         <segue destination="zVH-t0-c1i" kind="relationship" relationship="viewControllers" id="qLG-U1-JgO"/>
                         <segue destination="FG3-nX-T9g" kind="relationship" relationship="viewControllers" id="2v1-rf-Tt8"/>
+                        <segue destination="cmO-QG-b0E" kind="relationship" relationship="viewControllers" id="eKA-QM-2eI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OwZ-I4-hUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -535,7 +527,7 @@
             <objects>
                 <tableViewController id="wrb-1m-evd" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="00l-EC-e8Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -776,15 +768,18 @@
             </objects>
             <point key="canvasLocation" x="1788" y="207.63546798029557"/>
         </scene>
-        <!--Side Menu Navigation Controller-->
+        <!--Menyu-->
         <scene sceneID="rkk-9A-vRR">
             <objects>
                 <navigationController storyboardIdentifier="LeftMenuNavigationController" modalPresentationStyle="fullScreen" navigationBarHidden="YES" id="cmO-QG-b0E" customClass="UISideMenuNavigationController" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Menyu" image="line.horizontal.3" catalog="system" id="1dn-AU-zAm"/>
                     <navigationItem key="navigationItem" id="YKy-lN-OaY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="fgB-yo-hwM">
+                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SDb-mL-LcM">
+                        <rect key="frame" x="0.0" y="-54" width="0.0" height="0.0"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <userDefinedRuntimeAttributes>
@@ -823,8 +818,8 @@
         <image name="Unknown-1" width="30" height="30"/>
         <image name="bell.circle.fill" catalog="system" width="64" height="60"/>
         <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="line.horizontal.3" catalog="system" width="64" height="32"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="menu" width="24" height="17"/>
         <image name="person.circle.fill" catalog="system" width="64" height="60"/>
         <image name="plus.app.fill" catalog="system" width="64" height="56"/>
     </resources>

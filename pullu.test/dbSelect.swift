@@ -9,21 +9,33 @@
 import Foundation
 class dbSelect {
     
+    
+    func GetJson(jsonUrlString:String,completionBlock: @escaping (_ result:Data) ->()){
+        
+        
+        guard let url = URL(string: jsonUrlString)else {return}
+        let task = URLSession.shared.dataTask(with: url, completionHandler: {(Data,URLResponse,Error)->Void in
+            guard let data=Data else{return}
+            completionBlock(data)
+            
+        })
+        
+        task.resume()
+        
+        
+    }
+    
     func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let jsonUrlString="http://13.92.237.16/api/androidmobileapp/user/login?username="+username+"&pass="+pass
-        guard let url = URL(string: jsonUrlString)else {return}
-        let task = URLSession.shared.dataTask(with: url, completionHandler: {(Data,URLResponse,Error)->Void in
-            guard let data=Data else{return}
-            /*let dataAsString=String(data:data,encoding: .utf8)
-             print(dataAsString)
-             */
+        let url="http://13.92.237.16/api/androidmobileapp/user/login?username="+username+"&pass="+pass
+        GetJson(jsonUrlString: url){
+            (json) in
             do{
                 
                 
                 var list  = try
-                    JSONDecoder().decode(Array<User>.self, from: data)
-               // userList=list
+                    JSONDecoder().decode(Array<User>.self, from: json)
+                // userList=list
                 
                 completionBlock(list)
                 
@@ -32,29 +44,23 @@ class dbSelect {
                 print("Error serializing json:",jsonErr)
             }
             
-        })
+            
+        }
         
-        task.resume()
-     
-    
     }
     
-    func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let jsonUrlString="http://13.92.237.16/api/androidmobileapp/user/getAds?username="+username+"&pass="+pass
-        guard let url = URL(string: jsonUrlString)else {return}
-        let task = URLSession.shared.dataTask(with: url, completionHandler: {(Data,URLResponse,Error)->Void in
-            guard let data=Data else{return}
-            /*let dataAsString=String(data:data,encoding: .utf8)
-             print(dataAsString)
-             */
+        let url="http://13.92.237.16/api/androidmobileapp/user/getAds?username="+username+"&pass="+pass
+        GetJson(jsonUrlString: url){
+            (json) in
             do{
                 
                 
                 var list  = try
-                    JSONDecoder().decode(Array<User>.self, from: data)
-               
-               // userList=list
+                    JSONDecoder().decode(Array<Advertisement>.self, from: json)
+                
+                // userList=list
                 
                 completionBlock(list)
                 
@@ -63,13 +69,10 @@ class dbSelect {
                 print("Error serializing json:",jsonErr)
             }
             
-        })
+        }
         
-        task.resume()
-     
-    
     }
-
+    
     
     
 }
