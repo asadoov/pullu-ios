@@ -99,7 +99,9 @@ class logIn: UIViewController {
                         self.dismiss(animated: false){
                             let alert = UIAlertController(title: "Bildiriş", message: "Məlumat səhfdi", preferredStyle: UIAlertController.Style.alert)
                             alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)}}
+                            self.present(alert, animated: true, completion: nil)}
+                        
+                    }
                     
                 }
                 
