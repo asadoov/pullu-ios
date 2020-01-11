@@ -73,6 +73,75 @@ class dbSelect {
         
     }
     
-    
+    func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
+        
+        let url="http://13.92.237.16/api/androidmobileapp/getCountries"
+        GetJson(jsonUrlString: url){
+            (json) in
+            do{
+                
+                
+                let list  = try
+                    JSONDecoder().decode(Array<Country>.self, from: json)
+                
+                // userList=list
+                
+                completionBlock(list)
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+        }
+        
+    }
+    func getCities(countryId:Int,completionBlock: @escaping (_ result:Array<City>) ->()){
+           
+           let url="http://13.92.237.16/api/androidmobileapp/getCities?countryid=" + String(countryId)
+           GetJson(jsonUrlString: url){
+               (json) in
+               do{
+                   
+                   
+                   let list  = try
+                       JSONDecoder().decode(Array<City>.self, from: json)
+                   
+                   // userList=list
+                   
+                   completionBlock(list)
+                   
+               }
+               catch let jsonErr{
+                   print("Error serializing json:",jsonErr)
+               }
+               
+           }
+           
+       }
+       
+    func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
+           
+           let url="http://13.92.237.16/api/androidmobileapp/getprofessions"
+           GetJson(jsonUrlString: url){
+               (json) in
+               do{
+                   
+                   
+                   let list  = try
+                       JSONDecoder().decode(Array<Profession>.self, from: json)
+                   
+                   // userList=list
+                   
+                   completionBlock(list)
+                   
+               }
+               catch let jsonErr{
+                   print("Error serializing json:",jsonErr)
+               }
+               
+           }
+           
+       }
     
 }
