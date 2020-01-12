@@ -9,18 +9,24 @@
 import Foundation
 struct User:Codable{
     
-    var name: String
-    var surname: String
-    var username: String
-    var mail: String
-    var phone: String
+    var name: String?
+    var surname: String?
+    var username: String?
+    var mail: String?
+    var phone: String?
+    var birthDate: String?
+    var gender: String?
+    var city: String?
+    var profession: String?
+    var regDate: String?
+    
     
     /*init (json:[String: Any]){
-        name=json["name"] as? String ?? ""
-        surname=json["surname"] as? String ?? ""
-        username=json["username"] as? String ?? ""
-        mail=json["mail"] as? String ?? ""
-        phone=json["phone"] as? String ?? ""
-    }
-    */
+     name=json["name"] as? String ?? ""
+     surname=json["surname"] as? String ?? ""
+     username=json["username"] as? String ?? ""
+     mail=json["mail"] as? String ?? ""
+     phone=json["phone"] as? String ?? ""
+     }
+     */
 }

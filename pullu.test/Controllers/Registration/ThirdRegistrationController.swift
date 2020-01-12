@@ -9,6 +9,8 @@
 import UIKit
 
 class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    let defaults = UserDefaults.standard
+    var newUser: NewUser = NewUser()
     @IBOutlet weak var countries: UIPickerView!
     @IBOutlet weak var cities: UIPickerView!
     @IBOutlet weak var professions: UIPickerView!
@@ -16,6 +18,8 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
     var cityList = ["Şəhəri seçin"]
     var professionList = ["Sektoru seçin"]
     let db:dbSelect=dbSelect()
+    let dbInsert:DbInsert=DbInsert()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,15 +35,15 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
             
         }
         db.getProfessions(){
-                 (list) in
-                 for item in list{
-                    self.professionList.append(item.name!)
-                     DispatchQueue.main.async {
-                         self.professions.reloadAllComponents();
-                     }
-                 }
-                 
-             }
+            (list) in
+            for item in list{
+                self.professionList.append(item.name!)
+                DispatchQueue.main.async {
+                    self.professions.reloadAllComponents();
+                }
+            }
+            
+        }
         // Do any additional setup after loading the view.
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -71,8 +75,8 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
             countrows = self.cityList.count
         }
         if pickerView == professions {
-                   countrows = self.professionList.count
-               }
+            countrows = self.professionList.count
+        }
         
         return countrows
     }
@@ -87,7 +91,7 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
                     
                     for city in list{
                         self.cityList.append(city.name!)
-                        print(city.name)
+                        //print(city.name)
                     }
                     DispatchQueue.main.async {
                         
@@ -110,6 +114,50 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
         }
         
     }
+    
+    
+    @IBAction func finishClick(_ sender: Any) {
+        
+        let selectedCountry = countriesList[countries.selectedRow(inComponent: 0)]
+        let selectedCity = cityList[cities.selectedRow(inComponent: 0)]
+        let selectedProfession = professionList[professions.selectedRow(inComponent: 0)]
+        newUser.country=selectedCountry
+        newUser.city=selectedCity
+        newUser.sector=selectedProfession
+        //print("\(newUser.bDate)")
+        do{
+            dbInsert.SignUp(newUserData: newUser){
+                (list)
+                in
+                let jsonEncoder = JSONEncoder()
+                do {
+                    self.defaults.set(self.newUser.mail, forKey: "mail")
+                    self.defaults.set(self.newUser.pass, forKey: "pass")
+                    
+                    let jsonData = try jsonEncoder.encode(list)
+                    let jsonString = String(data: jsonData, encoding: .utf8)
+                    self.defaults.set(jsonString, forKey: "uData")
+                   self.performSegue(withIdentifier: "successRegPage", sender: self)
+                   // print("JSON String : " + jsonString!)
+                }
+                catch {
+                }
+                
+            }
+            
+            
+        }
+        catch{
+            let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqlarıı doldurun!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+            
+        }
+        // print(selectedCountry)
+        
+    }
+    
     
     /*
      // MARK: - Navigation
