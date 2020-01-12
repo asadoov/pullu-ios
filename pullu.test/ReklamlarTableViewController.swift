@@ -83,6 +83,7 @@ class ReklamlarTableViewController: UITableViewController {
         // let userData = defaults.string(forKey: "uData")
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
+        print("\(mail)\n\(pass)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
             (list) in
@@ -98,18 +99,18 @@ class ReklamlarTableViewController: UITableViewController {
                 // print(advert.name)
             }
             
-            DispatchQueue.main.async {
-                self.dismiss(animated: false){
-                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                    self.tableView.reloadData()
-                    
-                }
             
-            }
-          
                 
             }
         
+            DispatchQueue.main.async {
+                  self.dismiss(animated: false){
+                      self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                      self.tableView.reloadData()
+                      
+                  }
+              
+              }
             
     }
     // MARK: - Table view data source

@@ -2,8 +2,8 @@
 //  dbSelect.swift
 //  pullu.test
 //
-//  Created by Rufat Asadov on 1/7/20.
-//  Copyright © 2020 Javidan Mirza. All rights reserved.
+//  Created by Rufat Asadzade on 1/7/20.
+//  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import Foundation
