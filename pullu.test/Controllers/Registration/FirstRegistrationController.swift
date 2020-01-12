@@ -38,7 +38,7 @@ class FirstRegistrationController: UIViewController {
                 newUser.username=uName.text
                 newUser.mail=email.text
                 newUser.pass=pass.text
-                
+            
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "secondRegPage", sender: self)
                 }

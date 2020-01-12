@@ -66,21 +66,23 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         
         let dt = dateFormatter.date(from: dateString)
-        print(dt)
-        if((!name.text!.isEmpty) && (!surname.text!.isEmpty) && (!phone.text!.isEmpty) && (bDate.date<dt!)){
+        //print(dt)
+        if((!name.text!.isEmpty) && (!surname.text!.isEmpty) && (!phone.text!.isEmpty) && (bDate.date<dt!)&&(gender.selectedRow(inComponent: 0)>0)){
             var birthDate = Date()
             birthDate = bDate.date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM-dd-yyyy"
+            let dateString = dateFormatter.string(from: birthDate)
             newUser.name=name.text
             newUser.surname=surname.text
             newUser.phone=phone.text
-            newUser.bDate=birthDate
+            newUser.bDate=dateString
+            newUser.gender=genders[gender.selectedRow(inComponent: 0)]
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM-dd-yyyy"
-            var dateString = dateFormatter.string(from: newUser.bDate!)
-            var selectedGender = gender.selectedRow(inComponent: 0)
             
-            print( dateString+"\n" + String(selectedGender))
+            
+            
+            print(newUser.bDate)
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "thirdRegPage", sender: self)
             }
@@ -93,6 +95,10 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "thirdRegPage"){
+            let displayVC = segue.destination as! ThirdRegistrationController
+            displayVC.newUser = newUser
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }

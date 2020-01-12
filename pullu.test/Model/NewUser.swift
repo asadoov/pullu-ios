@@ -15,8 +15,8 @@ struct NewUser{
     var mail: String?
     var phone: String?
     var pass: String?
-    var bDate: Date?
-    var gender: Int?
+    var bDate: String?
+    var gender: String?
     var country: String?
     var city: String?
     var sector: String?
