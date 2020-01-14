@@ -41,33 +41,34 @@ class ReklamlarTableViewController: UITableViewController {
     
     
     @IBAction func paidClick(_ sender: Any) {
-
+        self.dataArray.removeAll()
+        
         self.getProducts(type:1)
         
         
     }
     @IBAction func notPaidClick(_ sender: Any) {
-       
+        
         self.dataArray.removeAll()
         self.getProducts(type:0)
         
     }
     
     private func getProducts(type:Int) {
-        DispatchQueue.main.async {
-            
-            let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-            
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            
-            alert.view.addSubview(loadingIndicator)
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        
+        /* DispatchQueue.main.async {
+         
+         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+         
+         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+         loadingIndicator.hidesWhenStopped = true
+         loadingIndicator.style = UIActivityIndicatorView.Style.gray
+         loadingIndicator.startAnimating();
+         
+         alert.view.addSubview(loadingIndicator)
+         self.present(alert, animated: true, completion: nil)
+         }
+         
+         */
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
@@ -90,14 +91,18 @@ class ReklamlarTableViewController: UITableViewController {
             }
             
             DispatchQueue.main.async {
-                self.dismiss(animated: false){
-                    self.ReklamList.reloadData()
-                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                    self.tableView.reloadData()
-                    
-                    
-                    
-                }
+                self.ReklamList.reloadData()
+                self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                self.tableView.reloadData()
+                /*
+                 self.dismiss(animated: false){
+                 self.ReklamList.reloadData()
+                 self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                 self.tableView.reloadData()
+                 
+                 
+                 
+                 }*/
                 
             }
             
