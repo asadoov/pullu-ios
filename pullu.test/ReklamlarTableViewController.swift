@@ -10,8 +10,9 @@ import UIKit
 
 class ReklamlarTableViewController: UITableViewController {
     var dataArray: [Advertisement] = [Advertisement]()
-    @IBOutlet var ReklamList: UITableView!
+  
     
+    @IBOutlet var ReklamList: UITableView!
     @IBOutlet weak var ReklamCount: UILabel!
     
     @IBOutlet weak var headerView: UIView!
@@ -61,6 +62,9 @@ class ReklamlarTableViewController: UITableViewController {
 
         self.dataArray.removeAll()
         self.getProducts(type:1)
+            
+            
+        
         
         
     }
@@ -89,7 +93,9 @@ class ReklamlarTableViewController: UITableViewController {
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
             (list) in
+            
             for advert in list{
+                print(advert.name)
                 if (advert.isPaid==type) {
                     
                     self.dataArray.append(advert)
@@ -106,11 +112,9 @@ class ReklamlarTableViewController: UITableViewController {
             }
         
             DispatchQueue.main.async {
-                  self.dismiss(animated: false){
-                      self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                      self.tableView.reloadData()
-                      
-                  }
+                
+                self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                     self.tableView.reloadData()
               
               }
             
