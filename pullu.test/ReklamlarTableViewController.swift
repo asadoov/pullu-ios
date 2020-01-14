@@ -10,9 +10,8 @@ import UIKit
 
 class ReklamlarTableViewController: UITableViewController {
     var dataArray: [Advertisement] = [Advertisement]()
-  
-    
     @IBOutlet var ReklamList: UITableView!
+    
     @IBOutlet weak var ReklamCount: UILabel!
     
     @IBOutlet weak var headerView: UIView!
@@ -33,57 +32,42 @@ class ReklamlarTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-            
-        /*let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
         
-        alert.view.addSubview(loadingIndicator)
- */
-       // present(alert, animated: true, completion: nil)
+        //
         self.getProducts(type:1)
-         
+        
     }
     
     
     @IBAction func paidClick(_ sender: Any) {
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
 
-        self.dataArray.removeAll()
         self.getProducts(type:1)
-            
-            
-        
         
         
     }
     @IBAction func notPaidClick(_ sender: Any) {
-       let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+       
         self.dataArray.removeAll()
         self.getProducts(type:0)
-         
+        
     }
     
     private func getProducts(type:Int) {
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+            
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            loadingIndicator.startAnimating();
+            
+            alert.view.addSubview(loadingIndicator)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
@@ -93,9 +77,7 @@ class ReklamlarTableViewController: UITableViewController {
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
             (list) in
-            
             for advert in list{
-                print(advert.name)
                 if (advert.isPaid==type) {
                     
                     self.dataArray.append(advert)
@@ -104,20 +86,25 @@ class ReklamlarTableViewController: UITableViewController {
                 }
                 
                 
-                // print(advert.name)
+                //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
             
-            
-                
-            }
-        
             DispatchQueue.main.async {
+                self.dismiss(animated: false){
+                    self.ReklamList.reloadData()
+                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                    self.tableView.reloadData()
+                    
+                    
+                    
+                }
                 
-                self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                     self.tableView.reloadData()
-              
-              }
+            }
             
+            
+        }
+        
+        
     }
     // MARK: - Table view data source
     

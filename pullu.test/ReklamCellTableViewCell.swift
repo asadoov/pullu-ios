@@ -7,6 +7,9 @@
 //
 
 import UIKit
+protocol ReklamCellDelegate {
+    func orderClick(object: Advertisement)
+}
 
 class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var ReklamImage: UIImageView!
@@ -18,7 +21,7 @@ class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var ReklamBaxish: UILabel!
     @IBOutlet weak var ReklamCategory: UILabel!
     var object: Advertisement?
-    var delegate: ReklamCellTableViewCell?
+   // var delegate: ReklamCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
