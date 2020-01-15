@@ -11,7 +11,7 @@ struct User:Codable{
     
     var name: String?
     var surname: String?
-    var username: String?
+
     var mail: String?
     var phone: String?
     var birthDate: String?
