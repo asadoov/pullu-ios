@@ -19,6 +19,8 @@ struct User:Codable{
     var city: String?
     var profession: String?
     var regDate: String?
+    var balance:String?
+    var earning:String?
     
     
     /*init (json:[String: Any]){
