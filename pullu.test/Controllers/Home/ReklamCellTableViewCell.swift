@@ -43,7 +43,7 @@ class ReklamCellTableViewCell: UITableViewCell {
         ReklamInfo.text=object?.description
         ReklamType.text=object?.aTypeName
         ReklamCategory.text=object?.catName
-        ReklamDate.text=
+
         if  object?.photo != nil{
             self.ReklamImage.image=UIImage(data: object!.photo!)
         }
