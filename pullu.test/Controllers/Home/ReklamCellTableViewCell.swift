@@ -37,13 +37,17 @@ class ReklamCellTableViewCell: UITableViewCell {
     
     
     func reloadData() {
-        
-        
+         let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+           dateFormatter.timeZone = TimeZone.current
+           dateFormatter.locale = Locale.current
+        var dt = dateFormatter.date(from: object!.cDate!)
+        dateFormatter.dateFormat = "EEEE, dd MMMM"
         ReklamTitle.text=object?.name
         ReklamInfo.text=object?.description
         ReklamType.text=object?.aTypeName
         ReklamCategory.text=object?.catName
-        ReklamDate.text=
+        ReklamDate.text=dateFormatter.string(from:dt!)
         if  object?.photo != nil{
             self.ReklamImage.image=UIImage(data: object!.photo!)
         }
