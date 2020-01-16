@@ -1,14 +1,16 @@
 //
-//  ReklamlarTableViewController.swift
+//  HomePageController.swift
 //  pullu.test
 //
-//  Created by Rufat Asadov on 1/10/20.
+//  Created by Rufat Asadzade on 1/9/20.
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import UIKit
-
-class ReklamlarTableViewController: UITableViewController {
+import Alamofire
+import AlamofireImage
+class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
     
@@ -35,53 +37,113 @@ class ReklamlarTableViewController: UITableViewController {
         
         
         //
+        ReklamList.delegate = self
+        ReklamList.dataSource = self
         self.getProducts(type:1)
         
     }
     
     
     @IBAction func paidClick(_ sender: Any) {
-        self.dataArray.removeAll()
-        
-        self.getProducts(type:1)
-        
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+            // Table was scrolled by user.
+            
+            self.dataArray.removeAll()
+            self.getProducts(type:1	)
+        }
         
     }
     @IBAction func notPaidClick(_ sender: Any) {
-        
-        self.dataArray.removeAll()
-        self.getProducts(type:0)
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+            // Table was scrolled by user.
+            
+            self.dataArray.removeAll()
+            self.getProducts(type:0)
+        }
         
     }
     
     private func getProducts(type:Int) {
-        /* DispatchQueue.main.async {
-         
-         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-         
-         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-         loadingIndicator.hidesWhenStopped = true
-         loadingIndicator.style = UIActivityIndicatorView.Style.gray
-         loadingIndicator.startAnimating();
-         
-         alert.view.addSubview(loadingIndicator)
-         self.present(alert, animated: true, completion: nil)
-         }
-         
-         */
+        DispatchQueue.main.async {
+            
+            let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+            
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            loadingIndicator.startAnimating();
+            
+            alert.view.addSubview(loadingIndicator)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
-        print("\(mail)\n\(pass)")
+        let udata=defaults.string(forKey: "uData")
+        print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
+            
             (list) in
+            
+            
             for advert in list{
+                var typeCount = 0
+                for itm in list{
+                    if itm.isPaid==type{
+                        typeCount += 1
+                    }
+                }
+                
                 if (advert.isPaid==type) {
+                    var item = advert
                     
-                    self.dataArray.append(advert)
+                    //  element += 1
+                    Alamofire.request(advert.photoUrl!).responseImage { response in
+                        if let catPicture = response.result.value {
+                            //advert.photo=catPicture.pngData()
+                            item.photo = catPicture.pngData()
+                            
+                            print("image downloaded: \(item.photo)")
+                            
+                            //self.dataArray[element].photo=catPicture.pngData()
+                            //print(self.dataArray[dataArray.count-1].photo)
+                            
+                        }
+                        else  {
+                            item.photo = UIImage(named: "background")?.pngData()
+                            //self.dataArray.append(item)
+                        }
+                        
+                        
+                        self.dataArray.append(item)
+                        print("\(self.dataArray.count) \n list count: \(typeCount)")
+                        if self.dataArray.count == typeCount{
+                            DispatchQueue.main.async {
+                                
+                                //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                //self.tableView.reloadData()
+                                self.ReklamList.reloadData()
+                                // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                self.dismiss(animated: false){
+                                    
+                                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                    //  self.tableView.reloadData()
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
                     
                     
                 }
@@ -90,21 +152,7 @@ class ReklamlarTableViewController: UITableViewController {
                 //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
             
-            DispatchQueue.main.async {
-                self.ReklamList.reloadData()
-                self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                self.tableView.reloadData()
-                /*
-                 self.dismiss(animated: false){
-                 self.ReklamList.reloadData()
-                 self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                 self.tableView.reloadData()
-                 
-                 
-                 
-                 }*/
-                
-            }
+            
             
             
         }
@@ -113,18 +161,18 @@ class ReklamlarTableViewController: UITableViewController {
     }
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return dataArray.count
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         cell.object = dataArray[indexPath.row]
         //cell.delegate = self
@@ -185,3 +233,4 @@ class ReklamlarTableViewController: UITableViewController {
      */
     
 }
+
