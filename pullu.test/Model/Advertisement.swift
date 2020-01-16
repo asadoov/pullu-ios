@@ -21,5 +21,6 @@ struct Advertisement : Codable {
     var catName: String?
     var photoUrl: String?
     var photo:  Data?
+    var cDate:String?
     
 }

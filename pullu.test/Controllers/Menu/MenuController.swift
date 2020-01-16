@@ -18,9 +18,19 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var earning: UILabel!
     
+    @IBOutlet weak var headerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        headerView.layer.backgroundColor = UIColor.white.cgColor
+        
+        headerView.layer.masksToBounds = false
+        headerView.layer.shadowColor = UIColor.gray.cgColor
+        headerView.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        headerView.layer.shadowOpacity = 1.0
+        headerView.layer.shadowRadius = 0.0
+        
         let udata=defaults.string(forKey: "uData")
         do{
             
@@ -30,8 +40,8 @@ class MenuController: UIViewController {
             
             // userList=list
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-            balance.text = "Balans: \(list[0].balance!) AZN"
-            earning.text = "Qazanc: \(list[0].earning!) AZN"
+            balance.text = "Yüklənən məbləğ\n\(list[0].balance!) AZN"
+            earning.text = "Qazanılan məbləğ\n\(list[0].earning!) AZN"
             
             
             

@@ -10,7 +10,7 @@ import UIKit
 
 class FirstRegistrationController: UIViewController {
     
-    @IBOutlet weak var uName: UITextField!
+
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var pass: UITextField!
     @IBOutlet weak var passRepeat: UITextField!
@@ -32,10 +32,10 @@ class FirstRegistrationController: UIViewController {
     }
     
     @IBAction func forwardClick(_ sender: Any) {
-        if((!uName.text!.isEmpty)&&(!email.text!.isEmpty)&&(!pass.text!.isEmpty)&&(!passRepeat.text!.isEmpty)){
+        if((!email.text!.isEmpty)&&(!pass.text!.isEmpty)&&(!passRepeat.text!.isEmpty)){
             if (pass.text==passRepeat.text) {
                 
-                newUser.username=uName.text
+         
                 newUser.mail=email.text
                 newUser.pass=pass.text
             
