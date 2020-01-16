@@ -7,6 +7,8 @@
 //
 
 import Foundation
+
+
 struct Advertisement : Codable {
     
     var id: Int?
@@ -18,5 +20,6 @@ struct Advertisement : Codable {
     var isPaid, mediaTpId, catId: Int?
     var catName: String?
     var photoUrl: String?
+    var photo:  Data?
     
 }

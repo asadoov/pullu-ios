@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AlamofireImage
+import Alamofire
 protocol ReklamCellDelegate {
     func orderClick(object: Advertisement)
 }
@@ -14,14 +16,14 @@ protocol ReklamCellDelegate {
 class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var ReklamImage: UIImageView!
     @IBOutlet weak var ReklamTitle: UILabel!
-
+    
     @IBOutlet weak var ReklamInfo: UILabel!
     @IBOutlet weak var ReklamDate: UILabel!
     @IBOutlet weak var ReklamType: UILabel!
     @IBOutlet weak var ReklamBaxish: UILabel!
     @IBOutlet weak var ReklamCategory: UILabel!
     var object: Advertisement?
-   // var delegate: ReklamCellDelegate?
+    // var delegate: ReklamCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -33,7 +35,7 @@ class ReklamCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-   
+    
     func reloadData() {
         
         
@@ -41,12 +43,21 @@ class ReklamCellTableViewCell: UITableViewCell {
         ReklamInfo.text=object?.description
         ReklamType.text=object?.aTypeName
         ReklamCategory.text=object?.catName
-      /*  photoView.image = nil
-        photoView.sd_setShowActivityIndicatorView(true)
-        photoView.sd_setIndicatorStyle(.whiteLarge)
-        photoView.sd_setImage(with: URL(string: Utility.getURLQuery((object?.photo)!)))
-        titleLabel.text = object?.title
-        descLabel.text = object?.desc
-        priceButton.setTitle(object?.price, for: .disabled)*/
+        if  object?.photo != nil{
+            self.ReklamImage.image=UIImage(data: object!.photo!)
+        }
+        
+        // self.ReklamImage.contentMode = .scaleAspectFill
+        
+        
+        
+        /*Alamofire.request(object!.photoUrl!).responseImage { response in
+         if let catPicture = response.result.value {
+         self.ReklamImage.image=""
+         self.ReklamImage.contentMode = .scaleAspectFill
+         //print("image downloaded: \(catPicture)")
+         }
+         }*/
+        
     }
 }

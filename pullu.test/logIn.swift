@@ -27,8 +27,14 @@ class logIn: UIViewController {
         
         view.addGestureRecognizer(tap)
         
-        if ConnectionCheck.isConnectedToNetwork() {
+        if (ConnectionCheck.isConnectedToNetwork() ) {
             print("Connected")
+            if defaults.string(forKey: "uData") != nil {
+              DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "segue", sender: self)
+                }
+            }
+            
             
         }
         else{

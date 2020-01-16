@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Alamofire
+import AlamofireImage
 class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     var dataArray: [Advertisement] = [Advertisement]()
@@ -44,7 +45,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     
     @IBAction func paidClick(_ sender: Any) {
-       if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
             // Table was scrolled by user.
             
             self.dataArray.removeAll()
@@ -82,14 +83,67 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // let userData = defaults.string(forKey: "uData")
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
-        print("\(mail)\n\(pass)")
+        let udata=defaults.string(forKey: "uData")
+        print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
+            
             (list) in
+            
+            
             for advert in list{
+                var typeCount = 0
+                for itm in list{
+                    if itm.isPaid==type{
+                        typeCount += 1
+                    }
+                }
+                
                 if (advert.isPaid==type) {
+                    var item = advert
                     
-                    self.dataArray.append(advert)
+                    //  element += 1
+                    Alamofire.request(advert.photoUrl!).responseImage { response in
+                        if let catPicture = response.result.value {
+                            //advert.photo=catPicture.pngData()
+                            item.photo = catPicture.pngData()
+                            
+                            print("image downloaded: \(item.photo)")
+                            
+                            //self.dataArray[element].photo=catPicture.pngData()
+                            //print(self.dataArray[dataArray.count-1].photo)
+                            
+                        }
+                        else  {
+                            item.photo = UIImage(named: "background")?.pngData()
+                            //self.dataArray.append(item)
+                        }
+                        
+                        
+                        self.dataArray.append(item)
+                        print("\(self.dataArray.count) \n list count: \(typeCount)")
+                        if self.dataArray.count == typeCount{
+                            DispatchQueue.main.async {
+                                
+                                //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                //self.tableView.reloadData()
+                                self.ReklamList.reloadData()
+                                // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                self.dismiss(animated: false){
+                                    
+                                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                    //  self.tableView.reloadData()
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
                     
                     
                 }
@@ -98,21 +152,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
             
-            DispatchQueue.main.async {
-                
-                //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                //self.tableView.reloadData()
-                self.ReklamList.reloadData()
-                self.dismiss(animated: false){
-                    
-                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                    //  self.tableView.reloadData()
-                    
-                    
-                    
-                }
-                
-            }
+            
             
             
         }
