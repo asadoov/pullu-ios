@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+
 class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     var dataArray: [Advertisement] = [Advertisement]()
