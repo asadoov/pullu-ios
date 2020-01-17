@@ -20,6 +20,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var headerView: UIView!
     var notPaid:Array<Advertisement>?
     var Paid:Array<Advertisement>?
+    var advertID:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -163,7 +164,10 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         cell.object = dataArray[indexPath.row]
-        print(cell.object?.name)
+        advertID=cell.object?.id!
+        print(advertID!)
+        self.performSegue(withIdentifier: "aboutAdvertPage", sender: self)
+        //print(cell.object?.name)
         //cell.delegate = self
         cell.reloadData()
         
@@ -234,15 +238,18 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
      }
      */
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+         if(segue.identifier == "aboutAdvertPage"){
+             let displayVC = segue.destination as! AboutAdvertController
+             displayVC.advertID = advertID
+         }
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
      }
-     */
     
 }
 
