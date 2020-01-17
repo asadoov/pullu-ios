@@ -104,7 +104,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     var item = advert
                     
                     //  element += 1
-                    Alamofire.request(advert.photoUrl!).responseImage { response in
+                    Alamofire.request(advert.photoUrl![0]).responseImage { response in
                         if let catPicture = response.result.value {
                             //advert.photo=catPicture.pngData()
                             item.photo = catPicture.pngData()
@@ -160,6 +160,17 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
+        cell.object = dataArray[indexPath.row]
+        print(cell.object?.name)
+        //cell.delegate = self
+        cell.reloadData()
+        
+        }
+
+       
+    
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
