@@ -143,5 +143,28 @@ class dbSelect {
            }
            
        }
+    func getAdvertById(advertID:Int?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+           
+           let url="http://13.92.237.16/api/androidmobileapp/user/about?advertID=\(advertID!)"
+           GetJson(jsonUrlString: url){
+               (json) in
+               do{
+                   
+                   
+                   let list  = try
+                       JSONDecoder().decode(Array<Advertisement>.self, from: json)
+                   
+                   // userList=list
+                   
+                   completionBlock(list)
+                   
+               }
+               catch let jsonErr{
+                   print("Error serializing json:",jsonErr)
+               }
+               
+           }
+           
+       }
     
 }
