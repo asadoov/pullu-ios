@@ -19,7 +19,7 @@ struct Advertisement : Codable {
     var aTypeName: String?
     var isPaid, mediaTpId, catId: Int?
     var catName: String?
-    var photoUrl: String?
+    var photoUrl: Array<String>?
     var photo:  Data?
     var cDate:String?
     
