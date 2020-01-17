@@ -47,11 +47,11 @@ class ReklamCellTableViewCell: UITableViewCell {
         ReklamInfo.text=object?.description
         ReklamType.text=object?.aTypeName
         ReklamCategory.text=object?.catName
-<<<<<<< HEAD
-        ReklamDate.text=dateFormatter.string(from:dt!)
-=======
 
->>>>>>> 65b246927587693e4c53836362b9000c4bf11038
+        ReklamDate.text=dateFormatter.string(from:dt!)
+
+
+
         if  object?.photo != nil{
             self.ReklamImage.image=UIImage(data: object!.photo!)
         }
