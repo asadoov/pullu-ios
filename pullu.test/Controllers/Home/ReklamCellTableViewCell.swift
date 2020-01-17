@@ -51,7 +51,6 @@ class ReklamCellTableViewCell: UITableViewCell {
 
         ReklamDate.text=dateFormatter.string(from:dt!)
 
-
         if  object?.photo != nil{
             self.ReklamImage.image=UIImage(data: object!.photo!)
         }
