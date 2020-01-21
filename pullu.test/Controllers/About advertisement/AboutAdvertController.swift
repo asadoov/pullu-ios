@@ -24,7 +24,7 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var balance: UILabel!
     
-
+    
     @IBOutlet weak var sellerFullname: UILabel!
     
     @IBOutlet weak var sellerPhone: UILabel!
@@ -70,41 +70,48 @@ class AboutAdvertController: UIViewController {
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
                 //  self.tableView.reloadData()
-               var imageSource: [ImageSource] = []
-               
-         
-                for  i in list[0].photoUrl! {
-                   
+                var imageSource: [ImageSource] = []
+                
+                
+                for  i in list[0].photoUrl ?? [""] {
+                    
+                    
+                    Alamofire.request(i).responseImage { response in
+                        if let catPicture = response.result.value {
+                            imageSource.append(ImageSource(image:  catPicture))
+                            // imgs.append(catPicture)
+                            print("Image downloaded\(catPicture)")
+                            //advert.photo=catPicture.pngData()
+                            DispatchQueue.main.async {
+                                self.slideshow.setImageInputs(imageSource)
+                            }
+                            
+                            //    photos.append(catPicture)
+                            
+                            //print("image downloaded: \(item.photo)")
+                            
+                            //self.dataArray[element].photo=catPicture.pngData()
+                            //print(self.dataArray[dataArray.count-1].photo)
+                            
+                        }
+                        else  {
+                            DispatchQueue.main.async {
+                                self.slideshow.setImageInputs([
+                                    
+                                    ImageSource(image: UIImage(named: "background")!)
+                                    
+                                ])
+                            }
+                            // photos.append(UIImage(named: "background")!)
+                            //self.dataArray.append(item)
+                        }
                         
-                        Alamofire.request(i).responseImage { response in
-                                               if let catPicture = response.result.value {
-                                                      imageSource.append(ImageSource(image:  catPicture))
-                                                  // imgs.append(catPicture)
-                                                   print("Image downloaded\(catPicture)")
-                                                   //advert.photo=catPicture.pngData()
-                                                   DispatchQueue.main.async {
-                                                       self.slideshow.setImageInputs(imageSource)
-                                                   }
-                                                   
-                                                   //    photos.append(catPicture)
-                                                   
-                                                   //print("image downloaded: \(item.photo)")
-                                                   
-                                                   //self.dataArray[element].photo=catPicture.pngData()
-                                                   //print(self.dataArray[dataArray.count-1].photo)
-                                                   
-                                               }
-                                               else  {
-                                                   // photos.append(UIImage(named: "background")!)
-                                                   //self.dataArray.append(item)
-                                               }
-                                               
-                                               
-                                           }
-                   
-                   
+                        
+                    }
+                    
+                    
                 }
-       
+                
                 
             }
         }
