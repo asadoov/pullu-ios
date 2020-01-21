@@ -145,26 +145,26 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     
                     
                     
-                    DispatchQueue.main.async {
-                        
-                        //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                        //self.tableView.reloadData()
-                        self.ReklamList.reloadData()
-                        // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                        self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                                   //  self.tableView.reloadData()
-                       /* self.dismiss(animated: false){
-                            
-                           
-                            
-                            
-                            
-                        }*/
-                        
-                    }
+                 
                     
                 }
-                
+                DispatchQueue.main.async {
+                                     
+                                     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                     //self.tableView.reloadData()
+                                     self.ReklamList.reloadData()
+                                     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                     self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                                                //  self.tableView.reloadData()
+                                    /* self.dismiss(animated: false){
+                                         
+                                        
+                                         
+                                         
+                                         
+                                     }*/
+                                     
+                                 }
                 
                 //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
