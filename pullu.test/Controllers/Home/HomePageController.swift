@@ -66,7 +66,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     private func getProducts(type:Int) {
-        DispatchQueue.main.async {
+       /* DispatchQueue.main.async {
             
             let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
             
@@ -79,7 +79,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.present(alert, animated: true, completion: nil)
         }
         
-        
+        */
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
@@ -92,7 +92,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             (list) in
             
-            
+           var adsWithImage: [Advertisement] = [Advertisement]()
             for advert in list{
                 var typeCount = 0
                 for itm in list{
@@ -103,7 +103,9 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 
                 if (advert.isPaid==type) {
                     var item = advert
-                    
+                 
+                    item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
+                    self.dataArray.append(item)
                     //  element += 1
                     Alamofire.request(advert.photoUrl![0]).responseImage { response in
                         if let catPicture = response.result.value {
@@ -121,24 +123,21 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                             //self.dataArray.append(item)
                         }
                         
-                        
-                        self.dataArray.append(item)
+                        adsWithImage.append(item)
+                        //self.dataArray.append(item)
                         print("\(self.dataArray.count) \n list count: \(typeCount)")
-                        if self.dataArray.count == typeCount{
+                        if adsWithImage.count == typeCount{
+                            self.dataArray.removeAll()
+                            self.dataArray=adsWithImage
+                            
                             DispatchQueue.main.async {
                                 
                                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                                 //self.tableView.reloadData()
                                 self.ReklamList.reloadData()
                                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                self.dismiss(animated: false){
-                                    
-                                    self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                    //  self.tableView.reloadData()
-                                    
-                                    
-                                    
-                                }
+                                
+                             self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                                 
                             }
                         }
@@ -146,7 +145,23 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     
                     
                     
-                    
+                    DispatchQueue.main.async {
+                        
+                        //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                        //self.tableView.reloadData()
+                        self.ReklamList.reloadData()
+                        // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                        self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                                   //  self.tableView.reloadData()
+                       /* self.dismiss(animated: false){
+                            
+                           
+                            
+                            
+                            
+                        }*/
+                        
+                    }
                     
                 }
                 

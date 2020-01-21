@@ -57,6 +57,7 @@ class logIn: UIViewController {
         loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating();
         
+        
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
         var usrList:Array<User>=Array<User>()

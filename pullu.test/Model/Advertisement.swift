@@ -13,6 +13,8 @@ struct Advertisement : Codable {
     
     var id: Int?
     var name: String?
+    var sellerFullName:String?
+    var sellerPhone:String?
     var description: String?
     var price: String?
     var aTypeId: Int?
