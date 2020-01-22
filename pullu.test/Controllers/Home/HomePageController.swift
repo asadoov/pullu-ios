@@ -123,10 +123,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                             //print(self.dataArray[dataArray.count-1].photo)
                             
                         }
-                        else  {
-                            item.photo = UIImage(named: "background")?.pngData()
-                            //self.dataArray.append(item)
-                        }
+                       
                         self.dataArray[k]=item
                        // self.dataArray.replaceSubrange( , with: item)
                            k+=1
@@ -168,6 +165,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     
                 }
                 DispatchQueue.main.async {
+                 
                     
                     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                     //self.tableView.reloadData()
