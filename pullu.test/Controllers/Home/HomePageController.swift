@@ -66,20 +66,20 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     private func getProducts(type:Int) {
-       /* DispatchQueue.main.async {
-            
-            let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-            
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            
-            alert.view.addSubview(loadingIndicator)
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        */
+        /* DispatchQueue.main.async {
+         
+         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+         
+         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+         loadingIndicator.hidesWhenStopped = true
+         loadingIndicator.style = UIActivityIndicatorView.Style.gray
+         loadingIndicator.startAnimating();
+         
+         alert.view.addSubview(loadingIndicator)
+         self.present(alert, animated: true, completion: nil)
+         }
+         
+         */
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
@@ -92,8 +92,10 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             (list) in
             
-           var adsWithImage: [Advertisement] = [Advertisement]()
+            var adsWithImage: [Advertisement] = [Advertisement]()
+            var k=0
             for advert in list{
+             
                 var typeCount = 0
                 for itm in list{
                     if itm.isPaid==type{
@@ -103,9 +105,12 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 
                 if (advert.isPaid==type) {
                     var item = advert
-                 
-                    item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
+                    
+                    //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
                     self.dataArray.append(item)
+                    
+                    
+                    let item_index = self.dataArray.endIndex
                     //  element += 1
                     Alamofire.request(advert.photoUrl![0]).responseImage { response in
                         if let catPicture = response.result.value {
@@ -122,49 +127,63 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                             item.photo = UIImage(named: "background")?.pngData()
                             //self.dataArray.append(item)
                         }
-                        
-                        adsWithImage.append(item)
+                        self.dataArray[k]=item
+                       // self.dataArray.replaceSubrange( , with: item)
+                           k+=1
+                        //adsWithImage.append(item)
                         //self.dataArray.append(item)
                         print("\(self.dataArray.count) \n list count: \(typeCount)")
-                        if adsWithImage.count == typeCount{
-                            self.dataArray.removeAll()
-                            self.dataArray=adsWithImage
+                        
+                        DispatchQueue.main.async {
                             
-                            DispatchQueue.main.async {
-                                
-                                //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                //self.tableView.reloadData()
-                                self.ReklamList.reloadData()
-                                // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                
+                            //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                            //self.tableView.reloadData()
+                            self.ReklamList.reloadData()
+                            // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                            
                             // self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                                
-                            }
+                            
                         }
+                        /* if adsWithImage.count == typeCount{
+                         self.dataArray.removeAll()
+                         self.dataArray=adsWithImage
+                         
+                         DispatchQueue.main.async {
+                         
+                         //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                         //self.tableView.reloadData()
+                         self.ReklamList.reloadData()
+                         // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                         
+                         // self.ReklamCount.text = String(typeCount)+" yeni reklam"
+                         
+                         }
+                         }
+                         */
                     }
                     
                     
                     
-                 
+                    
                     
                 }
                 DispatchQueue.main.async {
-                                     
-                                     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                     //self.tableView.reloadData()
-                                     self.ReklamList.reloadData()
-                                     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                     self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                                                                //  self.tableView.reloadData()
-                                    /* self.dismiss(animated: false){
-                                         
-                                        
-                                         
-                                         
-                                         
-                                     }*/
-                                     
-                                 }
+                    
+                    //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                    //self.tableView.reloadData()
+                    self.ReklamList.reloadData()
+                    // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                    self.ReklamCount.text = String(typeCount)+" yeni reklam"
+                    //  self.tableView.reloadData()
+                    /* self.dismiss(animated: false){
+                     
+                     
+                     
+                     
+                     
+                     }*/
+                    
+                }
                 
                 //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
@@ -177,7 +196,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
+        let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         cell.object = dataArray[indexPath.row]
         advertID=cell.object?.id!
         print(advertID!)
@@ -186,9 +205,9 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //cell.delegate = self
         cell.reloadData()
         
-        }
-
-       
+    }
+    
+    
     
     // MARK: - Table view data source
     
@@ -254,17 +273,17 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
      */
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if(segue.identifier == "aboutAdvertPage"){
-             let displayVC = segue.destination as! AboutAdvertController
-             displayVC.advertID = advertID
-         }
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "aboutAdvertPage"){
+            let displayVC = segue.destination as! AboutAdvertController
+            displayVC.advertID = advertID
+        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
     
 }
 
