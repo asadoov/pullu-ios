@@ -137,7 +137,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                                 self.ReklamList.reloadData()
                                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                                 
-                             self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                            // self.ReklamCount.text = String(typeCount)+" yeni reklam"
                                 
                             }
                         }
@@ -154,7 +154,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                                      //self.tableView.reloadData()
                                      self.ReklamList.reloadData()
                                      // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                                     self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                                     self.ReklamCount.text = String(typeCount)+" yeni reklam"
                                                                 //  self.tableView.reloadData()
                                     /* self.dismiss(animated: false){
                                          
