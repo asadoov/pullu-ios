@@ -33,6 +33,10 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
+        slideshow.addGestureRecognizer(gestureRecognizer)
+        
         slideshow.pageIndicatorPosition = .init(horizontal: .center,vertical: .under)
         slideshow.contentScaleMode=UIViewContentMode.scaleAspectFill
         let pageControl=UIPageControl()
@@ -119,7 +123,9 @@ class AboutAdvertController: UIViewController {
         
     }
     
-    
+    @objc func didTap() {
+      slideshow.presentFullScreenController(from: self)
+    }
     /*
      // MARK: - Navigation
      
