@@ -30,6 +30,8 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var sellerPhone: UILabel!
     @IBOutlet weak var slideshow: ImageSlideshow!
     
+    @IBOutlet weak var earnMoney: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,9 @@ class AboutAdvertController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                
+                if list[0].isPaid==0{
+                    self.earnMoney.isHidden=true
+                }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -125,6 +129,14 @@ class AboutAdvertController: UIViewController {
     
     @objc func didTap() {
       slideshow.presentFullScreenController(from: self)
+    }
+    
+    @IBAction func earnMoney_click(_ sender: Any) {
+        
+        let n=(30/slideshow.images.count)
+        //dasda
+        slideshow.presentFullScreenController(from: self).slideshow.slideshowInterval=Double(n)
+        
     }
     /*
      // MARK: - Navigation
