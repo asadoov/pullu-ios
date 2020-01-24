@@ -13,6 +13,7 @@
 		04C8751423C736B400E84091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8751323C736B400E84091 /* AppDelegate.swift */; };
 		04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB7DA23C7190700042E5C /* HomePageController.swift */; };
 		6E465D7B219C5A1E12FCF1CF /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */; };
+		B602324523DAD4F30073B7FF /* ReklamStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B602324423DAD4F30073B7FF /* ReklamStoryController.swift */; };
 		B61290F523D05B8C00FE9344 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61290F423D05B8C00FE9344 /* MenuController.swift */; };
 		B638618923CB291F0059B944 /* DbInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638618823CB291F0059B944 /* DbInsert.swift */; };
 		B65327C723D1ED430068E9E7 /* AboutAdvertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */; };
@@ -25,6 +26,8 @@
 		B6951DC423C503230020C7EE /* logIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC323C503230020C7EE /* logIn.swift */; };
 		B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC523C503EE0020C7EE /* dbSelect.swift */; };
 		B6951DC823C507570020C7EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC723C507570020C7EE /* User.swift */; };
+		B698D9A523D9DA6300905CDF /* TextReklamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698D9A423D9DA6300905CDF /* TextReklamController.swift */; };
+		B698D9A923D9DB3E00905CDF /* VideoReklamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */; };
 		B6D7ACF223CA7D92005AAB76 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF123CA7D92005AAB76 /* Country.swift */; };
 		B6D7ACF423CA7E98005AAB76 /* ThirdRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF323CA7E98005AAB76 /* ThirdRegistrationController.swift */; };
 		B6D7ACF623CA8591005AAB76 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF523CA8591005AAB76 /* City.swift */; };
@@ -43,6 +46,7 @@
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		2D74EB4D2A385DF8587E57FE /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
 		9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		B638618823CB291F0059B944 /* DbInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbInsert.swift; sourceTree = "<group>"; };
 		B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAdvertController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		B6951DC523C503EE0020C7EE /* dbSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbSelect.swift; sourceTree = "<group>"; };
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B698D9A423D9DA6300905CDF /* TextReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReklamController.swift; sourceTree = "<group>"; };
+		B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReklamController.swift; sourceTree = "<group>"; };
 		B6D7ACF123CA7D92005AAB76 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		B6D7ACF323CA7E98005AAB76 /* ThirdRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdRegistrationController.swift; sourceTree = "<group>"; };
 		B6D7ACF523CA8591005AAB76 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
@@ -141,7 +147,9 @@
 		B65327C523D1E84A0068E9E7 /* About advertisement */ = {
 			isa = PBXGroup;
 			children = (
-				B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */,
+				B698D9AA23D9DB6700905CDF /* Photo Reklam Page */,
+				B698D9A623D9DA6700905CDF /* Video Reklam Page */,
+				B698D9A323D9DA2900905CDF /* Text Reklam Page */,
 			);
 			path = "About advertisement";
 			sourceTree = "<group>";
@@ -187,6 +195,31 @@
 				B6D7ACF723CA8AC3005AAB76 /* Profession.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B698D9A323D9DA2900905CDF /* Text Reklam Page */ = {
+			isa = PBXGroup;
+			children = (
+				B698D9A423D9DA6300905CDF /* TextReklamController.swift */,
+				B602324423DAD4F30073B7FF /* ReklamStoryController.swift */,
+			);
+			path = "Text Reklam Page";
+			sourceTree = "<group>";
+		};
+		B698D9A623D9DA6700905CDF /* Video Reklam Page */ = {
+			isa = PBXGroup;
+			children = (
+				B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */,
+			);
+			path = "Video Reklam Page";
+			sourceTree = "<group>";
+		};
+		B698D9AA23D9DB6700905CDF /* Photo Reklam Page */ = {
+			isa = PBXGroup;
+			children = (
+				B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */,
+			);
+			path = "Photo Reklam Page";
 			sourceTree = "<group>";
 		};
 		CA3D62115FD4EA1DDBE1E8D2 /* Pods */ = {
@@ -331,6 +364,9 @@
 				B65327C723D1ED430068E9E7 /* AboutAdvertController.swift in Sources */,
 				B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */,
 				045829A523C452D3004F6FA9 /* pullu_test.xcdatamodeld in Sources */,
+				B698D9A523D9DA6300905CDF /* TextReklamController.swift in Sources */,
+				B602324523DAD4F30073B7FF /* ReklamStoryController.swift in Sources */,
+				B698D9A923D9DB3E00905CDF /* VideoReklamController.swift in Sources */,
 				B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */,
 				B6D7ACF423CA7E98005AAB76 /* ThirdRegistrationController.swift in Sources */,
 			);
