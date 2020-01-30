@@ -57,7 +57,7 @@ class MenuController: UIViewController {
         self.defaults.set(nil, forKey: "mail")
         self.defaults.set(nil, forKey: "pass")
         self.defaults.set(nil, forKey: "uData")
-        self.performSegue(withIdentifier: "signOutSegue", sender: self)
+        self.dismiss(animated: true)
         
     }
     /*

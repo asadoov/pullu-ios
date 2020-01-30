@@ -55,7 +55,7 @@ class DbInsert {
                 in
                 
                 do{
-                 
+                    
                     
                     let list  = try
                         JSONDecoder().decode(Array<User>.self, from: response.data!)
@@ -63,6 +63,43 @@ class DbInsert {
                     print(list)
                     
                     completionBlock(list)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+        
+        
+        
+        
+        
+    }
+    func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:EarnMoney) ->()){
+        
+        
+        
+        let PULLULINK = "http://13.92.237.16/api/androidmobileapp/earnMoney"
+        let Parameters = ["advertID": advertID!,"mail":mail!, "pass":pass!] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(EarnMoney.self, from: response.data!)
+                    // userList=list
+                    print(status)
+                    
+                    completionBlock(status)
                     
                     
                 }
