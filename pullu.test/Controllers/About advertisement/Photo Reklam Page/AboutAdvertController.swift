@@ -31,7 +31,7 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var slideshow: ImageSlideshow!
     
     @IBOutlet weak var earnMoney: UIButton!
-    
+       var imageSource: [ImageSource] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +78,7 @@ class AboutAdvertController: UIViewController {
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
                 //  self.tableView.reloadData()
-                var imageSource: [ImageSource] = []
+             
                 
                 
                 for  i in list[0].photoUrl ?? [""] {
@@ -86,12 +86,12 @@ class AboutAdvertController: UIViewController {
                     
                     Alamofire.request(i).responseImage { response in
                         if let catPicture = response.result.value {
-                            imageSource.append(ImageSource(image:  catPicture))
+                            self.imageSource.append(ImageSource(image:  catPicture))
                             // imgs.append(catPicture)
                             print("Image downloaded\(catPicture)")
                             //advert.photo=catPicture.pngData()
                             DispatchQueue.main.async {
-                                self.slideshow.setImageInputs(imageSource)
+                                self.slideshow.setImageInputs(self.imageSource)
                             }
                             
                             //    photos.append(catPicture)
@@ -128,14 +128,18 @@ class AboutAdvertController: UIViewController {
     }
     
     @objc func didTap() {
-      slideshow.presentFullScreenController(from: self)
+        slideshow.presentFullScreenController(from: self)
     }
     
     @IBAction func earnMoney_click(_ sender: Any) {
         
-        let n=(30/slideshow.images.count)
-        //dasda
-        slideshow.presentFullScreenController(from: self).slideshow.slideshowInterval=Double(n)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
+        newViewController.imageSource=imageSource
+        self.present(newViewController, animated: true, completion: nil)
+       // let n=(30/slideshow.images.count)
+   
+       // slideshow.presentFullScreenController(from: self).slideshow.slideshowInterval=Double(n)
         
     }
     /*
