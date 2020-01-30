@@ -78,8 +78,14 @@ class TextReklamController: UIViewController {
     
     
     @IBAction func earnMoney_click(_ sender: Any) {
+        earnMoney.isHidden=true;
+        let defaults = UserDefaults.standard
+        let pass = defaults.string(forKey: "pass")
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "ReklamStoryPage") as! ReklamStoryController
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "TextStoryPage") as! ReklamStoryController
+        newViewController.advertID=advertID!
+        newViewController.mail=self.userData[0].mail
+        newViewController.pass=pass!
         newViewController.advertDescription=self.advertDescription.text
         self.present(newViewController, animated: true, completion: nil)
     }

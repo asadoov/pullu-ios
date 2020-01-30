@@ -196,7 +196,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        cell.object = dataArray[indexPath.row]
+	        cell.object = dataArray[indexPath.row]
         advertID=cell.object?.id!
         //print(advertID!)
         if cell.object?.aTypeId==2{
