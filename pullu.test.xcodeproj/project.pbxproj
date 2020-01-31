@@ -12,13 +12,14 @@
 		045829AA23C452D5004F6FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
 		04C8751423C736B400E84091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8751323C736B400E84091 /* AppDelegate.swift */; };
 		04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB7DA23C7190700042E5C /* HomePageController.swift */; };
-		6E465D7B219C5A1E12FCF1CF /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */; };
 		B602324523DAD4F30073B7FF /* ReklamStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B602324423DAD4F30073B7FF /* ReklamStoryController.swift */; };
 		B61290F523D05B8C00FE9344 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61290F423D05B8C00FE9344 /* MenuController.swift */; };
 		B638618923CB291F0059B944 /* DbInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638618823CB291F0059B944 /* DbInsert.swift */; };
 		B65327C723D1ED430068E9E7 /* AboutAdvertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */; };
 		B65E10D023C9084C0081F8BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65E10CF23C9084B0081F8BD /* Assets.xcassets */; };
 		B66BAA4A23E309E300410822 /* PhotoStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BAA4923E309E300410822 /* PhotoStoryController.swift */; };
+		B66BAA5B23E31A9500410822 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */; };
+		B66BAA5C23E31A9500410822 /* Pods_pullu_test.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1A423C84A0E0089C894 /* Advertisement.swift */; };
 		B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */; };
 		B67D4FD523CA07AE00E572E8 /* FirstRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D4FD423CA07AE00E572E8 /* FirstRegistrationController.swift */; };
@@ -38,6 +39,20 @@
 		B6EEC71323C76DA200B9AEC9 /* ConnectionCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B66BAA5D23E31A9600410822 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B66BAA5C23E31A9500410822 /* Pods_pullu_test.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0458299723C452D3004F6FA9 /* pullu.test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pullu.test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045829A123C452D3004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,6 +69,10 @@
 		B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAdvertController.swift; sourceTree = "<group>"; };
 		B65E10CF23C9084B0081F8BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B66BAA4923E309E300410822 /* PhotoStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStoryController.swift; sourceTree = "<group>"; };
+		B66BAA4E23E31A3700410822 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B66BAA5123E31A3B00410822 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B66BAA5423E31A3F00410822 /* ImageSlideshow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ImageSlideshow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B66BAA5723E31A8900410822 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B66CA1A423C84A0E0089C894 /* Advertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertisement.swift; sourceTree = "<group>"; };
 		B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamCellTableViewCell.swift; sourceTree = "<group>"; };
 		B67D4FD423CA07AE00E572E8 /* FirstRegistrationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstRegistrationController.swift; sourceTree = "<group>"; };
@@ -79,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E465D7B219C5A1E12FCF1CF /* Pods_pullu_test.framework in Frameworks */,
+				B66BAA5B23E31A9500410822 /* Pods_pullu_test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +145,10 @@
 		92B3C5AEB36025992BBB5E86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B66BAA5723E31A8900410822 /* Alamofire.framework */,
+				B66BAA5423E31A3F00410822 /* ImageSlideshow.framework */,
+				B66BAA5123E31A3B00410822 /* AlamofireImage.framework */,
+				B66BAA4E23E31A3700410822 /* Alamofire.framework */,
 				9E664BEA9B2EB9BC0930988D /* Pods_pullu_test.framework */,
 			);
 			name = Frameworks;
@@ -249,6 +272,7 @@
 				0458299423C452D3004F6FA9 /* Frameworks */,
 				0458299523C452D3004F6FA9 /* Resources */,
 				82B16B80999A4EA127D167A6 /* [CP] Embed Pods Frameworks */,
+				B66BAA5D23E31A9600410822 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
