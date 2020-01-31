@@ -12,6 +12,8 @@ import AlamofireImage
 
 class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var paidBtn: UIButton!
+    @IBOutlet weak var notPaidBtn: UIButton!
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
     
@@ -67,6 +69,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     private func getProducts(type:Int) {
+       
         /* DispatchQueue.main.async {
          
          let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
@@ -90,7 +93,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
-            
+       
             (list) in
             
             var adsWithImage: [Advertisement] = [Advertisement]()
