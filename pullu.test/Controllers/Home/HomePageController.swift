@@ -25,8 +25,10 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var advertID:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: ""), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage(named: "")
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
         /*headerView.layer.backgroundColor = UIColor.white.cgColor
          
          headerView.layer.masksToBounds = false
@@ -69,7 +71,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     private func getProducts(type:Int) {
-       
+        
         /* DispatchQueue.main.async {
          
          let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
@@ -93,7 +95,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
-       
+            
             (list) in
             
             var adsWithImage: [Advertisement] = [Advertisement]()
@@ -199,7 +201,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-	        cell.object = dataArray[indexPath.row]
+        cell.object = dataArray[indexPath.row]
         advertID=cell.object?.id!
         //print(advertID!)
         if cell.object?.aTypeId==2{
@@ -298,7 +300,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let displayVC = segue.destination as! TextReklamController
             displayVC.advertID = advertID
         }
-      
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
