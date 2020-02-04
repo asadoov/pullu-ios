@@ -15,7 +15,8 @@ class TextReklamController: UIViewController {
     var advertID:Int?
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
-    
+    var pass:String?
+    @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advertName: UILabel!
     @IBOutlet weak var advertDescription: UILabel!
     @IBOutlet weak var sellerFullname: UILabel!
@@ -34,20 +35,23 @@ class TextReklamController: UIViewController {
         advertImage.addGestureRecognizer(tap)
         advertImage.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
-        select.getAdvertById(advertID: advertID)
+        
+        do{
+            let udata = self.defaults.string(forKey: "uData")
+            pass = self.defaults.string(forKey: "pass")
+            
+            self.userData  = try
+                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+        }
+        catch let jsonErr{
+            print("Error serializing json:",jsonErr)
+        }
+        select.getAdvertById(advertID: advertID,mail:self.userData[0].mail,pass:pass )
         {
             (list)
             in
             
-            do{
-                let udata = self.defaults.string(forKey: "uData")
-                
-                self.userData  = try
-                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
+            
             
             DispatchQueue.main.async {
                 if list[0].isPaid==0{
@@ -64,7 +68,7 @@ class TextReklamController: UIViewController {
                 self.advertDescription.text = list[0].description!
                 self.advertType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
-                
+                self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 
             }
         }

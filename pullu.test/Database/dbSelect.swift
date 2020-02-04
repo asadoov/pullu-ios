@@ -143,9 +143,9 @@ class dbSelect {
            }
            
        }
-    func getAdvertById(advertID:Int?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    func getAdvertById(advertID:Int?,mail:String?,pass:String?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
            
-           let url="http://13.92.237.16/api/androidmobileapp/user/about?advertID=\(advertID!)"
+           let url="http://13.92.237.16/api/androidmobileapp/user/about?advertID=\(advertID!)&mail=\(mail!)&pass=\(pass!)"
            GetJson(jsonUrlString: url){
                (json) in
                do{

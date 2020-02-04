@@ -25,5 +25,6 @@ struct Advertisement : Codable {
     var photo:  Data?
     var cDate:String?
     var seen:Int?
+    var views:Int?
     
 }

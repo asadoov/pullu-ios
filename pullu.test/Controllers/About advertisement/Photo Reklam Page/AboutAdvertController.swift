@@ -16,6 +16,8 @@ class AboutAdvertController: UIViewController {
     var advertID:Int?
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
+    var pass:String?
+    @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
     @IBOutlet weak var advDescription: UILabel!
@@ -32,19 +34,19 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var blurClocks: UIImageView!
     @IBOutlet weak var earnMoney: UIButton!
-       var imageSource: [ImageSource] = []
+    var imageSource: [ImageSource] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-
+        
+        
         let blurEffect = UIBlurEffect(style:.regular)
-           let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
         //always fill the view
-           blurEffectView.frame = self.view.bounds
-           blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-           blurClocks.addSubview(blurEffectView)
+        blurEffectView.frame = self.view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        blurClocks.addSubview(blurEffectView)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
         slideshow.addGestureRecognizer(gestureRecognizer)
         
@@ -56,20 +58,22 @@ class AboutAdvertController: UIViewController {
         slideshow.pageIndicator=pageControl
         
         // Do any additional setup after loading the view.
-        select.getAdvertById(advertID: advertID)
+        do{
+            let udata = self.defaults.string(forKey: "uData")
+            pass = self.defaults.string(forKey: "pass")
+            self.userData  = try
+                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+        }
+        catch let jsonErr{
+            print("Error serializing json:",jsonErr)
+        }
+        //print("mail: \(userData[0].mail) pass: \(pass) advertID: \(advertID)")
+        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
         {
             (list)
             in
             
-            do{
-                let udata = self.defaults.string(forKey: "uData")
-                
-                self.userData  = try
-                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
+            
             
             DispatchQueue.main.async {
                 if list[0].isPaid==0{
@@ -86,8 +90,9 @@ class AboutAdvertController: UIViewController {
                 self.advDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
+                self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 //  self.tableView.reloadData()
-             
+                
                 
                 
                 for  i in list[0].photoUrl ?? [""] {
@@ -146,9 +151,9 @@ class AboutAdvertController: UIViewController {
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
         newViewController.imageSource=imageSource
         self.present(newViewController, animated: true, completion: nil)
-       // let n=(30/slideshow.images.count)
-   
-       // slideshow.presentFullScreenController(from: self).slideshow.slideshowInterval=Double(n)
+        // let n=(30/slideshow.images.count)
+        
+        // slideshow.presentFullScreenController(from: self).slideshow.slideshowInterval=Double(n)
         
     }
     /*
