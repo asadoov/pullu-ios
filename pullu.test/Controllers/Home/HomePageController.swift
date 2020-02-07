@@ -92,7 +92,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
         let udata=defaults.string(forKey: "uData")
-        print("\(mail)\n\(pass)\n\(udata)")
+        //print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
             

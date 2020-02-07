@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		045829A223C452D3004F6FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A023C452D3004F6FA9 /* Main.storyboard */; };
-		045829A523C452D3004F6FA9 /* pullu_test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 045829A323C452D3004F6FA9 /* pullu_test.xcdatamodeld */; };
 		045829AA23C452D5004F6FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
 		0484058523E7F200005E353C /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */; };
 		0484058623E7F200005E353C /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057723E7F200005E353C /* Nunito-ExtraBold.ttf */; };
@@ -25,33 +24,29 @@
 		0484059123E7F200005E353C /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0484058223E7F200005E353C /* OFL.txt */; };
 		0484059223E7F200005E353C /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484058323E7F200005E353C /* Nunito-Italic.ttf */; };
 		0484059323E7F200005E353C /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484058423E7F200005E353C /* Nunito-LightItalic.ttf */; };
-		04C8751423C736B400E84091 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8751323C736B400E84091 /* AppDelegate.swift */; };
-		04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EFB7DA23C7190700042E5C /* HomePageController.swift */; };
-		B602324523DAD4F30073B7FF /* ReklamStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B602324423DAD4F30073B7FF /* ReklamStoryController.swift */; };
-		B61290F523D05B8C00FE9344 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61290F423D05B8C00FE9344 /* MenuController.swift */; };
-		B638618923CB291F0059B944 /* DbInsert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B638618823CB291F0059B944 /* DbInsert.swift */; };
-		B65327C723D1ED430068E9E7 /* AboutAdvertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */; };
 		B65E10D023C9084C0081F8BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65E10CF23C9084B0081F8BD /* Assets.xcassets */; };
-		B66BAA4A23E309E300410822 /* PhotoStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BAA4923E309E300410822 /* PhotoStoryController.swift */; };
-		B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1A423C84A0E0089C894 /* Advertisement.swift */; };
-		B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */; };
-		B67D4FD523CA07AE00E572E8 /* FirstRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D4FD423CA07AE00E572E8 /* FirstRegistrationController.swift */; };
-		B67D4FD723CA0EE400E572E8 /* SecondRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D4FD623CA0EE400E572E8 /* SecondRegistrationController.swift */; };
-		B67D4FDA23CA13DF00E572E8 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67D4FD923CA13DF00E572E8 /* NewUser.swift */; };
-		B67FA3A923E1B17E000DAF92 /* earnMoney.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67FA3A823E1B17E000DAF92 /* earnMoney.swift */; };
-		B6951DC423C503230020C7EE /* logIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC323C503230020C7EE /* logIn.swift */; };
-		B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC523C503EE0020C7EE /* dbSelect.swift */; };
-		B6951DC823C507570020C7EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC723C507570020C7EE /* User.swift */; };
-		B698D9A523D9DA6300905CDF /* TextReklamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698D9A423D9DA6300905CDF /* TextReklamController.swift */; };
-		B698D9A923D9DB3E00905CDF /* VideoReklamController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */; };
-		B6D7ACF223CA7D92005AAB76 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF123CA7D92005AAB76 /* Country.swift */; };
-		B6D7ACF423CA7E98005AAB76 /* ThirdRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF323CA7E98005AAB76 /* ThirdRegistrationController.swift */; };
-		B6D7ACF623CA8591005AAB76 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF523CA8591005AAB76 /* City.swift */; };
-		B6D7ACF823CA8AC3005AAB76 /* Profession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D7ACF723CA8AC3005AAB76 /* Profession.swift */; };
-		B6EEC70F23C76A5300B9AEC9 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */; };
-		B6EEC71323C76DA200B9AEC9 /* ConnectionCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */; };
-		FEB1132BA071D218297A1168 /* libPods-pullu.test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405D11058BBF3E1964D18F8F /* libPods-pullu.test.a */; };
+		B684E39D23EDA6AF003CB663 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B684E39F23EDAA3C003CB663 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B684E39E23EDAA3C003CB663 /* Pods_pullu_test.framework */; };
+		B684E3A023EDAA3C003CB663 /* Pods_pullu_test.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B684E39E23EDAA3C003CB663 /* Pods_pullu_test.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B688E4CB23ED5DE3003D04D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B688E4CA23ED5DE3003D04D0 /* GoogleService-Info.plist */; };
+		B688E5B323ED9EF5003D04D0 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B688E5B023ED9458003D04D0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B688E5B323ED9EF5003D04D0 /* (null) in Embed Frameworks */,
+				B684E39D23EDA6AF003CB663 /* (null) in Embed Frameworks */,
+				B684E3A023EDAA3C003CB663 /* Pods_pullu_test.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0458299723C452D3004F6FA9 /* pullu.test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pullu.test.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,11 +71,35 @@
 		0484058423E7F200005E353C /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
 		04C8751323C736B400E84091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
-		2D74EB4D2A385DF8587E57FE /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
-		405D11058BBF3E1964D18F8F /* libPods-pullu.test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pullu.test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21E2A4B0F8D012842CB2F882 /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
+		66C58075E32DC2EA7B5FB057 /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
+		A058FB9BD8027CD092F96B92 /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		B638618823CB291F0059B944 /* DbInsert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbInsert.swift; sourceTree = "<group>"; };
+		B652A1B423EDA46C00D75422 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1B623EDA51F00D75422 /* gRPCCertificates-Cpp.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "gRPCCertificates-Cpp.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1B723EDA51F00D75422 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1B823EDA51F00D75422 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1B923EDA51F00D75422 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BA23EDA51F00D75422 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BB23EDA51F00D75422 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BC23EDA51F00D75422 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BD23EDA51F00D75422 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BE23EDA51F00D75422 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1BF23EDA51F00D75422 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C023EDA51F00D75422 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C123EDA51F00D75422 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C223EDA51F00D75422 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C323EDA51F00D75422 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C423EDA51F00D75422 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C523EDA51F00D75422 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C623EDA51F00D75422 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C723EDA51F00D75422 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C823EDA51F00D75422 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1C923EDA51F00D75422 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1CA23EDA51F00D75422 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B652A1CC23EDA51F00D75422 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAdvertController.swift; sourceTree = "<group>"; };
 		B65E10CF23C9084B0081F8BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B66BAA4923E309E300410822 /* PhotoStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStoryController.swift; sourceTree = "<group>"; };
@@ -90,18 +109,152 @@
 		B67D4FD623CA0EE400E572E8 /* SecondRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRegistrationController.swift; sourceTree = "<group>"; };
 		B67D4FD923CA13DF00E572E8 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		B67FA3A823E1B17E000DAF92 /* earnMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = earnMoney.swift; sourceTree = "<group>"; };
+		B684E39E23EDAA3C003CB663 /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4C823ED3453003D04D0 /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		B688E4CA23ED5DE3003D04D0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B688E4CE23ED8F2B003D04D0 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4CF23ED8F2B003D04D0 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D023ED8F2B003D04D0 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D123ED8F2B003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D223ED8F2B003D04D0 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D323ED8F2B003D04D0 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D423ED8F2B003D04D0 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D523ED8F2B003D04D0 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D623ED8F2B003D04D0 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D723ED8F2B003D04D0 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D823ED8F2B003D04D0 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4D923ED8F2B003D04D0 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DA23ED8F2B003D04D0 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DB23ED8F2B003D04D0 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DC23ED8F2B003D04D0 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DD23ED8F2B003D04D0 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DE23ED8F2B003D04D0 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4DF23ED8F2B003D04D0 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4E023ED8F2B003D04D0 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4E123ED8F2B003D04D0 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4E323ED8F2B003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4FA23ED8F45003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4FC23ED8FD1003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4FE23ED8FEF003D04D0 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E4FF23ED8FEF003D04D0 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50023ED8FEF003D04D0 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50123ED8FEF003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50223ED8FEF003D04D0 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50323ED8FEF003D04D0 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50423ED8FEF003D04D0 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50523ED8FEF003D04D0 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50623ED8FEF003D04D0 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50723ED8FEF003D04D0 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50823ED8FEF003D04D0 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50923ED8FEF003D04D0 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50A23ED8FEF003D04D0 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50B23ED8FEF003D04D0 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50C23ED8FEF003D04D0 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50D23ED8FEF003D04D0 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50E23ED8FEF003D04D0 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E50F23ED8FEF003D04D0 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E51023ED8FEF003D04D0 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E51123ED8FEF003D04D0 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E51323ED8FEF003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52A23ED90B5003D04D0 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52B23ED90B5003D04D0 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52C23ED90B5003D04D0 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52D23ED90B5003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52E23ED90B5003D04D0 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E52F23ED90B5003D04D0 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53023ED90B5003D04D0 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53123ED90B5003D04D0 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53223ED90B5003D04D0 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53323ED90B5003D04D0 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53423ED90B5003D04D0 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53523ED90B5003D04D0 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53623ED90B5003D04D0 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53723ED90B5003D04D0 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53823ED90B5003D04D0 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53923ED90B5003D04D0 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53A23ED90B5003D04D0 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53B23ED90B5003D04D0 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53C23ED90B5003D04D0 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53D23ED90B5003D04D0 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E53F23ED90B5003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E55623ED90F7003D04D0 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E55823ED90F7003D04D0 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E55A23ED90F7003D04D0 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E55C23ED90F7003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E55E23ED90F7003D04D0 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56023ED90F7003D04D0 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56223ED90F7003D04D0 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56423ED90F7003D04D0 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56623ED90F7003D04D0 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56823ED90F7003D04D0 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56A23ED90F7003D04D0 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56C23ED90F7003D04D0 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E56E23ED90F7003D04D0 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57023ED90F7003D04D0 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57223ED90F7003D04D0 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57423ED90F7003D04D0 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57623ED90F7003D04D0 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57823ED90F7003D04D0 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57A23ED90F7003D04D0 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E57C23ED90F7003D04D0 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58023ED90F7003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58223ED9118003D04D0 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58323ED9118003D04D0 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58423ED9118003D04D0 /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58523ED9118003D04D0 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58623ED9118003D04D0 /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58723ED9118003D04D0 /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58823ED9118003D04D0 /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58923ED9118003D04D0 /* libFirebaseDatabase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseDatabase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58A23ED9118003D04D0 /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58B23ED9118003D04D0 /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58C23ED9118003D04D0 /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58D23ED9118003D04D0 /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58E23ED9118003D04D0 /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E58F23ED9118003D04D0 /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59023ED9118003D04D0 /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59123ED9118003D04D0 /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59223ED9118003D04D0 /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59323ED9118003D04D0 /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59423ED9118003D04D0 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59523ED9118003D04D0 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B688E59723ED9118003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B689501423EBE61900B9CE54 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		B689501723EBE88B00B9CE54 /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
+		B68DB89223EB1D0B003C3960 /* SuccessRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessRegController.swift; sourceTree = "<group>"; };
+		B68DB89423EB32F0003C3960 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		B6951DC523C503EE0020C7EE /* dbSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbSelect.swift; sourceTree = "<group>"; };
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B698D9A423D9DA6300905CDF /* TextReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReklamController.swift; sourceTree = "<group>"; };
 		B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReklamController.swift; sourceTree = "<group>"; };
+		B6CBE8A223EC438B002414CC /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A323EC438B002414CC /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A423EC438B002414CC /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A523EC438B002414CC /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A623EC438B002414CC /* libFirebaseAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A723EC438B002414CC /* libFirebaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A823EC438B002414CC /* libFirebaseCoreDiagnostics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseCoreDiagnostics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8A923EC438B002414CC /* libFirebaseFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AA23EC438B002414CC /* libFirebaseInstallations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstallations.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AB23EC438B002414CC /* libFirebaseInstanceID.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFirebaseInstanceID.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AC23EC438B002414CC /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AD23EC438B002414CC /* libGoogleDataTransportCCTSupport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransportCCTSupport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AE23EC438B002414CC /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8AF23EC438B002414CC /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B023EC438B002414CC /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B123EC438B002414CC /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B223EC438B002414CC /* libImageSlideshow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libImageSlideshow.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B323EC438B002414CC /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B423EC438B002414CC /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8B623EC438B002414CC /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6CBE8D023EC45AB002414CC /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		B6D7ACF123CA7D92005AAB76 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		B6D7ACF323CA7E98005AAB76 /* ThirdRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdRegistrationController.swift; sourceTree = "<group>"; };
 		B6D7ACF523CA8591005AAB76 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		B6D7ACF723CA8AC3005AAB76 /* Profession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profession.swift; sourceTree = "<group>"; };
 		B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheckController.swift; sourceTree = "<group>"; };
-		F1EF8223C6CF9078A62CDA7C /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEB1132BA071D218297A1168 /* libPods-pullu.test.a in Frameworks */,
+				B684E39F23EDAA3C003CB663 /* Pods_pullu_test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +277,7 @@
 				0458299823C452D3004F6FA9 /* Products */,
 				CA3D62115FD4EA1DDBE1E8D2 /* Pods */,
 				92B3C5AEB36025992BBB5E86 /* Frameworks */,
+				B688E4CD23ED8ED3003D04D0 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +292,7 @@
 		0458299923C452D3004F6FA9 /* pullu.test */ = {
 			isa = PBXGroup;
 			children = (
+				B688E4CA23ED5DE3003D04D0 /* GoogleService-Info.plist */,
 				04C8751323C736B400E84091 /* AppDelegate.swift */,
 				B638618423CB28D10059B944 /* Database */,
 				B67D4FD823CA13C000E572E8 /* Model */,
@@ -179,7 +334,158 @@
 		92B3C5AEB36025992BBB5E86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				405D11058BBF3E1964D18F8F /* libPods-pullu.test.a */,
+				B684E39E23EDAA3C003CB663 /* Pods_pullu_test.framework */,
+				B652A1B623EDA51F00D75422 /* gRPCCertificates-Cpp.bundle */,
+				B652A1B723EDA51F00D75422 /* libabseil.a */,
+				B652A1B823EDA51F00D75422 /* libAlamofire.a */,
+				B652A1B923EDA51F00D75422 /* libAlamofireImage.a */,
+				B652A1BA23EDA51F00D75422 /* libBoringSSL-GRPC.a */,
+				B652A1BB23EDA51F00D75422 /* libFirebaseAuth.a */,
+				B652A1BC23EDA51F00D75422 /* libFirebaseCore.a */,
+				B652A1BD23EDA51F00D75422 /* libFirebaseCoreDiagnostics.a */,
+				B652A1BE23EDA51F00D75422 /* libFirebaseDatabase.a */,
+				B652A1BF23EDA51F00D75422 /* libFirebaseFirestore.a */,
+				B652A1C023EDA51F00D75422 /* libFirebaseInstallations.a */,
+				B652A1C123EDA51F00D75422 /* libFirebaseInstanceID.a */,
+				B652A1C223EDA51F00D75422 /* libGoogleDataTransport.a */,
+				B652A1C323EDA51F00D75422 /* libGoogleDataTransportCCTSupport.a */,
+				B652A1C423EDA51F00D75422 /* libGoogleUtilities.a */,
+				B652A1C523EDA51F00D75422 /* libgRPC-C++.a */,
+				B652A1C623EDA51F00D75422 /* libgRPC-Core.a */,
+				B652A1C723EDA51F00D75422 /* libGTMSessionFetcher.a */,
+				B652A1C823EDA51F00D75422 /* libImageSlideshow.a */,
+				B652A1C923EDA51F00D75422 /* libleveldb-library.a */,
+				B652A1CA23EDA51F00D75422 /* libnanopb.a */,
+				B652A1CC23EDA51F00D75422 /* libPromisesObjC.a */,
+				B652A1B423EDA46C00D75422 /* libBoringSSL-GRPC.a */,
+				B688E58223ED9118003D04D0 /* libabseil.a */,
+				B688E58323ED9118003D04D0 /* libAlamofire.a */,
+				B688E58423ED9118003D04D0 /* libAlamofireImage.a */,
+				B688E58523ED9118003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E58623ED9118003D04D0 /* libFirebaseAuth.a */,
+				B688E58723ED9118003D04D0 /* libFirebaseCore.a */,
+				B688E58823ED9118003D04D0 /* libFirebaseCoreDiagnostics.a */,
+				B688E58923ED9118003D04D0 /* libFirebaseDatabase.a */,
+				B688E58A23ED9118003D04D0 /* libFirebaseFirestore.a */,
+				B688E58B23ED9118003D04D0 /* libFirebaseInstallations.a */,
+				B688E58C23ED9118003D04D0 /* libFirebaseInstanceID.a */,
+				B688E58D23ED9118003D04D0 /* libGoogleDataTransport.a */,
+				B688E58E23ED9118003D04D0 /* libGoogleDataTransportCCTSupport.a */,
+				B688E58F23ED9118003D04D0 /* libGoogleUtilities.a */,
+				B688E59023ED9118003D04D0 /* libgRPC-C++.a */,
+				B688E59123ED9118003D04D0 /* libgRPC-Core.a */,
+				B688E59223ED9118003D04D0 /* libGTMSessionFetcher.a */,
+				B688E59323ED9118003D04D0 /* libImageSlideshow.a */,
+				B688E59423ED9118003D04D0 /* libleveldb-library.a */,
+				B688E59523ED9118003D04D0 /* libnanopb.a */,
+				B688E59723ED9118003D04D0 /* libPromisesObjC.a */,
+				B688E55623ED90F7003D04D0 /* libabseil.a */,
+				B688E55823ED90F7003D04D0 /* libAlamofire.a */,
+				B688E55A23ED90F7003D04D0 /* libAlamofireImage.a */,
+				B688E55C23ED90F7003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E55E23ED90F7003D04D0 /* libFirebaseAuth.a */,
+				B688E56023ED90F7003D04D0 /* libFirebaseCore.a */,
+				B688E56223ED90F7003D04D0 /* libFirebaseCoreDiagnostics.a */,
+				B688E56423ED90F7003D04D0 /* libFirebaseDatabase.a */,
+				B688E56623ED90F7003D04D0 /* libFirebaseFirestore.a */,
+				B688E56823ED90F7003D04D0 /* libFirebaseInstallations.a */,
+				B688E56A23ED90F7003D04D0 /* libFirebaseInstanceID.a */,
+				B688E56C23ED90F7003D04D0 /* libGoogleDataTransport.a */,
+				B688E56E23ED90F7003D04D0 /* libGoogleDataTransportCCTSupport.a */,
+				B688E57023ED90F7003D04D0 /* libGoogleUtilities.a */,
+				B688E57223ED90F7003D04D0 /* libgRPC-C++.a */,
+				B688E57423ED90F7003D04D0 /* libgRPC-Core.a */,
+				B688E57623ED90F7003D04D0 /* libGTMSessionFetcher.a */,
+				B688E57823ED90F7003D04D0 /* libImageSlideshow.a */,
+				B688E57A23ED90F7003D04D0 /* libleveldb-library.a */,
+				B688E57C23ED90F7003D04D0 /* libnanopb.a */,
+				B688E58023ED90F7003D04D0 /* libPromisesObjC.a */,
+				B688E52A23ED90B5003D04D0 /* libabseil.a */,
+				B688E52B23ED90B5003D04D0 /* libAlamofire.a */,
+				B688E52C23ED90B5003D04D0 /* libAlamofireImage.a */,
+				B688E52D23ED90B5003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E52E23ED90B5003D04D0 /* libFirebaseAuth.a */,
+				B688E52F23ED90B5003D04D0 /* libFirebaseCore.a */,
+				B688E53023ED90B5003D04D0 /* libFirebaseCoreDiagnostics.a */,
+				B688E53123ED90B5003D04D0 /* libFirebaseDatabase.a */,
+				B688E53223ED90B5003D04D0 /* libFirebaseFirestore.a */,
+				B688E53323ED90B5003D04D0 /* libFirebaseInstallations.a */,
+				B688E53423ED90B5003D04D0 /* libFirebaseInstanceID.a */,
+				B688E53523ED90B5003D04D0 /* libGoogleDataTransport.a */,
+				B688E53623ED90B5003D04D0 /* libGoogleDataTransportCCTSupport.a */,
+				B688E53723ED90B5003D04D0 /* libGoogleUtilities.a */,
+				B688E53823ED90B5003D04D0 /* libgRPC-C++.a */,
+				B688E53923ED90B5003D04D0 /* libgRPC-Core.a */,
+				B688E53A23ED90B5003D04D0 /* libGTMSessionFetcher.a */,
+				B688E53B23ED90B5003D04D0 /* libImageSlideshow.a */,
+				B688E53C23ED90B5003D04D0 /* libleveldb-library.a */,
+				B688E53D23ED90B5003D04D0 /* libnanopb.a */,
+				B688E53F23ED90B5003D04D0 /* libPromisesObjC.a */,
+				B688E4FE23ED8FEF003D04D0 /* libabseil.a */,
+				B688E4FF23ED8FEF003D04D0 /* libAlamofire.a */,
+				B688E50023ED8FEF003D04D0 /* libAlamofireImage.a */,
+				B688E50123ED8FEF003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E50223ED8FEF003D04D0 /* libFirebaseAuth.a */,
+				B688E50323ED8FEF003D04D0 /* libFirebaseCore.a */,
+				B688E50423ED8FEF003D04D0 /* libFirebaseCoreDiagnostics.a */,
+				B688E50523ED8FEF003D04D0 /* libFirebaseDatabase.a */,
+				B688E50623ED8FEF003D04D0 /* libFirebaseFirestore.a */,
+				B688E50723ED8FEF003D04D0 /* libFirebaseInstallations.a */,
+				B688E50823ED8FEF003D04D0 /* libFirebaseInstanceID.a */,
+				B688E50923ED8FEF003D04D0 /* libGoogleDataTransport.a */,
+				B688E50A23ED8FEF003D04D0 /* libGoogleDataTransportCCTSupport.a */,
+				B688E50B23ED8FEF003D04D0 /* libGoogleUtilities.a */,
+				B688E50C23ED8FEF003D04D0 /* libgRPC-C++.a */,
+				B688E50D23ED8FEF003D04D0 /* libgRPC-Core.a */,
+				B688E50E23ED8FEF003D04D0 /* libGTMSessionFetcher.a */,
+				B688E50F23ED8FEF003D04D0 /* libImageSlideshow.a */,
+				B688E51023ED8FEF003D04D0 /* libleveldb-library.a */,
+				B688E51123ED8FEF003D04D0 /* libnanopb.a */,
+				B688E51323ED8FEF003D04D0 /* libPromisesObjC.a */,
+				B688E4FC23ED8FD1003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E4FA23ED8F45003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E4CE23ED8F2B003D04D0 /* libabseil.a */,
+				B688E4CF23ED8F2B003D04D0 /* libAlamofire.a */,
+				B688E4D023ED8F2B003D04D0 /* libAlamofireImage.a */,
+				B688E4D123ED8F2B003D04D0 /* libBoringSSL-GRPC.a */,
+				B688E4D223ED8F2B003D04D0 /* libFirebaseAuth.a */,
+				B688E4D323ED8F2B003D04D0 /* libFirebaseCore.a */,
+				B688E4D423ED8F2B003D04D0 /* libFirebaseCoreDiagnostics.a */,
+				B688E4D523ED8F2B003D04D0 /* libFirebaseDatabase.a */,
+				B688E4D623ED8F2B003D04D0 /* libFirebaseFirestore.a */,
+				B688E4D723ED8F2B003D04D0 /* libFirebaseInstallations.a */,
+				B688E4D823ED8F2B003D04D0 /* libFirebaseInstanceID.a */,
+				B688E4D923ED8F2B003D04D0 /* libGoogleDataTransport.a */,
+				B688E4DA23ED8F2B003D04D0 /* libGoogleDataTransportCCTSupport.a */,
+				B688E4DB23ED8F2B003D04D0 /* libGoogleUtilities.a */,
+				B688E4DC23ED8F2B003D04D0 /* libgRPC-C++.a */,
+				B688E4DD23ED8F2B003D04D0 /* libgRPC-Core.a */,
+				B688E4DE23ED8F2B003D04D0 /* libGTMSessionFetcher.a */,
+				B688E4DF23ED8F2B003D04D0 /* libImageSlideshow.a */,
+				B688E4E023ED8F2B003D04D0 /* libleveldb-library.a */,
+				B688E4E123ED8F2B003D04D0 /* libnanopb.a */,
+				B688E4E323ED8F2B003D04D0 /* libPromisesObjC.a */,
+				B6CBE8A223EC438B002414CC /* libabseil.a */,
+				B6CBE8A323EC438B002414CC /* libAlamofire.a */,
+				B6CBE8A423EC438B002414CC /* libAlamofireImage.a */,
+				B6CBE8A523EC438B002414CC /* libBoringSSL-GRPC.a */,
+				B6CBE8A623EC438B002414CC /* libFirebaseAuth.a */,
+				B6CBE8A723EC438B002414CC /* libFirebaseCore.a */,
+				B6CBE8A823EC438B002414CC /* libFirebaseCoreDiagnostics.a */,
+				B6CBE8A923EC438B002414CC /* libFirebaseFirestore.a */,
+				B6CBE8AA23EC438B002414CC /* libFirebaseInstallations.a */,
+				B6CBE8AB23EC438B002414CC /* libFirebaseInstanceID.a */,
+				B6CBE8AC23EC438B002414CC /* libGoogleDataTransport.a */,
+				B6CBE8AD23EC438B002414CC /* libGoogleDataTransportCCTSupport.a */,
+				B6CBE8AE23EC438B002414CC /* libGoogleUtilities.a */,
+				B6CBE8AF23EC438B002414CC /* libgRPC-C++.a */,
+				B6CBE8B023EC438B002414CC /* libgRPC-Core.a */,
+				B6CBE8B123EC438B002414CC /* libGTMSessionFetcher.a */,
+				B6CBE8B223EC438B002414CC /* libImageSlideshow.a */,
+				B6CBE8B323EC438B002414CC /* libleveldb-library.a */,
+				B6CBE8B423EC438B002414CC /* libnanopb.a */,
+				B6CBE8B623EC438B002414CC /* libPromisesObjC.a */,
+				A058FB9BD8027CD092F96B92 /* Pods_pullu_test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -223,6 +529,8 @@
 		B67D4FD023CA059C00E572E8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6CBE8CF23EC4552002414CC /* Notification */,
+				B689501623EBE73900B9CE54 /* StatisticsPack */,
 				B61290F123D0593600FE9344 /* Menu */,
 				B65327C523D1E84A0068E9E7 /* About advertisement */,
 				B66A08F423CF517F00DE4D26 /* Home */,
@@ -237,6 +545,7 @@
 				B67D4FD423CA07AE00E572E8 /* FirstRegistrationController.swift */,
 				B67D4FD623CA0EE400E572E8 /* SecondRegistrationController.swift */,
 				B6D7ACF323CA7E98005AAB76 /* ThirdRegistrationController.swift */,
+				B68DB89223EB1D0B003C3960 /* SuccessRegController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -251,8 +560,26 @@
 				B6D7ACF523CA8591005AAB76 /* City.swift */,
 				B6D7ACF723CA8AC3005AAB76 /* Profession.swift */,
 				B67FA3A823E1B17E000DAF92 /* earnMoney.swift */,
+				B68DB89423EB32F0003C3960 /* Status.swift */,
+				B689501423EBE61900B9CE54 /* Statistics.swift */,
+				B688E4C823ED3453003D04D0 /* NotificationModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B688E4CD23ED8ED3003D04D0 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		B689501623EBE73900B9CE54 /* StatisticsPack */ = {
+			isa = PBXGroup;
+			children = (
+				B689501723EBE88B00B9CE54 /* StatisticsController.swift */,
+			);
+			path = StatisticsPack;
 			sourceTree = "<group>";
 		};
 		B698D9A323D9DA2900905CDF /* Text Reklam Page */ = {
@@ -281,11 +608,19 @@
 			path = "Photo Reklam Page";
 			sourceTree = "<group>";
 		};
+		B6CBE8CF23EC4552002414CC /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				B6CBE8D023EC45AB002414CC /* NotificationViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		CA3D62115FD4EA1DDBE1E8D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2D74EB4D2A385DF8587E57FE /* Pods-pullu.test.debug.xcconfig */,
-				F1EF8223C6CF9078A62CDA7C /* Pods-pullu.test.release.xcconfig */,
+				66C58075E32DC2EA7B5FB057 /* Pods-pullu.test.debug.xcconfig */,
+				21E2A4B0F8D012842CB2F882 /* Pods-pullu.test.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -297,11 +632,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 045829AE23C452D5004F6FA9 /* Build configuration list for PBXNativeTarget "pullu.test" */;
 			buildPhases = (
-				EC2FC5FCAE71464532FC767C /* [CP] Check Pods Manifest.lock */,
+				1ED7555895FB1DA5565AF709 /* [CP] Check Pods Manifest.lock */,
 				0458299323C452D3004F6FA9 /* Sources */,
 				0458299423C452D3004F6FA9 /* Frameworks */,
 				0458299523C452D3004F6FA9 /* Resources */,
-				71B7307A73E07C1025F136AA /* [CP] Copy Pods Resources */,
+				B688E5B023ED9458003D04D0 /* Embed Frameworks */,
+				03751A426D0B2ADA519D0E15 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -361,6 +697,7 @@
 				0484058723E7F200005E353C /* Nunito-ExtraLightItalic.ttf in Resources */,
 				B65E10D023C9084C0081F8BD /* Assets.xcassets in Resources */,
 				0484058B23E7F200005E353C /* Nunito-Bold.ttf in Resources */,
+				B688E4CB23ED5DE3003D04D0 /* GoogleService-Info.plist in Resources */,
 				0484058F23E7F200005E353C /* Nunito-SemiBoldItalic.ttf in Resources */,
 				0484058623E7F200005E353C /* Nunito-ExtraBold.ttf in Resources */,
 				045829A223C452D3004F6FA9 /* Main.storyboard in Resources */,
@@ -374,24 +711,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		71B7307A73E07C1025F136AA /* [CP] Copy Pods Resources */ = {
+		03751A426D0B2ADA519D0E15 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EC2FC5FCAE71464532FC767C /* [CP] Check Pods Manifest.lock */ = {
+		1ED7555895FB1DA5565AF709 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -420,31 +757,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B67FA3A923E1B17E000DAF92 /* earnMoney.swift in Sources */,
-				B61290F523D05B8C00FE9344 /* MenuController.swift in Sources */,
-				04C8751423C736B400E84091 /* AppDelegate.swift in Sources */,
-				B6D7ACF823CA8AC3005AAB76 /* Profession.swift in Sources */,
-				B6951DC423C503230020C7EE /* logIn.swift in Sources */,
-				B6D7ACF623CA8591005AAB76 /* City.swift in Sources */,
-				B67D4FD723CA0EE400E572E8 /* SecondRegistrationController.swift in Sources */,
-				04EFB7DB23C7190700042E5C /* HomePageController.swift in Sources */,
-				B6951DC623C503EE0020C7EE /* dbSelect.swift in Sources */,
-				B67D4FD523CA07AE00E572E8 /* FirstRegistrationController.swift in Sources */,
-				B6951DC823C507570020C7EE /* User.swift in Sources */,
-				B66BAA4A23E309E300410822 /* PhotoStoryController.swift in Sources */,
-				B6EEC71323C76DA200B9AEC9 /* ConnectionCheckController.swift in Sources */,
-				B638618923CB291F0059B944 /* DbInsert.swift in Sources */,
-				B67D4FDA23CA13DF00E572E8 /* NewUser.swift in Sources */,
-				B6EEC70F23C76A5300B9AEC9 /* ConnectionCheck.swift in Sources */,
-				B6D7ACF223CA7D92005AAB76 /* Country.swift in Sources */,
-				B65327C723D1ED430068E9E7 /* AboutAdvertController.swift in Sources */,
-				B66CA1A523C84A0E0089C894 /* Advertisement.swift in Sources */,
-				045829A523C452D3004F6FA9 /* pullu_test.xcdatamodeld in Sources */,
-				B698D9A523D9DA6300905CDF /* TextReklamController.swift in Sources */,
-				B602324523DAD4F30073B7FF /* ReklamStoryController.swift in Sources */,
-				B698D9A923D9DB3E00905CDF /* VideoReklamController.swift in Sources */,
-				B66CA1B123C88D6C0089C894 /* ReklamCellTableViewCell.swift in Sources */,
-				B6D7ACF423CA7E98005AAB76 /* ThirdRegistrationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,18 +898,20 @@
 		};
 		045829AF23C452D5004F6FA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D74EB4D2A385DF8587E57FE /* Pods-pullu.test.debug.xcconfig */;
+			baseConfigurationReference = 66C58075E32DC2EA7B5FB057 /* Pods-pullu.test.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LC9W6SVFY7;
-				INFOPLIST_FILE = pullu.test/Info.plist;
+				DEVELOPMENT_TEAM = 47MPKXK9M8;
+				INFOPLIST_FILE = "/Users/rufat/Desktop/pullu-ios/pullu.test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "az.rufat.pullu-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "az.nigar.pullu-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -605,18 +919,20 @@
 		};
 		045829B023C452D5004F6FA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F1EF8223C6CF9078A62CDA7C /* Pods-pullu.test.release.xcconfig */;
+			baseConfigurationReference = 21E2A4B0F8D012842CB2F882 /* Pods-pullu.test.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LC9W6SVFY7;
-				INFOPLIST_FILE = pullu.test/Info.plist;
+				DEVELOPMENT_TEAM = 47MPKXK9M8;
+				INFOPLIST_FILE = "/Users/rufat/Desktop/pullu-ios/pullu.test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "az.rufat.pullu-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "az.nigar.pullu-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

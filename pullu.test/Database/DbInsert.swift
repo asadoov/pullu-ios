@@ -37,7 +37,7 @@ class DbInsert {
     
     
     
-    func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
         
         let url="http://13.92.237.16/api/androidmobileapp/user/signUp?name=\(newUserData.name ?? "")&surname=\(newUserData.surname ?? "")&mail=\(newUserData.mail ?? "")&pass=\(newUserData.pass ?? "")&phone=\(newUserData.phone ?? "")&bDate=\(newUserData.bDate ?? "")&gender=\( newUserData.gender ?? "")&country=\(newUserData.country ?? "")&city=\(newUserData.city ?? "")&profession=\(newUserData.sector ?? "")"
         
@@ -57,12 +57,12 @@ class DbInsert {
                 do{
                     
                     
-                    let list  = try
-                        JSONDecoder().decode(Array<User>.self, from: response.data!)
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
-                    print(list)
+                    //print(list)
                     
-                    completionBlock(list)
+                    completionBlock(statusCode)
                     
                     
                 }

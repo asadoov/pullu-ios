@@ -54,8 +54,8 @@ class TextReklamController: UIViewController {
             
             
             DispatchQueue.main.async {
-                if list[0].isPaid==0{
-                    self.earnMoney.isHidden=true
+                if list[0].isPaid==1{
+                    self.earnMoney.isHidden=false
                 }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()

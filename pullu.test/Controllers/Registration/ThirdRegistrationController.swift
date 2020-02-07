@@ -127,20 +127,32 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
         //print("\(newUser.bDate)")
         do{
             dbInsert.SignUp(newUserData: newUser){
-                (list)
+                (statusCode)
                 in
-                let jsonEncoder = JSONEncoder()
+             
                 do {
                     self.defaults.set(self.newUser.mail, forKey: "mail")
                     self.defaults.set(self.newUser.pass, forKey: "pass")
                     
-                    let jsonData = try jsonEncoder.encode(list)
-                    let jsonString = String(data: jsonData, encoding: .utf8)
-                    self.defaults.set(jsonString, forKey: "uData")
-                   self.performSegue(withIdentifier: "successRegPage", sender: self)
-                   // print("JSON String : " + jsonString!)
+                    
+                    if statusCode.ok==1{
+                        
+                        self.performSegue(withIdentifier: "successRegPage", sender: self)
+                    }
+                    else   {
+                        let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqların düzgünlüyünə fikir verin!", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }
+                    
+                    
+                    // print("JSON String : " + jsonString!)
                 }
                 catch {
+                    let alert = UIAlertController(title: "Bildiriş", message: "Biraz sonra birdaha cəht edin", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 
             }
@@ -148,12 +160,13 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
             
         }
         catch{
-            let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqlarıı doldurun!", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Bildiriş", message: "Biraz sonra birdaha cəht edin", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
             
         }
+        
         // print(selectedCountry)
         
     }

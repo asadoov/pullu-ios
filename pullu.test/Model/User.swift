@@ -7,8 +7,11 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 struct User:Codable{
-
+    var firebaseID:String?
     var name: String?
     var surname: String?
 
@@ -22,6 +25,10 @@ struct User:Codable{
     var balance:String?
     var earning:String?
     
+    init(user: FirebaseAuth.User) {
+        self.firebaseID = user.uid
+        self.mail = user.email!
+    }
     
     /*init (json:[String: Any]){
      name=json["name"] as? String ?? ""

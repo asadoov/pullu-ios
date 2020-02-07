@@ -14,9 +14,11 @@ import AlamofireImage
 class AboutAdvertController: UIViewController {
     let defaults = UserDefaults.standard
     var advertID:Int?
+    var mail:String?
+    var pass:String?
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
-    var pass:String?
+    
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
@@ -63,6 +65,7 @@ class AboutAdvertController: UIViewController {
             pass = self.defaults.string(forKey: "pass")
             self.userData  = try
                 JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+            self.mail=self.userData[0].mail
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
@@ -76,8 +79,8 @@ class AboutAdvertController: UIViewController {
             
             
             DispatchQueue.main.async {
-                if list[0].isPaid==0{
-                    self.earnMoney.isHidden=true
+                if list[0].isPaid==1{
+                    self.earnMoney.isHidden=false
                 }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
@@ -150,6 +153,9 @@ class AboutAdvertController: UIViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
         newViewController.imageSource=imageSource
+        newViewController.advertID=advertID
+        newViewController.mail=mail
+        newViewController.pass=pass
         self.present(newViewController, animated: true, completion: nil)
         // let n=(30/slideshow.images.count)
         
