@@ -11,6 +11,7 @@ target 'pullu.test' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseDatabase'
+  pod 'BoringSSL-GRPC'
 
 pod 'Alamofire', '~> 4.8'
     pod 'AlamofireImage', '~> 3.5'

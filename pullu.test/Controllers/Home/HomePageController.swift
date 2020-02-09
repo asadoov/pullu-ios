@@ -300,6 +300,10 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let displayVC = segue.destination as! TextReklamController
             displayVC.advertID = advertID
         }
+        if(segue.identifier == "videoReklamPage"){
+            let displayVC = segue.destination as! VideoReklamController
+            displayVC.advertID = advertID
+        }
         
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.

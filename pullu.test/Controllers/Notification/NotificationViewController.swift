@@ -10,16 +10,22 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class NotificationViewController: UIViewController {
+class NotificationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     var userr:User!
     var ref: DatabaseReference!
-    var notifications = Array<Notification>()
+    var notifications = Array<NotificationModel>()
+    @IBOutlet weak var notificationTable: UITableView!
     
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
+        self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
         Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
             if error != nil
             {
@@ -27,23 +33,20 @@ class NotificationViewController: UIViewController {
             }
             else
             {
-                self.ref = Database.database().reference(withPath: "users").child("notifications")
+                let userID = Auth.auth().currentUser!.uid
+                self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications")
                 self.ref.observe(.value, with: { [weak self]  (snapshot) in
                     //print("value: \(snapshot)")
-                    var _notification = Array<NotificationModel>()
+                    
                     for item in snapshot.children {
                         let task = NotificationModel(snapshot: item as! DataSnapshot)
-                        _notification.append(task)
+                        self!.notifications.append(task)
                         
                     }
-                    DispatchQueue.main.async {
-                        self.dismiss(animated: false){
-                            let alert = UIAlertController(title: "Bildiriş", message: "\(_notification[0].title!)", preferredStyle: UIAlertController.Style.alert)
-                            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                            self.present(alert, animated: true, completion: nil)}
-                        
-                    }
-                  //  print(_notification[0].title!)
+                    
+                    self?.notificationTable.reloadData()
+                    
+                    //  print(_notification[0].title!)
                 })
                 
                 // guard var currentUser = Auth.auth().currentUser else {return}
@@ -76,10 +79,35 @@ class NotificationViewController: UIViewController {
                 
             }
         }
-        
+        notificationTable.delegate = self
+        notificationTable.dataSource = self
     }
     
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return notifications.count
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: NotificationCell = (tableView.dequeueReusableCell(withIdentifier: "notifyCell", for: indexPath) as! NotificationCell)
+        cell.object = notifications[indexPath.row]
+        //cell.delegate = self
+        cell.reloadData()
+        //cell.object = dataArray[indexPath.row]
+        //     cell.delegate = self
+        
+        
+        // Configure the cell...
+        
+        return cell
+    }
     
     
     /*
