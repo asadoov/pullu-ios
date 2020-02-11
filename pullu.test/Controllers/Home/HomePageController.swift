@@ -20,8 +20,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var ReklamCount: UILabel!
     
     @IBOutlet weak var headerView: UIView!
-    var notPaid:Array<Advertisement>?
-    var Paid:Array<Advertisement>?
+    var advertArray: [Advertisement] = [Advertisement]()
     var advertID:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,52 +45,13 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //
         ReklamList.delegate = self
         ReklamList.dataSource = self
-        self.getProducts(type:1)
-        
-    }
-    
-    
-    @IBAction func paidClick(_ sender: Any) {
-        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-            // Table was scrolled by user.
-            
-            self.dataArray.removeAll()
-            self.getProducts(type:1	)
-        }
-        
-    }
-    @IBAction func notPaidClick(_ sender: Any) {
-        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-            // Table was scrolled by user.
-            
-            self.dataArray.removeAll()
-            self.getProducts(type:0)
-        }
-        
-    }
-    
-    private func getProducts(type:Int) {
-        
-        /* DispatchQueue.main.async {
-         
-         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-         
-         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-         loadingIndicator.hidesWhenStopped = true
-         loadingIndicator.style = UIActivityIndicatorView.Style.gray
-         loadingIndicator.startAnimating();
-         
-         alert.view.addSubview(loadingIndicator)
-         self.present(alert, animated: true, completion: nil)
-         }
-         
-         */
+        //  self.getProducts()
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
-        let udata=defaults.string(forKey: "uData")
+        // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
         db.getAds(username: mail!, pass: pass!){
@@ -100,94 +60,98 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             var adsWithImage: [Advertisement] = [Advertisement]()
             var k=0
-            for advert in list{
+            var i:Int?
+            for advert in list {
                 
                 var typeCount = 0
-                for itm in list{
-                    if itm.isPaid==type{
-                        typeCount += 1
+                 for itm in list{
+                 if itm.isPaid==1{
+                 typeCount += 1
+                 }
+                 }
+                
+                //if (advert.isPaid==type) {
+                var item = advert
+                
+                //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
+                self.dataArray.append(item)
+                if  item.isPaid==1{
+                    i=0
+                                                                     self.advertArray.append(item)
+                                                                   }
+                
+                // let item_index = self.dataArray.endIndex
+                //  element += 1
+                
+                Alamofire.request(advert.photoUrl![0]).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
+                        item.photo = catPicture.pngData()
+                        
+                        print("image downloaded: \(item.photo)")
+                        
+                        
                     }
+                    
+                    self.dataArray[k]=item
+                    if  self.dataArray[k].isPaid==1{
+                        self.advertArray[i!]=item
+                        i!+=1
+                                                    }
+                    // self.dataArray.replaceSubrange( , with: item)
+                    k+=1
+                    
+                    print("\(self.dataArray.count) \n list count: \(typeCount)")
+    
+                              
+                     
+                  
+                         
+                              
+                          
+                          DispatchQueue.main.async {
+                              
+                            self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                              self.ReklamList.reloadData()
+                              
+                              
+                          }
+                    
+                    // DispatchQueue.main.async {
+                    
+                    
+                    //   self.ReklamList.reloadData()
+                    
+                    
+                    // }
+                    
                 }
                 
-                if (advert.isPaid==type) {
-                    var item = advert
-                    
-                    //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
-                    self.dataArray.append(item)
-                    
-                    
-                    let item_index = self.dataArray.endIndex
-                    //  element += 1
-                    Alamofire.request(advert.photoUrl![0]).responseImage { response in
-                        if let catPicture = response.result.value {
-                            //advert.photo=catPicture.pngData()
-                            item.photo = catPicture.pngData()
-                            
-                            print("image downloaded: \(item.photo)")
-                            
-                            //self.dataArray[element].photo=catPicture.pngData()
-                            //print(self.dataArray[dataArray.count-1].photo)
-                            
-                        }
-                        
-                        self.dataArray[k]=item
-                        // self.dataArray.replaceSubrange( , with: item)
-                        k+=1
-                        //adsWithImage.append(item)
-                        //self.dataArray.append(item)
-                        print("\(self.dataArray.count) \n list count: \(typeCount)")
-                        
-                        DispatchQueue.main.async {
-                            
-                            //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                            //self.tableView.reloadData()
-                            self.ReklamList.reloadData()
-                            // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                            
-                            // self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                            
-                        }
-                        /* if adsWithImage.count == typeCount{
-                         self.dataArray.removeAll()
-                         self.dataArray=adsWithImage
-                         
-                         DispatchQueue.main.async {
-                         
-                         //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                         //self.tableView.reloadData()
-                         self.ReklamList.reloadData()
-                         // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                         
-                         // self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                         
-                         }
-                         }
-                         */
-                    }
-                    
-                    
-                    
-                    
-                    
-                }
-                DispatchQueue.main.async {
-                    
-                    
-                    //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                    //self.tableView.reloadData()
-                    self.ReklamList.reloadData()
-                    // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                    self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                    //  self.tableView.reloadData()
-                    /* self.dismiss(animated: false){
-                     
-                     
-                     
-                     
-                     
-                     }*/
-                    
-                }
+                
+                
+                
+                
+                
+                //  }
+                /*         DispatchQueue.main.async {
+                 
+                 
+                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                 //self.tableView.reloadData()
+                 self.ReklamList.reloadData()
+                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+                 self.ReklamCount.text = String(typeCount)+" yeni reklam"
+                 //  self.tableView.rel§oadData()
+                 /* self.dismiss(animated: false){
+                 
+                 
+                 
+                 
+                 
+                 }*/
+                 
+                 }
+                 */
                 
                 //bunu cixardir melumatlar gelir yani- print(advert.name)
             }
@@ -198,10 +162,192 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         
         
+      
     }
+    
+    
+    @IBAction func paidClick(_ sender: Any) {
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+            
+            self.advertArray.removeAll()
+            // Table was scrolled by user.
+            if dataArray.count>0{
+                
+                for item in dataArray{
+                    if item.isPaid==1{
+                        
+                        advertArray.append(item)
+                    }
+                    
+                }
+                
+                DispatchQueue.main.async {
+                    self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                    self.ReklamList.reloadData()
+                    
+                    
+                }
+                
+            }
+        }
+    }
+    @IBAction func notPaidClick(_ sender: Any) {
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+            self.advertArray.removeAll()
+            // Table was scrolled by user.
+            if dataArray.count>0{
+                for item in dataArray{
+                    if item.isPaid==0{
+                        
+                        advertArray.append(item)
+                    }
+                    
+                }
+                DispatchQueue.main.async {
+                     self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                    
+                    self.ReklamList.reloadData()
+                    
+                    
+                }
+            }
+        }
+    }
+    
+    /*   private func getProducts(completionBlock: @escaping (_ result:Array<Advertisement>) ->()) {
+     
+     /* DispatchQueue.main.async {
+     
+     let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+     
+     let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+     loadingIndicator.hidesWhenStopped = true
+     loadingIndicator.style = UIActivityIndicatorView.Style.gray
+     loadingIndicator.startAnimating();
+     
+     alert.view.addSubview(loadingIndicator)
+     self.present(alert, animated: true, completion: nil)
+     }
+     
+     */
+     let defaults = UserDefaults.standard
+     
+     // let userData = defaults.string(forKey: "uData")
+     let mail = defaults.string(forKey: "mail")
+     let pass = defaults.string(forKey: "pass")
+     let udata=defaults.string(forKey: "uData")
+     //print("\(mail)\n\(pass)\n\(udata)")
+     let  db:dbSelect=dbSelect()
+     db.getAds(username: mail!, pass: pass!){
+     
+     (list) in
+     
+     var adsWithImage: [Advertisement] = [Advertisement]()
+     var k=0
+     for advert in list {
+     
+     var typeCount = 0
+     /*  for itm in list{
+     if itm.isPaid==type{
+     typeCount += 1
+     }
+     } */
+     
+     //if (advert.isPaid==type) {
+     var item = advert
+     
+     //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
+     self.dataArray.append(item)
+     
+     
+     // let item_index = self.dataArray.endIndex
+     //  element += 1
+     
+     Alamofire.request(advert.photoUrl![0]).responseImage { response in
+     if let catPicture = response.result.value {
+     //advert.photo=catPicture.pngData()
+     item.photo = catPicture.pngData()
+     
+     print("image downloaded: \(item.photo)")
+     
+     //self.dataArray[element].photo=catPicture.pngData()
+     //print(self.dataArray[dataArray.count-1].photo)
+     
+     }
+     
+     self.dataArray[k]=item
+     // self.dataArray.replaceSubrange( , with: item)
+     k+=1
+     //adsWithImage.append(item)
+     //self.dataArray.append(item)
+     print("\(self.dataArray.count) \n list count: \(typeCount)")
+     
+     DispatchQueue.main.async {
+     
+     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     //self.tableView.reloadData()
+     self.ReklamList.reloadData()
+     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     
+     // self.ReklamCount.text = String(typeCount)+" yeni reklam"
+     
+     }
+     /* if adsWithImage.count == typeCount{
+     self.dataArray.removeAll()
+     self.dataArray=adsWithImage
+     
+     DispatchQueue.main.async {
+     
+     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     //self.tableView.reloadData()
+     self.ReklamList.reloadData()
+     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     
+     // self.ReklamCount.text = String(typeCount)+" yeni reklam"
+     
+     }
+     }
+     */
+     }
+     
+     
+     
+     
+     
+     
+     //  }
+     DispatchQueue.main.async {
+     
+     
+     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     //self.tableView.reloadData()
+     self.ReklamList.reloadData()
+     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+     self.ReklamCount.text = String(typeCount)+" yeni reklam"
+     //  self.tableView.rel§oadData()
+     /* self.dismiss(animated: false){
+     
+     
+     
+     
+     
+     }*/
+     
+     }
+     
+     //bunu cixardir melumatlar gelir yani- print(advert.name)
+     }
+     
+     
+     
+     
+     }
+     
+     
+     }*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        cell.object = dataArray[indexPath.row]
+        cell.object = advertArray[indexPath.row]
         advertID=cell.object?.id!
         //print(advertID!)
         if cell.object?.aTypeId==2{
@@ -233,13 +379,20 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return dataArray.count
+        return advertArray.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        cell.object = dataArray[indexPath.row]
+        do{
+            cell.object = advertArray[indexPath.row]
+        }
+        catch
+        {
+            print(indexPath.row)
+        }
+        
         //cell.delegate = self
         cell.reloadData()
         //cell.object = dataArray[indexPath.row]
@@ -286,6 +439,9 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
      return true
      }
      */
+    
+    
+    
     
     
     // MARK: - Navigation
