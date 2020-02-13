@@ -22,6 +22,12 @@ class TabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.tabBar.layer.masksToBounds = true
+        self.tabBar.isTranslucent = true
+     //   self.tabBar.barStyle = .blackOpaque
+        self.tabBar.layer.cornerRadius = 20
+        self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
                   if error != nil
                   {
