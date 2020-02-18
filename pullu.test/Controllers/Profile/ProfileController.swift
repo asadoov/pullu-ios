@@ -8,9 +8,21 @@
 
 import UIKit
 
+//Cavidan Mirzə
+
 class ProfileController: UIViewController {
 
-    @IBOutlet weak var saveBtn: UIButton!
+
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var mobileNumField: UITextField!
+    @IBOutlet weak var dogumTarixField: UITextField!
+    @IBOutlet weak var cinsPicker: UIPickerView!
+    @IBOutlet weak var sheherField: UIPickerView!
+    @IBOutlet weak var ixtisasField: UIPickerView!
+    @IBOutlet weak var qoshulmaTarixField: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +33,7 @@ class ProfileController: UIViewController {
         gradient.frame = view.bounds
         gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
 
-        saveBtn.layer.insertSublayer(gradient, at: 0)
+       // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
     
 
