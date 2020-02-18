@@ -10,28 +10,34 @@ import UIKit
 import WebKit
 
 
-class WebViewController: UIViewController {
+class WebViewController: UIViewController, WKUIDelegate {
     let defaults = UserDefaults.standard
+    var User:User?
+    var id: Int?
+    var MainUrl = "https://test.smartpay.az/keeper-sl/payment/service/588?iframe=true&im_id1="
+    
 
     @IBOutlet weak var webView: WKWebView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let myURL = URL(string:"https://www.apple.com")
-        let myRequest = URLRequest(url: myURL!)
-        webView.load(myRequest)
+        
 
         // Do any additional setup after loading the view.
-        let usrData = defaults.string(forKey: "usrData")
+        let usrdata = defaults.string(forKey: "usrData")
         do{
         
-        //let list  = try
-           // JSONDecoder().decode(Array<User>.self, from: usrdata!.data(using: .utf8)!)
+        var list = try! 
+            JSONDecoder().decode(Array<User>.self, from: usrdata!.data(using: .utf8)!)
+            
+            id=list[0].id
             
             
-            
+     
         }
-        
+        let myURL = URL(string:"\(MainUrl)\(id)")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
         
         
         
