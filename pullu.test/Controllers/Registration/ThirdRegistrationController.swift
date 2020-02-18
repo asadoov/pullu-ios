@@ -135,17 +135,22 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
                     self.defaults.set(self.newUser.pass, forKey: "pass")
                     
                     
-                    if statusCode.ok==1{
+                    if statusCode.response==0{
                         
                         self.performSegue(withIdentifier: "successRegPage", sender: self)
                     }
-                    else   {
-                        let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqların düzgünlüyünə fikir verin!", preferredStyle: UIAlertController.Style.alert)
+                    if statusCode.response==1   {
+                        let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa birdaha sınayın", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                         
                     }
-                    
+                    if statusCode.response==2   {
+                                           let alert = UIAlertController(title: "Bildiriş", message: "Mail artıq mövcuddur", preferredStyle: UIAlertController.Style.alert)
+                                           alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                           self.present(alert, animated: true, completion: nil)
+                                           
+                                       }
                     
                     // print("JSON String : " + jsonString!)
                 }

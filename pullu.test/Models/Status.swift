@@ -8,5 +8,5 @@
 
 import Foundation
 public class Status: Codable {
-    public var ok:Int?
+    public var response:Int?
 }
