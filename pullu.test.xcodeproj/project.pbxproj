@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		045829A223C452D3004F6FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A023C452D3004F6FA9 /* Main.storyboard */; };
 		045829AA23C452D5004F6FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
+		047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F46A323FBBEFD005E9DFA /* WebViewController.swift */; };
 		0484058523E7F200005E353C /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */; };
 		0484058623E7F200005E353C /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057723E7F200005E353C /* Nunito-ExtraBold.ttf */; };
 		0484058723E7F200005E353C /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057823E7F200005E353C /* Nunito-ExtraLightItalic.ttf */; };
@@ -90,6 +91,7 @@
 		045829A423C452D3004F6FA9 /* pullu_test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pullu_test.xcdatamodel; sourceTree = "<group>"; };
 		045829A923C452D5004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		045829AB23C452D5004F6FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		047F46A323FBBEFD005E9DFA /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		0484057723E7F200005E353C /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
 		0484057823E7F200005E353C /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -679,7 +681,6 @@
 			isa = PBXGroup;
 			children = (
 				B68294D123F599740041E446 /* Profile */,
-				B68294CF23F599420041E446 /* ProfileController.swift */,
 				B65FE46E23EF43F80020C21F /* Tab Bar */,
 				B67B9DF323EEF23600A3451C /* Offline Page */,
 				B6DCE32423EEC508005BEE84 /* Sign in */,
@@ -689,6 +690,7 @@
 				B65327C523D1E84A0068E9E7 /* About advertisement */,
 				B66A08F423CF517F00DE4D26 /* Home */,
 				B67D4FD323CA05ED00E572E8 /* Registration */,
+				047F46A323FBBEFD005E9DFA /* WebViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -725,6 +727,7 @@
 		B68294D123F599740041E446 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				B68294CF23F599420041E446 /* ProfileController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -955,6 +958,7 @@
 				B67B9DD423EEE18A00A3451C /* Status.swift in Sources */,
 				B67B9DD523EEE18A00A3451C /* Statistics.swift in Sources */,
 				B67B9DD623EEE18A00A3451C /* NotificationModel.swift in Sources */,
+				047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */,
 				B67B9DD923EEE18A00A3451C /* logIn.swift in Sources */,
 				B67B9DDA23EEE18A00A3451C /* NotificationViewController.swift in Sources */,
 				B67B9DDB23EEE18A00A3451C /* StatisticsController.swift in Sources */,

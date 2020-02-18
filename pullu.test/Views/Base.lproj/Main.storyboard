@@ -720,73 +720,75 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Dpz-tZ-LVY">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="144"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ax2-WU-CWW">
                                 <rect key="frame" x="0.0" y="153" width="375" height="563"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhX-Rd-pGz">
-                                        <rect key="frame" x="29" y="78" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="E-poçt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YhX-Rd-pGz">
+                                        <rect key="frame" x="29" y="25" width="53" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="akt-qg-PdC">
-                                        <rect key="frame" x="29" y="107" width="317" height="34"/>
+                                        <rect key="frame" x="29" y="54" width="317" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uy3-6D-S4m">
-                                        <rect key="frame" x="29" y="178" width="317" height="34"/>
+                                        <rect key="frame" x="29" y="125" width="317" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KXE-KY-8Fz">
-                                        <rect key="frame" x="29" y="259" width="317" height="34"/>
+                                        <rect key="frame" x="29" y="206" width="317" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4W3-sZ-U6H">
-                                        <rect key="frame" x="29" y="149" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobil nörmə" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4W3-sZ-U6H">
+                                        <rect key="frame" x="29" y="96" width="96" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0P-iv-fzE">
-                                        <rect key="frame" x="29" y="230" width="42" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Doğum tarixi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0P-iv-fzE">
+                                        <rect key="frame" x="29" y="177" width="97" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WnK-ly-hw6">
-                                        <rect key="frame" x="29" y="301" width="140" height="94"/>
+                                        <rect key="frame" x="29" y="248" width="140" height="94"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OIA-yE-eM8">
-                                        <rect key="frame" x="29" y="403" width="317" height="85"/>
+                                        <rect key="frame" x="29" y="350" width="317" height="85"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bN-m2-tgh">
-                                        <rect key="frame" x="206" y="301" width="140" height="88"/>
+                                        <rect key="frame" x="206" y="248" width="140" height="88"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     </pickerView>
+
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ad Soyad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-hP-P5q">
                                         <rect key="frame" x="113" y="55" width="149" height="17"/>
+>>>>>>> a18df94f0bcd16d7119c2ee5de9cb43612985127
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Nunito-ExtraBold" family="Nunito" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZL-fU-YNs">
-                                        <rect key="frame" x="29" y="551" width="317" height="49"/>
+                                        <rect key="frame" x="29" y="491" width="317" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Yadda saxla"/>
@@ -802,7 +804,9 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="Layer 26" translatesAutoresizingMaskIntoConstraints="NO" id="En0-N9-ggE">
+
                                 <rect key="frame" x="137" y="91" width="101" height="97"/>
+>>>>>>> a18df94f0bcd16d7119c2ee5de9cb43612985127
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="ultraLight"/>
                                 <userDefinedRuntimeAttributes>
@@ -816,13 +820,49 @@
                         <viewLayoutGuide key="safeArea" id="heg-MF-RgJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="bUk-Ni-vbm"/>
+                    <size key="freeformSize" width="375" height="812"/>
                     <connections>
-                        <outlet property="saveBtn" destination="OZL-fU-YNs" id="ILx-Sd-Dpj"/>
+                        <outlet property="cinsPicker" destination="WnK-ly-hw6" id="VAQ-a7-JQG"/>
+                        <outlet property="dogumTarixField" destination="KXE-KY-8Fz" id="XTn-dM-oFz"/>
+                        <outlet property="emailField" destination="akt-qg-PdC" id="SZw-Wf-mmP"/>
+                        <outlet property="ixtisasField" destination="OIA-yE-eM8" id="e6h-pO-E0d"/>
+                        <outlet property="mobileNumField" destination="uy3-6D-S4m" id="8Gd-gs-JdM"/>
+                        <outlet property="qoshulmaTarixField" destination="oPY-C6-7h9" id="ncf-xk-Avt"/>
+                        <outlet property="sheherField" destination="0bN-m2-tgh" id="zIn-Om-nFS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lYu-ML-7rv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-71.200000000000003" y="-2726.6009852216748"/>
+            <point key="canvasLocation" x="-40.799999999999997" y="-2978.5714285714289"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="6uA-1z-4wy">
+            <objects>
+                <viewController id="cHx-tw-vvK" customClass="WebViewController" customModule="pullu_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bPC-jv-7tS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iup-eC-Txm">
+                                <rect key="frame" x="0.0" y="44" width="375" height="755"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="EmB-G6-4cl"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Iup-eC-Txm" id="9NN-pn-9Zr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="do3-7I-EuK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1029.5999999999999" y="-2958.6206896551726"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Rf4-Dy-O9L">
@@ -1647,9 +1687,6 @@ baxışı</string>
                                 <state key="normal" title=" Profil" image="balans">
                                     <color key="titleColor" red="0.34152862430000003" green="0.34201377630000002" blue="0.40586018559999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <connections>
-                                    <segue destination="7Uc-1d-hBx" kind="show" id="Zgq-De-uW9"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vk4-uX-fdI">
                                 <rect key="frame" x="27" y="334" width="119" height="22"/>
@@ -1715,7 +1752,9 @@ baxışı</string>
                         <outlet property="balance" destination="WlM-1b-UtM" id="WGr-Ke-hk4"/>
                         <outlet property="earning" destination="56V-lW-n6z" id="o06-fc-9kp"/>
                         <outlet property="nameSurname" destination="jGl-f6-FqA" id="6dR-un-aua"/>
+
                         <outlet property="userID" destination="z8V-Co-FJK" id="apz-TL-AfW"/>
+>>>>>>> a18df94f0bcd16d7119c2ee5de9cb43612985127
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dJR-Yr-lT5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
