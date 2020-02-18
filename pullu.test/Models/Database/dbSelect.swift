@@ -27,7 +27,7 @@ public class dbSelect {
     
     func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/login?username="+username+"&pass="+pass
+        let url="http://13.92.237.16/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{

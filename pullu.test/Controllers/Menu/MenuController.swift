@@ -20,6 +20,7 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var headerView: UIView!
     
+    @IBOutlet weak var userID: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +48,7 @@ class MenuController: UIViewController {
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
             balance.text = "Yüklənən məbləğ\n\(list[0].balance!) AZN"
             earning.text = "Qazanılan məbləğ\n\(list[0].earning!) AZN"
-            
+            userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
             
             
         }
