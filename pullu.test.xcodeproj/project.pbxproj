@@ -26,6 +26,8 @@
 		0484059123E7F200005E353C /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0484058223E7F200005E353C /* OFL.txt */; };
 		0484059223E7F200005E353C /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484058323E7F200005E353C /* Nunito-Italic.ttf */; };
 		0484059323E7F200005E353C /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484058423E7F200005E353C /* Nunito-LightItalic.ttf */; };
+		04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1A23FBFF54007380BA /* BalanceController.swift */; };
+		04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
 		B62CBE3523F0847E00783A40 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */; };
 		B62CBE3623F0847E00783A40 /* Pods_pullu_test.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -109,6 +111,8 @@
 		0484058323E7F200005E353C /* Nunito-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Italic.ttf"; sourceTree = "<group>"; };
 		0484058423E7F200005E353C /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
 		04C8751323C736B400E84091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04D6EF1A23FBFF54007380BA /* BalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceController.swift; sourceTree = "<group>"; };
+		04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalanceController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		259A9ADBF30E384973B8D01C /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 		35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,6 +420,16 @@
 			path = Nunito;
 			sourceTree = "<group>";
 		};
+		04D6EF1923FBFCCB007380BA /* Finance */ = {
+			isa = PBXGroup;
+			children = (
+				047F46A323FBBEFD005E9DFA /* WebViewController.swift */,
+				04D6EF1A23FBFF54007380BA /* BalanceController.swift */,
+				04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */,
+			);
+			path = Finance;
+			sourceTree = "<group>";
+		};
 		92B3C5AEB36025992BBB5E86 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -680,6 +694,7 @@
 		B67D4FD023CA059C00E572E8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				04D6EF1923FBFCCB007380BA /* Finance */,
 				B68294D123F599740041E446 /* Profile */,
 				B65FE46E23EF43F80020C21F /* Tab Bar */,
 				B67B9DF323EEF23600A3451C /* Offline Page */,
@@ -690,7 +705,6 @@
 				B65327C523D1E84A0068E9E7 /* About advertisement */,
 				B66A08F423CF517F00DE4D26 /* Home */,
 				B67D4FD323CA05ED00E572E8 /* Registration */,
-				047F46A323FBBEFD005E9DFA /* WebViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -949,6 +963,7 @@
 				B67B9DCB23EEE18A00A3451C /* dbSelect.swift in Sources */,
 				B67B9DCC23EEE18A00A3451C /* DbInsert.swift in Sources */,
 				B67B9DCD23EEE18A00A3451C /* Advertisement.swift in Sources */,
+				04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */,
 				B67B9DCE23EEE18A00A3451C /* User.swift in Sources */,
 				B67B9DCF23EEE18A00A3451C /* NewUser.swift in Sources */,
 				B67B9DD023EEE18A00A3451C /* Country.swift in Sources */,
@@ -972,6 +987,7 @@
 				B67B9DE323EEE18A00A3451C /* HomePageController.swift in Sources */,
 				B67B9DE423EEE18A00A3451C /* FirstRegistrationController.swift in Sources */,
 				B67B9DE523EEE18A00A3451C /* SecondRegistrationController.swift in Sources */,
+				04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */,
 				B67B9DE623EEE18A00A3451C /* ThirdRegistrationController.swift in Sources */,
 				B67B9DE723EEE18A00A3451C /* SuccessRegController.swift in Sources */,
 				B68294D023F599420041E446 /* ProfileController.swift in Sources */,

@@ -18,24 +18,23 @@ class WebViewController: UIViewController, WKUIDelegate {
     
 
     @IBOutlet weak var webView: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
 
         // Do any additional setup after loading the view.
-        let usrdata = defaults.string(forKey: "usrData")
+        let uData = defaults.string(forKey: "uData")
         do{
         
-        var list = try! 
-            JSONDecoder().decode(Array<User>.self, from: usrdata!.data(using: .utf8)!)
+        let list = try!
+            JSONDecoder().decode(Array<User>.self, from: uData!.data(using: .utf8)!)
             
             id=list[0].id
-            
-            
-     
+
         }
-        let myURL = URL(string:"\(MainUrl)\(id)")
+        
+        let myURL = URL(string:"\(MainUrl)\(id!)")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         
