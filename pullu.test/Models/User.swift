@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 struct User:Codable{
+    var id:Int?
     var firebaseID:String?
     var name: String?
     var surname: String?
