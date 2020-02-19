@@ -189,4 +189,28 @@ public class dbSelect {
              }
              
          }
+    func profilview(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
+        
+        let url="http://13.92.237.16/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        GetJson(jsonUrlString: url){
+            (json) in
+            do{
+                
+                
+                let statistics  = try
+                    JSONDecoder().decode(Statistics.self, from: json)
+                
+                // userList=list
+                
+                completionBlock(statistics)
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+        }
+        
+    }
+    
 }
