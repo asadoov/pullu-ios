@@ -17,7 +17,7 @@ class ProfileController: UIViewController {
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var sheherField: UIPickerView!
+    @IBOutlet weak var sheherField: UILabel!
     @IBOutlet weak var ixtisasField: UIPickerView!
     @IBOutlet weak var qoshulmaTarixField: UILabel!
     
