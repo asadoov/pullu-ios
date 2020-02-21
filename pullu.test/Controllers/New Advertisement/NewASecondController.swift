@@ -9,9 +9,9 @@
 import UIKit
 import OpalImagePicker
 class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-
+ var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
   let mediaPicker=UIImagePickerController()
-   
+  
     @IBOutlet weak var descriptionTxt: UITextView!
     
     
@@ -20,7 +20,10 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if newAdverisement.isPaid==1{
+            print(newAdverisement.trfID!)
+            
+        }
         // Do any additional setup after loading the view.
     }
     

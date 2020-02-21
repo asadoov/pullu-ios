@@ -10,7 +10,7 @@ import UIKit
 
 class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
-    var newAdverisement:NewAdvertisementStruct?
+    var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
     
     @IBOutlet weak var aTypePicker: UIPickerView!
     @IBOutlet weak var aCatPicker: UIPickerView!
@@ -40,14 +40,14 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         select.aType(){
-               (list)
-               in
-               self.typeList=list
-               self.typeList.remove(at: 2)
-               DispatchQueue.main.async {
-                   self.aTypePicker.reloadAllComponents();
-               }
-           }
+            (list)
+            in
+            self.typeList=list
+            self.typeList.remove(at: 2)
+            DispatchQueue.main.async {
+                self.aTypePicker.reloadAllComponents();
+            }
+        }
         select.aCategory(){
             (list)
             in
@@ -56,7 +56,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
                 self.aCatPicker.reloadAllComponents();
             }
         }
-   
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -110,26 +110,38 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
     
     
     @IBAction func nextBtnClick(_ sender: Any) {
-        var index = typeList.filter{a in a.name==typeList[aTypePicker.selectedRow(inComponent: 0)].name}
-       newAdverisement?.aTypeID=index[0].id!
-        index = typeList.filter{a in a.name==typeList[aTypePicker.selectedRow(inComponent: 0)].name}
-        newAdverisement?.aCategoryID
-      //  print(index[0].id!)
-      
-       
-//        if !titleTxt.text!.isEmpty{
+        
+        if !titleTxt.text!.isEmpty{
+            let typeID = typeList.filter{a in a.name==typeList[aTypePicker.selectedRow(inComponent: 0)].name}
+            newAdverisement.aTypeID=typeID[0].id!
+            let catID = catList.filter{a in a.name==catList[aCatPicker.selectedRow(inComponent: 0)].name}
+            newAdverisement.aCategoryID=catID[0].id!
+            newAdverisement.title=titleTxt.text
+            if isPaidSwitch.selectedSegmentIndex==1{
+                newAdverisement.isPaid=1
+                performSegue(withIdentifier: "tariffPage", sender: true)
+            }
+            else {
+                newAdverisement.isPaid=0
+                performSegue(withIdentifier: "newASecond", sender: true)
+                
+            }
+//            let jsonEncoder = JSONEncoder()
+//                                   do {
+//            let jsonData = try jsonEncoder.encode(newAdverisement)
+//                                       let jsonString = String(data: jsonData, encoding: .utf8)
 //
-//
-//
-//            if isPaidSwitch.selectedSegmentIndex==1{
-//
-//                performSegue(withIdentifier: "tariffPage", sender: true)
+//                                    print(jsonString!)
 //            }
-//            else {
-//                performSegue(withIdentifier: "newASecond", sender: true)
+//                                   catch{
 //
+//                             print("error")
 //            }
-//        }
+        }
+        
+        
+        
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -158,14 +170,25 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         }
         return ""
     }
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier=="tariffPage"{
+            let displayVC = segue.destination as! TariffController
+                      displayVC.newAdverisement = newAdverisement
+            
+        }
+        if segue.identifier=="newASecond"{
+                  
+                  let displayVC = segue.destination as! NewASecondController
+                            displayVC.newAdverisement = newAdverisement
+              }
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-     */
+  
     
 }
