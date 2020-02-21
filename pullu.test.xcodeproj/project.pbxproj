@@ -29,6 +29,8 @@
 		04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1A23FBFF54007380BA /* BalanceController.swift */; };
 		04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
+		B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854A23FD56C40069C08F /* CategoryStruct.swift */; };
+		B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854C23FD6BEA0069C08F /* TypeStruct.swift */; };
 		B62CBE3523F0847E00783A40 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */; };
 		B62CBE3623F0847E00783A40 /* Pods_pullu_test.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B65E10D023C9084C0081F8BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B65E10CF23C9084B0081F8BD /* Assets.xcassets */; };
@@ -68,6 +70,12 @@
 		B684E39D23EDA6AF003CB663 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B684E3A023EDAA3C003CB663 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B688E5B323ED9EF5003D04D0 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B6897C6C23FD024200ECEB1E /* NewAdvertFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */; };
+		B6A40A8D23FE613B0043495D /* TariffStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A8C23FE613B0043495D /* TariffStruct.swift */; };
+		B6A40A8F23FE648C0043495D /* TariffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A8E23FE648C0043495D /* TariffController.swift */; };
+		B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9123FE68460043495D /* TariffViewCell.swift */; };
+		B6A40A9423FEB8A70043495D /* NewASecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9323FEB8A70043495D /* NewASecondController.swift */; };
+		B6A40A9623FEC2E40043495D /* NewAdvertisementStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -120,6 +128,8 @@
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B60501BC23F0299600928B7F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		B62B854A23FD56C40069C08F /* CategoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStruct.swift; sourceTree = "<group>"; };
+		B62B854C23FD6BEA0069C08F /* TypeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeStruct.swift; sourceTree = "<group>"; };
 		B62CBDA623F0819D00783A40 /* absl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = absl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B62CBDA723F0819D00783A40 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B62CBDA823F0819D00783A40 /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +325,7 @@
 		B688E59723ED9118003D04D0 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B689501423EBE61900B9CE54 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		B689501723EBE88B00B9CE54 /* StatisticsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsController.swift; sourceTree = "<group>"; };
+		B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertFirstController.swift; sourceTree = "<group>"; };
 		B68DB89223EB1D0B003C3960 /* SuccessRegController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessRegController.swift; sourceTree = "<group>"; };
 		B68DB89423EB32F0003C3960 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
@@ -322,6 +333,11 @@
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B698D9A423D9DA6300905CDF /* TextReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReklamController.swift; sourceTree = "<group>"; };
 		B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReklamController.swift; sourceTree = "<group>"; };
+		B6A40A8C23FE613B0043495D /* TariffStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffStruct.swift; sourceTree = "<group>"; };
+		B6A40A8E23FE648C0043495D /* TariffController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffController.swift; sourceTree = "<group>"; };
+		B6A40A9123FE68460043495D /* TariffViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffViewCell.swift; sourceTree = "<group>"; };
+		B6A40A9323FEB8A70043495D /* NewASecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewASecondController.swift; sourceTree = "<group>"; };
+		B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisementStruct.swift; sourceTree = "<group>"; };
 		B6CBE8A223EC438B002414CC /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CBE8A323EC438B002414CC /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CBE8A423EC438B002414CC /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -694,6 +710,7 @@
 		B67D4FD023CA059C00E572E8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6897C6A23FD021500ECEB1E /* New Advertisement */,
 				04D6EF1923FBFCCB007380BA /* Finance */,
 				B68294D123F599740041E446 /* Profile */,
 				B65FE46E23EF43F80020C21F /* Tab Bar */,
@@ -734,6 +751,10 @@
 				B68DB89423EB32F0003C3960 /* Status.swift */,
 				B689501423EBE61900B9CE54 /* Statistics.swift */,
 				B688E4C823ED3453003D04D0 /* NotificationModel.swift */,
+				B62B854A23FD56C40069C08F /* CategoryStruct.swift */,
+				B62B854C23FD6BEA0069C08F /* TypeStruct.swift */,
+				B6A40A8C23FE613B0043495D /* TariffStruct.swift */,
+				B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -761,6 +782,16 @@
 			path = Statistics;
 			sourceTree = "<group>";
 		};
+		B6897C6A23FD021500ECEB1E /* New Advertisement */ = {
+			isa = PBXGroup;
+			children = (
+				B6A40A9023FE67EF0043495D /* Tariff page */,
+				B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */,
+				B6A40A9323FEB8A70043495D /* NewASecondController.swift */,
+			);
+			path = "New Advertisement";
+			sourceTree = "<group>";
+		};
 		B698D9A323D9DA2900905CDF /* Text Reklam Page */ = {
 			isa = PBXGroup;
 			children = (
@@ -785,6 +816,15 @@
 				B66BAA4923E309E300410822 /* PhotoStoryController.swift */,
 			);
 			path = "Photo Reklam Page";
+			sourceTree = "<group>";
+		};
+		B6A40A9023FE67EF0043495D /* Tariff page */ = {
+			isa = PBXGroup;
+			children = (
+				B6A40A8E23FE648C0043495D /* TariffController.swift */,
+				B6A40A9123FE68460043495D /* TariffViewCell.swift */,
+			);
+			path = "Tariff page";
 			sourceTree = "<group>";
 		};
 		B6CBE8CF23EC4552002414CC /* Notification */ = {
@@ -956,17 +996,20 @@
 			files = (
 				B67B9DE923EEE19E00A3451C /* pullu_test.xcdatamodeld in Sources */,
 				B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */,
+				B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */,
 				B65FE46B23EF40440020C21F /* TabBarController.swift in Sources */,
 				B67B9DEA23EEE19E00A3451C /* ConnectionCheck.swift in Sources */,
 				B67B9DEB23EEE19E00A3451C /* ConnectionCheckController.swift in Sources */,
 				B67B9DCA23EEE18A00A3451C /* AppDelegate.swift in Sources */,
 				B67B9DCB23EEE18A00A3451C /* dbSelect.swift in Sources */,
+				B6A40A9623FEC2E40043495D /* NewAdvertisementStruct.swift in Sources */,
 				B67B9DCC23EEE18A00A3451C /* DbInsert.swift in Sources */,
 				B67B9DCD23EEE18A00A3451C /* Advertisement.swift in Sources */,
 				04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */,
 				B67B9DCE23EEE18A00A3451C /* User.swift in Sources */,
 				B67B9DCF23EEE18A00A3451C /* NewUser.swift in Sources */,
 				B67B9DD023EEE18A00A3451C /* Country.swift in Sources */,
+				B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */,
 				B67B9DD123EEE18A00A3451C /* City.swift in Sources */,
 				B67B9DD223EEE18A00A3451C /* Profession.swift in Sources */,
 				B67B9DD323EEE18A00A3451C /* earnMoney.swift in Sources */,
@@ -978,7 +1021,10 @@
 				B67B9DDA23EEE18A00A3451C /* NotificationViewController.swift in Sources */,
 				B67B9DDB23EEE18A00A3451C /* StatisticsController.swift in Sources */,
 				B67B9DDC23EEE18A00A3451C /* MenuController.swift in Sources */,
+				B6897C6C23FD024200ECEB1E /* NewAdvertFirstController.swift in Sources */,
 				B67B9DDD23EEE18A00A3451C /* AboutAdvertController.swift in Sources */,
+				B6A40A9423FEB8A70043495D /* NewASecondController.swift in Sources */,
+				B6A40A8F23FE648C0043495D /* TariffController.swift in Sources */,
 				B67B9DDE23EEE18A00A3451C /* PhotoStoryController.swift in Sources */,
 				B67B9DDF23EEE18A00A3451C /* VideoReklamController.swift in Sources */,
 				B67B9DE023EEE18A00A3451C /* TextReklamController.swift in Sources */,
@@ -986,8 +1032,10 @@
 				B67B9DE223EEE18A00A3451C /* ReklamCellTableViewCell.swift in Sources */,
 				B67B9DE323EEE18A00A3451C /* HomePageController.swift in Sources */,
 				B67B9DE423EEE18A00A3451C /* FirstRegistrationController.swift in Sources */,
+				B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */,
 				B67B9DE523EEE18A00A3451C /* SecondRegistrationController.swift in Sources */,
 				04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */,
+				B6A40A8D23FE613B0043495D /* TariffStruct.swift in Sources */,
 				B67B9DE623EEE18A00A3451C /* ThirdRegistrationController.swift in Sources */,
 				B67B9DE723EEE18A00A3451C /* SuccessRegController.swift in Sources */,
 				B68294D023F599420041E446 /* ProfileController.swift in Sources */,

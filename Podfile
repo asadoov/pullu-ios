@@ -12,7 +12,7 @@ target 'pullu.test' do
   pod 'Firebase/Firestore'
   pod 'FirebaseDatabase'
   pod 'BoringSSL-GRPC'
-
+pod 'OpalImagePicker'
 pod 'Alamofire', '~> 4.8'
     pod 'AlamofireImage', '~> 3.5'
 pod 'ImageSlideshow', '~> 1.8.3'
