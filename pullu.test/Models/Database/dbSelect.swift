@@ -29,7 +29,7 @@ public class dbSelect {
     
     func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
+        let url="https://pullu.az/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -53,7 +53,7 @@ public class dbSelect {
     
     func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/getAds?username="+username+"&pass="+pass
+        let url="https://pullu.az/api/androidmobileapp/user/getAds?username="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -77,7 +77,7 @@ public class dbSelect {
     
     func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/getCountries"
+        let url="https://pullu.az/api/androidmobileapp/getCountries"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -100,7 +100,7 @@ public class dbSelect {
     }
     func getCities(countryId:Int,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/getCities?countryid=" + String(countryId)
+        let url="https://pullu.az/api/androidmobileapp/getCities?countryid=" + String(countryId)
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -124,7 +124,7 @@ public class dbSelect {
     
     func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/getprofessions"
+        let url="https://pullu.az/api/androidmobileapp/getprofessions"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -147,7 +147,7 @@ public class dbSelect {
     }
     func getAdvertById(advertID:Int?,mail:String?,pass:String?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/about?advertID=\(advertID!)&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)&mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -170,7 +170,7 @@ public class dbSelect {
     }
     func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -193,7 +193,7 @@ public class dbSelect {
     }
     func profilview(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -216,7 +216,7 @@ public class dbSelect {
     }
     func aCategory(completionBlock: @escaping (_ result:Array<CategoryStruct>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/aCategory"
+        let url="https://pullu.az/api/androidmobileapp/aCategory"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -239,7 +239,7 @@ public class dbSelect {
     }
     func aType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/atype"
+        let url="https://pullu.az/api/androidmobileapp/atype"
    
                 GetJson(jsonUrlString: url){
                     (json) in
@@ -263,7 +263,7 @@ public class dbSelect {
     }
     func aTariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
         
-        let url="http://13.92.237.16/api/androidmobileapp/atariff"
+        let url="https://pullu.az/api/androidmobileapp/atariff"
         
         request(url ,method: .get,encoding: URLEncoding(destination: .queryString)).responseJSON
             {
