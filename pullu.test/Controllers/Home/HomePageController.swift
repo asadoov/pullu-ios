@@ -12,8 +12,8 @@ import AlamofireImage
 
 class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    @IBOutlet weak var paidBtn: UIButton!
-    @IBOutlet weak var notPaidBtn: UIButton!
+    @IBOutlet weak var isPaidSegment: UISegmentedControl!
+   
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
     
@@ -165,54 +165,59 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
       
     }
     
-    
-    @IBAction func paidClick(_ sender: Any) {
-        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+    @IBAction func isPaidChanged(_ sender: Any) {
+       if isPaidSegment.selectedSegmentIndex == 0{
+            if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+                     
+                     self.advertArray.removeAll()
+                     // Table was scrolled by user.
+                     if dataArray.count>0{
+                         
+                         for item in dataArray{
+                             if item.isPaid==1{
+                                 
+                                 advertArray.append(item)
+                             }
+                             
+                         }
+                         
+                         DispatchQueue.main.async {
+                             self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                             self.ReklamList.reloadData()
+                             
+                             
+                         }
+                         
+                     }
+                 }
             
-            self.advertArray.removeAll()
-            // Table was scrolled by user.
-            if dataArray.count>0{
-                
-                for item in dataArray{
-                    if item.isPaid==1{
-                        
-                        advertArray.append(item)
-                    }
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                    self.ReklamList.reloadData()
-                    
-                    
-                }
-                
-            }
+        }
+        if isPaidSegment.selectedSegmentIndex==1{
+            
+            if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+                      self.advertArray.removeAll()
+                      // Table was scrolled by user.
+                      if dataArray.count>0{
+                          for item in dataArray{
+                              if item.isPaid==0{
+                                  
+                                  advertArray.append(item)
+                              }
+                              
+                          }
+                          DispatchQueue.main.async {
+                               self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                              
+                              self.ReklamList.reloadData()
+                              
+                              
+                          }
+                      }
+                  }
         }
     }
-    @IBAction func notPaidClick(_ sender: Any) {
-        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-            self.advertArray.removeAll()
-            // Table was scrolled by user.
-            if dataArray.count>0{
-                for item in dataArray{
-                    if item.isPaid==0{
-                        
-                        advertArray.append(item)
-                    }
-                    
-                }
-                DispatchQueue.main.async {
-                     self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                    
-                    self.ReklamList.reloadData()
-                    
-                    
-                }
-            }
-        }
-    }
+    
+   
     
     /*   private func getProducts(completionBlock: @escaping (_ result:Array<Advertisement>) ->()) {
      

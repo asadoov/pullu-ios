@@ -38,18 +38,25 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func selectMedia(_ sender: Any) {
+     
+        if newAdverisement.aTypeID == 2{
         let imagePicker = OpalImagePickerController()
+        imagePicker.maximumSelectionsAllowed=10
         presentOpalImagePickerController(imagePicker, animated: true,
             select: { (assets) in
                 //Select Assets
             }, cancel: {
                 //Cancel
             })
-//        mediaPicker.delegate=self
-//              mediaPicker.sourceType=UIImagePickerController.SourceType.photoLibrary
-//              mediaPicker.mediaTypes = ["public.image", "public.movie"]
-//        mediaPicker.
-//              self.present(mediaPicker,animated: true,completion: nil)
+        }
+        if newAdverisement.aTypeID == 3 {
+        mediaPicker.delegate=self
+              mediaPicker.sourceType=UIImagePickerController.SourceType.photoLibrary
+             // mediaPicker.mediaTypes = ["public.image", "public.movie"]
+                       mediaPicker.mediaTypes = ["public.movie"]
+       
+              self.present(mediaPicker,animated: true,completion: nil)
+        }
     }
     /*
     // MARK: - Navigation
