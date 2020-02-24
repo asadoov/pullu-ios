@@ -8,7 +8,7 @@
 
 import Foundation
 class CategoryStruct: Codable {
-    var ID:Int?
+    var id:Int?
     var name:String?
     var catImage:String?
     
