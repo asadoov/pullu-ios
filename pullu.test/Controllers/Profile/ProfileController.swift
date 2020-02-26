@@ -21,17 +21,28 @@ class ProfileController: UIViewController {
     @IBOutlet weak var ixtisasField: UIPickerView!
     @IBOutlet weak var qoshulmaTarixField: UILabel!
     
-    
-    
+    var defaults = UserDefaults.standard
+    var select:dbSelect=dbSelect()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let mail = defaults.string(forKey: "mail")
+        let pass = defaults.string(forKey: "pass")
+        select.getProfileInfo(mail: mail!, pass: pass!) {
+            (profile)
+            in
+            DispatchQueue.main.async {
+                self.emailField.text = String(profile.self)
+            }
+        }
+        
 
         // Do any additional setup after loading the view.
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+      
+        
+      
+        
 
        // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
