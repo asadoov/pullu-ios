@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import Alomofire
+//import Alomofire
 import AlamofireImage
 
 
-class ArchiveController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ArchiveController: UIViewController{ //, UITableViewDelegate, UITableViewDataSource {
     
     
 
@@ -33,13 +33,13 @@ class ArchiveController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        <#code#>
+//    }
 
     /*
     // MARK: - Navigation

@@ -27,15 +27,15 @@ class ProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let mail = defaults.string(forKey: "mail")
-        let pass = defaults.string(forKey: "pass")
-        select.getProfileInfo(mail: mail!, pass: pass!) {
-            (profile)
-            in
-            DispatchQueue.main.async {
-                self.emailField.text = String(profile.self)
-            }
-        }
+//        let mail = defaults.string(forKey: "mail")
+//        let pass = defaults.string(forKey: "pass")
+//        select.getProfileInfo(mail: mail!, pass: pass!) {
+//            (profile)
+//            in
+//            DispatchQueue.main.async {
+//                self.emailField.text = String(profile.self)
+//            }
+//        }
         
 
         // Do any additional setup after loading the view.
