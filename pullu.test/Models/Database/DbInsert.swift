@@ -39,12 +39,12 @@ class DbInsert {
     
     func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/signUp?name=\(newUserData.name ?? "")&surname=\(newUserData.surname ?? "")&mail=\(newUserData.mail ?? "")&pass=\(newUserData.pass ?? "")&phone=\(newUserData.phone ?? "")&bDate=\(newUserData.bDate ?? "")&gender=\( newUserData.gender ?? "")&country=\(newUserData.country ?? "")&city=\(newUserData.city ?? "")&profession=\(newUserData.sector ?? "")"
+   
         
         let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
         
         
-        let PULLULINK = "http://13.92.237.16/api/androidmobileapp/user/signUp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
         let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"profession":newUserData.sector!]
         
         
