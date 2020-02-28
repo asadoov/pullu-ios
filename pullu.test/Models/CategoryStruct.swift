@@ -11,5 +11,6 @@ class CategoryStruct: Codable {
     var id:Int?
     var name:String?
     var catImage:String?
+     var downloadedIco:  Data?
     
 }
