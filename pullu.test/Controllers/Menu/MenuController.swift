@@ -21,6 +21,10 @@ class MenuController: UIViewController {
     @IBOutlet weak var headerView: UIView!
     
     @IBOutlet weak var userID: UILabel!
+    
+    var select:dbSelect=dbSelect()
+    var profM = ProfileModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,8 +63,15 @@ class MenuController: UIViewController {
     }
     
     @IBAction func profilButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "profSegue", sender: self)
+        }
         
-    }
+        }
+            // Get the new view controller using segue.destination.
+            // Pass the selected object to the new view controller.
+            
+    
     
     
     
@@ -71,14 +82,11 @@ class MenuController: UIViewController {
         self.dismiss(animated: true)
         
     }
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+     
     
 }

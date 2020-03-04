@@ -170,7 +170,7 @@ public class dbSelect {
     }
     func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -193,9 +193,9 @@ public class dbSelect {
     }
     
     //Profil
-    func getProfileInfo(completionBlock: @escaping (_ result:Array<ProfileModel>) ->()){
+    func getProfileInfo(mail:String? , pass:String?, completionBlock: @escaping (_ result:Array<ProfileModel>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/aCategory"
+        let url="https://pullu.az/api/androidmobileapp/user/profile?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -212,9 +212,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     
     //

@@ -17,36 +17,40 @@ class ProfileController: UIViewController {
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var sheherField: UILabel!
     @IBOutlet weak var ixtisasField: UIPickerView!
-    @IBOutlet weak var qoshulmaTarixField: UILabel!
+    @IBOutlet weak var cityText: UITextField!
+    @IBOutlet weak var creatDate: UITextField!
+
     
     var defaults = UserDefaults.standard
     var select:dbSelect=dbSelect()
+    var profilM = ProfileModel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let mail = defaults.string(forKey: "mail")
-//        let pass = defaults.string(forKey: "pass")
-//        select.getProfileInfo(mail: mail!, pass: pass!) {
-//            (profile)
-//            in
-//            DispatchQueue.main.async {
-//                self.emailField.text = String(profile.self)
-//            }
-//        }
-        
+
+        let pass = defaults.string(forKey: "pass")
+        let mail = defaults.string(forKey: "mail")
+        select.getProfileInfo(mail: mail, pass: pass) {
+            (list) in
+            
+            
+            DispatchQueue.main.async {
+                self.emailField.text = String(self.profilM.mail!)
+            self.mobileNumField.text = self.profilM.phone
+            self.dogumTarixField.text = self.profilM.bDate
+            self.cityText.text = self.profilM.city
+            self.creatDate.text = self.profilM.cDate
+             
+                
+            }
+        }
 
         // Do any additional setup after loading the view.
-      
-        
-      
-        
 
        // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
-    
 
     /*
     // MARK: - Navigation
