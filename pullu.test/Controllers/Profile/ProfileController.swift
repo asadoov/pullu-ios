@@ -24,7 +24,7 @@ class ProfileController: UIViewController {
     
     var defaults = UserDefaults.standard
     var select:dbSelect=dbSelect()
-    var profilM = ProfileModel()
+    var profilM: [ProfileModel] = [ProfileModel]()
     
 
     override func viewDidLoad() {
@@ -34,24 +34,21 @@ class ProfileController: UIViewController {
         let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
+            let list = profilM
             
             
             DispatchQueue.main.async {
-                self.emailField.text = String(self.profilM.mail!)
-            self.mobileNumField.text = self.profilM.phone
-            self.dogumTarixField.text = self.profilM.bDate
-            self.cityText.text = self.profilM.city
-            self.creatDate.text = self.profilM.cDate
-             
-                
+                self.emailField.text = list
             }
         }
+        
+       
 
         // Do any additional setup after loading the view.
 
        // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
-
+    
     /*
     // MARK: - Navigation
 

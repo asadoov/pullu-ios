@@ -68,6 +68,13 @@ class MenuController: UIViewController {
         }
         
         }
+    
+    @IBAction func statisticsButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "statiSegue", sender: self)
+        }
+    }
+    
             // Get the new view controller using segue.destination.
             // Pass the selected object to the new view controller.
             

@@ -10,14 +10,14 @@ import Foundation
 
 class ProfileModel:Codable{
     
-       public var name: String?
-       public var surname: String?
-       public var mail: String?
-       public var phone: String?
-       public var bDate: String?
-       public var gender: String?
-       public var city: String?
-       public var profession: String?
-       public var cDate: String?
-       public var response: Int?
+       var name: String?
+       var surname: String?
+       var mail: String?
+       var phone: String?
+       var bDate: String?
+       var gender: String?
+       var city: String?
+       var profession: String?
+       var cDate: String?
+       var response: Int?
 }
