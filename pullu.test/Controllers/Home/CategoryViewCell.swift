@@ -14,7 +14,7 @@ class CategoryViewCell: UICollectionViewCell {
     @IBOutlet weak var catImage: UIImageView!
     func reloadData() {
      self.categoryLabel.text=object?.name!
-        if object?.downloadedIco != nil{
+        if object?.downloadedIco != nil {
        self.catImage.image=UIImage(data: object!.downloadedIco!)
         }
         // self.ReklamImage.contentMode = .scaleAspectFill
