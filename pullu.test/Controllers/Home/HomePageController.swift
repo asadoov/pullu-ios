@@ -14,6 +14,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
    
+    @IBOutlet weak var categoryScroll: UICollectionView!
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
     
@@ -22,6 +23,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var headerView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
     var advertID:Int?
+    var catList:Array<CategoryStruct> = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,9 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         //
         ReklamList.delegate = self
         ReklamList.dataSource = self
+        
+    
+        
         //  self.getProducts()
         let defaults = UserDefaults.standard
         
@@ -54,6 +59,63 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
         let  db:dbSelect=dbSelect()
+        db.aCategory(){
+            (list)
+            in
+              self.catList=list
+            var catImageIndex=0
+            for item in self.catList{
+                
+                Alamofire.request(item.catImage!).responseImage { response in
+                                 if let catPicture = response.result.value {
+                                     //advert.photo=catPicture.pngData()
+                                     item.downloadedIco = catPicture.pngData()
+                                     
+                                     print("image downloaded: \(item.downloadedIco)")
+                                     
+                                     
+                                 }
+                                 
+                                 self.catList[catImageIndex]=item
+                             
+                                 // self.dataArray.replaceSubrange( , with: item)
+                                 catImageIndex+=1
+                                 
+                                 //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                 
+                                           
+                                  
+                               
+                                      
+                                           
+                                       
+                                       DispatchQueue.main.async {
+                                           
+                                
+                                           self.categoryScroll.reloadData()
+                                           
+                                           
+                                       }
+                                 
+                                 // DispatchQueue.main.async {
+                                 
+                                 
+                                 //   self.ReklamList.reloadData()
+                                 
+                                 
+                                 // }
+                                 
+                             }
+                
+            }
+          
+             DispatchQueue.main.async {
+            self.categoryScroll.reloadData()
+               
+            }
+        }
+        
+        
         db.getAds(username: mail!, pass: pass!){
             
             (list) in
@@ -88,7 +150,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         //advert.photo=catPicture.pngData()
                         item.photo = catPicture.pngData()
                         
-                        print("image downloaded: \(item.photo)")
+                     //   print("image downloaded: \(item.photo)")
                         
                         
                     }
@@ -101,7 +163,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     // self.dataArray.replaceSubrange( , with: item)
                     k+=1
                     
-                    print("\(self.dataArray.count) \n list count: \(typeCount)")
+                    //print("\(self.dataArray.count) \n list count: \(typeCount)")
     
                               
                      
@@ -469,6 +531,28 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+
+}
+extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(catList.count)
+        return catList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+             let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryViewCell
+
+
+        cell.object=catList[indexPath.row]
+        cell.reloadData()
+       // print(catList[indexPath.row].name)
+      
+        return cell
+            
+    
+    }
+    
+    
     
 }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import OpalImagePicker
+
 class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
  var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
   let mediaPicker=UIImagePickerController()
@@ -38,26 +39,41 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func selectMedia(_ sender: Any) {
-     
+      let imagePicker = OpalImagePickerController()
         if newAdverisement.aTypeID == 2{
-        let imagePicker = OpalImagePickerController()
+       let configuration = OpalImagePickerConfiguration()
+       configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Maximum şəkil sayı 10 olmaıdır", comment: "")
+       imagePicker.configuration = configuration
         imagePicker.maximumSelectionsAllowed=10
         presentOpalImagePickerController(imagePicker, animated: true,
             select: { (assets) in
                 //Select Assets
+               
             }, cancel: {
                 //Cancel
             })
         }
         if newAdverisement.aTypeID == 3 {
-        mediaPicker.delegate=self
-              mediaPicker.sourceType=UIImagePickerController.SourceType.photoLibrary
-             // mediaPicker.mediaTypes = ["public.image", "public.movie"]
-                       mediaPicker.mediaTypes = ["public.movie"]
-       
-              self.present(mediaPicker,animated: true,completion: nil)
-        }
-    }
+            let configuration = OpalImagePickerConfiguration()
+            configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Siz sadəcə 1 vide seçə bilərsiniz", comment: "")
+            imagePicker.configuration = configuration
+            imagePicker.maximumSelectionsAllowed=1
+            imagePicker.allowedMediaTypes = Set([.video])
+            presentOpalImagePickerController(imagePicker, animated: true,
+                select: { (assets) in
+                    //Select Assets
+                   
+                }, cancel: {
+                    //Cancel
+                })
+//        mediaPicker.delegate=self
+//              mediaPicker.sourceType=UIImagePickerController.SourceType.photoLibrary
+//             // mediaPicker.mediaTypes = ["public.image", "public.movie"]
+//                       mediaPicker.mediaTypes = ["public.movie"]
+//
+//              self.present(mediaPicker,animated: true,completion: nil)
+      }
+            }
     /*
     // MARK: - Navigation
 
