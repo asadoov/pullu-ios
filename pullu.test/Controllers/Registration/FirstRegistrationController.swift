@@ -59,6 +59,11 @@ class FirstRegistrationController: UIViewController {
             
         }
     }
+    @IBAction func backButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "geriSegue", sender: self)
+        }
+    }
     
     
      // MARK: - Navigation

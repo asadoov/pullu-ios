@@ -17,26 +17,33 @@ class ProfileController: UIViewController {
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var sheherField: UILabel!
     @IBOutlet weak var ixtisasField: UIPickerView!
-    @IBOutlet weak var qoshulmaTarixField: UILabel!
+    @IBOutlet weak var cityText: UITextField!
+    @IBOutlet weak var creatDate: UITextField!
+
     
+    var defaults = UserDefaults.standard
+    var select:dbSelect=dbSelect()
+    var profilM: [ProfileModel] = [ProfileModel]()
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        let gradient = CAGradientLayer()
+        let pass = defaults.string(forKey: "pass")
+        let mail = defaults.string(forKey: "mail")
+        select.getProfileInfo(mail: mail, pass: pass) {
+            (list) in
+            
+        }
+        
+       
 
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        // Do any additional setup after loading the view.
 
        // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
     
-
     /*
     // MARK: - Navigation
 

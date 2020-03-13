@@ -170,7 +170,7 @@ public class dbSelect {
     }
     func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -191,29 +191,31 @@ public class dbSelect {
         }
         
     }
-    func profilview(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
+    
+    //Profil
+    func getProfileInfo(mail:String? , pass:String?, completionBlock: @escaping (_ result:Array<ProfileModel>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/profile?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
                 
                 
-                let statistics  = try
-                    JSONDecoder().decode(Statistics.self, from: json)
+                let profile  = try
+                    JSONDecoder().decode(Array<ProfileModel>.self, from: json)
                 
                 // userList=list
                 
-                completionBlock(statistics)
+                completionBlock(profile)
                 
             }
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
+    
+    //
     func aCategory(completionBlock: @escaping (_ result:Array<CategoryStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/aCategory"
