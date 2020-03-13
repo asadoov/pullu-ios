@@ -78,6 +78,8 @@
 		B688E5B323ED9EF5003D04D0 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6897C6C23FD024200ECEB1E /* NewAdvertFirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */; };
 		B68E5F4A24094DAF002B9168 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68E5F4924094DAF002B9168 /* CategoryViewCell.swift */; };
+		B697C6CC241BBDE600AE9402 /* BackroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697C6CB241BBDE600AE9402 /* BackroundController.swift */; };
+		B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */; };
 		B6A40A8D23FE613B0043495D /* TariffStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A8C23FE613B0043495D /* TariffStruct.swift */; };
 		B6A40A8F23FE648C0043495D /* TariffController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A8E23FE648C0043495D /* TariffController.swift */; };
 		B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9123FE68460043495D /* TariffViewCell.swift */; };
@@ -345,6 +347,8 @@
 		B6951DC323C503230020C7EE /* logIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = logIn.swift; sourceTree = "<group>"; };
 		B6951DC523C503EE0020C7EE /* dbSelect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dbSelect.swift; sourceTree = "<group>"; };
 		B6951DC723C507570020C7EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B697C6CB241BBDE600AE9402 /* BackroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackroundController.swift; sourceTree = "<group>"; };
+		B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImageStruct.swift; sourceTree = "<group>"; };
 		B698D9A423D9DA6300905CDF /* TextReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextReklamController.swift; sourceTree = "<group>"; };
 		B698D9A823D9DB3E00905CDF /* VideoReklamController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoReklamController.swift; sourceTree = "<group>"; };
 		B6A40A8C23FE613B0043495D /* TariffStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffStruct.swift; sourceTree = "<group>"; };
@@ -792,6 +796,7 @@
 				B6A40A8C23FE613B0043495D /* TariffStruct.swift */,
 				B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */,
 				04AA33592405482B00685D64 /* ProfileModel.swift */,
+				B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -822,11 +827,20 @@
 		B6897C6A23FD021500ECEB1E /* New Advertisement */ = {
 			isa = PBXGroup;
 			children = (
+				B697C6CA241BBD6F00AE9402 /* Background page */,
 				B6A40A9023FE67EF0043495D /* Tariff page */,
 				B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */,
 				B6A40A9323FEB8A70043495D /* NewASecondController.swift */,
 			);
 			path = "New Advertisement";
+			sourceTree = "<group>";
+		};
+		B697C6CA241BBD6F00AE9402 /* Background page */ = {
+			isa = PBXGroup;
+			children = (
+				B697C6CB241BBDE600AE9402 /* BackroundController.swift */,
+			);
+			path = "Background page";
 			sourceTree = "<group>";
 		};
 		B698D9A323D9DA2900905CDF /* Text Reklam Page */ = {
@@ -1031,6 +1045,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,
 				04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */,
 				B67B9DE923EEE19E00A3451C /* pullu_test.xcdatamodeld in Sources */,
 				B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */,
@@ -1072,6 +1087,7 @@
 				B67B9DE023EEE18A00A3451C /* TextReklamController.swift in Sources */,
 				B67B9DE123EEE18A00A3451C /* ReklamStoryController.swift in Sources */,
 				B67B9DE223EEE18A00A3451C /* ReklamCellTableViewCell.swift in Sources */,
+				B697C6CC241BBDE600AE9402 /* BackroundController.swift in Sources */,
 				B67B9DE323EEE18A00A3451C /* HomePageController.swift in Sources */,
 				B67B9DE423EEE18A00A3451C /* FirstRegistrationController.swift in Sources */,
 				B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */,

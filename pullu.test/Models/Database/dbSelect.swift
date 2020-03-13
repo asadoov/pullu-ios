@@ -308,6 +308,29 @@ public class dbSelect {
         
     }
     
-    
+    func getBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
+           
+           let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
+      
+                   GetJson(jsonUrlString: url){
+                       (json) in
+                       do{
+           
+           
+                           let backroundImageList  = try
+                               JSONDecoder().decode(Array<BackroundImageStruct>.self, from: json)
+           
+                           // userList=list
+           
+                           completionBlock(backroundImageList)
+           
+                       }
+                       catch let jsonErr{
+                           print("Error serializing json:",jsonErr)
+                       }
+           
+                   }
+           
+       }
     
 }
