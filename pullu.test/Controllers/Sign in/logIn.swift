@@ -98,19 +98,11 @@ class logIn: UIViewController {
                         self.dismiss(animated: false)
                         {
                             self.performSegue(withIdentifier: "segue", sender: self)                        }
-                        
-                        
-                        
+        
                     }
-                    
-                    
+ 
                 }
-                    
-                    
-                    
-                    
-                    
-                    
+                  
                 else{
                     DispatchQueue.main.async {
                         self.dismiss(animated: false){
@@ -137,6 +129,11 @@ class logIn: UIViewController {
         
     }
     
+    @IBAction func forgotPassButton(_ sender: Any) {
+        DispatchQueue.main.async {
+                   self.performSegue(withIdentifier: "forgPassSegue", sender: self)
+               }
+    }
     
     
     

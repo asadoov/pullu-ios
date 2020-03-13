@@ -34,12 +34,7 @@ class ProfileController: UIViewController {
         let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
-            let list = profilM
             
-            
-            DispatchQueue.main.async {
-                self.emailField.text = list
-            }
         }
         
        
