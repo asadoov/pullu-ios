@@ -188,17 +188,19 @@ class DbInsert {
     
          
       
-         let PULLULINK = "pullu.az/api/androidmobileapp/accounts/password/reset"
-        let Parameters = ["newpass":newpass ,"mail": mail,"code": code] as [String : Any]
+         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/newpass"
+        let Parameters = ["newpass":newpass, "mail": mail,"code": code] as [String : Any]
          
          
+    
          request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
              {
                  (response)
                  in
-                 
+                 print(PULLULINK)
+                
                  do{
-                     
+                    
                      
                      let statusCode  = try
                          JSONDecoder().decode(Status.self, from: response.data!)

@@ -71,9 +71,9 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        var verifyNumber = "\(pass1text.text!)\(pass2text.text!)\(pass3text.text!)\(pass4text.text!)"
+         verifyNumber = "\(pass1text.text!)\(pass2text.text!)\(pass3text.text!)\(pass4text.text!)"
         
-        
+        print(verifyNumber)
         dbIns.checkSendCode(mail: usrEmail, code: verifyNumber) {
             (Status) in
             

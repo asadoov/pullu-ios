@@ -13,12 +13,13 @@ class CreatePassViewController: UIViewController {
     @IBOutlet weak var newPassText: UITextField!
     @IBOutlet weak var newPassRepttext: UITextField!
     var dbIns : DbInsert = DbInsert()
-    var usrEml: String = ""
-    var usrCode: String = ""
+    var usrEml: String?
+    var usrCode: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
     }
     
@@ -35,10 +36,45 @@ class CreatePassViewController: UIViewController {
                alert.view.addSubview(loadingIndicator)
                present(alert, animated: true, completion: nil)
         
-        dbIns.createNewPass(newpass: newPassText.text!, mail: usrEml, code: usrCode){
-            (statu) in
+
+            if (self.newPassText.text! == self.newPassRepttext.text!){
+        
+        
+        dbIns.createNewPass(newpass: newPassText.text!, mail: usrEml!, code: usrCode!){
+            (Status) in
             
             
+            
+            switch Status.response{
+                
+            case 0:
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "lastPageSegue", sender: self)
+                }
+                break
+                
+            case 1:
+                let alert = UIAlertController(title: "Bildiriş", message: " deyishilmedi ", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                break
+                
+                case 2:
+                let alert = UIAlertController(title: "Bildiriş", message: "Error", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+                
+                break
+            default : break
+            }
+    
+        }
+        }
+        else {
+            let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqlarıı doldurun!", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
