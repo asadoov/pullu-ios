@@ -74,15 +74,20 @@ class BackroundController: UIViewController {
     }
     
     
-    /*
+
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier=="backToPublish"{
+                   let displayVC = segue.destination as! NewASecondController
+                                        displayVC.newAdverisement = newAdverisement
+                   
+               }
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-     */
+     
     
 }
 extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSource{
@@ -103,6 +108,15 @@ extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSourc
         return cell
         
         
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      let cell = backgroundsCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BackgroundCell
+        cell.backgroundImage =  backgroundImageList[indexPath.row]
+                // cell.object = tariffList[indexPath.row]
+          //newAdverisement.trfID=cell.object!.id!
+        print(cell.backgroundImage!.id!)
+                 cell.reloadData()
+          //self.performSegue(withIdentifier: "newASecond", sender: true)
     }
     
     
