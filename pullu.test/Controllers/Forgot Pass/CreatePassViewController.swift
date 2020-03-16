@@ -48,22 +48,25 @@ class CreatePassViewController: UIViewController {
             switch Status.response{
                 
             case 0:
-                
+                self.dismiss(animated: false) {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "lastPageSegue", sender: self)
+                    }
                 }
                 break
                 
             case 1:
+                self.dismiss(animated: false) {
                 let alert = UIAlertController(title: "Bildiriş", message: " deyishilmedi ", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil)}
                 break
                 
                 case 2:
+                    self.dismiss(animated: false) {
                 let alert = UIAlertController(title: "Bildiriş", message: "Error", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                        self.present(alert, animated: true, completion: nil)}
                 
                 break
             default : break

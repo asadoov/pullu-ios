@@ -42,21 +42,24 @@ class SendEmailViewController: UIViewController {
             switch status.response {
                 
             case 0:
+                self.dismiss(animated: false) {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "fourSegue", sender: self)
+                }
                 }
                 break
             case 1:
                 self.dismiss(animated: false){
-                let alert = UIAlertController(title: "Bildiriş", message: " ! ", preferredStyle: UIAlertController.Style.alert)
+                let alert = UIAlertController(title: "Bildiriş", message: " Server Error ", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil) }
                 break
                 
             case 2:
+                self.dismiss(animated: false){
                 let alert = UIAlertController(title: "Bildiriş", message: "Email mövcud deyil. Emailin düzgünlüyünü yoxlayın", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil) }
                 
                 break
             default: break

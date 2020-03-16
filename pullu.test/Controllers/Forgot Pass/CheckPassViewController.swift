@@ -55,6 +55,7 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
             return true
         }
     
+    
 
     @IBAction func nextButton(_ sender: Any) {
         
@@ -82,21 +83,25 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
             switch Status.response {
                 
             case 0:
+                self.dismiss(animated: false) {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "changePassSegue", sender: self)
+                }
                 }
                 break
                 
             case 1:
-                let alert = UIAlertController(title: "Bildiriş", message: " error 1 ", preferredStyle: UIAlertController.Style.alert)
+                self.dismiss(animated: false) {
+                let alert = UIAlertController(title: "Bildiriş", message: " Şifrə yalnışdır ", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                    self.present(alert, animated: true, completion: nil)}
                 break
                 
                 case 2:
-                let alert = UIAlertController(title: "Bildiriş", message: "Email mövcud deyil. Emailin düzgünlüyünü yoxlayın", preferredStyle: UIAlertController.Style.alert)
+                    self.dismiss(animated: false) {
+                let alert = UIAlertController(title: "Bildiriş", message: "Server Error", preferredStyle: UIAlertController.Style.alert)
                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                        self.present(alert, animated: true, completion: nil)}
                 
                 break
             default : break
