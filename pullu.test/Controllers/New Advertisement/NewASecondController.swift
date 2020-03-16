@@ -40,6 +40,10 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     @IBAction func selectMedia(_ sender: Any) {
       let imagePicker = OpalImagePickerController()
+        if newAdverisement.aTypeID == 1 {
+            
+            performSegue(withIdentifier: "chooseBackground", sender: true)
+        }
         if newAdverisement.aTypeID == 2{
        let configuration = OpalImagePickerConfiguration()
        configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Maximum şəkil sayı 10 olmaıdır", comment: "")

@@ -8,6 +8,7 @@
 
 import Foundation
 class BackroundImageStruct: Codable {
-    var ID:Int
-    var imgUrl:String
+    var id:Int?
+    var imgUrl:String?
+    var downloadedImg:Data?
 }
