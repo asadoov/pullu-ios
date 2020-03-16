@@ -53,7 +53,7 @@ public class dbSelect {
     
     func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/getAds?username="+username+"&pass="+pass
+        let url="https://pullu.az/api/androidmobileapp/user/get/Ads?username="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -124,7 +124,7 @@ public class dbSelect {
     
     func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/getprofessions"
+        let url="https://pullu.az/api/androidmobileapp/get/professions"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -170,7 +170,7 @@ public class dbSelect {
     }
     func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/getStatistics?mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/get/statistics?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -218,7 +218,7 @@ public class dbSelect {
     //
     func aCategory(completionBlock: @escaping (_ result:Array<CategoryStruct>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/aCategory"
+        let url="https://pullu.az/api/androidmobileapp/get/aCategory"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -241,7 +241,7 @@ public class dbSelect {
     }
     func aType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/atype"
+        let url="https://pullu.az/api/androidmobileapp/get/atype"
    
                 GetJson(jsonUrlString: url){
                     (json) in
@@ -265,7 +265,7 @@ public class dbSelect {
     }
     func aTariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/atariff"
+        let url="https://pullu.az/api/androidmobileapp/get/atariff"
         
         request(url ,method: .get,encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -308,6 +308,29 @@ public class dbSelect {
         
     }
     
-    
+    func getBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
+           
+           let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
+      
+                   GetJson(jsonUrlString: url){
+                       (json) in
+                       do{
+           
+           
+                           let backroundImageList  = try
+                               JSONDecoder().decode(Array<BackroundImageStruct>.self, from: json)
+           
+                           // userList=list
+           
+                           completionBlock(backroundImageList)
+           
+                       }
+                       catch let jsonErr{
+                           print("Error serializing json:",jsonErr)
+                       }
+           
+                   }
+           
+       }
     
 }
