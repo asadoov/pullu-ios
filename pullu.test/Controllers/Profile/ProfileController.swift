@@ -39,6 +39,8 @@ class ProfileController: UIViewController {
             
             DispatchQueue.main.async {
                 self.emailField.text = list2.mail
+                
+                
             }
             
         }
@@ -47,7 +49,7 @@ class ProfileController: UIViewController {
 
         // Do any additional setup after loading the view.
 
-       // saveBtn.layer.insertSublayer(gradient, at: 0)
+       // saveBtn.layer.insertSublayer(gradient, at: 0)8
     }
     
     /*

@@ -21,6 +21,18 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -200
+        }
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
+            
+            
+            //Looks for single or multiple taps.
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
         pass1text.delegate = self
         pass2text.delegate = self
@@ -108,6 +120,11 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    @IBAction func sendAgain(_ sender: Any) {
+        
+    }
+    
     
     
     // MARK: - Navigation

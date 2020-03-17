@@ -16,6 +16,17 @@ class SendEmailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -200
+        }
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
+            
+            
+            //Looks for single or multiple taps.
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         // Do any additional setup after loading the view.
     }
     
@@ -66,6 +77,11 @@ class SendEmailViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func backToHomeButton(_ sender: Any) {
+        self.dismiss(animated:true)
+    }
+    
     
     
     // MARK: - Navigation
