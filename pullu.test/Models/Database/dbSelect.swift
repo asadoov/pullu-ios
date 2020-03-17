@@ -100,7 +100,7 @@ public class dbSelect {
     }
     func getCities(countryId:Int,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/getCities?countryid=" + String(countryId)
+        let url="https://pullu.az/api/androidmobileapp/get/Cities?countryid=" + String(countryId)
         GetJson(jsonUrlString: url){
             (json) in
             do{
