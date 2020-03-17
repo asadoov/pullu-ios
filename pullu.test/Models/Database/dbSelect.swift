@@ -77,7 +77,7 @@ public class dbSelect {
     
     func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/getCountries"
+        let url="https://pullu.az/api/androidmobileapp/get/countries"
         GetJson(jsonUrlString: url){
             (json) in
             do{
