@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 class BackroundController: UIViewController {
-    
+    var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
     @IBOutlet weak var backgroundsCollection: UICollectionView!
     
     var select:dbSelect = dbSelect()
@@ -110,13 +110,16 @@ extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSourc
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        newAdverisement.mediaBase64?.removeAll()
       let cell = backgroundsCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BackgroundCell
         cell.backgroundImage =  backgroundImageList[indexPath.row]
                 // cell.object = tariffList[indexPath.row]
           //newAdverisement.trfID=cell.object!.id!
-        print(cell.backgroundImage!.id!)
+        newAdverisement.mediaBase64?.append(String(cell.backgroundImage!.id!))
+      //  print(cell.backgroundImage!.id!)
                  cell.reloadData()
-          //self.performSegue(withIdentifier: "newASecond", sender: true)
+       
+        self.performSegue(withIdentifier: "backToPublish", sender: true)
     }
     
     

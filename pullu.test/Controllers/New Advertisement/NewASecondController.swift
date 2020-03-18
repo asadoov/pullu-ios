@@ -78,14 +78,20 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
 //              self.present(mediaPicker,animated: true,completion: nil)
       }
             }
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier=="chooseBackground"{
+                         let displayVC = segue.destination as! BackroundController
+                                              displayVC.newAdverisement = newAdverisement
+                         
+                     }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }
