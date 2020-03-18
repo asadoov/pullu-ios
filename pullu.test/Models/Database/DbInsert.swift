@@ -38,12 +38,7 @@ class DbInsert {
     
     
     func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
-        
-   
-        
-        let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
-        
-        
+      
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
         let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"profession":newUserData.sector!]
         
@@ -70,12 +65,6 @@ class DbInsert {
                     print("Error serializing json:",jsonErr)
                 }
         }
-        
-        
-        
-        
-        
-        
     }
     func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:EarnMoney) ->()){
         
@@ -107,12 +96,6 @@ class DbInsert {
                     print("Error serializing json:",jsonErr)
                 }
         }
-        
-        
-        
-        
-        
-        
     }
     
     // forgot pass / mail yoxlanishi
@@ -147,7 +130,6 @@ class DbInsert {
                      print("Error serializing json:",jsonErr)
                  }
          }
-    
      }
     // forgot pass / 4 regemli shifre yoxlanishi
     func checkSendCode(mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
@@ -180,7 +162,6 @@ class DbInsert {
                      print("Error serializing json:",jsonErr)
                  }
          }
-    
      }
     // forgot pass/ yeni şifrə yaratmaq
     func createNewPass(newpass:String ,mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
@@ -215,8 +196,5 @@ class DbInsert {
                      print("Error serializing json:",jsonErr)
                  }
          }
-    
      }
-    
-    
 }

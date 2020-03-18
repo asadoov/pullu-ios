@@ -11,7 +11,7 @@ import UIKit
 import AlamofireImage
 
 
-class ArchiveController: UIViewController{ //, UITableViewDelegate, UITableViewDataSource {
+class ArchiveController: UIViewController { //}, UITableViewDelegate, UITableViewDataSource {
     
     
 

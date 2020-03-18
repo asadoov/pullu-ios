@@ -10,6 +10,7 @@
 		0430E2562404F5C300F39810 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0430E2552404F5C300F39810 /* ArchiveController.swift */; };
 		045829A223C452D3004F6FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A023C452D3004F6FA9 /* Main.storyboard */; };
 		045829AA23C452D5004F6FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
+		047B6F722422084F00481CCA /* ArchiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B6F712422084F00481CCA /* ArchiveTableViewCell.swift */; };
 		047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F46A323FBBEFD005E9DFA /* WebViewController.swift */; };
 		047F46A623FBD6E9005E9DFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */; };
 		0484058523E7F200005E353C /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */; };
@@ -112,6 +113,7 @@
 		045829A423C452D3004F6FA9 /* pullu_test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pullu_test.xcdatamodel; sourceTree = "<group>"; };
 		045829A923C452D5004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		045829AB23C452D5004F6FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		047B6F712422084F00481CCA /* ArchiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveTableViewCell.swift; sourceTree = "<group>"; };
 		047F46A323FBBEFD005E9DFA /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				0430E2552404F5C300F39810 /* ArchiveController.swift */,
+				047B6F712422084F00481CCA /* ArchiveTableViewCell.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -731,8 +734,8 @@
 		B66A08F423CF517F00DE4D26 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */,
 				04EFB7DA23C7190700042E5C /* HomePageController.swift */,
+				B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */,
 				B68E5F4924094DAF002B9168 /* CategoryViewCell.swift */,
 			);
 			path = Home;
@@ -750,20 +753,20 @@
 		B67D4FD023CA059C00E572E8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6DCE32423EEC508005BEE84 /* Sign in */,
+				B67D4FD323CA05ED00E572E8 /* Registration */,
 				04E6BF5524190662002381F1 /* Forgot Pass */,
+				B66A08F423CF517F00DE4D26 /* Home */,
 				0430E2522404F57C00F39810 /* Archive */,
 				B6897C6A23FD021500ECEB1E /* New Advertisement */,
 				04D6EF1923FBFCCB007380BA /* Finance */,
 				B68294D123F599740041E446 /* Profile */,
 				B65FE46E23EF43F80020C21F /* Tab Bar */,
 				B67B9DF323EEF23600A3451C /* Offline Page */,
-				B6DCE32423EEC508005BEE84 /* Sign in */,
 				B6CBE8CF23EC4552002414CC /* Notification */,
 				B689501623EBE73900B9CE54 /* Statistics */,
 				B61290F123D0593600FE9344 /* Menu */,
 				B65327C523D1E84A0068E9E7 /* About advertisement */,
-				B66A08F423CF517F00DE4D26 /* Home */,
-				B67D4FD323CA05ED00E572E8 /* Registration */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1098,6 +1101,7 @@
 				04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */,
 				B67B9DE523EEE18A00A3451C /* SecondRegistrationController.swift in Sources */,
 				04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */,
+				047B6F722422084F00481CCA /* ArchiveTableViewCell.swift in Sources */,
 				B6A40A8D23FE613B0043495D /* TariffStruct.swift in Sources */,
 				B67B9DE623EEE18A00A3451C /* ThirdRegistrationController.swift in Sources */,
 				B67B9DE723EEE18A00A3451C /* SuccessRegController.swift in Sources */,

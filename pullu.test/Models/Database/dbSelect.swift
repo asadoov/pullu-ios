@@ -45,15 +45,12 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
-            
         }
-        
     }
     
     func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/get/Ads?username="+username+"&pass="+pass
+        let url="https://pullu.az/api/androidmobileapp/user/get/Ads?mail="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -70,9 +67,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     
     func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
@@ -94,13 +89,11 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     func getCities(countryId:Int,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/getCities?countryid=" + String(countryId)
+        let url="https://pullu.az/api/androidmobileapp/get/Cities?countryid=" + String(countryId)
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -117,9 +110,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     
     func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
@@ -141,9 +132,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     func getAdvertById(advertID:Int?,mail:String?,pass:String?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
@@ -164,9 +153,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
         
@@ -187,9 +174,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     
     //Profil
@@ -235,9 +220,7 @@ public class dbSelect {
             catch let jsonErr{
                 print("Error serializing json:",jsonErr)
             }
-            
         }
-        
     }
     func aType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
@@ -259,10 +242,9 @@ public class dbSelect {
                     catch let jsonErr{
                         print("Error serializing json:",jsonErr)
                     }
-        
                 }
-        
     }
+    
     func aTariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/atariff"
@@ -328,9 +310,6 @@ public class dbSelect {
                        catch let jsonErr{
                            print("Error serializing json:",jsonErr)
                        }
-           
                    }
-           
        }
-    
 }

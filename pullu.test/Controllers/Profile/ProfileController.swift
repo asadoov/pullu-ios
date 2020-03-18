@@ -37,11 +37,16 @@ class ProfileController: UIViewController {
             
             let list2 = list[0]
             
-            DispatchQueue.main.async {
+            
+            func reloadData() {
+                DispatchQueue.main.async {
                 self.emailField.text = list2.mail
-                
-                
             }
+            }
+//            DispatchQueue.main.async {
+//                self.emailField.text = list2.mail
+//
+//            }
             
         }
         

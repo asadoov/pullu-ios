@@ -18,6 +18,7 @@ class VideoReklamController: UIViewController {
     let defaults = UserDefaults.standard
     var userData = Array<User>()
     @IBOutlet weak var videoPlayer: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

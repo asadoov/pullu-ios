@@ -71,7 +71,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                                      //advert.photo=catPicture.pngData()
                                      item.downloadedIco = catPicture.pngData()
                                      
-                                     print("image downloaded: \(item.downloadedIco)")
+                                    // print("image downloaded: \(item.downloadedIco)")
                                      
                                      
                                  }

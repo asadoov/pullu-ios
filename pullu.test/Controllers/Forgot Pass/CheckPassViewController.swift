@@ -24,7 +24,7 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
         
         
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -200
+            self.view.frame.origin.y = -100
         }
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
             self.view.frame.origin.y = 0.0
@@ -32,7 +32,7 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
             
             
             //Looks for single or multiple taps.
-            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let _: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
 
         pass1text.delegate = self
         pass2text.delegate = self
@@ -122,6 +122,47 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func sendAgain(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+        dbIns.sendPassChangeMail(mail: usrEmail) {
+            (status) in
+                        
+            switch status.response {
+                
+            case 0:
+                self.dismiss(animated: false){
+                let alert = UIAlertController(title: "Bildiriş", message: " Göndərildi. Emailinizi yoxlayın ", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil) }
+                break
+            case 1:
+                self.dismiss(animated: false){
+                let alert = UIAlertController(title: "Bildiriş", message: " Server Error ", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil) }
+                break
+                
+            case 2:
+                self.dismiss(animated: false){
+                let alert = UIAlertController(title: "Bildiriş", message: "Email mövcud deyil. Emailin düzgünlüyünü yoxlayın", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil) }
+                
+                break
+            default: break
+            }
+        }
         
     }
     
