@@ -14,14 +14,15 @@ protocol ReklamCellDelegate {
 }
 
 class ReklamCellTableViewCell: UITableViewCell {
-    @IBOutlet weak var ReklamImage: UIImageView!
-    @IBOutlet weak var ReklamTitle: UILabel!
+    @IBOutlet weak var aImage: UIImageView!
+    @IBOutlet weak var aTitle: UILabel!
     
-    @IBOutlet weak var ReklamInfo: UILabel!
-    @IBOutlet weak var ReklamDate: UILabel!
-    @IBOutlet weak var ReklamType: UILabel!
-    @IBOutlet weak var ReklamBaxish: UILabel!
-    @IBOutlet weak var ReklamCategory: UILabel!
+    @IBOutlet weak var aPrice: UILabel!
+    @IBOutlet weak var aInfo: UILabel!
+    @IBOutlet weak var aDate: UILabel!
+    @IBOutlet weak var aType: UILabel!
+    @IBOutlet weak var aViews: UILabel!
+    @IBOutlet weak var aCategory: UILabel!
     var object: Advertisement?
     // var delegate: ReklamCellDelegate?
     override func awakeFromNib() {
@@ -44,25 +45,25 @@ class ReklamCellTableViewCell: UITableViewCell {
         dateFormatter.locale = Locale.current
         var dt = dateFormatter.date(from: object!.cDate!)
         dateFormatter.dateFormat = "EEEE, dd MMMM"
-        ReklamTitle.text=object?.name
-        ReklamInfo.text=object?.description
-        ReklamType.text=object?.aTypeName
-        ReklamCategory.text=object?.catName
-        
-        ReklamDate.text=dateFormatter.string(from:dt!)
+        aTitle.text=object?.name
+        aInfo.text=object?.description
+        aType.text=object?.aTypeName
+        aCategory.text=object?.catName
+        aPrice.text="\(object!.price!) AZN "
+        aDate.text=dateFormatter.string(from:dt!)
         
         if  object?.photo != nil{
-            self.ReklamImage.image=UIImage(data: object!.photo!)
+            self.aImage.image=UIImage(data: object!.photo!)
         }
         else  {
-            ReklamImage.image=UIImage(named: "background")
+            aImage.image=UIImage(named: "background")
             let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-            loadingIndicator.center=CGPoint(x: ReklamImage.bounds.size.width/2, y: ReklamImage.bounds.size.height/2)
+            loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.color = UIColor.lightGray
             // loadingIndicator.style = UIActivityIndicatorView.Style.gray
             loadingIndicator.startAnimating();
-            ReklamImage.addSubview(loadingIndicator)
+            aImage.addSubview(loadingIndicator)
             
             //present(alert, animated: true, completion: nil)
             

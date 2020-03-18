@@ -14,6 +14,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
+  
     @IBOutlet weak var categoryScroll: UICollectionView!
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
