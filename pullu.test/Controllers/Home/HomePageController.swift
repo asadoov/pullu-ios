@@ -13,7 +13,7 @@ import AlamofireImage
 class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
-   
+    
     @IBOutlet weak var categoryScroll: UICollectionView!
     var dataArray: [Advertisement] = [Advertisement]()
     @IBOutlet var ReklamList: UITableView!
@@ -48,7 +48,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         ReklamList.delegate = self
         ReklamList.dataSource = self
         
-    
+        
         
         //  self.getProducts()
         let defaults = UserDefaults.standard
@@ -62,57 +62,65 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         db.aCategory(){
             (list)
             in
-              self.catList=list
-            var catImageIndex=0
+            self.catList=list
+            var catIndex=0
             for item in self.catList{
                 
                 Alamofire.request(item.catImage!).responseImage { response in
-                                 if let catPicture = response.result.value {
-                                     //advert.photo=catPicture.pngData()
-                                     item.downloadedIco = catPicture.pngData()
-                                     
-                                     print("image downloaded: \(item.downloadedIco)")
-                                     
-                                     
-                                 }
-                                 
-                                 self.catList[catImageIndex]=item
-                             
-                                 // self.dataArray.replaceSubrange( , with: item)
-                                 catImageIndex+=1
-                                 
-                                 //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                 
-                                           
-                                  
-                               
-                                      
-                                           
-                                       
-                                       DispatchQueue.main.async {
-                                           
-                                
-                                           self.categoryScroll.reloadData()
-                                           
-                                           
-                                       }
-                                 
-                                 // DispatchQueue.main.async {
-                                 
-                                 
-                                 //   self.ReklamList.reloadData()
-                                 
-                                 
-                                 // }
-                                 
-                             }
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
+                        item.downloadedIco = catPicture.pngData()
+                        
+                        print("image downloaded: \(item.downloadedIco)")
+                        
+                        // self.catList[item.id!-1]=item
+                        self.catList[catIndex]=item
+                        // self.dataArray.replaceSubrange( , with: item)
+                        catIndex+=1
+                        if catIndex == self.catList.count {
+                            self.catList.sort { $0.id! < $1.id! }
+                            
+                            
+                        }
+                        DispatchQueue.main.async {
+                            self.categoryScroll.reloadData()
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    //                    DispatchQueue.main.async {
+                    //
+                    //
+                    //                        self.categoryScroll.reloadData()
+                    //
+                    //
+                    //                    }
+                    
+                    // DispatchQueue.main.async {
+                    
+                    
+                    //   self.ReklamList.reloadData()
+                    
+                    
+                    // }
+                    
+                }
                 
             }
-          
-             DispatchQueue.main.async {
-            self.categoryScroll.reloadData()
-               
-            }
+            //            self.catList.sort {
+            //                $0.id! < $1.id!
+            //            }
+            
         }
         
         
@@ -126,11 +134,11 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
             for advert in list {
                 
                 var typeCount = 0
-                 for itm in list{
-                 if itm.isPaid==1{
-                 typeCount += 1
-                 }
-                 }
+                for itm in list{
+                    if itm.isPaid==1{
+                        typeCount += 1
+                    }
+                }
                 
                 //if (advert.isPaid==type) {
                 var item = advert
@@ -139,8 +147,8 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self.dataArray.append(item)
                 if  item.isPaid==1{
                     i=0
-                                                                     self.advertArray.append(item)
-                                                                   }
+                    self.advertArray.append(item)
+                }
                 
                 // let item_index = self.dataArray.endIndex
                 //  element += 1
@@ -150,34 +158,42 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         //advert.photo=catPicture.pngData()
                         item.photo = catPicture.pngData()
                         
-                     //   print("image downloaded: \(item.photo)")
+                        //   print("image downloaded: \(item.photo)")
+                        
+                        self.dataArray[k]=item
+                        if  self.dataArray[k].isPaid==1{
+                            self.advertArray[i!]=item
+                            i!+=1
+                        }
+                        // self.dataArray.replaceSubrange( , with: item)
+                        k+=1
+                        if k == self.dataArray.count {
+                            self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+                            //self.dataArray.sort { $0.cDate! > $1.cDate! }
+                        }
+                        DispatchQueue.main.async {
+                            
+                            self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                            self.ReklamList.reloadData()
+                            
+                            
+                        }
+                        
                         
                         
                     }
                     
-                    self.dataArray[k]=item
-                    if  self.dataArray[k].isPaid==1{
-                        self.advertArray[i!]=item
-                        i!+=1
-                                                    }
-                    // self.dataArray.replaceSubrange( , with: item)
-                    k+=1
+                    
                     
                     //print("\(self.dataArray.count) \n list count: \(typeCount)")
-    
-                              
-                     
-                  
-                         
-                              
-                          
-                          DispatchQueue.main.async {
-                              
-                            self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                              self.ReklamList.reloadData()
-                              
-                              
-                          }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     
                     // DispatchQueue.main.async {
                     
@@ -224,62 +240,77 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         
         
-      
+        
     }
     
     @IBAction func isPaidChanged(_ sender: Any) {
-       if isPaidSegment.selectedSegmentIndex == 0{
-            if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-                     
-                     self.advertArray.removeAll()
-                     // Table was scrolled by user.
-                     if dataArray.count>0{
-                         
-                         for item in dataArray{
-                             if item.isPaid==1{
-                                 
-                                 advertArray.append(item)
-                             }
-                             
-                         }
-                         
-                         DispatchQueue.main.async {
-                             self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                             self.ReklamList.reloadData()
-                             
-                             
-                         }
-                         
-                     }
-                 }
+        
+        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+            if isPaidSegment.selectedSegmentIndex == 0{
+                self.advertArray.removeAll()
+                // Table was scrolled by user.
+                if dataArray.count>0{
+                    
+                    for item in dataArray{
+                        if item.isPaid==1{
+                            
+                            advertArray.append(item)
+                        }
+                        
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                        self.ReklamList.reloadData()
+                        
+                        
+                    }
+                    
+                }
+            }
+            
+            if isPaidSegment.selectedSegmentIndex==1{
+                
+                self.advertArray.removeAll()
+                // Table was scrolled by user.
+                if dataArray.count>0{
+                    for item in dataArray{
+                        if item.isPaid==0{
+                            
+                            advertArray.append(item)
+                        }
+                        
+                    }
+                    DispatchQueue.main.async {
+                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                        
+                        self.ReklamList.reloadData()
+                        
+                        
+                    }
+                }
+            }
             
         }
-        if isPaidSegment.selectedSegmentIndex==1{
+        else  {
             
-            if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-                      self.advertArray.removeAll()
-                      // Table was scrolled by user.
-                      if dataArray.count>0{
-                          for item in dataArray{
-                              if item.isPaid==0{
-                                  
-                                  advertArray.append(item)
-                              }
-                              
-                          }
-                          DispatchQueue.main.async {
-                               self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                              
-                              self.ReklamList.reloadData()
-                              
-                              
-                          }
-                      }
-                  }
+            if isPaidSegment.selectedSegmentIndex == 0{
+                
+                isPaidSegment.selectedSegmentIndex = 1
+                
+            }
+              if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
+            
         }
+        
+        
+        
+        
+        
+        
     }
     
-   
+    
     
     /*   private func getProducts(completionBlock: @escaping (_ result:Array<Advertisement>) ->()) {
      
@@ -531,7 +562,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-
+    
 }
 extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -540,16 +571,16 @@ extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-             let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryViewCell
-
-
+        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryViewCell
+        
+        
         cell.object=catList[indexPath.row]
         cell.reloadData()
-       // print(catList[indexPath.row].name)
-      
+        // print(catList[indexPath.row].name)
+        
         return cell
-            
-    
+        
+        
     }
     
     

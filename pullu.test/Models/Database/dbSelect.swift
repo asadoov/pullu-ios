@@ -53,7 +53,7 @@ public class dbSelect {
     
     func getAds(username:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/get/Ads?username="+username+"&pass="+pass
+        let url="https://pullu.az/api/androidmobileapp/user/get/Ads?mail="+username+"&pass="+pass
         GetJson(jsonUrlString: url){
             (json) in
             do{
