@@ -27,6 +27,8 @@ class ArchiveController: UIViewController{ //, UITableViewDelegate, UITableViewD
         navigationController?.navigationBar.isTranslucent = true
         
         
+     
+        
         
         
         // Do any additional setup after loading the view.

@@ -31,6 +31,9 @@ class TextReklamController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+          navigationController?.navigationBar.isTranslucent = false
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(TextReklamController.tappedMe))
         advertImage.addGestureRecognizer(tap)
         advertImage.isUserInteractionEnabled = true

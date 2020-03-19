@@ -28,9 +28,14 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+//        
+   
+        
+        // navigationItem.hidesBackButton = true;
+        
         /*headerView.layer.backgroundColor = UIColor.white.cgColor
          
          headerView.layer.masksToBounds = false
@@ -75,7 +80,7 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         print("image downloaded: \(item.downloadedIco)")
                         
                         // self.catList[item.id!-1]=item
-                        self.catList[catIndex]=item
+                        //self.catList[catIndex]=item
                         // self.dataArray.replaceSubrange( , with: item)
                         catIndex+=1
                         if catIndex == self.catList.count {
@@ -243,6 +248,21 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        super.viewWillAppear(animated)
+    }
+
+//    override func viewWillDisappear(_ animated: Bool) {
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.view.backgroundColor = .blue
+//        super.viewWillDisappear(animated)
+//    }
     
     @IBAction func isPaidChanged(_ sender: Any) {
         

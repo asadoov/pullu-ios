@@ -41,6 +41,9 @@ class AboutAdvertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+              navigationController?.navigationBar.isTranslucent = false
+              
         
         let blurEffect = UIBlurEffect(style:.regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)

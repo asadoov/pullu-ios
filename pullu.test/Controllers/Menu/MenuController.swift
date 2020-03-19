@@ -28,10 +28,10 @@ class MenuController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
         
    /*     headerView.layer.backgroundColor = UIColor.white.cgColor
         
@@ -60,6 +60,13 @@ class MenuController: UIViewController {
             print("Error serializing json:",jsonErr)
         }
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+        super.viewWillAppear(animated)
     }
     
     @IBAction func profilButton(_ sender: Any) {

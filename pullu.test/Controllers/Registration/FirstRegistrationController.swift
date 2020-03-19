@@ -22,9 +22,7 @@ class FirstRegistrationController: UIViewController {
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-               navigationController?.navigationBar.shadowImage = UIImage()
-               navigationController?.navigationBar.isTranslucent = true
+      
         
         
         view.addGestureRecognizer(tap)

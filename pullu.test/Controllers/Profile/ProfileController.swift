@@ -11,8 +11,8 @@ import UIKit
 //Cavidan Mirzə
 
 class ProfileController: UIViewController {
-
-
+    
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
@@ -20,16 +20,19 @@ class ProfileController: UIViewController {
     @IBOutlet weak var ixtisasField: UIPickerView!
     @IBOutlet weak var cityText: UITextField!
     @IBOutlet weak var creatDate: UITextField!
-
+    
     
     var defaults = UserDefaults.standard
     var select:dbSelect=dbSelect()
     var profilM: [ProfileModel] = [ProfileModel]()
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        
+        
         let pass = defaults.string(forKey: "pass")
         let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
@@ -37,21 +40,28 @@ class ProfileController: UIViewController {
             
         }
         
-       
-
+        
+        
         // Do any additional setup after loading the view.
-
-       // saveBtn.layer.insertSublayer(gradient, at: 0)
+        
+        // saveBtn.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.view.backgroundColor = .blue
+        super.viewWillDisappear(animated)
+        
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
