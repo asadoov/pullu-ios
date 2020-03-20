@@ -24,7 +24,7 @@ class HomePageController: UIViewController{
     @IBOutlet weak var srchBar: UISearchBar!
     let searchController = UISearchController(searchResultsController: nil)
     
-    @IBOutlet weak var navItem: UINavigationItem!
+    //@IBOutlet weak var navItem: UINavigationItem!
     
     @IBOutlet weak var headerView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
@@ -43,8 +43,8 @@ class HomePageController: UIViewController{
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
         //navigationItem.hidesSearchBarWhenScrolling = false
-        navItem.hidesSearchBarWhenScrolling = true
-        navItem.searchController = searchController
+//        navItem.hidesSearchBarWhenScrolling = true
+//        navItem.searchController = searchController
         //navigationItem.searchController = searchController
         
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -295,13 +295,13 @@ class HomePageController: UIViewController{
     
     
 
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .clear
-        super.viewWillAppear(animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.view.backgroundColor = .clear
+//        super.viewWillAppear(animated)
+//    }
 
 //    override func viewWillDisappear(_ animated: Bool) {
 //        navigationController?.navigationBar.isTranslucent = false
