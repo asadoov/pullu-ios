@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 
-class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class HomePageController: UIViewController{
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
@@ -21,18 +21,59 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     @IBOutlet weak var ReklamCount: UILabel!
     
+    @IBOutlet weak var srchBar: UISearchBar!
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    @IBOutlet weak var navItem: UINavigationItem!
+    
     @IBOutlet weak var headerView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var catList:Array<CategoryStruct> = []
     override func viewDidLoad() {
         super.viewDidLoad()
+//title yoxdu belke?
+        //gormedin yazdimda elimnen blablablaaaaaaaa
+        //icine pox neter duzeldime bu xiyari
+            searchController.searchBar.placeholder = "Search..."
+         searchController.obscuresBackgroundDuringPresentation = false
+         searchController.searchResultsUpdater = self
+         searchController.searchBar.searchBarStyle = .minimal
+        // searchController.searchBar.barTintColor = UIColor.white
+        // searchController.searchBar.tintColor = UIColor.white
+        //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
+        //navigationItem.hidesSearchBarWhenScrolling = false
+        navItem.hidesSearchBarWhenScrolling = true
+        navItem.searchController = searchController
+        //navigationItem.searchController = searchController
         
 //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        navigationController?.navigationBar.shadowImage = UIImage()
 //        navigationController?.navigationBar.isTranslucent = true
-//        
-   
+//mans senin bu kodun title gostermire basha dushursen?
+        
+        //sen hide eliyirsen navigation bari?
+        //yox sen eledin hammisini ag
+            //ne eledinki?
+        //kele navigtaion itemnen sohbet gedir. men viewda olanlari hide elemishem ama sende umumiyyetce navbar yoxdu
+        
+        
+        
+        //he ozum elemishem qesten
+        //o kod var ha bax o goturub atir navbarin icine. navbar gorsenmeyene qeder searchbar gorsenmeyecek
+        //gozde
+        
+        //bu adi viewcontrollerdiye mene lazimdiki ele eliende cixsin kategoriyalarnan search
+        //mans bu kodda konkret qemor olacaq. men dedim belke adi table viewdu.
+      //tamam indi men nece qoshum table view a
+        //senin indi searchbarin ishleyir?
+        //funksional yox
+        //mans onu qosh birde
+        //mans bular bir birine bagli deyile. gozle gorum ne fikirleshmek olur. search bar axtarish eliye bilmesi ucun gerek kornevoy classa seach bari qoshmaq olsun. gorursen searchbar qoshmaq isteyende error verir cunki view controllerde seachluq hecne yoxxduama bele baxanda mence  ola
+    
+        
+        //search elemek ucun goturub search bari search bar in methodunun icinde axtarish elemek olar. mans exten
+        //onun ucun bax gosterim neynemek lazimdi
         
         // navigationItem.hidesBackButton = true;
         
@@ -249,7 +290,11 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
+
     
+    
+    
+
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -464,6 +509,22 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
      
      
      }*/
+    
+}
+extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating
+{
+    func updateSearchResults(for searchController: UISearchController) {
+        //searchbara her defe nese yazanda bu functionu edir
+        //menlik bir qullugun tapshirigin?))
+        //ishledemmedin?
+    //be bu niye itmir??
+        //kele sarimisane deyesen))
+        print("blablabla")
+    }
+
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         cell.object = advertArray[indexPath.row]
@@ -585,6 +646,8 @@ class HomePageController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
 }
+
+
 extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(catList.count)

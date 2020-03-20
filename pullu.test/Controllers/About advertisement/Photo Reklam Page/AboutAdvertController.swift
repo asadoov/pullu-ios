@@ -34,7 +34,7 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var sellerPhone: UILabel!
     @IBOutlet weak var slideshow: ImageSlideshow!
     
-    @IBOutlet weak var blurClocks: UIImageView!
+//    @IBOutlet weak var blurClocks: UIImageView!
     @IBOutlet weak var earnMoney: UIButton!
     var imageSource: [ImageSource] = []
     
@@ -45,13 +45,13 @@ class AboutAdvertController: UIViewController {
               navigationController?.navigationBar.isTranslucent = false
               
         
-        let blurEffect = UIBlurEffect(style:.regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //always fill the view
-        blurEffectView.frame = self.view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        blurClocks.addSubview(blurEffectView)
+//        let blurEffect = UIBlurEffect(style:.regular)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        //always fill the view
+//        blurEffectView.frame = self.view.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        
+//        blurClocks.addSubview(blurEffectView)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
         slideshow.addGestureRecognizer(gestureRecognizer)
         
