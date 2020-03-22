@@ -21,7 +21,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
     @IBOutlet weak var titleTxt: UITextField!
     
     
-    @IBOutlet weak var nextBtn: UIButton!
+  
     var select:dbSelect=dbSelect()
     var catList:Array<CategoryStruct>=[]
     var typeList:Array<TypeStruct>=[]
@@ -57,9 +57,9 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
             }
         }
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//              navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
         
     }
     

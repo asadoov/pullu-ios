@@ -44,7 +44,8 @@ class ReklamCellTableViewCell: UITableViewCell {
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
         var dt = dateFormatter.date(from: object!.cDate!)
-        dateFormatter.dateFormat = "EEEE, dd MMMM"
+      //  dateFormatter.dateFormat = "EEEE, dd MMMM"
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         aTitle.text=object?.name
         aInfo.text=object?.description
         aType.text=object?.aTypeName
@@ -56,15 +57,41 @@ class ReklamCellTableViewCell: UITableViewCell {
             self.aImage.image=UIImage(data: object!.photo!)
         }
         else  {
-            aImage.image=UIImage(named: "background")
-            let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-            loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.color = UIColor.lightGray
-            // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            aImage.addSubview(loadingIndicator)
-            
+            if object?.aTypeId != 3{
+                
+                
+                aImage.image=UIImage(named: "background")
+                let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+                loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.color = UIColor.lightGray
+                // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                loadingIndicator.startAnimating();
+                aImage.addSubview(loadingIndicator)
+            }
+            else   {
+                let label = UILabel()
+                label.center = CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
+
+                   // you will probably want to set the font (remember to use Dynamic Type!)
+                   label.font = UIFont.preferredFont(forTextStyle: .footnote)
+
+                   // and set the text color too - remember good contrast
+                   label.textColor = .black
+
+                   // may not be necessary (e.g., if the width & height match the superview)
+                   // if you do need to center, CGPointMake has been deprecated, so use this
+                  
+
+                   // this changed in Swift 3 (much better, no?)
+                   label.textAlignment = .center
+
+                   label.text = "I am a test label"
+                               
+                aImage.addSubview(label)
+                
+                
+            }
             //present(alert, animated: true, completion: nil)
             
         }
