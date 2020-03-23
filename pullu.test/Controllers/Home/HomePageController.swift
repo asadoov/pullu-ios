@@ -14,9 +14,9 @@ class HomePageController: UIViewController{
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
-  
+    
     @IBOutlet weak var categoryScroll: UICollectionView!
-    var dataArray: [Advertisement] = [Advertisement]()
+   
     @IBOutlet var ReklamList: UITableView!
     
     @IBOutlet weak var ReklamCount: UILabel!
@@ -28,33 +28,35 @@ class HomePageController: UIViewController{
     
     @IBOutlet weak var headerView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
+    var isPaid: [Advertisement] = [Advertisement]()
+    var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var catList:Array<CategoryStruct> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-//title yoxdu belke?
+        //title yoxdu belke?
         //gormedin yazdimda elimnen blablablaaaaaaaa
         //icine pox neter duzeldime bu xiyari
-            searchController.searchBar.placeholder = "Search..."
-         searchController.obscuresBackgroundDuringPresentation = false
-         searchController.searchResultsUpdater = self
-         searchController.searchBar.searchBarStyle = .minimal
+        searchController.searchBar.placeholder = "Search..."
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.searchBarStyle = .minimal
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
         //navigationItem.hidesSearchBarWhenScrolling = false
-//        navItem.hidesSearchBarWhenScrolling = true
-//        navItem.searchController = searchController
+        //        navItem.hidesSearchBarWhenScrolling = true
+        //        navItem.searchController = searchController
         //navigationItem.searchController = searchController
         
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
-//mans senin bu kodun title gostermire basha dushursen?
+        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //        navigationController?.navigationBar.shadowImage = UIImage()
+        //        navigationController?.navigationBar.isTranslucent = true
+        //mans senin bu kodun title gostermire basha dushursen?
         
         //sen hide eliyirsen navigation bari?
         //yox sen eledin hammisini ag
-            //ne eledinki?
+        //ne eledinki?
         //kele navigtaion itemnen sohbet gedir. men viewda olanlari hide elemishem ama sende umumiyyetce navbar yoxdu
         
         
@@ -65,12 +67,12 @@ class HomePageController: UIViewController{
         
         //bu adi viewcontrollerdiye mene lazimdiki ele eliende cixsin kategoriyalarnan search
         //mans bu kodda konkret qemor olacaq. men dedim belke adi table viewdu.
-      //tamam indi men nece qoshum table view a
+        //tamam indi men nece qoshum table view a
         //senin indi searchbarin ishleyir?
         //funksional yox
         //mans onu qosh birde
         //mans bular bir birine bagli deyile. gozle gorum ne fikirleshmek olur. search bar axtarish eliye bilmesi ucun gerek kornevoy classa seach bari qoshmaq olsun. gorursen searchbar qoshmaq isteyende error verir cunki view controllerde seachluq hecne yoxxduama bele baxanda mence  ola
-    
+        
         
         //search elemek ucun goturub search bari search bar in methodunun icinde axtarish elemek olar. mans exten
         //onun ucun bax gosterim neynemek lazimdi
@@ -136,8 +138,8 @@ class HomePageController: UIViewController{
                         
                     }
                     
-                 
-                  
+                    
+                    
                     
                 }
                 
@@ -153,13 +155,13 @@ class HomePageController: UIViewController{
             
             (list) in
             
-           // var adsWithImage: [Advertisement] = [Advertisement]()
+            // var adsWithImage: [Advertisement] = [Advertisement]()
             var k=0
             var i:Int?
-           
+            
             for advert in list {
-                  var typeCount = 0
-               
+                var typeCount = 0
+                
                 for itm in list{
                     if itm.isPaid==1{
                         typeCount += 1
@@ -170,79 +172,161 @@ class HomePageController: UIViewController{
                 var item = advert
                 
                 //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
-                self.dataArray.append(item)
-              //call img download
+               // self.dataArray.append(item)
+                //call img download
                 
                 // let item_index = self.dataArray.endIndex
                 //  element += 1
                 
-            
-                   
-                   if  item.isPaid==1{
-                                     i=0
-                                     self.advertArray.append(item)
-                                     Alamofire.request(item.photoUrl![0]).responseImage { response in
-                                                     if let catPicture = response.result.value {
-                                                         //advert.photo=catPicture.pngData()
-                                                         
-                                                       //  item.photo = UIImage(named: "damaged")?.pngData()
-                                                         if catPicture != nil {
-                                                                item.photo = catPicture.pngData()
-                                                         }
-                                                         else {
-                                                             item.photo = UIImage(named: "damaged")?.pngData()
-                                                             
-                                                         }
-                                                      
-                                                         
-                                                         //   print("image downloaded: \(item.photo)")
-                                                         
-                                                         self.dataArray[k]=item
-                                                         if  self.dataArray[k].isPaid==1{
-                                                             self.advertArray[i!]=item
-                                                             i!+=1
-                                                         }
-                                                         // self.dataArray.replaceSubrange( , with: item)
-                                                         k+=1
-                                                         if k == self.dataArray.count {
-                                                             self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-                                                             //self.dataArray.sort { $0.cDate! > $1.cDate! }
-                                                         }
-                                                         DispatchQueue.main.async {
-                                                             
-                                                             self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                                                             self.ReklamList.reloadData()
-                                                             
-                                                             
-                                                         }
-                                                         
-                                                         
-                                                         
-                                                     }
-                                                     
-                                                     
-                                                     
-                                                     //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     
-                                                     // DispatchQueue.main.async {
-                                                     
-                                                     
-                                                     //   self.ReklamList.reloadData()
-                                                     
-                                                     
-                                                     // }
-                                                     
-                                                 }
-                                     
-                                 }
+                
+                
+                if  item.isPaid==1{
+                    i=0
+                    // self.advertArray.append(item)
+                    self.isPaid.append(item)
+                    
+                    
+                    //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
+                    //                        if let catPicture = response.result.value {
+                    //                            //advert.photo=catPicture.pngData()
+                    //
+                    //                            //  item.photo = UIImage(named: "damaged")?.pngData()
+                    //                            if catPicture != nil {
+                    //                                item.photo = catPicture.pngData()
+                    //                            }
+                    //                            else {
+                    //                                item.photo = UIImage(named: "damaged")?.pngData()
+                    //
+                    //                            }
+                    //
+                    //
+                    //                            //   print("image downloaded: \(item.photo)")
+                    //
+                    //                            self.dataArray[k]=item
+                    //                            if  self.dataArray[k].isPaid==1{
+                    //                                self.advertArray[i!]=item
+                    //                                i!+=1
+                    //                            }
+                    //                            // self.dataArray.replaceSubrange( , with: item)
+                    //                            k+=1
+                    //                            if k == self.dataArray.count {
+                    //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+                    //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
+                    //                            }
+                    //                            DispatchQueue.main.async {
+                    //
+                    //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                    //                                self.ReklamList.reloadData()
+                    //
+                    //
+                    //                            }
+                    //
+                    //
+                    //
+                    //                        }
+                    //
+                    //
+                    //
+                    //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //                        // DispatchQueue.main.async {
+                    //
+                    //
+                    //                        //   self.ReklamList.reloadData()
+                    //
+                    //
+                    //                        // }
+                    //
+                    //                    }
+                    
+                }
+                if  item.isPaid==0{
+                                  i=0
+                                  // self.advertArray.append(item)
+                                  self.isNotPaid.append(item)
+                                  
+                                  
+                                  //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
+                                  //                        if let catPicture = response.result.value {
+                                  //                            //advert.photo=catPicture.pngData()
+                                  //
+                                  //                            //  item.photo = UIImage(named: "damaged")?.pngData()
+                                  //                            if catPicture != nil {
+                                  //                                item.photo = catPicture.pngData()
+                                  //                            }
+                                  //                            else {
+                                  //                                item.photo = UIImage(named: "damaged")?.pngData()
+                                  //
+                                  //                            }
+                                  //
+                                  //
+                                  //                            //   print("image downloaded: \(item.photo)")
+                                  //
+                                  //                            self.dataArray[k]=item
+                                  //                            if  self.dataArray[k].isPaid==1{
+                                  //                                self.advertArray[i!]=item
+                                  //                                i!+=1
+                                  //                            }
+                                  //                            // self.dataArray.replaceSubrange( , with: item)
+                                  //                            k+=1
+                                  //                            if k == self.dataArray.count {
+                                  //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+                                  //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
+                                  //                            }
+                                  //                            DispatchQueue.main.async {
+                                  //
+                                  //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                                  //                                self.ReklamList.reloadData()
+                                  //
+                                  //
+                                  //                            }
+                                  //
+                                  //
+                                  //
+                                  //                        }
+                                  //
+                                  //
+                                  //
+                                  //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //
+                                  //                        // DispatchQueue.main.async {
+                                  //
+                                  //
+                                  //                        //   self.ReklamList.reloadData()
+                                  //
+                                  //
+                                  //                        // }
+                                  //
+                                  //                    }
+                                  
+                              }
+                
+                
+                self.advertArray = self.isPaid
+                
+                DispatchQueue.main.async {
+                    
+                    self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                    self.ReklamList.reloadData()
+                    
+                    
+                }
                 
                 
                 
@@ -271,7 +355,35 @@ class HomePageController: UIViewController{
             }
             
             
-            
+            self.getImages(adsList: self.isPaid){
+                
+                (list)
+                in
+                self.isPaid = list
+                self.advertArray = self.isPaid
+                DispatchQueue.main.async {
+                    
+                    
+                    self.ReklamList.reloadData()
+                    
+                    
+                }
+                
+            }
+            self.getImages(adsList: self.isNotPaid){
+                         
+                         (list)
+                         in
+                self.isNotPaid = list
+                         DispatchQueue.main.async {
+                             
+                             
+                             self.ReklamList.reloadData()
+                             
+                             
+                         }
+                         
+                     }
             
         }
         
@@ -279,76 +391,156 @@ class HomePageController: UIViewController{
         
     }
     
-
     
-    func downloadImages (itm : Advertisement, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    
+    func getImages (adsList : Array<Advertisement>,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+         var dataArray: [Advertisement] = [Advertisement]()
+        dataArray = adsList
+        var dowloadedCount=0
         
-   
+        
+        for var item in adsList{
+            
+            
+            
+            Alamofire.request(item.photoUrl![0]).responseImage { response in
+                if let catPicture = response.result.value {
+                    //advert.photo=catPicture.pngData()
+                    
+                    //  item.photo = UIImage(named: "damaged")?.pngData()
+                    if catPicture != nil {
+                        item.photo = catPicture.pngData()
+                    }
+                    else {
+                        item.photo = UIImage(named: "damaged")?.pngData()
+                        
+                    }
+                    
+                    
+                    //   print("image downloaded: \(item.photo)")
+                    
+                    dataArray[dowloadedCount]=item
+                    
+                    
+                    dowloadedCount+=1
+                    if dowloadedCount == adsList.count {
+                        dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+                        //self.dataArray.sort { $0.cDate! > $1.cDate! }
+                    }
+                    
+                    
+                     completionBlock(dataArray)
+                    
+                }
+                
+                
+                
+                //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                // DispatchQueue.main.async {
+                
+                
+                //   self.ReklamList.reloadData()
+                
+                
+                // }
+                
+            }
+            
+            
+        }
+       
         
     }
     
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
-//        navigationController?.view.backgroundColor = .clear
-//        super.viewWillAppear(animated)
-//    }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.view.backgroundColor = .blue
-//        super.viewWillDisappear(animated)
-//    }
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    //        navigationController?.navigationBar.shadowImage = UIImage()
+    //        navigationController?.navigationBar.isTranslucent = true
+    //        navigationController?.view.backgroundColor = .clear
+    //        super.viewWillAppear(animated)
+    //    }
+    
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        navigationController?.navigationBar.isTranslucent = false
+    //        navigationController?.view.backgroundColor = .blue
+    //        super.viewWillDisappear(animated)
+    //    }
     
     @IBAction func isPaidChanged(_ sender: Any) {
         self.advertArray.removeAll()
         
         if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
             if isPaidSegment.selectedSegmentIndex == 0{
-               
+                if  isPaid != nil{
+                               advertArray = isPaid
+                                 DispatchQueue.main.async {
+                                                       self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                               
+                                                       self.ReklamList.reloadData()
+                               
+                               
+                                                   }
+                           }
                 // Table was scrolled by user.
-                if dataArray.count>0{
-                    
-                    for item in dataArray{
-                        if item.isPaid==1{
-                            
-                            advertArray.append(item)
-                        }
-                        
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                        self.ReklamList.reloadData()
-                        
-                        
-                    }
-                    
-                }
+//                if dataArray.count>0{
+//
+//                    for item in dataArray{
+//                        if item.isPaid==1{
+//
+//                            advertArray.append(item)
+//                        }
+//
+//                    }
+//
+//                    DispatchQueue.main.async {
+//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+//                        self.ReklamList.reloadData()
+//
+//
+//                    }
+//
+//                }
             }
             
             if isPaidSegment.selectedSegmentIndex==1{
-                
+                if  isNotPaid != nil{
+                    advertArray = isNotPaid
+                      DispatchQueue.main.async {
+                                            self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                    
+                                            self.ReklamList.reloadData()
+                    
+                    
+                                        }
+                }
                 
                 // Table was scrolled by user.
-                if dataArray.count>0{
-                    for item in dataArray{
-                        if item.isPaid==0{
-                            
-                            advertArray.append(item)
-                        }
-                        
-                    }
-                    DispatchQueue.main.async {
-                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                        
-                        self.ReklamList.reloadData()
-                        
-                        
-                    }
-                }
+//                if dataArray.count>0{
+//                    for item in dataArray{
+//                        if item.isPaid==0{
+//
+//                            advertArray.append(item)
+//                        }
+//
+//                    }
+//                    DispatchQueue.main.async {
+//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+//
+//                        self.ReklamList.reloadData()
+//
+//
+//                    }
+//                }
             }
             
         }
@@ -359,7 +551,7 @@ class HomePageController: UIViewController{
                 isPaidSegment.selectedSegmentIndex = 1
                 
             }
-              if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
+            if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
             
         }
         
@@ -511,11 +703,11 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
         //searchbara her defe nese yazanda bu functionu edir
         //menlik bir qullugun tapshirigin?))
         //ishledemmedin?
-    //be bu niye itmir??
+        //be bu niye itmir??
         //kele sarimisane deyesen))
         print("blablabla")
     }
-
+    
     
     
     
