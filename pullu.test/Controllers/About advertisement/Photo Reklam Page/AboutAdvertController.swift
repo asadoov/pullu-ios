@@ -22,7 +22,8 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
-    @IBOutlet weak var advDescription: UILabel!
+    @IBOutlet weak var aDescription: UITextView!
+    
     
     @IBOutlet weak var advType: UILabel!
     
@@ -34,24 +35,24 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var sellerPhone: UILabel!
     @IBOutlet weak var slideshow: ImageSlideshow!
     
-//    @IBOutlet weak var blurClocks: UIImageView!
+    //    @IBOutlet weak var blurClocks: UIImageView!
     @IBOutlet weak var earnMoney: UIButton!
     var imageSource: [ImageSource] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
-           //   navigationController?.navigationBar.isTranslucent = false
-              
         
-//        let blurEffect = UIBlurEffect(style:.regular)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        //always fill the view
-//        blurEffectView.frame = self.view.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        
-//        blurClocks.addSubview(blurEffectView)
+        //   navigationController?.navigationBar.isTranslucent = false
+        
+        
+        //        let blurEffect = UIBlurEffect(style:.regular)
+        //        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        //        //always fill the view
+        //        blurEffectView.frame = self.view.bounds
+        //        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        //
+        //        blurClocks.addSubview(blurEffectView)
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
         slideshow.addGestureRecognizer(gestureRecognizer)
         
@@ -93,12 +94,29 @@ class AboutAdvertController: UIViewController {
                 self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
                 self.sellerPhone.text=list[0].sellerPhone!
-                self.advDescription.text = list[0].description!
+                self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 //  self.tableView.reloadData()
-                
+                  let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+                DispatchQueue.main.async {
+                    self.slideshow.setImageInputs([
+                        
+                        ImageSource(image: UIImage(named: "background")!)
+                        
+                    ])
+                    
+                  
+                    loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
+                    loadingIndicator.hidesWhenStopped = true
+                    loadingIndicator.color = UIColor.lightGray
+                    // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                    loadingIndicator.startAnimating();
+                    self.slideshow.addSubview(loadingIndicator)
+                    
+                    
+                }
                 
                 
                 for  i in list[0].photoUrl ?? [""] {
@@ -111,6 +129,7 @@ class AboutAdvertController: UIViewController {
                             print("Image downloaded\(catPicture)")
                             //advert.photo=catPicture.pngData()
                             DispatchQueue.main.async {
+                                loadingIndicator.stopAnimating();
                                 self.slideshow.setImageInputs(self.imageSource)
                             }
                             
@@ -122,17 +141,7 @@ class AboutAdvertController: UIViewController {
                             //print(self.dataArray[dataArray.count-1].photo)
                             
                         }
-                        else  {
-                            DispatchQueue.main.async {
-                                self.slideshow.setImageInputs([
-                                    
-                                    ImageSource(image: UIImage(named: "background")!)
-                                    
-                                ])
-                            }
-                            // photos.append(UIImage(named: "background")!)
-                            //self.dataArray.append(item)
-                        }
+                        
                         
                         
                     }
