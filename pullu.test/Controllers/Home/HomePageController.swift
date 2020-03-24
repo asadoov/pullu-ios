@@ -34,13 +34,23 @@ class HomePageController: UIViewController{
     var catList:Array<CategoryStruct> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        //title yoxdu belke?
-        //gormedin yazdimda elimnen blablablaaaaaaaa
-        //icine pox neter duzeldime bu xiyari
+      
         searchController.searchBar.placeholder = "Search..."
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
+        
+        
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+            
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            loadingIndicator.startAnimating();
+            
+            
+            alert.view.addSubview(loadingIndicator)
+            present(alert, animated: true, completion: nil)
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
@@ -52,29 +62,7 @@ class HomePageController: UIViewController{
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()
         //        navigationController?.navigationBar.isTranslucent = true
-        //mans senin bu kodun title gostermire basha dushursen?
         
-        //sen hide eliyirsen navigation bari?
-        //yox sen eledin hammisini ag
-        //ne eledinki?
-        //kele navigtaion itemnen sohbet gedir. men viewda olanlari hide elemishem ama sende umumiyyetce navbar yoxdu
-        
-        
-        
-        //he ozum elemishem qesten
-        //o kod var ha bax o goturub atir navbarin icine. navbar gorsenmeyene qeder searchbar gorsenmeyecek
-        //gozde
-        
-        //bu adi viewcontrollerdiye mene lazimdiki ele eliende cixsin kategoriyalarnan search
-        //mans bu kodda konkret qemor olacaq. men dedim belke adi table viewdu.
-        //tamam indi men nece qoshum table view a
-        //senin indi searchbarin ishleyir?
-        //funksional yox
-        //mans onu qosh birde
-        //mans bular bir birine bagli deyile. gozle gorum ne fikirleshmek olur. search bar axtarish eliye bilmesi ucun gerek kornevoy classa seach bari qoshmaq olsun. gorursen searchbar qoshmaq isteyende error verir cunki view controllerde seachluq hecne yoxxduama bele baxanda mence  ola
-        
-        
-        //search elemek ucun goturub search bari search bar in methodunun icinde axtarish elemek olar. mans exten
         //onun ucun bax gosterim neynemek lazimdi
         
         // navigationItem.hidesBackButton = true;
@@ -380,15 +368,16 @@ class HomePageController: UIViewController{
                              
                              self.ReklamList.reloadData()
                              
-                             
+                              self.dismiss(animated: true)
                          }
                          
                      }
             
+            
         }
         
         
-        
+       
     }
     
     

@@ -34,7 +34,16 @@ class TextReklamController: UIViewController {
     @IBOutlet weak var advertImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+                   
+                   let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+                   loadingIndicator.hidesWhenStopped = true
+                   loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                   loadingIndicator.startAnimating();
+                   
+                   
+                   alert.view.addSubview(loadingIndicator)
+                   present(alert, animated: false, completion: nil)
         // navigationController?.navigationBar.isTranslucent = false
         
         
@@ -76,7 +85,7 @@ class TextReklamController: UIViewController {
                 
                 let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
                 
-                DispatchQueue.main.async {
+           
                     
                     self.advertImage.image = UIImage(named: "background")!
                     
@@ -86,7 +95,6 @@ class TextReklamController: UIViewController {
                     // loadingIndicator.style = UIActivityIndicatorView.Style.gray
                     loadingIndicator.startAnimating();
                     self.advertImage.addSubview(loadingIndicator)
-                }
                 
                 for  i in list[0].photoUrl ?? [""] {
                     
@@ -118,7 +126,7 @@ class TextReklamController: UIViewController {
                     
                 }
                 
-                
+                self.dismiss(animated: false)
             }
         }
         
