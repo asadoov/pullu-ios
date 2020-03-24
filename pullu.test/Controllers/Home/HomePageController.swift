@@ -33,8 +33,16 @@ class HomePageController: UIViewController{
     var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var catList:Array<CategoryStruct> = []
+        private let myRefreshControl = UIRefreshControl()
+     let  db:dbSelect=dbSelect()
+    var mail:String?
+    var pass:String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    
+        myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        ReklamList.addSubview(myRefreshControl)
       
         searchController.searchBar.placeholder = "Search..."
         searchController.obscuresBackgroundDuringPresentation = false
@@ -95,11 +103,11 @@ class HomePageController: UIViewController{
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
-        let mail = defaults.string(forKey: "mail")
-        let pass = defaults.string(forKey: "pass")
+         mail = defaults.string(forKey: "mail")
+      pass = defaults.string(forKey: "pass")
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
-        let  db:dbSelect=dbSelect()
+       
         db.aCategory(){
             (list)
             in
@@ -469,6 +477,31 @@ class HomePageController: UIViewController{
     //        super.viewWillDisappear(animated)
     //    }
     
+    
+    
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action:
+                     #selector(HomePageController.handleRefresh(_:)),
+                                 for: UIControl.Event.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        
+        return refreshControl
+    }()
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+//        let newHotel = Hotels(name: "Montage Laguna Beach", place:
+//                              "California south")
+//        hotels.append(newHotel)
+//
+//        hotels.sort() { $0.name < $0.place }
+//
+//        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+  
+    
     @IBAction func isPaidChanged(_ sender: Any) {
         self.advertArray.removeAll()
         
@@ -556,142 +589,119 @@ class HomePageController: UIViewController{
     }
     
     
+  
     
-    /*   private func getProducts(completionBlock: @escaping (_ result:Array<Advertisement>) ->()) {
-     
-     /* DispatchQueue.main.async {
-     
-     let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-     
-     let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-     loadingIndicator.hidesWhenStopped = true
-     loadingIndicator.style = UIActivityIndicatorView.Style.gray
-     loadingIndicator.startAnimating();
-     
-     alert.view.addSubview(loadingIndicator)
-     self.present(alert, animated: true, completion: nil)
-     }
-     
-     */
-     let defaults = UserDefaults.standard
-     
-     // let userData = defaults.string(forKey: "uData")
-     let mail = defaults.string(forKey: "mail")
-     let pass = defaults.string(forKey: "pass")
-     let udata=defaults.string(forKey: "uData")
-     //print("\(mail)\n\(pass)\n\(udata)")
-     let  db:dbSelect=dbSelect()
-     db.getAds(username: mail!, pass: pass!){
-     
-     (list) in
-     
-     var adsWithImage: [Advertisement] = [Advertisement]()
-     var k=0
-     for advert in list {
-     
-     var typeCount = 0
-     /*  for itm in list{
-     if itm.isPaid==type{
-     typeCount += 1
-     }
-     } */
-     
-     //if (advert.isPaid==type) {
-     var item = advert
-     
-     //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
-     self.dataArray.append(item)
-     
-     
-     // let item_index = self.dataArray.endIndex
-     //  element += 1
-     
-     Alamofire.request(advert.photoUrl![0]).responseImage { response in
-     if let catPicture = response.result.value {
-     //advert.photo=catPicture.pngData()
-     item.photo = catPicture.pngData()
-     
-     print("image downloaded: \(item.photo)")
-     
-     //self.dataArray[element].photo=catPicture.pngData()
-     //print(self.dataArray[dataArray.count-1].photo)
-     
-     }
-     
-     self.dataArray[k]=item
-     // self.dataArray.replaceSubrange( , with: item)
-     k+=1
-     //adsWithImage.append(item)
-     //self.dataArray.append(item)
-     print("\(self.dataArray.count) \n list count: \(typeCount)")
-     
-     DispatchQueue.main.async {
-     
-     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     //self.tableView.reloadData()
-     self.ReklamList.reloadData()
-     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     
-     // self.ReklamCount.text = String(typeCount)+" yeni reklam"
-     
-     }
-     /* if adsWithImage.count == typeCount{
-     self.dataArray.removeAll()
-     self.dataArray=adsWithImage
-     
-     DispatchQueue.main.async {
-     
-     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     //self.tableView.reloadData()
-     self.ReklamList.reloadData()
-     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     
-     // self.ReklamCount.text = String(typeCount)+" yeni reklam"
-     
-     }
-     }
-     */
-     }
-     
-     
-     
-     
-     
-     
-     //  }
-     DispatchQueue.main.async {
-     
-     
-     //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     //self.tableView.reloadData()
-     self.ReklamList.reloadData()
-     // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-     self.ReklamCount.text = String(typeCount)+" yeni reklam"
-     //  self.tableView.rel§oadData()
-     /* self.dismiss(animated: false){
-     
-     
-     
-     
-     
-     }*/
-     
-     }
-     
-     //bunu cixardir melumatlar gelir yani- print(advert.name)
-     }
-     
-     
-     
-     
-     }
-     
-     
-     }*/
+    @objc func refresh() {
+        isPaid.removeAll()
+                isNotPaid.removeAll()
+        if mail != nil&&pass != nil{
+            var typeCount=0
+        
+       db.getAds(username: mail!, pass: pass!){
+                  
+                  (list) in
+                  
+               
+            
+                  
+                  for advert in list {
+                      
+                      //if (advert.isPaid==type) {
+                      let item = advert
+                      
+                      
+                      
+                      if  item.isPaid==1{
+          
+                  
+                          // self.advertArray.append(item)
+                          self.isPaid.append(item)
+                          
+                         
+                          
+                      }
+                      if  item.isPaid==0{
+                           
+                     
+                                        // self.advertArray.append(item)
+                                        self.isNotPaid.append(item)
+                                        
+                                        
+                                      
+                                    }
+                    
+                    
+                          DispatchQueue.main.async {
+                      
+                    if self.isPaidSegment.selectedSegmentIndex == 0{
+                      self.advertArray = self.isPaid
+                        typeCount=self.isPaid.count
+                    }else {
+                         self.advertArray = self.isNotPaid
+                          typeCount=self.isNotPaid.count
+                    }
+                      
+                
+                          
+                          self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                          self.ReklamList.reloadData()
+                            
+                            self.myRefreshControl.endRefreshing()
+                          
+                      }
+                      
+                      
+                     
+                  }
+                  
+                  self.getImages(adsList: self.isPaid){
+                      
+                      (list)
+                      in
+                      self.isPaid = list
+                    
+                      DispatchQueue.main.async {
+                          if self.isPaidSegment.selectedSegmentIndex==0{
+                              self.advertArray=self.isPaid
+                          }
+                          
+                          self.ReklamList.reloadData()
+                          
+                          
+                      }
+                      
+                  }
+                  self.getImages(adsList: self.isNotPaid){
+                               
+                               (list)
+                               in
+                      self.isNotPaid = list
+                               DispatchQueue.main.async {
+                                   
+                                if self.isPaidSegment.selectedSegmentIndex==1{
+                                    self.advertArray=self.isNotPaid
+                                }
+                                   
+                                   self.ReklamList.reloadData()
+                                   
+                                  
+                               }
+                               
+                           }
+                  
+                  
+                  
+              }
+        }
+       
+    }
     
 }
 extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating
 {
+    
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
         //searchbara her defe nese yazanda bu functionu edir
         //menlik bir qullugun tapshirigin?))
@@ -701,7 +711,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
         print("blablabla")
     }
     
-    
+     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
