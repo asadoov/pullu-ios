@@ -39,6 +39,9 @@ class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var advertClick: UIView!
     
     func reloadData() {
+        
+      
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
