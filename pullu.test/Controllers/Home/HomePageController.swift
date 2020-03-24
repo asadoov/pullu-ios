@@ -21,6 +21,7 @@ class HomePageController: UIViewController{
     
     @IBOutlet weak var ReklamCount: UILabel!
     
+   
     @IBOutlet weak var srchBar: UISearchBar!
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -40,6 +41,9 @@ class HomePageController: UIViewController{
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
         
+        
+      
+
         
         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
             
