@@ -16,12 +16,12 @@ class HomePageController: UIViewController{
     
     
     @IBOutlet weak var categoryScroll: UICollectionView!
-   
+    
     @IBOutlet var ReklamList: UITableView!
     
     @IBOutlet weak var ReklamCount: UILabel!
     
-   
+    
     @IBOutlet weak var srchBar: UISearchBar!
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -33,36 +33,36 @@ class HomePageController: UIViewController{
     var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var catList:Array<CategoryStruct> = []
-        private let myRefreshControl = UIRefreshControl()
-     let  db:dbSelect=dbSelect()
+    private let myRefreshControl = UIRefreshControl()
+    let  db:dbSelect=dbSelect()
     var mail:String?
     var pass:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
+        
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         ReklamList.addSubview(myRefreshControl)
-      
+        
         searchController.searchBar.placeholder = "Search..."
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal
         
         
-      
-
+        
+        
         
         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-            
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-            loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            loadingIndicator.startAnimating();
-            
-            
-            alert.view.addSubview(loadingIndicator)
-            present(alert, animated: true, completion: nil)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
@@ -103,11 +103,11 @@ class HomePageController: UIViewController{
         let defaults = UserDefaults.standard
         
         // let userData = defaults.string(forKey: "uData")
-         mail = defaults.string(forKey: "mail")
-      pass = defaults.string(forKey: "pass")
+        mail = defaults.string(forKey: "mail")
+        pass = defaults.string(forKey: "pass")
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
-       
+        
         db.aCategory(){
             (list)
             in
@@ -172,7 +172,7 @@ class HomePageController: UIViewController{
                 var item = advert
                 
                 //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
-               // self.dataArray.append(item)
+                // self.dataArray.append(item)
                 //call img download
                 
                 // let item_index = self.dataArray.endIndex
@@ -249,73 +249,73 @@ class HomePageController: UIViewController{
                     
                 }
                 if  item.isPaid==0{
-                                  i=0
-                                  // self.advertArray.append(item)
-                                  self.isNotPaid.append(item)
-                                  
-                                  
-                                  //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
-                                  //                        if let catPicture = response.result.value {
-                                  //                            //advert.photo=catPicture.pngData()
-                                  //
-                                  //                            //  item.photo = UIImage(named: "damaged")?.pngData()
-                                  //                            if catPicture != nil {
-                                  //                                item.photo = catPicture.pngData()
-                                  //                            }
-                                  //                            else {
-                                  //                                item.photo = UIImage(named: "damaged")?.pngData()
-                                  //
-                                  //                            }
-                                  //
-                                  //
-                                  //                            //   print("image downloaded: \(item.photo)")
-                                  //
-                                  //                            self.dataArray[k]=item
-                                  //                            if  self.dataArray[k].isPaid==1{
-                                  //                                self.advertArray[i!]=item
-                                  //                                i!+=1
-                                  //                            }
-                                  //                            // self.dataArray.replaceSubrange( , with: item)
-                                  //                            k+=1
-                                  //                            if k == self.dataArray.count {
-                                  //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-                                  //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
-                                  //                            }
-                                  //                            DispatchQueue.main.async {
-                                  //
-                                  //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                                  //                                self.ReklamList.reloadData()
-                                  //
-                                  //
-                                  //                            }
-                                  //
-                                  //
-                                  //
-                                  //                        }
-                                  //
-                                  //
-                                  //
-                                  //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //
-                                  //                        // DispatchQueue.main.async {
-                                  //
-                                  //
-                                  //                        //   self.ReklamList.reloadData()
-                                  //
-                                  //
-                                  //                        // }
-                                  //
-                                  //                    }
-                                  
-                              }
+                    i=0
+                    // self.advertArray.append(item)
+                    self.isNotPaid.append(item)
+                    
+                    
+                    //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
+                    //                        if let catPicture = response.result.value {
+                    //                            //advert.photo=catPicture.pngData()
+                    //
+                    //                            //  item.photo = UIImage(named: "damaged")?.pngData()
+                    //                            if catPicture != nil {
+                    //                                item.photo = catPicture.pngData()
+                    //                            }
+                    //                            else {
+                    //                                item.photo = UIImage(named: "damaged")?.pngData()
+                    //
+                    //                            }
+                    //
+                    //
+                    //                            //   print("image downloaded: \(item.photo)")
+                    //
+                    //                            self.dataArray[k]=item
+                    //                            if  self.dataArray[k].isPaid==1{
+                    //                                self.advertArray[i!]=item
+                    //                                i!+=1
+                    //                            }
+                    //                            // self.dataArray.replaceSubrange( , with: item)
+                    //                            k+=1
+                    //                            if k == self.dataArray.count {
+                    //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+                    //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
+                    //                            }
+                    //                            DispatchQueue.main.async {
+                    //
+                    //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                    //                                self.ReklamList.reloadData()
+                    //
+                    //
+                    //                            }
+                    //
+                    //
+                    //
+                    //                        }
+                    //
+                    //
+                    //
+                    //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //
+                    //                        // DispatchQueue.main.async {
+                    //
+                    //
+                    //                        //   self.ReklamList.reloadData()
+                    //
+                    //
+                    //                        // }
+                    //
+                    //                    }
+                    
+                }
                 
                 
                 self.advertArray = self.isPaid
@@ -324,7 +324,7 @@ class HomePageController: UIViewController{
                     
                     self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.ReklamList.reloadData()
-                    
+                    self.dismiss(animated: true)
                     
                 }
                 
@@ -355,112 +355,127 @@ class HomePageController: UIViewController{
             }
             
             
-            self.getImages(adsList: self.isPaid){
-                
-                (list)
-                in
-                self.isPaid = list
-                self.advertArray = self.isPaid
-                DispatchQueue.main.async {
-                    
-                    
-                    self.ReklamList.reloadData()
-                    
-                    
-                }
-                
-            }
-            self.getImages(adsList: self.isNotPaid){
-                         
-                         (list)
-                         in
-                self.isNotPaid = list
-                         DispatchQueue.main.async {
-                             
-                             
-                             self.ReklamList.reloadData()
-                             
-                              self.dismiss(animated: true)
-                         }
-                         
-                     }
+            //            self.getImages(adsList: self.isPaid){
+            //
+            //                (list)
+            //                in
+            //                self.isPaid = list
+            //                self.advertArray = self.isPaid
+            //                DispatchQueue.main.async {
+            //
+            //
+            //                    self.ReklamList.reloadData()
+            //
+            //
+            //                }
+            //
+            //            }
+            //            self.getImages(adsList: self.isNotPaid){
+            //
+            //                         (list)
+            //                         in
+            //                self.isNotPaid = list
+            //                         DispatchQueue.main.async {
+            //
+            //
+            //                             self.ReklamList.reloadData()
+            //
+            //                              self.dismiss(animated: true)
+            //                         }
+            //
+            //                     }
             
             
         }
         
         
-       
-    }
-    
-    
-    
-    func getImages (adsList : Array<Advertisement>,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-         var dataArray: [Advertisement] = [Advertisement]()
-        dataArray = adsList
-        var dowloadedCount=0
-        
-        
-        for var item in adsList{
-            
-            
-            
-            Alamofire.request(item.photoUrl![0]).responseImage { response in
-                if let catPicture = response.result.value {
-                    //advert.photo=catPicture.pngData()
-                    
-                    //  item.photo = UIImage(named: "damaged")?.pngData()
-                    if catPicture != nil {
-                        item.photo = catPicture.pngData()
-                    }
-                    else {
-                        item.photo = UIImage(named: "damaged")?.pngData()
-                        
-                    }
-                    
-                    
-                    //   print("image downloaded: \(item.photo)")
-                    
-                    dataArray[dowloadedCount]=item
-                    
-                    
-                    dowloadedCount+=1
-                    if dowloadedCount == adsList.count {
-                        dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-                        //self.dataArray.sort { $0.cDate! > $1.cDate! }
-                    }
-                    
-                    
-                     completionBlock(dataArray)
-                    
-                }
-                
-                
-                
-                //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                // DispatchQueue.main.async {
-                
-                
-                //   self.ReklamList.reloadData()
-                
-                
-                // }
-                
-            }
-            
-            
-        }
-       
         
     }
+    
+    
+    
+    //    func getImages (adsList : Array<Advertisement>,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    //         var dataArray: [Advertisement] = [Advertisement]()
+    //        dataArray = adsList
+    //        var dowloadedCount=0
+    //
+    //
+    //        for var item in adsList{
+    //            if item.photoUrl![0] != nil && item.aTypeId != 3{
+    //
+    //
+    //                let url = URL(string: item.photoUrl![0])
+    //
+    //                if let data = try? Data(contentsOf: url!){
+    //                    dataArray[dowloadedCount].photo=data
+    //                } else{
+    //
+    //                } //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+    //           // item.photo =  data!
+    //
+    //
+    //            }
+    //            dowloadedCount+=1
+    //            completionBlock(dataArray)
+    //           // Alamofire.request(item.photoUrl![0]).responseImage { response in
+    ////                if let catPicture = response.result.value {
+    ////                    //advert.photo=catPicture.pngData()
+    ////
+    ////                    //  item.photo = UIImage(named: "damaged")?.pngData()
+    ////                    if catPicture != nil {
+    ////                        dataArray[dowloadedCount].photo = catPicture.pngData()
+    ////                       // item.photo = catPicture.pngData()
+    ////                    }
+    ////                    else {
+    ////                        dataArray[dowloadedCount].photo=UIImage(named: "damaged")?.pngData()
+    ////                       // item.photo = UIImage(named: "damaged")?.pngData()
+    ////
+    ////                    }
+    ////
+    ////
+    ////                    //   print("image downloaded: \(item.photo)")
+    ////
+    ////                   // dataArray[dowloadedCount]=item
+    ////
+    ////
+    ////                    dowloadedCount+=1
+    ////                    if dowloadedCount == adsList.count {
+    ////                        dataArray.sorted(by: { $0.cDate! < $1.cDate!})
+    ////                        //self.dataArray.sort { $0.cDate! > $1.cDate! }
+    ////                    }
+    ////
+    ////
+    ////                     completionBlock(dataArray)
+    ////
+    ////                }
+    //
+    //
+    //
+    //                //print("\(self.dataArray.count) \n list count: \(typeCount)")
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //                // DispatchQueue.main.async {
+    //
+    //
+    //                //   self.ReklamList.reloadData()
+    //
+    //
+    //                // }
+    //
+    //            //}
+    //
+    //
+    //        }
+    //
+    //
+    //    }
     
     
     //    override func viewWillAppear(_ animated: Bool) {
@@ -483,7 +498,7 @@ class HomePageController: UIViewController{
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
-                     #selector(HomePageController.handleRefresh(_:)),
+            #selector(HomePageController.handleRefresh(_:)),
                                  for: UIControl.Event.valueChanged)
         refreshControl.tintColor = UIColor.red
         
@@ -491,16 +506,16 @@ class HomePageController: UIViewController{
     }()
     @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
         
-//        let newHotel = Hotels(name: "Montage Laguna Beach", place:
-//                              "California south")
-//        hotels.append(newHotel)
-//
-//        hotels.sort() { $0.name < $0.place }
-//
-//        self.tableView.reloadData()
+        //        let newHotel = Hotels(name: "Montage Laguna Beach", place:
+        //                              "California south")
+        //        hotels.append(newHotel)
+        //
+        //        hotels.sort() { $0.name < $0.place }
+        //
+        //        self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
-  
+    
     
     @IBAction func isPaidChanged(_ sender: Any) {
         self.advertArray.removeAll()
@@ -508,65 +523,65 @@ class HomePageController: UIViewController{
         if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
             if isPaidSegment.selectedSegmentIndex == 0{
                 if  isPaid != nil{
-                               advertArray = isPaid
-                                 DispatchQueue.main.async {
-                                                       self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                               
-                                                       self.ReklamList.reloadData()
-                               
-                               
-                                                   }
-                           }
+                    advertArray = isPaid
+                    DispatchQueue.main.async {
+                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                        
+                        self.ReklamList.reloadData()
+                        
+                        
+                    }
+                }
                 // Table was scrolled by user.
-//                if dataArray.count>0{
-//
-//                    for item in dataArray{
-//                        if item.isPaid==1{
-//
-//                            advertArray.append(item)
-//                        }
-//
-//                    }
-//
-//                    DispatchQueue.main.async {
-//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//                        self.ReklamList.reloadData()
-//
-//
-//                    }
-//
-//                }
+                //                if dataArray.count>0{
+                //
+                //                    for item in dataArray{
+                //                        if item.isPaid==1{
+                //
+                //                            advertArray.append(item)
+                //                        }
+                //
+                //                    }
+                //
+                //                    DispatchQueue.main.async {
+                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                //                        self.ReklamList.reloadData()
+                //
+                //
+                //                    }
+                //
+                //                }
             }
             
             if isPaidSegment.selectedSegmentIndex==1{
                 if  isNotPaid != nil{
                     advertArray = isNotPaid
-                      DispatchQueue.main.async {
-                                            self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                    
-                                            self.ReklamList.reloadData()
-                    
-                    
-                                        }
+                    DispatchQueue.main.async {
+                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                        
+                        self.ReklamList.reloadData()
+                        
+                        
+                    }
                 }
                 
                 // Table was scrolled by user.
-//                if dataArray.count>0{
-//                    for item in dataArray{
-//                        if item.isPaid==0{
-//
-//                            advertArray.append(item)
-//                        }
-//
-//                    }
-//                    DispatchQueue.main.async {
-//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//
-//                        self.ReklamList.reloadData()
-//
-//
-//                    }
-//                }
+                //                if dataArray.count>0{
+                //                    for item in dataArray{
+                //                        if item.isPaid==0{
+                //
+                //                            advertArray.append(item)
+                //                        }
+                //
+                //                    }
+                //                    DispatchQueue.main.async {
+                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                //
+                //                        self.ReklamList.reloadData()
+                //
+                //
+                //                    }
+                //                }
             }
             
         }
@@ -589,114 +604,126 @@ class HomePageController: UIViewController{
     }
     
     
-  
+    
     
     @objc func refresh() {
         isPaid.removeAll()
-                isNotPaid.removeAll()
+        isNotPaid.removeAll()
         if mail != nil&&pass != nil{
             var typeCount=0
-        
-       db.getAds(username: mail!, pass: pass!){
-                  
-                  (list) in
-                  
-               
             
-                  
-                  for advert in list {
-                      
-                      //if (advert.isPaid==type) {
-                      let item = advert
-                      
-                      
-                      
-                      if  item.isPaid==1{
-          
-                  
-                          // self.advertArray.append(item)
-                          self.isPaid.append(item)
-                          
-                         
-                          
-                      }
-                      if  item.isPaid==0{
-                           
-                     
-                                        // self.advertArray.append(item)
-                                        self.isNotPaid.append(item)
-                                        
-                                        
-                                      
-                                    }
-                    
-                    
-                          DispatchQueue.main.async {
-                      
-                    if self.isPaidSegment.selectedSegmentIndex == 0{
-                      self.advertArray = self.isPaid
-                        typeCount=self.isPaid.count
-                    }else {
-                         self.advertArray = self.isNotPaid
-                          typeCount=self.isNotPaid.count
-                    }
-                      
+            db.getAds(username: mail!, pass: pass!){
                 
-                          
-                          self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                          self.ReklamList.reloadData()
-                            
-                            self.myRefreshControl.endRefreshing()
-                          
-                      }
-                      
-                      
-                     
-                  }
-                  
-                  self.getImages(adsList: self.isPaid){
-                      
-                      (list)
-                      in
-                      self.isPaid = list
+                (list) in
+                
+                
+                
+                
+                for advert in list {
                     
-                      DispatchQueue.main.async {
-                          if self.isPaidSegment.selectedSegmentIndex==0{
-                              self.advertArray=self.isPaid
-                          }
-                          
-                          self.ReklamList.reloadData()
-                          
-                          
-                      }
-                      
-                  }
-                  self.getImages(adsList: self.isNotPaid){
-                               
-                               (list)
-                               in
-                      self.isNotPaid = list
-                               DispatchQueue.main.async {
-                                   
-                                if self.isPaidSegment.selectedSegmentIndex==1{
-                                    self.advertArray=self.isNotPaid
-                                }
-                                   
-                                   self.ReklamList.reloadData()
-                                   
-                                  
-                               }
-                               
-                           }
-                  
-                  
-                  
-              }
+                    //if (advert.isPaid==type) {
+                    let item = advert
+                    
+                    
+                    
+                    if  item.isPaid==1{
+                        
+                        
+                        // self.advertArray.append(item)
+                        self.isPaid.append(item)
+                        
+                        
+                        
+                    }
+                    if  item.isPaid==0{
+                        
+                        
+                        // self.advertArray.append(item)
+                        self.isNotPaid.append(item)
+                        
+                        
+                        
+                    }
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                        if self.isPaidSegment.selectedSegmentIndex == 0{
+                            self.advertArray = self.isPaid
+                            typeCount=self.isPaid.count
+                        }else {
+                            self.advertArray = self.isNotPaid
+                            typeCount=self.isNotPaid.count
+                        }
+                        
+                        
+                        
+                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                        self.ReklamList.reloadData()
+                        
+                        self.myRefreshControl.endRefreshing()
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                //                  self.getImages(adsList: self.isPaid){
+                //
+                //                      (list)
+                //                      in
+                //                      self.isPaid = list
+                //
+                //                      DispatchQueue.main.async {
+                //                          if self.isPaidSegment.selectedSegmentIndex==0{
+                //                              self.advertArray=self.isPaid
+                //                          }
+                //
+                //                          self.ReklamList.reloadData()
+                //
+                //
+                //                      }
+                //
+                //                  }
+                //                  self.getImages(adsList: self.isNotPaid){
+                //
+                //                               (list)
+                //                               in
+                //                      self.isNotPaid = list
+                //                               DispatchQueue.main.async {
+                //
+                //                                if self.isPaidSegment.selectedSegmentIndex==1{
+                //                                    self.advertArray=self.isNotPaid
+                //                                }
+                //
+                //                                   self.ReklamList.reloadData()
+                //
+                //
+                //                               }
+                //
+                //                           }
+                
+                
+                
+            }
         }
-       
+        
     }
     
 }
+
+func cancelSpecificTask(byUrl url:URL) {
+    Alamofire.SessionManager.default.session.getAllTasks{sessionTasks in
+        for task in sessionTasks {
+            if task.originalRequest?.url == url {
+                task.cancel()
+            }
+        }
+
+    }
+}
+
 extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating
 {
     
@@ -711,7 +738,7 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
         print("blablabla")
     }
     
-     
+    
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -751,11 +778,49 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
         return advertArray.count
     }
     
-    
+ 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         do{
+            // cell.imageView?.image = nil
+            if advertArray[indexPath.row].photo == nil{
+            Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
+                if let catPicture = response.result.value {
+                    //advert.photo=catPicture.pngData()
+                    
+                    //  item.photo = UIImage(named: "damaged")?.pngData()
+                    if indexPath.row <= self.advertArray.count {
+                 
+                    if catPicture != nil {
+                        
+                        self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                       
+                    }
+                    else {
+                        self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
+                        
+                    }
+                     
+                    
+                      
+                    
+                    // dataArray[dowloadedCount]=item
+                    
+                    
+                    
+                }
+                   
+                    cell.object = self.advertArray[indexPath.row]
+                      cell.reloadData()
+                }
+                
+              
+                
+            }
+            }
             cell.object = advertArray[indexPath.row]
+            
+            
         }
         catch
         {
