@@ -41,7 +41,14 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: false, completion: nil)
         
         //   navigationController?.navigationBar.isTranslucent = false
         
@@ -83,6 +90,7 @@ class AboutAdvertController: UIViewController {
             
             
             DispatchQueue.main.async {
+           
                 if list[0].isPaid==1{
                     self.earnMoney.isHidden=false
                 }
@@ -98,16 +106,17 @@ class AboutAdvertController: UIViewController {
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
+                
                 //  self.tableView.reloadData()
-                  let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-                DispatchQueue.main.async {
+                let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+              
                     self.slideshow.setImageInputs([
                         
                         ImageSource(image: UIImage(named: "background")!)
                         
                     ])
                     
-                  
+                    
                     loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
                     loadingIndicator.hidesWhenStopped = true
                     loadingIndicator.color = UIColor.lightGray
@@ -116,7 +125,7 @@ class AboutAdvertController: UIViewController {
                     self.slideshow.addSubview(loadingIndicator)
                     
                     
-                }
+                
                 
                 
                 for  i in list[0].photoUrl ?? [""] {
@@ -148,9 +157,11 @@ class AboutAdvertController: UIViewController {
                     
                     
                 }
-                
-                
+                     self.dismiss(animated: false)
+                      
             }
+            
+      
         }
         
         
