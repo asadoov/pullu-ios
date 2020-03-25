@@ -24,7 +24,7 @@ class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var aViews: UILabel!
     @IBOutlet weak var aCategory: UILabel!
     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-    var object: Advertisement?
+    var object:Advertisement?
     // var delegate: ReklamCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,88 +69,73 @@ class ReklamCellTableViewCell: UITableViewCell {
         aPrice.text="\(object!.price!) AZN "
         aDate.text=dateFormatter.string(from:dt!)
         //
-        if  (object?.photo != nil){
-            self.aImage.image=UIImage(data: object!.photo!)
-             loadingIndicator.stopAnimating()
+        
+        
+        
+        
+        if object?.photo != nil {
             
-            //            Alamofire.request((object?.photoUrl![0])!).responseImage { response in
-            //                if let catPicture = response.result.value {
-            //                    //advert.photo=catPicture.pngData()
-            //
-            //                    //  item.photo = UIImage(named: "damaged")?.pngData()
-            //                    if catPicture != nil {
-            //                        self.aImage.image=UIImage(data: catPicture.pngData()!)
-            //                    }
-            //                    else {
-            //                        self.aImage.image=UIImage(named: "damaged")
-            //
-            //                    }
-            //
-            //
-            //                    //   print("image downloaded: \(item.photo)")
-            //
-            //                    // dataArray[dowloadedCount]=item
-            //
-            //
-            //
-            //                }
-            //
-            //
-            //
-            //
-            //            }
+            self.aImage.image=UIImage(data: object!.photo!)
+            loadingIndicator.stopAnimating()
+        }
+        else {
+            if object?.downloaded == true {
+                aImage.image=UIImage(named: "damaged")
+                loadingIndicator.stopAnimating()
+            }
             
         }
-            
-            
-            
-//        else  {
-//            if object?.aTypeId != 3{
-//
-//            }
-//
-//            //                    if object?.aTypeId != 3{
-//            //
-//            //
-//            //                        aImage.image=UIImage(named: "background")
-//            //                        let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-//            //                        loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-//            //                        loadingIndicator.hidesWhenStopped = true
-//            //                        loadingIndicator.color = UIColor.lightGray
-//            //                        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-//            //                        loadingIndicator.startAnimating();
-//            //                        aImage.addSubview(loadingIndicator)
-//            //                    }
-//            //                    else   {
-//            //                        let label = UILabel()
-//            //                        label.center = CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-//            //
-//            //                        // you will probably want to set the font (remember to use Dynamic Type!)
-//            //                        label.font = UIFont.preferredFont(forTextStyle: .footnote)
-//            //
-//            //                        // and set the text color too - remember good contrast
-//            //                        label.textColor = .black
-//            //
-//            //                        // may not be necessary (e.g., if the width & height match the superview)
-//            //                        // if you do need to center, CGPointMake has been deprecated, so use this
-//            //
-//            //
-//            //                        // this changed in Swift 3 (much better, no?)
-//            //                        label.textAlignment = .center
-//            //
-//            //                        label.text = "I am a test label"
-//            //
-//            //                        aImage.addSubview(label)
-//            //
-//            //
-//            //                    }
-//            //present(alert, animated: true, completion: nil)
-//
-//        }
-//
         
         
-      
+        
+        
+        
+        
+        //        else  {
+        //
+        //
+        //            if object?.aTypeId != 3{
+        //
+        //
+        //                aImage.image=UIImage(named: "background")
+        //                let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        //                loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
+        //                loadingIndicator.hidesWhenStopped = true
+        //                loadingIndicator.color = UIColor.lightGray
+        //                // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        //                loadingIndicator.startAnimating();
+        //                aImage.addSubview(loadingIndicator)
+        //            }
+        //            else   {
+        //                let label = UILabel()
+        //                label.center = CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
+        //
+        //                // you will probably want to set the font (remember to use Dynamic Type!)
+        //                label.font = UIFont.preferredFont(forTextStyle: .footnote)
+        //
+        //                // and set the text color too - remember good contrast
+        //                label.textColor = .black
+        //
+        //                // may not be necessary (e.g., if the width & height match the superview)
+        //                // if you do need to center, CGPointMake has been deprecated, so use this
+        //
+        //
+        //                // this changed in Swift 3 (much better, no?)
+        //                label.textAlignment = .center
+        //
+        //                label.text = "I am a test label"
+        //
+        //                aImage.addSubview(label)
+        //
+        //
+        //            }
+        //
+        //
+        //        }
+        
+        
+        
+        
         // self.ReklamImage.contentMode = .scaleAspectFill
         
         

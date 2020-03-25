@@ -33,6 +33,7 @@ class HomePageController: UIViewController{
     var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var catList:Array<CategoryStruct> = []
+    var catObject:CategoryStruct?
     private let myRefreshControl = UIRefreshControl()
     let  db:dbSelect=dbSelect()
     var mail:String?
@@ -62,7 +63,7 @@ class HomePageController: UIViewController{
         
         
         alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: false, completion: nil)
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
@@ -151,7 +152,7 @@ class HomePageController: UIViewController{
         }
         
         
-        db.getAds(username: mail!, pass: pass!){
+        db.getAds(username: mail!, pass: pass!,catID: 0){
             
             (list) in
             
@@ -321,10 +322,11 @@ class HomePageController: UIViewController{
                 self.advertArray = self.isPaid
                 
                 DispatchQueue.main.async {
-                    
+                    self.dismiss(animated: false){
                     self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.ReklamList.reloadData()
-                    self.dismiss(animated: true)
+                    }
+                   
                     
                 }
                 
@@ -394,97 +396,18 @@ class HomePageController: UIViewController{
     
     
     
-    //    func getImages (adsList : Array<Advertisement>,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-    //         var dataArray: [Advertisement] = [Advertisement]()
-    //        dataArray = adsList
-    //        var dowloadedCount=0
-    //
-    //
-    //        for var item in adsList{
-    //            if item.photoUrl![0] != nil && item.aTypeId != 3{
-    //
-    //
-    //                let url = URL(string: item.photoUrl![0])
-    //
-    //                if let data = try? Data(contentsOf: url!){
-    //                    dataArray[dowloadedCount].photo=data
-    //                } else{
-    //
-    //                } //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-    //           // item.photo =  data!
-    //
-    //
-    //            }
-    //            dowloadedCount+=1
-    //            completionBlock(dataArray)
-    //           // Alamofire.request(item.photoUrl![0]).responseImage { response in
-    ////                if let catPicture = response.result.value {
-    ////                    //advert.photo=catPicture.pngData()
-    ////
-    ////                    //  item.photo = UIImage(named: "damaged")?.pngData()
-    ////                    if catPicture != nil {
-    ////                        dataArray[dowloadedCount].photo = catPicture.pngData()
-    ////                       // item.photo = catPicture.pngData()
-    ////                    }
-    ////                    else {
-    ////                        dataArray[dowloadedCount].photo=UIImage(named: "damaged")?.pngData()
-    ////                       // item.photo = UIImage(named: "damaged")?.pngData()
-    ////
-    ////                    }
-    ////
-    ////
-    ////                    //   print("image downloaded: \(item.photo)")
-    ////
-    ////                   // dataArray[dowloadedCount]=item
-    ////
-    ////
-    ////                    dowloadedCount+=1
-    ////                    if dowloadedCount == adsList.count {
-    ////                        dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-    ////                        //self.dataArray.sort { $0.cDate! > $1.cDate! }
-    ////                    }
-    ////
-    ////
-    ////                     completionBlock(dataArray)
-    ////
-    ////                }
-    //
-    //
-    //
-    //                //print("\(self.dataArray.count) \n list count: \(typeCount)")
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //                // DispatchQueue.main.async {
-    //
-    //
-    //                //   self.ReklamList.reloadData()
-    //
-    //
-    //                // }
-    //
-    //            //}
-    //
-    //
-    //        }
-    //
-    //
-    //    }
     
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    //        navigationController?.navigationBar.shadowImage = UIImage()
-    //        navigationController?.navigationBar.isTranslucent = true
-    //        navigationController?.view.backgroundColor = .clear
-    //        super.viewWillAppear(animated)
-    //    }
+    
+        override func viewWillAppear(_ animated: Bool) {
+            
+            ReklamList.reloadData()
+//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//            navigationController?.navigationBar.shadowImage = UIImage()
+//            navigationController?.navigationBar.isTranslucent = true
+//            navigationController?.view.backgroundColor = .clear
+//            super.viewWillAppear(animated)
+        }
     
     //    override func viewWillDisappear(_ animated: Bool) {
     //        navigationController?.navigationBar.isTranslucent = false
@@ -495,26 +418,6 @@ class HomePageController: UIViewController{
     
     
     
-    lazy var refreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action:
-            #selector(HomePageController.handleRefresh(_:)),
-                                 for: UIControl.Event.valueChanged)
-        refreshControl.tintColor = UIColor.red
-        
-        return refreshControl
-    }()
-    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
-        
-        //        let newHotel = Hotels(name: "Montage Laguna Beach", place:
-        //                              "California south")
-        //        hotels.append(newHotel)
-        //
-        //        hotels.sort() { $0.name < $0.place }
-        //
-        //        self.tableView.reloadData()
-        refreshControl.endRefreshing()
-    }
     
     
     @IBAction func isPaidChanged(_ sender: Any) {
@@ -612,7 +515,7 @@ class HomePageController: UIViewController{
         if mail != nil&&pass != nil{
             var typeCount=0
             
-            db.getAds(username: mail!, pass: pass!){
+            db.getAds(username: mail!, pass: pass!, catID: 0){
                 
                 (list) in
                 
@@ -669,46 +572,38 @@ class HomePageController: UIViewController{
                     
                 }
                 
-                //                  self.getImages(adsList: self.isPaid){
-                //
-                //                      (list)
-                //                      in
-                //                      self.isPaid = list
-                //
-                //                      DispatchQueue.main.async {
-                //                          if self.isPaidSegment.selectedSegmentIndex==0{
-                //                              self.advertArray=self.isPaid
-                //                          }
-                //
-                //                          self.ReklamList.reloadData()
-                //
-                //
-                //                      }
-                //
-                //                  }
-                //                  self.getImages(adsList: self.isNotPaid){
-                //
-                //                               (list)
-                //                               in
-                //                      self.isNotPaid = list
-                //                               DispatchQueue.main.async {
-                //
-                //                                if self.isPaidSegment.selectedSegmentIndex==1{
-                //                                    self.advertArray=self.isNotPaid
-                //                                }
-                //
-                //                                   self.ReklamList.reloadData()
-                //
-                //
-                //                               }
-                //
-                //                           }
                 
                 
                 
             }
         }
         
+    }
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "photoReklamPage"){
+            let displayVC = segue.destination as! AboutAdvertController
+            displayVC.advertID = advertID
+        }
+        if(segue.identifier == "textReklamPage"){
+            let displayVC = segue.destination as! TextReklamController
+            displayVC.advertID = advertID
+        }
+        if(segue.identifier == "videoReklamPage"){
+            let displayVC = segue.destination as! VideoReklamController
+            displayVC.advertID = advertID
+        }
+        if(segue.identifier == "aCatSegue"){
+            let displayVC = segue.destination as! CategoryViewController
+            displayVC.object = catObject
+        }
+        
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
     
 }
@@ -720,9 +615,10 @@ func cancelSpecificTask(byUrl url:URL) {
                 task.cancel()
             }
         }
-
+        
     }
 }
+
 
 extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchResultsUpdating
 {
@@ -778,45 +674,46 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
         return advertArray.count
     }
     
- 
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         do{
             // cell.imageView?.image = nil
             if advertArray[indexPath.row].photo == nil{
-            Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                if let catPicture = response.result.value {
-                    //advert.photo=catPicture.pngData()
-                    
-                    //  item.photo = UIImage(named: "damaged")?.pngData()
-                    if indexPath.row <= self.advertArray.count {
-                 
-                    if catPicture != nil {
+                Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
                         
-                        self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                       
-                    }
-                    else {
-                        self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
+                        //  item.photo = UIImage(named: "damaged")?.pngData()
+                        if indexPath.row <= self.advertArray.count {
+                            
+                            if catPicture != nil {
+                                
+                                self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                
+                                
+                            }
+                            else {
+                                self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
+                                
+                            }
+                            
+                             self.advertArray[indexPath.row].downloaded=true
+                            
+                            
+                            // dataArray[dowloadedCount]=item
+                            
+                            
+                            
+                        }
                         
+                        cell.object = self.advertArray[indexPath.row]
+                        cell.reloadData()
                     }
-                     
-                    
-                      
-                    
-                    // dataArray[dowloadedCount]=item
                     
                     
                     
                 }
-                   
-                    cell.object = self.advertArray[indexPath.row]
-                      cell.reloadData()
-                }
-                
-              
-                
-            }
             }
             cell.object = advertArray[indexPath.row]
             
@@ -878,38 +775,26 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
     
     
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "photoReklamPage"){
-            let displayVC = segue.destination as! AboutAdvertController
-            displayVC.advertID = advertID
-        }
-        if(segue.identifier == "textReklamPage"){
-            let displayVC = segue.destination as! TextReklamController
-            displayVC.advertID = advertID
-        }
-        if(segue.identifier == "videoReklamPage"){
-            let displayVC = segue.destination as! VideoReklamController
-            displayVC.advertID = advertID
-        }
-        
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    
 }
 
 
 extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(catList.count)
+        // print(catList.count)
         return catList.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
+        cell.object = catList[indexPath.row]
+        // print(cell.object?.name)
+        catObject=cell.object
+        self.performSegue(withIdentifier: "aCatSegue", sender: self)
+        
+        cell.reloadData()
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryViewCell
+        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
         
         
         cell.object=catList[indexPath.row]
@@ -920,6 +805,7 @@ extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource
         
         
     }
+    
     
     
     
