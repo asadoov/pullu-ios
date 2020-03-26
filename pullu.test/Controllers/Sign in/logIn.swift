@@ -82,21 +82,22 @@ class logIn: UIViewController {
                     //print(usrList[0].mail)
                     
                     DispatchQueue.main.async {
-                        self.defaults.set(usrList[0].mail, forKey: "mail")
-                        self.defaults.set(self.pass.text, forKey: "pass")
-                        //self.defaults.set(usrList, forKey: "userData")
-                        let jsonEncoder = JSONEncoder()
-                        do {
-                            let jsonData = try jsonEncoder.encode(usrList)
-                            let jsonString = String(data: jsonData, encoding: .utf8)
-                            self.defaults.set(jsonString, forKey: "uData")
-                            
-                            // print("JSON String : " + jsonString!)
-                        }
-                        catch {
-                        }
                         self.dismiss(animated: false)
                         {
+                            self.defaults.set(usrList[0].mail, forKey: "mail")
+                            self.defaults.set(self.pass.text, forKey: "pass")
+                            //self.defaults.set(usrList, forKey: "userData")
+                            let jsonEncoder = JSONEncoder()
+                            do {
+                                let jsonData = try jsonEncoder.encode(usrList)
+                                let jsonString = String(data: jsonData, encoding: .utf8)
+                                self.defaults.set(jsonString, forKey: "uData")
+                                
+                                // print("JSON String : " + jsonString!)
+                            }
+                            catch {
+                            }
+                            
                             self.performSegue(withIdentifier: "segue", sender: self)
                             
                             
@@ -143,6 +144,7 @@ class logIn: UIViewController {
         if(segue.identifier == "segue"){
             let displayVC = segue.destination as! TabBarController
             displayVC.navigationItem.hidesBackButton = true
+            
             
         }
         
