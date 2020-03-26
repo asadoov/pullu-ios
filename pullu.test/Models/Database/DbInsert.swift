@@ -114,4 +114,109 @@ class DbInsert {
         
         
     }
+    
+    // forgot pass / mail yoxlanishi
+    func sendPassChangeMail(mail:String ,completionBlock: @escaping (_ result:Status) ->()){
+         
+    
+         
+      
+         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/send/mail"
+        let Parameters = ["mail": mail] as [String : Any]
+         
+         
+         
+         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+             {
+                 (response)
+                 in
+                 
+                 do{
+                     
+                     
+                     let statusCode  = try
+                         JSONDecoder().decode(Status.self, from: response.data!)
+                     // userList=list
+                     //print(list)
+                     
+                     completionBlock(statusCode)
+                     
+                     
+                 }
+                 catch let jsonErr{
+                     print("Error serializing json:",jsonErr)
+                 }
+         }
+    
+     }
+    // forgot pass / 4 regemli shifre yoxlanishi
+    func checkSendCode(mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+         
+    
+         
+      
+         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/confirm"
+        let Parameters = ["mail": mail,"code": code] as [String : Any]
+         
+         
+         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+             {
+                 (response)
+                 in
+                 
+                 do{
+                     
+                     
+                     let statusCode  = try
+                         JSONDecoder().decode(Status.self, from: response.data!)
+                     // userList=list
+                     //print(list)
+                     
+                     completionBlock(statusCode)
+                     
+                     
+                 }
+                 catch let jsonErr{
+                     print("Error serializing json:",jsonErr)
+                 }
+         }
+    
+     }
+    // forgot pass/ yeni şifrə yaratmaq
+    func createNewPass(newpass:String ,mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+         
+    
+         
+      
+         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/newpass"
+        let Parameters = ["newpass":newpass, "mail": mail,"code": code] as [String : Any]
+         
+         
+    
+         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+             {
+                 (response)
+                 in
+                 print(PULLULINK)
+                
+                 do{
+                    
+                     
+                     let statusCode  = try
+                         JSONDecoder().decode(Status.self, from: response.data!)
+                     // userList=list
+                     //print(list)
+                     
+                     completionBlock(statusCode)
+                     
+                     
+                 }
+                 catch let jsonErr{
+                     print("Error serializing json:",jsonErr)
+                 }
+         }
+    
+     }
+    
+    
 }

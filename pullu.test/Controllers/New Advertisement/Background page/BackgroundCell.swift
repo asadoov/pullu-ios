@@ -1,21 +1,23 @@
 //
-//  CategoryViewCell.swift
+//  CollectionViewCell.swift
 //  pullu.test
 //
-//  Created by Rufat on 2/28/20.
+//  Created by Rufat on 3/16/20.
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import UIKit
 
-class CategoryViewCell: UICollectionViewCell {
-    var object: CategoryStruct?
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var catImage: UIImageView!
+class BackgroundCell: UICollectionViewCell {
+    @IBOutlet weak var backgroundImageCell: UIImageView!
+    
+    var backgroundImage:BackroundImageStruct?
     func reloadData() {
-     self.categoryLabel.text=object?.name!
-        if object?.downloadedIco != nil {
-       self.catImage.image=UIImage(data: object!.downloadedIco!)
+        
+       // backgroundImageCell.image=backgroundImage
+//     self.categoryLabel.text=object?.name!
+        if backgroundImage?.downloadedImg != nil {
+            self.backgroundImageCell.image=UIImage(data: (backgroundImage?.downloadedImg)!)
         }
         // self.ReklamImage.contentMode = .scaleAspectFill
         
@@ -30,4 +32,5 @@ class CategoryViewCell: UICollectionViewCell {
          }*/
         
     }
+    
 }

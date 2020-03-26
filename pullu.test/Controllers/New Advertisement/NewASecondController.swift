@@ -40,6 +40,10 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     @IBAction func selectMedia(_ sender: Any) {
       let imagePicker = OpalImagePickerController()
+        if newAdverisement.aTypeID == 1 {
+            
+            performSegue(withIdentifier: "chooseBackground", sender: true)
+        }
         if newAdverisement.aTypeID == 2{
        let configuration = OpalImagePickerConfiguration()
        configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Maximum şəkil sayı 10 olmaıdır", comment: "")
@@ -74,14 +78,20 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
 //              self.present(mediaPicker,animated: true,completion: nil)
       }
             }
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier=="chooseBackground"{
+                         let displayVC = segue.destination as! BackroundController
+                                              displayVC.newAdverisement = newAdverisement
+                         
+                     }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }

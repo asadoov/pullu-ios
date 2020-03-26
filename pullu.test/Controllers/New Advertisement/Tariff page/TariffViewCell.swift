@@ -27,7 +27,7 @@ class TariffViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func reloadData() {
-        self.measureLabel.text="Tarif tipi: \(object!.measure!)"
+        self.measureLabel.text="Tip: \(object!.measure!)"
         self.viewCountLabel.text="Baxış sayı: \(String(object!.viewCount!))"
         self.priceLabel.text="\(String(object!.price!)) AZN"
         

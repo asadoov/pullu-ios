@@ -11,40 +11,57 @@ import UIKit
 //Cavidan Mirzə
 
 class ProfileController: UIViewController {
-
-
+    
+    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var sheherField: UILabel!
     @IBOutlet weak var ixtisasField: UIPickerView!
-    @IBOutlet weak var qoshulmaTarixField: UILabel!
+    @IBOutlet weak var cityText: UITextField!
+    @IBOutlet weak var creatDate: UITextField!
     
+    
+    var defaults = UserDefaults.standard
+    var select:dbSelect=dbSelect()
+    var profilM: [ProfileModel] = [ProfileModel]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        
+        
+        let pass = defaults.string(forKey: "pass")
+        let mail = defaults.string(forKey: "mail")
+        select.getProfileInfo(mail: mail, pass: pass) {
+            (list) in
+            
+        }
+        
+        
+        
         // Do any additional setup after loading the view.
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-
-       // saveBtn.layer.insertSublayer(gradient, at: 0)
+        
+        // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.view.backgroundColor = .blue
+        super.viewWillDisappear(animated)
+        
     }
-    */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

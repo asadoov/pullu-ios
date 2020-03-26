@@ -19,14 +19,14 @@ class logIn: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        
-    NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-        self.view.frame.origin.y = -200
-    }
-    NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-        self.view.frame.origin.y = 0.0
-    }
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = -200
+        }
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            self.view.frame.origin.y = 0.0
+        }
         
         
         //Looks for single or multiple taps.
@@ -40,7 +40,7 @@ class logIn: UIViewController {
         if (ConnectionCheck.isConnectedToNetwork() ) {
             print("Connected")
             if defaults.string(forKey: "uData") != nil {
-              DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "segue", sender: self)
                 }
             }
@@ -82,34 +82,30 @@ class logIn: UIViewController {
                     //print(usrList[0].mail)
                     
                     DispatchQueue.main.async {
-                        self.defaults.set(usrList[0].mail, forKey: "mail")
-                        self.defaults.set(self.pass.text, forKey: "pass")
-                        //self.defaults.set(usrList, forKey: "userData")
-                        let jsonEncoder = JSONEncoder()
-                        do {
-                            let jsonData = try jsonEncoder.encode(usrList)
-                            let jsonString = String(data: jsonData, encoding: .utf8)
-                            self.defaults.set(jsonString, forKey: "uData")
-                            
-                            // print("JSON String : " + jsonString!)
-                        }
-                        catch {
-                        }
                         self.dismiss(animated: false)
                         {
-                            self.performSegue(withIdentifier: "segue", sender: self)                        }
-                        
-                        
+                            self.defaults.set(usrList[0].mail, forKey: "mail")
+                            self.defaults.set(self.pass.text, forKey: "pass")
+                            //self.defaults.set(usrList, forKey: "userData")
+                            let jsonEncoder = JSONEncoder()
+                            do {
+                                let jsonData = try jsonEncoder.encode(usrList)
+                                let jsonString = String(data: jsonData, encoding: .utf8)
+                                self.defaults.set(jsonString, forKey: "uData")
+                                
+                                // print("JSON String : " + jsonString!)
+                            }
+                            catch {
+                            }
+                            
+                            self.performSegue(withIdentifier: "segue", sender: self)
+                            
+                            
+                        }
                         
                     }
                     
-                    
                 }
-                    
-                    
-                    
-                    
-                    
                     
                 else{
                     DispatchQueue.main.async {
@@ -137,6 +133,25 @@ class logIn: UIViewController {
         
     }
     
+    @IBAction func forgotPassButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "forgPassSegue", sender: self)
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "segue"){
+            let displayVC = segue.destination as! TabBarController
+            displayVC.navigationItem.hidesBackButton = true
+            
+            
+        }
+        
+        
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
     
     
     
