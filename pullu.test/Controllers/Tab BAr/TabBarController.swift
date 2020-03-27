@@ -45,7 +45,7 @@ class TabBarController: UITabBarController {
                             
                              notificationCount += 1
                           }
-                        self!.tabBar.items![3].badgeValue = String(notificationCount)
+       //                 self!.tabBar.items![3].badgeValue = String(notificationCount)
                               
                           
                         //  print(_notification[0].title!)

@@ -19,5 +19,4 @@ class ProfileModel:Codable{
        var city: String?
        var profession: String?
        var cDate: String?
-       var response: Int?
 }

@@ -199,7 +199,7 @@ public class dbSelect {
     //Profil
     func getProfileInfo(mail:String? , pass:String?, completionBlock: @escaping (_ result:Array<ProfileModel>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/profile?mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/get/profile?mail=\(mail!)&pass=\(pass!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
