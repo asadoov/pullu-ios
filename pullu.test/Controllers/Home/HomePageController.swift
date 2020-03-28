@@ -184,66 +184,7 @@ class HomePageController: UIViewController{
                     self.isPaid.append(item)
                     
                     
-                    //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
-                    //                        if let catPicture = response.result.value {
-                    //                            //advert.photo=catPicture.pngData()
-                    //
-                    //                            //  item.photo = UIImage(named: "damaged")?.pngData()
-                    //                            if catPicture != nil {
-                    //                                item.photo = catPicture.pngData()
-                    //                            }
-                    //                            else {
-                    //                                item.photo = UIImage(named: "damaged")?.pngData()
-                    //
-                    //                            }
-                    //
-                    //
-                    //                            //   print("image downloaded: \(item.photo)")
-                    //
-                    //                            self.dataArray[k]=item
-                    //                            if  self.dataArray[k].isPaid==1{
-                    //                                self.advertArray[i!]=item
-                    //                                i!+=1
-                    //                            }
-                    //                            // self.dataArray.replaceSubrange( , with: item)
-                    //                            k+=1
-                    //                            if k == self.dataArray.count {
-                    //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-                    //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
-                    //                            }
-                    //                            DispatchQueue.main.async {
-                    //
-                    //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                    //                                self.ReklamList.reloadData()
-                    //
-                    //
-                    //                            }
-                    //
-                    //
-                    //
-                    //                        }
-                    //
-                    //
-                    //
-                    //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //                        // DispatchQueue.main.async {
-                    //
-                    //
-                    //                        //   self.ReklamList.reloadData()
-                    //
-                    //
-                    //                        // }
-                    //
-                    //                    }
+                    
                     
                 }
                 if  item.isPaid==0{
@@ -252,66 +193,7 @@ class HomePageController: UIViewController{
                     self.isNotPaid.append(item)
                     
                     
-                    //                    Alamofire.request(item.photoUrl![0]).responseImage { response in
-                    //                        if let catPicture = response.result.value {
-                    //                            //advert.photo=catPicture.pngData()
-                    //
-                    //                            //  item.photo = UIImage(named: "damaged")?.pngData()
-                    //                            if catPicture != nil {
-                    //                                item.photo = catPicture.pngData()
-                    //                            }
-                    //                            else {
-                    //                                item.photo = UIImage(named: "damaged")?.pngData()
-                    //
-                    //                            }
-                    //
-                    //
-                    //                            //   print("image downloaded: \(item.photo)")
-                    //
-                    //                            self.dataArray[k]=item
-                    //                            if  self.dataArray[k].isPaid==1{
-                    //                                self.advertArray[i!]=item
-                    //                                i!+=1
-                    //                            }
-                    //                            // self.dataArray.replaceSubrange( , with: item)
-                    //                            k+=1
-                    //                            if k == self.dataArray.count {
-                    //                                self.dataArray.sorted(by: { $0.cDate! < $1.cDate!})
-                    //                                //self.dataArray.sort { $0.cDate! > $1.cDate! }
-                    //                            }
-                    //                            DispatchQueue.main.async {
-                    //
-                    //                                self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                    //                                self.ReklamList.reloadData()
-                    //
-                    //
-                    //                            }
-                    //
-                    //
-                    //
-                    //                        }
-                    //
-                    //
-                    //
-                    //                        //print("\(self.dataArray.count) \n list count: \(typeCount)")
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //
-                    //                        // DispatchQueue.main.async {
-                    //
-                    //
-                    //                        //   self.ReklamList.reloadData()
-                    //
-                    //
-                    //                        // }
-                    //
-                    //                    }
+                  
                     
                 }
                 
@@ -322,6 +204,7 @@ class HomePageController: UIViewController{
             
                     self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.ReklamList.reloadData()
+                    self.isPaidSegment.selectedSegmentIndex=0
                     self.hideActivityIndicator()
                     
                 }

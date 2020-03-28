@@ -21,6 +21,7 @@ class CategoryViewController: UIViewController {
     var aID:Int?
     let  db:dbSelect=dbSelect()
     
+    @IBOutlet weak var isPaidSegment: UISegmentedControl!
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
       var loadingView: UIView = UIView()
     
@@ -117,6 +118,89 @@ class CategoryViewController: UIViewController {
            }
        }
       
+    @IBAction func isPaidSegmentChanged(_ sender: Any) {
+      
+              self.advertArray.removeAll()
+              
+              if (!aTableView.isTracking && !aTableView.isDecelerating) {
+                  if isPaidSegment.selectedSegmentIndex == 0{
+                      if  isPaid != nil{
+                          advertArray = isPaid
+                          DispatchQueue.main.async {
+                                 self.aTableView.reloadData()
+                              
+                              
+                          }
+                      }
+                      // Table was scrolled by user.
+                      //                if dataArray.count>0{
+                      //
+                      //                    for item in dataArray{
+                      //                        if item.isPaid==1{
+                      //
+                      //                            advertArray.append(item)
+                      //                        }
+                      //
+                      //                    }
+                      //
+                      //                    DispatchQueue.main.async {
+                      //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                      //                        self.ReklamList.reloadData()
+                      //
+                      //
+                      //                    }
+                      //
+                      //                }
+                  }
+                  
+                  if isPaidSegment.selectedSegmentIndex==1{
+                      if  isNotPaid != nil{
+                          advertArray = isNotPaid
+                          DispatchQueue.main.async {
+                              self.aTableView.reloadData()
+                              
+                              
+                          }
+                      }
+                      
+                      // Table was scrolled by user.
+                      //                if dataArray.count>0{
+                      //                    for item in dataArray{
+                      //                        if item.isPaid==0{
+                      //
+                      //                            advertArray.append(item)
+                      //                        }
+                      //
+                      //                    }
+                      //                    DispatchQueue.main.async {
+                      //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                      //
+                      //                        self.ReklamList.reloadData()
+                      //
+                      //
+                      //                    }
+                      //                }
+                  }
+                  
+              }
+              else  {
+                  
+                  if isPaidSegment.selectedSegmentIndex == 0{
+                      
+                      isPaidSegment.selectedSegmentIndex = 1
+                      
+                  }
+                  if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
+                  
+              }
+              
+              
+              
+              
+              
+              
+          
+    }
     
     // MARK: - Navigation
       
