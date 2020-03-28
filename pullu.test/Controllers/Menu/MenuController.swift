@@ -32,7 +32,12 @@ class MenuController: UIViewController {
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
         logOutBtn.icon = UIImage(named: "logout")?.pngData()
+           let profileBtn:MenuStruct = MenuStruct()
+        profileBtn.ID=1
+           profileBtn.name="Profil"
+         menuItems.append(profileBtn)
         menuItems.append(logOutBtn)
+        
         //
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()

@@ -24,8 +24,11 @@ class MenuCell: UITableViewCell {
     
     func reloadData() {
         self.menuItem.text=object?.name!
+        if  self.menuIcon.image != nil {
+             self.menuIcon.image=UIImage(data: object!.icon!)
+        }
         
-        self.menuIcon.image=UIImage(data: object!.icon!)
+       
               // self.ReklamImage.contentMode = .scaleAspectFill
               
               
