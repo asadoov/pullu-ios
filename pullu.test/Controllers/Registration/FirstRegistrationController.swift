@@ -22,6 +22,9 @@ class FirstRegistrationController: UIViewController {
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         
+      
+        
+        
         view.addGestureRecognizer(tap)
         
         // Do any additional setup after loading the view.
@@ -52,6 +55,11 @@ class FirstRegistrationController: UIViewController {
                                        alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
                                        self.present(alert, animated: true, completion: nil)
             
+        }
+    }
+    @IBAction func backButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "geriSegue", sender: self)
         }
     }
     

@@ -32,7 +32,7 @@ class PhotoStoryController: UIViewController {
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             time+=1
             if time==30{
-                /* self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
+                 self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
                  
                  (status)
                  in
@@ -44,7 +44,7 @@ class PhotoStoryController: UIViewController {
                  }
                  
                  }
-                 */
+                 
                 self.dismiss(animated: true)
                 
             }
