@@ -236,35 +236,7 @@ class HomePageController: UIViewController{
             }
             
             
-            //            self.getImages(adsList: self.isPaid){
-            //
-            //                (list)
-            //                in
-            //                self.isPaid = list
-            //                self.advertArray = self.isPaid
-            //                DispatchQueue.main.async {
-            //
-            //
-            //                    self.ReklamList.reloadData()
-            //
-            //
-            //                }
-            //
-            //            }
-            //            self.getImages(adsList: self.isNotPaid){
-            //
-            //                         (list)
-            //                         in
-            //                self.isNotPaid = list
-            //                         DispatchQueue.main.async {
-            //
-            //
-            //                             self.ReklamList.reloadData()
-            //
-            //                              self.dismiss(animated: true)
-            //                         }
-            //
-            //                     }
+           
             
             
         }
