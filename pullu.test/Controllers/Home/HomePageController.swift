@@ -38,8 +38,14 @@ class HomePageController: UIViewController{
     let  db:dbSelect=dbSelect()
     var mail:String?
     var pass:String?
+    var loadingIsOn = false
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
+    var loadingView: UIView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showActivityIndicator()
+    
         
         
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -54,16 +60,7 @@ class HomePageController: UIViewController{
         
         
         
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+      
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
@@ -322,11 +319,10 @@ class HomePageController: UIViewController{
                 self.advertArray = self.isPaid
                 
                 DispatchQueue.main.async {
-                    self.dismiss(animated: false){
+            
                     self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.ReklamList.reloadData()
-                    }
-                   
+                    self.hideActivityIndicator()
                     
                 }
                 
@@ -389,14 +385,40 @@ class HomePageController: UIViewController{
             
             
         }
+               
         
         
         
     }
     
     
-    
-    
+    func showActivityIndicator() {
+         DispatchQueue.main.async {
+            self.loadingView = UIView()
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.center = self.view.center
+            self.loadingView.backgroundColor = UIColor.black
+            self.loadingView.alpha = 0.7
+            self.loadingView.clipsToBounds = true
+            self.loadingView.layer.cornerRadius = 10
+
+            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+
+            self.loadingView.addSubview(self.spinner)
+            self.view.addSubview(self.loadingView)
+            self.spinner.startAnimating()
+        }
+    }
+
+    func hideActivityIndicator() {
+         DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.loadingView.removeFromSuperview()
+        }
+    }
+   
     
     
         override func viewWillAppear(_ animated: Bool) {
