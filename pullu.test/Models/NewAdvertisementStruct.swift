@@ -14,7 +14,7 @@ class NewAdvertisementStruct: Codable {
     var title:String?
     var trfID:Int?
     var description:String?
-    var price:Double?
+    var price:String?
     var countryID:Int?
     var cityID:Int?
     var ageRangeID:Int?

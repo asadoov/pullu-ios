@@ -24,7 +24,7 @@ class MenuCell: UITableViewCell {
     
     func reloadData() {
         self.menuItem.text=object?.name!
-        if  self.menuIcon.image != nil {
+        if  self.menuIcon.image! != nil {
              self.menuIcon.image=UIImage(data: object!.icon!)
         }
         
