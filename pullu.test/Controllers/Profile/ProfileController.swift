@@ -12,16 +12,6 @@ import UIKit
 
 class ProfileController: UIViewController {
     
-    
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var mobileNumField: UITextField!
-    @IBOutlet weak var dogumTarixField: UITextField!
-    @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var ixtisasField: UIPickerView!
-    @IBOutlet weak var cityText: UITextField!
-    @IBOutlet weak var creatDate: UITextField!
-    
-    
     var defaults = UserDefaults.standard
     var select:dbSelect=dbSelect()
     var profilM: [ProfileModel] = [ProfileModel]()
@@ -41,7 +31,7 @@ class ProfileController: UIViewController {
              let list2 = list[0]
             
             DispatchQueue.main.async {
-                self.emailField.text = list2.mail
+          //      self.emailField.text = list2.mail
             }
             
         }
