@@ -29,7 +29,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func nextBtn(_ sender: Any) {
-  
+  performSegue(withIdentifier: "auditorySegue", sender: true)
       
 //        if (descriptionTxt.text != "" && price.text != "")
 //        {
