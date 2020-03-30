@@ -311,6 +311,30 @@ public class dbSelect {
         //           }
         
     }
+    func getAgeRange(completionBlock: @escaping (_ result:Array<AgeRangeStruct>) ->()){
+           
+           let url="https://pullu.az/api/androidmobileapp/get/age/range"
+      
+                   GetJson(jsonUrlString: url){
+                       (json) in
+                       do{
+           
+           
+                           let backroundImageList  = try
+                               JSONDecoder().decode(Array<AgeRangeStruct>.self, from: json)
+           
+                           // userList=list
+           
+                           completionBlock(backroundImageList)
+           
+                       }
+                       catch let jsonErr{
+                           print("Error serializing json:",jsonErr)
+                       }
+           
+                   }
+           
+       }
     
     func getBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
            
