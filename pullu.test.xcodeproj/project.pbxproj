@@ -36,6 +36,8 @@
 		04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* CheckPassViewController.swift */; };
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
+		B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */; };
+		B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCD1243209DD0020C2D8 /* AuditoryController.swift */; };
 		B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62984442423716A001346B2 /* NewHomeViewController.swift */; };
 		B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854A23FD56C40069C08F /* CategoryStruct.swift */; };
 		B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854C23FD6BEA0069C08F /* TypeStruct.swift */; };
@@ -150,6 +152,8 @@
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B60501BC23F0299600928B7F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeStruct.swift; sourceTree = "<group>"; };
+		B618DCD1243209DD0020C2D8 /* AuditoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditoryController.swift; sourceTree = "<group>"; };
 		B62984442423716A001346B2 /* NewHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeViewController.swift; sourceTree = "<group>"; };
 		B62B854A23FD56C40069C08F /* CategoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStruct.swift; sourceTree = "<group>"; };
 		B62B854C23FD6BEA0069C08F /* TypeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeStruct.swift; sourceTree = "<group>"; };
@@ -712,6 +716,14 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
+		B618DCD0243209700020C2D8 /* AuditoryController */ = {
+			isa = PBXGroup;
+			children = (
+				B618DCD1243209DD0020C2D8 /* AuditoryController.swift */,
+			);
+			path = AuditoryController;
+			sourceTree = "<group>";
+		};
 		B638618423CB28D10059B944 /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -821,6 +833,7 @@
 				04AA33592405482B00685D64 /* ProfileModel.swift */,
 				B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */,
 				B686A24C242B7CC200F62D5E /* MenuStruct.swift */,
+				B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -860,6 +873,7 @@
 		B6897C6A23FD021500ECEB1E /* New Advertisement */ = {
 			isa = PBXGroup;
 			children = (
+				B618DCD0243209700020C2D8 /* AuditoryController */,
 				B697C6CA241BBD6F00AE9402 /* Background page */,
 				B6A40A9023FE67EF0043495D /* Tariff page */,
 				B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */,
@@ -1079,6 +1093,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */,
 				B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */,
 				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,
 				04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */,
@@ -1098,6 +1113,7 @@
 				B67B9DCE23EEE18A00A3451C /* User.swift in Sources */,
 				B67B9DCF23EEE18A00A3451C /* NewUser.swift in Sources */,
 				0430E2562404F5C300F39810 /* ArchiveController.swift in Sources */,
+				B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */,
 				B67B9DD023EEE18A00A3451C /* Country.swift in Sources */,
 				B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */,
 				B67B9DD123EEE18A00A3451C /* City.swift in Sources */,
