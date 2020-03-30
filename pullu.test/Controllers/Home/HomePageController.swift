@@ -581,10 +581,10 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource,UISearchR
                             // dataArray[dowloadedCount]=item
                             
                             
-                            
+                            cell.object = self.advertArray[indexPath.row]
                         }
                         
-                        cell.object = self.advertArray[indexPath.row]
+                        
                         cell.reloadData()
                     }
                     
