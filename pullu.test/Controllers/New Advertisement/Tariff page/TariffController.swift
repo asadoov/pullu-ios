@@ -13,7 +13,8 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
     var select:dbSelect=dbSelect()
     
     var tariffList:Array<TariffStruct>=[]
- var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
+    var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()
+    var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     
     @IBOutlet weak var tariffTable: UITableView!
     
@@ -35,6 +36,15 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController!.navigationBar.tintColor = .systemBlue
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController!.navigationBar.tintColor = .white
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tariffList.count
     }
@@ -42,7 +52,8 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: TariffViewCell = (tableView.dequeueReusableCell(withIdentifier: "cell") as! TariffViewCell)
         
-        do{
+        do
+        {
             cell.object = tariffList[indexPath.row]
         }
         catch
@@ -65,37 +76,40 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
         return 1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       return 60
-       }
+        return 60
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      for indexPath in tableView.indexPathsForSelectedRows ?? [] {
-          tableView.deselectRow(at: indexPath, animated: true)
-      }
-         let cell: TariffViewCell = (tableView.dequeueReusableCell(withIdentifier: "cell") as! TariffViewCell)
-         cell.object = tariffList[indexPath.row]
-              // cell.object = tariffList[indexPath.row]
-        newAdverisement.trfID=cell.object!.id!
-      //  print(cell.object!.id!)
-               cell.reloadData()
+        for indexPath in tableView.indexPathsForSelectedRows ?? [] {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        let cell: TariffViewCell = (tableView.dequeueReusableCell(withIdentifier: "cell") as! TariffViewCell)
+        cell.object = tariffList[indexPath.row]
+        // cell.object = tariffList[indexPath.row]
+        newAdvertisement.aTrfID=cell.object!.id!
+        newAPreview.aTrf = "\(cell.object!.measure!) baxış \(cell.object!.price!) AZN"
+        //  print(cell.object!.id!)
+        cell.reloadData()
         self.performSegue(withIdentifier: "newASecond", sender: true)
         
     }
-
-        
- 
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier=="newASecond"{
             let displayVC = segue.destination as! NewASecondController
-                                 displayVC.newAdverisement = newAdverisement
+            displayVC.newAdvertisement = newAdvertisement
+            displayVC.newAPreview=newAPreview
+            
             
         }
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    
     
 }

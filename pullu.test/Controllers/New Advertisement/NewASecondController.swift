@@ -10,11 +10,19 @@ import UIKit
 import OpalImagePicker
 
 class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    
+    let defaults = UserDefaults.standard
     @IBOutlet weak var noPriceSwitch: UISwitch!
-    var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
+    var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()
+    var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     let mediaPicker=UIImagePickerController()
     
-  
+    @IBOutlet weak var chooseMediaBtn: UIButton!
+    
+    
+    
+    @IBOutlet weak var descriptionField: UITextView!
     
     
     @IBOutlet weak var price: UITextField!
@@ -22,38 +30,59 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if newAdverisement.isPaid==1{
-            print(newAdverisement.trfID!)
+        self.defaults.set(nil, forKey: "backgroundID")
+        if newAdvertisement.isPaid==1{
+            print(newAdvertisement.aTrfID!)
             
         }
         // Do any additional setup after loading the view.
     }
     
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        let backgroundID = defaults.string(forKey: "backgroundID")
+        if backgroundID != nil
+        {
+            if newAdvertisement.mediaBase64 !=  nil {
+                newAdvertisement.mediaBase64!.removeAll()
+                
+            }
+            newAdvertisement.mediaBase64 = Array<String>()
+            newAdvertisement.mediaBase64!.append(backgroundID!)
+            chooseMediaBtn.setTitle("Fonu dəyiş", for: .normal)
+            
+        }
+        //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //            navigationController?.navigationBar.shadowImage = UIImage()
+        //            navigationController?.navigationBar.isTranslucent = true
+        //            navigationController?.view.backgroundColor = .clear
+        //            super.viewWillAppear(animated)
+    }
     
     
     @IBAction func nextBtn(_ sender: Any) {
-        if newAdverisement.price != "" && newAdverisement.description != "" && newAdverisement.mediaBase64 != "" {
-         performSegue(withIdentifier: "auditorySegue", sender: true)
+        if price.text != "" && descriptionField.text != "" && newAdvertisement.mediaBase64 != nil {
+            
+            
+            newAdvertisement.aDescription = descriptionField.text
+            newAPreview.aDescription = descriptionField.text
+            newAdvertisement.aPrice = price.text
+            newAPreview.aPrice = "\(price.text!)"
+            
+            
+            performSegue(withIdentifier: "auditorySegue", sender: true)
         }
-      
         
-        //        if (descriptionTxt.text != "" && price.text != "")
-        //        {
-        //
-        //
-        //        }
+        
+        
     }
     
     @IBAction func selectMedia(_ sender: Any) {
         let imagePicker = OpalImagePickerController()
-        if newAdverisement.aTypeID == 1 {
-            
-            performSegue(withIdentifier: "chooseBackground", sender: true)
+        if newAdvertisement.aTypeID == 1 {
+            performSegue(withIdentifier: "backgroundsSegue", sender: true)
         }
-        if newAdverisement.aTypeID == 2{
+        if newAdvertisement.aTypeID == 2{
             let configuration = OpalImagePickerConfiguration()
             configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Maximum şəkil sayı 10 olmaıdır", comment: "")
             imagePicker.configuration = configuration
@@ -66,7 +95,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                 //Cancel
             })
         }
-        if newAdverisement.aTypeID == 3 {
+        if newAdvertisement.aTypeID == 3 {
             let configuration = OpalImagePickerConfiguration()
             configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Siz sadəcə 1 vide seçə bilərsiniz", comment: "")
             imagePicker.configuration = configuration
@@ -89,18 +118,22 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     @IBAction func noPriceSwitchChanged(_ sender: Any) {
+        
+        print(newAdvertisement.mediaBase64!)
+        
         if noPriceSwitch.isOn
         {
             
             price.isEnabled=false
             price.placeholder = "Razılaşma yolu ilə"
-            newAdverisement.price = "Razılaşma yolu ilə"
+            price.text = ""
+            
         }
         else
         {
             price.isEnabled=true
             price.placeholder = "AZN"
-            newAdverisement.price = ""
+            newAdvertisement.aPrice = ""
             
         }
     }
@@ -108,12 +141,13 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier=="chooseBackground"{
-            let displayVC = segue.destination as! BackroundController
-            displayVC.newAdverisement = newAdverisement
+        if segue.identifier=="auditorySegue"{
             
+            let displayVC = segue.destination as! AuditoryController
+            displayVC.newAdvertisement = newAdvertisement
+            displayVC.newAPreview = newAPreview
         }
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }

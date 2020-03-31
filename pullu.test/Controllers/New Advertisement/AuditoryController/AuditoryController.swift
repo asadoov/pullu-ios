@@ -14,36 +14,40 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var genderPicker: UIPickerView!
     @IBOutlet weak var ageRangePicker: UIPickerView!
     @IBOutlet weak var professionPicker: UIPickerView!
-    
+    var newAdvertisement:NewAdvertisementStruct = NewAdvertisementStruct()
+    var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     var countries:Array<Country> = []
     var cities:Array<City> = []
     var genders:Array<String> = []
     var professions:Array<Profession> = []
     var ageRanges:Array<AgeRangeStruct> = []
-    var db:dbSelect = dbSelect()
+    var select:dbSelect = dbSelect()
+   
     
+    let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        genders.append("Bütün cinslər")
         genders.append("Kişi")
         genders.append("Qadın")
         var chooseCountry:Country = Country()
         chooseCountry.ID = 0
-        chooseCountry.name = "Ölkəni seçin.."
+        chooseCountry.name = "Bütün ölkələr"
         self.countries.append(chooseCountry)
         var chooseCity:City = City()
-              chooseCity.ID = 0
-              chooseCity.name = "---"
-              self.cities.append(chooseCity)
+        chooseCity.id = 0
+        chooseCity.name = "Bütün şəhərlər"
+        self.cities.append(chooseCity)
         let chooseAge:AgeRangeStruct = AgeRangeStruct()
         chooseAge.id = 0
-        chooseAge.range = "Yaş seçin.."
+        chooseAge.range = "Bütün yaşlar"
         self.ageRanges.append(chooseAge)
         
         var chooseProfession:Profession = Profession()
-        chooseProfession.ID = 0
-        chooseProfession.name = "Sektor seçin.."
+        chooseProfession.id = 0
+        chooseProfession.name = "Bütün ixtisaslar"
         self.professions.append(chooseProfession)
         
         self.countryPicker.reloadAllComponents()
@@ -51,7 +55,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.genderPicker.reloadAllComponents()
         self.ageRangePicker.reloadAllComponents()
         self.professionPicker.reloadAllComponents()
-        db.getCounties(){
+        select.getCounties(){
             
             (list)
             in
@@ -61,7 +65,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.countryPicker.reloadAllComponents()
             }
         }
-        db.getAgeRange(){
+        select.getAgeRange(){
             
             (list)
             in
@@ -72,7 +76,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.ageRangePicker.reloadAllComponents()
             }
         }
-        db.getProfessions(){
+        select.getProfessions(){
             
             (list)
             in
@@ -85,6 +89,34 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         
     }
     
+    @IBAction func finishButton(_ sender: Any) {
+        
+        if newAdvertisement.aCountryID == nil {
+            newAdvertisement.aCountryID = 0
+            newAPreview.aCountry = "Hamısı"
+        }
+        if newAdvertisement.aCityID == nil {
+            newAdvertisement.aCityID = 0
+            newAPreview.aCity = "Hamısı"
+        }
+        if newAdvertisement.aGenderID == nil {
+            newAdvertisement.aGenderID = 0
+            newAPreview.aGender = 0
+        }
+        if newAdvertisement.aAgeRangeID == nil {
+            newAdvertisement.aAgeRangeID = 0
+            newAPreview.aAgeRange = "Hamısı"
+        }
+        if newAdvertisement.aProfessionID == nil {
+            newAdvertisement.aProfessionID = 0
+            newAPreview.aProfession = "Hamısı"
+        }
+        newAdvertisement.mail = defaults.string(forKey: "mail")
+        newAdvertisement.pass = defaults.string(forKey: "pass")
+          self.performSegue(withIdentifier: "previewController", sender: self)
+        
+        
+    }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -138,8 +170,10 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         if pickerView==countryPicker{
             
             let selectedRow = countryPicker.selectedRow(inComponent: 0)
+            newAdvertisement.aCountryID = selectedRow
+            newAPreview.aCountry = countries[row].name
             if selectedRow>0{
-                db.getCities(countryId:selectedRow){
+                select.getCities(countryId:selectedRow){
                     (list)
                     in
                     
@@ -157,8 +191,8 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             else {
                 self.cities.removeAll()
                 var choose:City = City()
-                choose.ID = 0;
-                choose.name = "Şəhəri seçin"
+                choose.id = 0;
+                choose.name = "Hamısı"
                 self.cities.append(choose)
                 DispatchQueue.main.async {
                     
@@ -169,18 +203,42 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             }
             
         }
+        if pickerView==cityPicker{
+            newAdvertisement.aCityID = cities[row].id
+            newAPreview.aCity = cities[row].name
+            
+        }
+        if pickerView==genderPicker{
+            newAdvertisement.aGenderID = row
+            newAPreview.aGender = row
+            
+        }
+        if pickerView==ageRangePicker{
+            newAdvertisement.aAgeRangeID = ageRanges[row].id
+            newAPreview.aAgeRange = ageRanges[row].range
+        }
+        if pickerView==professionPicker{
+            newAdvertisement.aProfessionID = professions[row].id
+            newAPreview.aProfession = professions[row].name
+        }
         
     }
     
     
-    /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if(segue.identifier == "previewController"){
+                let displayVC = segue.destination as! PreviewController
+                displayVC.newAdvertisement = newAdvertisement
+                displayVC.newAPreview = newAPreview
+            }
+       
+            
+            // Get the new view controller using segue.destination.
+            // Pass the selected object to the new view controller.
+        }
+     
     
 }
