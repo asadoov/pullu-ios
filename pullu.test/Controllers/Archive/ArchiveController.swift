@@ -11,13 +11,10 @@ import UIKit
 import AlamofireImage
 
 
-class ArchiveController: UIViewController{ //, UITableViewDelegate, UITableViewDataSource {
-    
+class ArchiveController: UIViewController { //UITableViewDelegate, UITableViewDataSource
     
 
-    @IBOutlet weak var viewSegment: UISegmentedControl!
     
-    @IBOutlet weak var archiveTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -148,12 +148,8 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
         cell.reloadData()
         
         if cell.object?.ID==1{
-                        DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "profSegue", sender: self)
-                        }
+                  self.performSegue(withIdentifier: "profSegue", sender: self)
         }
-        
-        
         
     }
     

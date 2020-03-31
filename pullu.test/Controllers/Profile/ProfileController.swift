@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 //Cavidan Mirzə
 
@@ -14,8 +15,16 @@ class ProfileController: UIViewController {
     
     var defaults = UserDefaults.standard
     var select:dbSelect=dbSelect()
-    var profilM: [ProfileModel] = [ProfileModel]()
+    //var profilM: [ProfileModel] = [ProfileModel]()
     
+    @IBOutlet weak var nameFiel: UITextField!
+    @IBOutlet weak var surnameFiel: UITextField!
+    @IBOutlet weak var phoneNFiel: UITextField!
+    @IBOutlet weak var bdateFiel: UITextField!
+    @IBOutlet weak var cDateFiel: UITextField!
+    @IBOutlet weak var emailFiel: UITextField!
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +35,18 @@ class ProfileController: UIViewController {
         let pass = defaults.string(forKey: "pass")
         let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
-            (list) in
+            (profileList) in
             
-             let list2 = list[0]
+            let list2 = profileList[0]
             
+            func reloadData() {
             DispatchQueue.main.async {
-          //      self.emailField.text = list2.mail
+                self.nameFiel.text = list2.name
+                self.surnameFiel.text = list2.surname
+                self.phoneNFiel.text = list2.phone
+                self.emailFiel.text = list2.mail
             }
-            
+            }
         }
         
         
