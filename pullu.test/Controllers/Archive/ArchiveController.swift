@@ -11,8 +11,17 @@ import UIKit
 import AlamofireImage
 
 
-class ArchiveController: UIViewController { //UITableViewDelegate, UITableViewDataSource
+class ArchiveController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    
+    
+    var viewwModel: [ViewsModel] = [ViewsModel]()
+    let db: dbSelect = dbSelect()
+    
+    @IBOutlet weak var atableView: UITableView!
+    
+    @IBOutlet weak var elanBshligi: UILabel!
+    @IBOutlet weak var price: UILabel!
 
     
     
@@ -32,13 +41,14 @@ class ArchiveController: UIViewController { //UITableViewDelegate, UITableViewDa
     }
     
     
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewwModel.count
+        
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return 95
+    }
 
     /*
     // MARK: - Navigation

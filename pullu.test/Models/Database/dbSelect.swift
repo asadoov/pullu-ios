@@ -361,4 +361,28 @@ public class dbSelect {
            
        }
     
+    
+    func getView(mail:String? , pass:String?, completionBlock: @escaping (_ result:Array<ViewsModel>) ->()){
+           
+        
+            let url = "https://pullu.az/api/androidmobileapp/user/get/views?mail=\(mail!)&pass=\(pass!)"
+           GetJson(jsonUrlString: url){
+               (json) in
+               do{
+                   
+                   
+                   let viewsModelList  = try
+                       JSONDecoder().decode(Array<ViewsModel>.self, from: json)
+                   
+                   // userList=list
+                   
+                   completionBlock(viewsModelList)
+                   
+               }
+               catch let jsonErr{
+                   print("Error serializing json:",jsonErr)
+               }
+           }
+       }
+    
 }
