@@ -126,6 +126,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         if !titleTxt.text!.isEmpty{
             let typeID = typeList.filter{a in a.name==typeList[aTypePicker.selectedRow(inComponent: 0)].name}
             newAdvertisement.aTypeID=typeID[0].id!
+            newAdvertisement.aMediaTypeID = typeID[0].id!
             newAPreview.aType = typeID[0].name!
             let catID = catList.filter{a in a.name==catList[aCatPicker.selectedRow(inComponent: 0)].name}
             newAdvertisement.aCategoryID=catID[0].id!

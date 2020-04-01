@@ -9,7 +9,7 @@
 import UIKit
 import OpalImagePicker
 
-class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate{
     
     
     let defaults = UserDefaults.standard
@@ -30,7 +30,15 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.defaults.set(nil, forKey: "backgroundID")
+        
+        descriptionField.delegate = self
+        descriptionField.layer.borderWidth = 1.0
+        descriptionField.text = "Ətraflı məlumat"
+        descriptionField.layer.borderColor = UIColor.gray.cgColor
+        
+        
+        self.defaults.set(nil, forKey: "backgroundUrl")
+        self.defaults.set(nil, forKey: "previewImg")
         if newAdvertisement.isPaid==1{
             print(newAdvertisement.aTrfID!)
             
@@ -38,17 +46,37 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         // Do any additional setup after loading the view.
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+        
+        textView.layer.borderColor = UIColor.red.cgColor
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        // textView.layer.borderColor = UIColor.clear.cgColor
+        if textView.text == ""{
+            
+            textView.text = "Ətraflı məlumat"
+        }
+        textView.layer.borderColor = UIColor.gray.cgColor
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
-        let backgroundID = defaults.string(forKey: "backgroundID")
-        if backgroundID != nil
+        let backgroundUrl = defaults.string(forKey: "backgroundUrl")
+        let previewImg = defaults.data(forKey: "previewImg")
+        if (backgroundUrl != nil && previewImg != nil)
         {
             if newAdvertisement.mediaBase64 !=  nil {
                 newAdvertisement.mediaBase64!.removeAll()
                 
             }
             newAdvertisement.mediaBase64 = Array<String>()
-            newAdvertisement.mediaBase64!.append(backgroundID!)
+            newAdvertisement.mediaBase64!.append(backgroundUrl!)
+            
+            newAPreview.mediaBase64 = Array<Data>()
+            newAPreview.mediaBase64!.append(previewImg!)
+            
             chooseMediaBtn.setTitle("Fonu dəyiş", for: .normal)
             
         }
@@ -61,13 +89,17 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     
     @IBAction func nextBtn(_ sender: Any) {
-        if price.text != "" && descriptionField.text != "" && newAdvertisement.mediaBase64 != nil {
+        if ((price.text != "" || newAdvertisement.aPrice != "") && descriptionField.text != "" && descriptionField.text != "Ətraflı məlumat" && newAdvertisement.mediaBase64 != nil ){
             
             
             newAdvertisement.aDescription = descriptionField.text
             newAPreview.aDescription = descriptionField.text
-            newAdvertisement.aPrice = price.text
-            newAPreview.aPrice = "\(price.text!)"
+            if price.text != "" {
+                newAdvertisement.aPrice = price.text
+                newAPreview.aPrice = "\(price.text!)"
+            }
+            
+            
             
             
             performSegue(withIdentifier: "auditorySegue", sender: true)
@@ -119,18 +151,21 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     @IBAction func noPriceSwitchChanged(_ sender: Any) {
         
-        print(newAdvertisement.mediaBase64!)
-        
+        //print(newAdvertisement.mediaBase64!)
+        price.text = ""
         if noPriceSwitch.isOn
         {
             
             price.isEnabled=false
             price.placeholder = "Razılaşma yolu ilə"
-            price.text = ""
+            newAdvertisement.aPrice = price.placeholder
+            newAPreview.aPrice = price.placeholder
+            //price.text = "Razılaşma yolu ilə"
             
         }
         else
         {
+            
             price.isEnabled=true
             price.placeholder = "AZN"
             newAdvertisement.aPrice = ""

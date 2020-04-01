@@ -116,7 +116,8 @@ extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSourc
       let cell = backgroundsCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BackgroundCell
         cell.backgroundImage =  backgroundImageList[indexPath.row]
         
-        self.defaults.set(cell.backgroundImage!.id!, forKey: "backgroundID")
+        self.defaults.set(cell.backgroundImage!.imgUrl!, forKey: "backgroundUrl")
+        self.defaults.set(cell.backgroundImage!.downloadedImg!, forKey: "previewImg")
         
                 // cell.object = tariffList[indexPath.row]
           //newAdverisement.trfID=cell.object!.id!

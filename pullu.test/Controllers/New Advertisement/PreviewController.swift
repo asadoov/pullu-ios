@@ -9,9 +9,11 @@
 import UIKit
 
 class PreviewController: UIViewController {
+    let defaults = UserDefaults.standard
     var newAdvertisement:NewAdvertisementStruct = NewAdvertisementStruct()
     var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     var insert:DbInsert = DbInsert()
+    @IBOutlet weak var aImage: UIImageView!
     @IBOutlet weak var aCategory: UILabel!
     @IBOutlet weak var aName: UILabel!
     @IBOutlet weak var aPrice: UILabel!
@@ -26,6 +28,15 @@ class PreviewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //    print("""
+        //        PROFESIYA - \(newAdvertisement.aProfessionID!)
+        //
+        //
+        // """)
+        //let previewImg = defaults.string(forKey: "previewImg")
+        // aImage.image=UIImage(data: Data(newAPreview.mediaBase64![0].utf8))
+        aImage.image=UIImage(data:newAPreview.mediaBase64![0])
         aCategory.text = newAPreview.aCategory
         aName.text = newAPreview.aTitle
         aPrice.text = "Qiymət: \(newAPreview.aPrice!)"
@@ -53,35 +64,47 @@ class PreviewController: UIViewController {
     }
     
     @IBAction func finishClicked(_ sender: Any) {
+        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+        
+        
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(newAdvertisement)
             let jsonString = String(data: jsonData, encoding: .utf8)
             // self.defaults.set(jsonString, forKey: "uData")
             
-            //print("JSON String : " + jsonString!)
+            print("JSON String : " + jsonString!)
             
             insert.addAdvertisement(jsonBody: jsonString!)
             {
                 (status)
+                
                 in
+                self.dismiss(animated: true)
                 if status.response == 0 {
                     
                     let alert = UIAlertController(title: "Uğurludur", message: "Bizi seçdiyiniz üçün təşəkkür edirik. Sizin reklamınız tısdiqləndikdən sonra yayımlanacaq. Daha sonra arxivim bölməsindən əlavə etdiyiniz reklamlarınıza baxa bilərsiniz.", preferredStyle: UIAlertController.Style.alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                         UIAlertAction in
                         _ = self.tabBarController?.selectedIndex = 0
-                       _ = self.navigationController?.popToRootViewController(animated: true)
-                       
+                        _ = self.navigationController?.popToRootViewController(animated: true)
+                        
                     }
-                              alert.addAction(okAction)
-                     self.present(alert, animated: true, completion: nil)
+                    alert.addAction(okAction)
+                    self.present(alert, animated: true, completion: nil)
                 }
                 else {
                     
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin.", preferredStyle: UIAlertController.Style.alert)
-                                                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                                        self.present(alert, animated: true, completion: nil)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
                 
             }
@@ -90,7 +113,7 @@ class PreviewController: UIViewController {
         catch {
         }
     }
- 
+    
     
     
     /*
