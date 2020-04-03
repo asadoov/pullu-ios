@@ -64,10 +64,13 @@ class HomePageController: UIViewController{
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
-        //navigationItem.hidesSearchBarWhenScrolling = false
-        //        navItem.hidesSearchBarWhenScrolling = true
-        //        navItem.searchController = searchController
-        //navigationItem.searchController = searchController
+//       let navigationitem = UINavigationItem(title: "")    //creates a new item with no title
+//        navigationitem.titleView = categoryScroll //your collectionview here to display as a view instead of the title that is usually there
+//        self.navigationController?.navigationBar.items = [navigationitem]
+        navigationItem.hidesSearchBarWhenScrolling = false
+//                navItem.hidesSearchBarWhenScrolling = true
+//                navItem.searchController = searchController
+        navigationItem.searchController = searchController
         
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()

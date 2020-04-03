@@ -93,6 +93,8 @@
 		B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9123FE68460043495D /* TariffViewCell.swift */; };
 		B6A40A9423FEB8A70043495D /* NewASecondController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9323FEB8A70043495D /* NewASecondController.swift */; };
 		B6A40A9623FEC2E40043495D /* NewAdvertisementStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */; };
+		B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDDD2433C13600D533B3 /* PreviewController.swift */; };
+		B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -372,6 +374,8 @@
 		B6A40A9123FE68460043495D /* TariffViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TariffViewCell.swift; sourceTree = "<group>"; };
 		B6A40A9323FEB8A70043495D /* NewASecondController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewASecondController.swift; sourceTree = "<group>"; };
 		B6A40A9523FEC2E40043495D /* NewAdvertisementStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAdvertisementStruct.swift; sourceTree = "<group>"; };
+		B6CBDDDD2433C13600D533B3 /* PreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewController.swift; sourceTree = "<group>"; };
+		B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAPreviewStruct.swift; sourceTree = "<group>"; };
 		B6CBE8A223EC438B002414CC /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CBE8A323EC438B002414CC /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CBE8A423EC438B002414CC /* libAlamofireImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofireImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -835,6 +839,7 @@
 				B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */,
 				B686A24C242B7CC200F62D5E /* MenuStruct.swift */,
 				B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */,
+				B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -878,6 +883,7 @@
 				B6A40A9023FE67EF0043495D /* Tariff page */,
 				B6897C6B23FD024200ECEB1E /* NewAdvertFirstController.swift */,
 				B6A40A9323FEB8A70043495D /* NewASecondController.swift */,
+				B6CBDDDD2433C13600D533B3 /* PreviewController.swift */,
 			);
 			path = "New Advertisement";
 			sourceTree = "<group>";
@@ -1093,9 +1099,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */,
 				B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */,
 				B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */,
 				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,
+				B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */,
 				04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */,
 				B67B9DE923EEE19E00A3451C /* pullu_test.xcdatamodeld in Sources */,
 				B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */,
