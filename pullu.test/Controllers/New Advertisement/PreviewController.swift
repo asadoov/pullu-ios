@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
+import ImageSlideshow
 class PreviewController: UIViewController {
     let defaults = UserDefaults.standard
     var newAdvertisement:NewAdvertisementStruct = NewAdvertisementStruct()
     var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     var insert:DbInsert = DbInsert()
-    @IBOutlet weak var aImage: UIImageView!
+    @IBOutlet weak var aImages: ImageSlideshow!
     @IBOutlet weak var aCategory: UILabel!
     @IBOutlet weak var aName: UILabel!
     @IBOutlet weak var aPrice: UILabel!
@@ -25,9 +25,19 @@ class PreviewController: UIViewController {
     @IBOutlet weak var aGender: UILabel!
     @IBOutlet weak var aAgeRange: UILabel!
     @IBOutlet weak var aProfession: UILabel!
-    
+    var imageSource: [ImageSource] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
+        aImages.addGestureRecognizer(gestureRecognizer)
+        
+        aImages.pageIndicatorPosition = .init(horizontal: .center,vertical: .under)
+        aImages.contentScaleMode=UIViewContentMode.scaleAspectFill
+        let pageControl=UIPageControl()
+        pageControl.currentPageIndicatorTintColor=UIColor.darkGray
+        pageControl.pageIndicatorTintColor=UIColor.lightGray
+        aImages.pageIndicator=pageControl
         
         //    print("""
         //        PROFESIYA - \(newAdvertisement.aProfessionID!)
@@ -36,7 +46,14 @@ class PreviewController: UIViewController {
         // """)
         //let previewImg = defaults.string(forKey: "previewImg")
         // aImage.image=UIImage(data: Data(newAPreview.mediaBase64![0].utf8))
-        aImage.image=UIImage(data:newAPreview.mediaBase64![0])
+        
+        
+        //aImage.image=UIImage(data:newAPreview.mediaBase64![0])
+        for image in newAPreview.mediaBase64!{
+            imageSource.append(ImageSource(image: UIImage(data: Data(base64Encoded: image)!)!))
+            
+        }
+        self.aImages.setImageInputs(imageSource)
         aCategory.text = newAPreview.aCategory
         aName.text = newAPreview.aTitle
         aPrice.text = "Qiymət: \(newAPreview.aPrice!)"
@@ -80,7 +97,7 @@ class PreviewController: UIViewController {
             let jsonString = String(data: jsonData, encoding: .utf8)
             // self.defaults.set(jsonString, forKey: "uData")
             
-            print("JSON String : " + jsonString!)
+          //  print("JSON String : " + jsonString!)
             
             insert.addAdvertisement(jsonBody: jsonString!)
             {
@@ -114,7 +131,9 @@ class PreviewController: UIViewController {
         }
     }
     
-    
+    @objc func didTap() {
+        aImages.presentFullScreenController(from: self)
+    }
     
     /*
      // MARK: - Navigation

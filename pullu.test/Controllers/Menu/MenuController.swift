@@ -32,10 +32,11 @@ class MenuController: UIViewController {
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
         logOutBtn.icon = UIImage(named: "logout")?.pngData()
-           let profileBtn:MenuStruct = MenuStruct()
+        let profileBtn:MenuStruct = MenuStruct()
         profileBtn.ID=1
-           profileBtn.name="Profil"
-         menuItems.append(profileBtn)
+        profileBtn.name="Profil"
+        profileBtn.icon  =  UIImage(named: "logout")?.pngData()
+        menuItems.append(profileBtn)
         menuItems.append(logOutBtn)
         
         //

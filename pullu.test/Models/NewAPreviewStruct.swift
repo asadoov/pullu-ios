@@ -22,5 +22,5 @@ class NewAPreviewStruct {
     var aGender:Int?
     var aAgeRange:String?
     var aProfession:String?
-    var mediaBase64:Array<Data>?
+    var mediaBase64:Array<String>?
 }
