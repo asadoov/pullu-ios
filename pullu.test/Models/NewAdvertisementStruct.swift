@@ -23,5 +23,6 @@ class NewAdvertisementStruct: Codable {
     var aGenderID:Int?
     var aAgeRangeID:Int?
     var aProfessionID:Int?
-    var mediaBase64:Array<String>?
+    var aBackgroundUrl:String?
+    var files:Array<Data>?
 }

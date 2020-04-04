@@ -28,11 +28,13 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     @IBOutlet weak var price: UITextField!
     
-    
+    var spinner = UIActivityIndicatorView(style: .whiteLarge)
+    var loadingView: UIView = UIView()
+    var filesAsset:[PHAsset] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
+        
         
         descriptionField.delegate = self
         descriptionField.layer.borderWidth = 1.0
@@ -72,8 +74,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         if (backgroundUrl != nil && previewImg != nil)
         {
             
-            newAdvertisement.mediaBase64 = Array<String>()
-            newAdvertisement.mediaBase64!.append(backgroundUrl!)
+            //   newAdvertisement.files = Array<Data>()
+            newAdvertisement.aBackgroundUrl = backgroundUrl!
             
             newAPreview.mediaBase64 = Array<String>()
             newAPreview.mediaBase64!.append(previewImg!.base64EncodedString())
@@ -95,7 +97,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     
     @IBAction func nextBtn(_ sender: Any) {
-        if ((price.text != "" || newAdvertisement.aPrice != "") && descriptionField.text != "" && descriptionField.text != "Ətraflı məlumat" && newAdvertisement.mediaBase64 != nil ){
+        if ((price.text != "" || newAdvertisement.aPrice != "") && descriptionField.text != "" && descriptionField.text != "Ətraflı məlumat" && (filesAsset.count > 0 || newAdvertisement.aBackgroundUrl != nil) ){
+            
             
             
             newAdvertisement.aDescription = descriptionField.text
@@ -107,17 +110,109 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             
             
+            if filesAsset.count > 0 {
+                self.fileChooser(assets: filesAsset)
+                {
+                    (completed)
+                    in
+                    if completed == true
+                    {
+                        
+                        self.hideActivityIndicator()
+                        // self.dismiss(animated: true)
+                        
+                        self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                    }
+                }
+                
+            }
+            else
+            {
+                self.performSegue(withIdentifier: "auditorySegue", sender: true)
+            }
             
-            performSegue(withIdentifier: "auditorySegue", sender: true)
+            
+            
         }
         
         
         
     }
     
+    func showActivityIndicator() {
+        DispatchQueue.main.async {
+            self.loadingView = UIView()
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.center = self.view.center
+            self.loadingView.backgroundColor = UIColor.black
+            self.loadingView.alpha = 0.7
+            self.loadingView.clipsToBounds = true
+            self.loadingView.layer.cornerRadius = 10
+            
+            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+            
+            self.loadingView.addSubview(self.spinner)
+            self.view.addSubview(self.loadingView)
+            self.spinner.startAnimating()
+        }
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.loadingView.removeFromSuperview()
+        }
+    }
+    func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
+        showActivityIndicator()
+        self.newAdvertisement.files = Array<Data>()
+        self.newAPreview.mediaBase64 = Array<String>()
+       var a = 1
+        for img in assets {
+            
+            
+            
+            var originalImage = 1
+            PHImageManager.default().requestImage(
+                for: img,
+                targetSize: .init(),
+                contentMode: .aspectFit,
+                options: nil) { (image, _) in
+                    // result = image
+                    if originalImage%2 == 0 {
+                        
+                        self.newAdvertisement.files?.append((image?.pngData())!)
+                        
+                        self.newAPreview.mediaBase64?.append((image?.pngData()?.base64EncodedString())!)
+                        //                                                    let strBase64 =  image?.pngData()!.base64EncodedString()
+                        //                                                    print(strBase64!)
+                        
+                    }
+                    
+                    originalImage += 1
+            }
+            
+            
+            if a == assets.count
+            {
+                 completionBlock(true)
+                
+            }
+              a+=1
+        
+            
+            
+        }
+        
+
+        
+    }
+    
     @IBAction func selectMedia(_ sender: Any) {
-        if newAdvertisement.mediaBase64 !=  nil {
-            newAdvertisement.mediaBase64!.removeAll()
+        if newAdvertisement.files !=  nil {
+            newAdvertisement.files!.removeAll()
             newAPreview.mediaBase64!.removeAll()
         }
         let imagePicker = OpalImagePickerController()
@@ -125,8 +220,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             performSegue(withIdentifier: "backgroundsSegue", sender: true)
         }
         if newAdvertisement.aTypeID == 2{
-            self.newAdvertisement.mediaBase64 = Array<String>()
-            self.newAPreview.mediaBase64 = Array<String>()
+            
             
             let configuration = OpalImagePickerConfiguration()
             configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Maximum şəkil sayı 10 olmaıdır", comment: "")
@@ -137,30 +231,9 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                              select: { (assets) in
                                                 
                                                 
-                                                for img in assets {
-                                                    
-                                                    
-                                                    var originalImage = 1
-                                                    PHImageManager.default().requestImage(
-                                                        for: img,
-                                                        targetSize: .init(),
-                                                        contentMode: .aspectFit,
-                                                        options: nil) { (image, _) in
-                                                            // result = image
-                                                            if originalImage%2 == 0 {
-                                                                
-                                                                self.newAdvertisement.mediaBase64?.append((image?.pngData()?.base64EncodedString())!)
-                                                                
-                                                                self.newAPreview.mediaBase64?.append((image?.pngData()?.base64EncodedString())!)
-                                                                //                                                    let strBase64 =  image?.pngData()!.base64EncodedString()
-                                                                //                                                    print(strBase64!)
-                                                                
-                                                            }
-                                                            originalImage += 1
-                                                    }
-                                                }
+                                                self.filesAsset = assets
+                                                self.dismiss(animated:true)
                                                 
-                                                self.dismiss(animated: true)
                                                 //Select Assets
                                                 
             }, cancel: {

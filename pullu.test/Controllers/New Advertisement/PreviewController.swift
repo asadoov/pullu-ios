@@ -25,6 +25,7 @@ class PreviewController: UIViewController {
     @IBOutlet weak var aGender: UILabel!
     @IBOutlet weak var aAgeRange: UILabel!
     @IBOutlet weak var aProfession: UILabel!
+   
     var imageSource: [ImageSource] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +57,12 @@ class PreviewController: UIViewController {
         self.aImages.setImageInputs(imageSource)
         aCategory.text = newAPreview.aCategory
         aName.text = newAPreview.aTitle
-        aPrice.text = "Qiymət: \(newAPreview.aPrice!)"
+        aPrice.text = "Qiymət: \(newAPreview.aPrice ?? "")"
         aDescription.text = newAPreview.aDescription
         aTariff.text = newAPreview.aTrf
         aType.text = newAPreview.aType
-        aCountry.text = "Hədəf ölkə: \(newAPreview.aCountry!)"
-        aCity.text = "Hədəf şəhər: \(newAPreview.aCity!)"
+        aCountry.text = "Hədəf ölkə: \(newAPreview.aCountry ?? "")"
+        aCity.text = "Hədəf şəhər: \(newAPreview.aCity ?? "")"
         switch newAPreview.aGender {
         case 0:
             aGender.text = "Hədəf şəhər: Hamısı"
@@ -75,22 +76,33 @@ class PreviewController: UIViewController {
         default:  break
             
         }
-        aAgeRange.text = "Hədəf yaş aralığı: \(newAPreview.aAgeRange!)"
-        aProfession.text = "Hədəf ixtisas: \(newAPreview.aProfession!)"
+        aAgeRange.text = "Hədəf yaş aralığı: \(newAPreview.aAgeRange ?? "")"
+        aProfession.text = "Hədəf ixtisas: \(newAPreview.aProfession ?? "")"
         // Do any additional setup after loading the view.
     }
     
     @IBAction func finishClicked(_ sender: Any) {
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//
+//
+//        alert.view.addSubview(loadingIndicator)
+       // present(alert, animated: true, completion: nil)
         
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
         
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+        let alertController = UIAlertController(title: "Gözləyin..", message: "Reklamınız serverlərimizə yerləşdirilir", preferredStyle: .alert)
+
+        let progressDownload : UIProgressView = UIProgressView(progressViewStyle: .default)
+
+          //  progressDownload.setProgress(5.0/10.0, animated: true)
+            progressDownload.frame = CGRect(x: 10, y: 70, width: 250, height: 0)
+
+        alertController.view.addSubview(progressDownload)
+        present(alertController, animated: true, completion: nil)
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(newAdvertisement)
@@ -99,12 +111,14 @@ class PreviewController: UIViewController {
             
           //  print("JSON String : " + jsonString!)
             
-            insert.addAdvertisement(jsonBody: jsonString!)
+//            insert.addAdvertisement(jsonBody: jsonString!)
+            insert.addAdvertisement(newAdvertisement: newAdvertisement,progressView: progressDownload)
             {
                 (status)
                 
                 in
                 self.dismiss(animated: true)
+             
                 if status.response == 0 {
                     
                     let alert = UIAlertController(title: "Uğurludur", message: "Bizi seçdiyiniz üçün təşəkkür edirik. Sizin reklamınız tısdiqləndikdən sonra yayımlanacaq. Daha sonra arxivim bölməsindən əlavə etdiyiniz reklamlarınıza baxa bilərsiniz.", preferredStyle: UIAlertController.Style.alert)
@@ -128,6 +142,7 @@ class PreviewController: UIViewController {
             
         }
         catch {
+           
         }
     }
     
