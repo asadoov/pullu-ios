@@ -15,7 +15,7 @@ class ArchiveController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    var viewwModel: [ViewsModel] = [ViewsModel]()
+    let viewwModel: [ViewsModel] = [ViewsModel]()
     let db: dbSelect = dbSelect()
     
     @IBOutlet weak var atableView: UITableView!
@@ -40,14 +40,14 @@ class ArchiveController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Do any additional setup after loading the view.
     }
     
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewwModel.count
-        
+
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return 95
+        return
     }
 
     /*
