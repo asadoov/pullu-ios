@@ -112,7 +112,7 @@ extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSourc
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        newAdverisement.mediaBase64?.removeAll()
+        //newAdverisement.mediaBase64?.removeAll()
       let cell = backgroundsCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BackgroundCell
         cell.backgroundImage =  backgroundImageList[indexPath.row]
         
