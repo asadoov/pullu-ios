@@ -9,8 +9,9 @@
 import Foundation
 struct City:Codable{
     
-    var ID: Int?
+    var id: Int?
     var name: String?
+    var countryID: Int?
     
-   
+    
 }

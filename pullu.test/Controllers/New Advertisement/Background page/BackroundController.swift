@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 class BackroundController: UIViewController {
+     let defaults = UserDefaults.standard
     var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
     @IBOutlet weak var backgroundsCollection: UICollectionView!
     
@@ -74,14 +75,15 @@ class BackroundController: UIViewController {
     }
     
     
-
+    
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier=="backToPublish"{
                    let displayVC = segue.destination as! NewASecondController
-                                        displayVC.newAdverisement = newAdverisement
+                                        displayVC.newAdvertisement = newAdverisement
                    
                }
      // Get the new view controller using segue.destination.
@@ -110,16 +112,22 @@ extension BackroundController:UICollectionViewDelegate,UICollectionViewDataSourc
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        newAdverisement.mediaBase64?.removeAll()
+        //newAdverisement.mediaBase64?.removeAll()
       let cell = backgroundsCollection.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! BackgroundCell
         cell.backgroundImage =  backgroundImageList[indexPath.row]
+        
+        self.defaults.set(cell.backgroundImage!.imgUrl!, forKey: "backgroundUrl")
+        self.defaults.set(cell.backgroundImage!.downloadedImg!, forKey: "previewImg")
+        
                 // cell.object = tariffList[indexPath.row]
           //newAdverisement.trfID=cell.object!.id!
-        newAdverisement.mediaBase64?.append(String(cell.backgroundImage!.id!))
+       // newAdverisement.mediaBase64?.append(String(cell.backgroundImage!.id!))
       //  print(cell.backgroundImage!.id!)
                  cell.reloadData()
+         
+     _ = navigationController?.popViewController(animated: true)
        
-        self.performSegue(withIdentifier: "backToPublish", sender: true)
+        //self.performSegue(withIdentifier: "backToPublish", sender: true)
     }
     
     
