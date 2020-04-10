@@ -34,9 +34,23 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = -200
+               }
+               NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = 0.0
+               }
+               
+               
+               //Looks for single or multiple taps.
+               let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+               
+               //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+               tap.cancelsTouchesInView = false
+               
+               view.addGestureRecognizer(tap)
         
-        
-        descriptionField.delegate = self
+        //descriptionField.delegate = self
         descriptionField.layer.borderWidth = 1.0
         descriptionField.text = "Ətraflı məlumat"
         descriptionField.layer.borderColor = UIColor.gray.cgColor
