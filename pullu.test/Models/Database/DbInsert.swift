@@ -270,17 +270,20 @@ class DbInsert {
                 //                    multipartFormData.append((newAdvertisement?.aBackgroundUrl!.data(using: .utf8)!)!, withName: "aBackgroundUrl")
                 multipartFormData.append(("\(newAdvertisement!.aAgeRangeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aAgeRangeID")
                 multipartFormData.append(("\(newAdvertisement!.aCategoryID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aCategoryID")
-                for file in newAdvertisement!.files! {
-                    let mimeType = self.mimeType(for: file)
-                    let ext = mimeType.components(separatedBy: "/")
-                    //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
-                    //                    {
-                    
-                    
-                    multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)
-                    //}
-                    
+                if newAdvertisement!.files != nil  {
+                    for file in newAdvertisement!.files! {
+                                       let mimeType = self.mimeType(for: file)
+                                       let ext = mimeType.components(separatedBy: "/")
+                                       //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
+                                       //                    {
+                                       
+                                       
+                                       multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)
+                                       //}
+                                       
+                                   }
                 }
+               
                 
                 multipartFormData.append(("\(newAdvertisement!.aBackgroundUrl ?? "")".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aBackgroundUrl")
                 multipartFormData.append(("\(newAdvertisement!.aCityID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aCityID")
