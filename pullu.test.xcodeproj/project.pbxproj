@@ -11,6 +11,7 @@
 		0430E2562404F5C300F39810 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0430E2552404F5C300F39810 /* ArchiveController.swift */; };
 		045829A223C452D3004F6FA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A023C452D3004F6FA9 /* Main.storyboard */; };
 		045829AA23C452D5004F6FA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
+		0459D074244408D300E5CA41 /* ArchiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459D073244408D300E5CA41 /* ArchiveTableViewController.swift */; };
 		047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F46A323FBBEFD005E9DFA /* WebViewController.swift */; };
 		047F46A623FBD6E9005E9DFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */; };
 		0484058523E7F200005E353C /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */; };
@@ -122,6 +123,7 @@
 		045829A423C452D3004F6FA9 /* pullu_test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pullu_test.xcdatamodel; sourceTree = "<group>"; };
 		045829A923C452D5004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		045829AB23C452D5004F6FA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0459D073244408D300E5CA41 /* ArchiveTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveTableViewController.swift; sourceTree = "<group>"; };
 		047F46A323FBBEFD005E9DFA /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0484057623E7F200005E353C /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 			isa = PBXGroup;
 			children = (
 				0430E2552404F5C300F39810 /* ArchiveController.swift */,
+				0459D073244408D300E5CA41 /* ArchiveTableViewController.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -1102,6 +1105,7 @@
 				B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */,
 				B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */,
 				B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */,
+				0459D074244408D300E5CA41 /* ArchiveTableViewController.swift in Sources */,
 				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,
 				B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */,
 				04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */,
