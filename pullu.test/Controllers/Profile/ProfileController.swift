@@ -13,13 +13,16 @@ import UIKit
 class ProfileController: UIViewController {
     
     
+    @IBOutlet weak var surnameField: UITextField!
+    @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
-    @IBOutlet weak var cinsPicker: UIPickerView!
-    @IBOutlet weak var ixtisasField: UIPickerView!
-    @IBOutlet weak var cityText: UITextField!
     @IBOutlet weak var creatDate: UITextField!
+    @IBOutlet weak var genderBtn: UIButton!
+    @IBOutlet weak var ixtisasBtn: UIButton!
+    @IBOutlet weak var cityBtn: UIButton!
+    
     
     
     var defaults = UserDefaults.standard
@@ -37,11 +40,15 @@ class ProfileController: UIViewController {
         let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
-            
-             let list2 = list[0]
-            
+   
             DispatchQueue.main.async {
-                self.emailField.text = list2.mail
+                self.emailField.text = list[0].mail
+                self.nameField.text = list[0].name
+                self.surnameField.text = list[0].surname
+                self.mobileNumField.text = list[0].phone
+                self.dogumTarixField.text = list[0].bDate
+                self.creatDate.text = list[0].cDate
+              
             }
             
         }

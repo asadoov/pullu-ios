@@ -133,11 +133,11 @@ class logIn: UIViewController {
         
     }
     
-    @IBAction func forgotPassButton(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "forgPassSegue", sender: self)
-        }
-    }
+//    @IBAction func forgotPassButton(_ sender: Any) {
+//        DispatchQueue.main.async {
+//            self.performSegue(withIdentifier: "forgPassSegue", sender: self)
+//        }
+//    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

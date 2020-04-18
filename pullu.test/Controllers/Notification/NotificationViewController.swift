@@ -109,7 +109,8 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 95
+    return 75
+        
     }
     
     /*

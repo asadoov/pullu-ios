@@ -19,9 +19,9 @@ class SuccessRegController: UIViewController {
     }
     
     
-    @IBAction func backToLogin_Click(_ sender: Any) {
-        self.dismiss(animated:true)
-    }
+//    @IBAction func backToLogin_Click(_ sender: Any) {
+//        self.dismiss(animated:true)
+//    }
     
     /*
     // MARK: - Navigation

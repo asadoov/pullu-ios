@@ -32,12 +32,39 @@ class MenuController: UIViewController {
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
         logOutBtn.icon = UIImage(named: "logout")?.pngData()
+        
         let profileBtn:MenuStruct = MenuStruct()
         profileBtn.ID=1
         profileBtn.name="Profil"
         profileBtn.icon  =  UIImage(named: "logout")?.pngData()
+        
+        let staticsBtn:MenuStruct = MenuStruct()
+        staticsBtn.ID=2
+        staticsBtn.name="Statistik Məlumatlar"
+        staticsBtn.icon  =  UIImage(named: "logout")?.pngData()
+        
+        let ruleBtn:MenuStruct = MenuStruct()
+        ruleBtn.ID=3
+        ruleBtn.name="Qayda və şərtlər"
+        ruleBtn.icon  =  UIImage(named: "logout")?.pngData()
+        
+        let aboutBtn:MenuStruct = MenuStruct()
+        aboutBtn.ID=4
+        aboutBtn.name="Proqram haqqında"
+        aboutBtn.icon  =  UIImage(named: "logout")?.pngData()
+        
+        let financeBtn:MenuStruct = MenuStruct()
+        financeBtn.ID=5
+        financeBtn.name="Maliyə"
+        financeBtn.icon  =  UIImage(named: "logout")?.pngData()
+        
         menuItems.append(profileBtn)
+        menuItems.append(staticsBtn)
+        menuItems.append(financeBtn)
+//        menuItems.append(ruleBtn)
+//        menuItems.append(aboutBtn)
         menuItems.append(logOutBtn)
+        
         
         //
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -89,26 +116,15 @@ class MenuController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = .clear
-        super.viewWillAppear(animated)
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        navigationController?.navigationBar.isTranslucent = true
+//        navigationController?.view.backgroundColor = .clear
+//        super.viewWillAppear(animated)
+//    }
     
-    @IBAction func profilButton(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "profSegue", sender: self)
-        }
-        
-    }
-    
-    @IBAction func statisticsButton(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "statiSegue", sender: self)
-        }
-    }
+
     
     // Get the new view controller using segue.destination.
     // Pass the selected object to the new view controller.
@@ -154,11 +170,27 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             
         }
         
+        else if cell.object?.ID == 1{
+            self.performSegue(withIdentifier: "profSegue", sender: self)
+            
+        }
+            
+        else if cell.object?.ID == 2{
+            self.performSegue(withIdentifier: "statiSegue", sender: self)
+            
+        }
+        
+        else if cell.object?.ID == 5{
+            self.performSegue(withIdentifier: "finanSegue", sender: self)
+            
+        }
         // print(cell.object?.name)
         //cell.delegate = self
         cell.reloadData()
         
     }
+    
+    
     
     
     

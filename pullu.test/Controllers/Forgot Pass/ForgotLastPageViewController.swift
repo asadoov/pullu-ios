@@ -15,11 +15,13 @@ class ForgotLastPageViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-    @IBAction func finishButton(_ sender: Any) {
-        DispatchQueue.main.async {
-                 self.performSegue(withIdentifier: "getHomeSegue", sender: self)
-        }
-    }
+   
+ 
+//    @IBAction func extBtn(_ sender: Any) {
+//        self.dismiss(animated:true)
+//    }
+    
+    
     
     
     /*
