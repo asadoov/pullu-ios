@@ -961,21 +961,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjj-9d-2FP">
-                                        <rect key="frame" x="25" y="190" width="364" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="cins"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XlX-I5-Z2V">
-                                        <rect key="frame" x="25" y="232" width="364" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="ixtisas"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ya-mK-YUp">
-                                        <rect key="frame" x="25" y="274" width="364" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="şəhər"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OZL-fU-YNs">
                                         <rect key="frame" x="25" y="437" width="364" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -988,6 +973,24 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gender" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="clL-5x-JBY">
+                                        <rect key="frame" x="25" y="190" width="364" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ixtisas" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dSA-LS-HrP">
+                                        <rect key="frame" x="25" y="232" width="364" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="şəhər" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-X7-bUl">
+                                        <rect key="frame" x="25" y="274" width="364" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -997,12 +1000,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profil" id="bUk-Ni-vbm"/>
                     <connections>
-                        <outlet property="cityBtn" destination="4ya-mK-YUp" id="PcA-k9-wPw"/>
+                        <outlet property="cityField" destination="mf3-X7-bUl" id="1DE-uy-4g4"/>
                         <outlet property="creatDate" destination="T7f-IB-gJP" id="A81-Te-AMs"/>
                         <outlet property="dogumTarixField" destination="KXE-KY-8Fz" id="XTn-dM-oFz"/>
                         <outlet property="emailField" destination="akt-qg-PdC" id="SZw-Wf-mmP"/>
-                        <outlet property="genderBtn" destination="cjj-9d-2FP" id="QWd-Qq-SRR"/>
-                        <outlet property="ixtisasBtn" destination="XlX-I5-Z2V" id="N00-Fz-n6n"/>
+                        <outlet property="genderField" destination="clL-5x-JBY" id="HP1-EL-Csj"/>
+                        <outlet property="ixtisas" destination="dSA-LS-HrP" id="Yzz-pg-aQk"/>
                         <outlet property="mobileNumField" destination="uy3-6D-S4m" id="8Gd-gs-JdM"/>
                         <outlet property="nameField" destination="h8M-2Q-OED" id="KdV-nU-9be"/>
                         <outlet property="surnameField" destination="qSe-F8-HWd" id="YzE-aO-ODn"/>
@@ -1329,7 +1332,7 @@ baxışı</string>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eJZ-VS-gMK">
-                                        <rect key="frame" x="210" y="33" width="196" height="73"/>
+                                        <rect key="frame" x="210" y="33" width="197" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <string key="text">Qazanılan məbləğ
 
@@ -1370,7 +1373,7 @@ isə Qazanılan məbləğ istifadə olunur</string>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVd-6a-8Om">
-                                        <rect key="frame" x="217" y="232" width="190" height="41"/>
+                                        <rect key="frame" x="218" y="232" width="189" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.84064692259999996" green="0.84074205160000004" blue="0.84059208630000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -1441,19 +1444,16 @@ baxışı</string>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wyO-yz-0Ub">
-                                        <rect key="frame" x="8" y="-6" width="397" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.33178228139999999" green="0.41186356540000002" blue="0.49627208709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <segments>
-                                            <segment title="Balans"/>
-                                            <segment title="Balansı artır"/>
-                                            <segment title="Çıxarış"/>
-                                        </segments>
-                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Balans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oj1-u6-q17">
+                                <rect key="frame" x="21" y="73" width="136" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="eea-LQ-Aid"/>

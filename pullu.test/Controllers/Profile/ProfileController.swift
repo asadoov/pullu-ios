@@ -19,9 +19,10 @@ class ProfileController: UIViewController {
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var creatDate: UITextField!
-    @IBOutlet weak var genderBtn: UIButton!
-    @IBOutlet weak var ixtisasBtn: UIButton!
-    @IBOutlet weak var cityBtn: UIButton!
+    @IBOutlet weak var genderField: UITextField!
+    @IBOutlet weak var ixtisas: UITextField!
+    @IBOutlet weak var cityField: UITextField!
+    
     
     
     
@@ -48,6 +49,9 @@ class ProfileController: UIViewController {
                 self.mobileNumField.text = list[0].phone
                 self.dogumTarixField.text = list[0].bDate
                 self.creatDate.text = list[0].cDate
+                self.genderField.text = list[0].gender
+                self.ixtisas.text = list[0].profession
+                self.cityField.text = list[0].city
               
             }
             
