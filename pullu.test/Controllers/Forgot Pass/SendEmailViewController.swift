@@ -38,6 +38,9 @@ class SendEmailViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func backBtnClck(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     
     
     @IBAction func nextButton(_ sender: Any) {

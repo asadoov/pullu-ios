@@ -57,10 +57,15 @@ class FirstRegistrationController: UIViewController {
             
         }
     }
+    @IBAction func backBtnClick(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     @IBAction func backButton(_ sender: Any) {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "geriSegue", sender: self)
         }
+        
+        
     }
     
     
