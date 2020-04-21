@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 class TabBarController: UITabBarController {
+     let defaults = UserDefaults.standard
+     var uID=0
     var userr:User!
     var ref: DatabaseReference!
     var notifications = Array<Notification>()
@@ -28,6 +30,25 @@ class TabBarController: UITabBarController {
      //   self.tabBar.barStyle = .blackOpaque
         self.tabBar.layer.cornerRadius = 20
         self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        
+        let udata=defaults.string(forKey: "uData")
+                      do{
+                          
+                          
+                          let list  = try
+                              JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                          
+                          // userList=list
+                       uID = list[0].id!
+                       
+                          
+                      }
+                      catch let jsonErr{
+                          print("Error serializing json:",jsonErr)
+                      }
+               
+        
         Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
                   if error != nil
                   {
@@ -36,16 +57,27 @@ class TabBarController: UITabBarController {
                   else
                   {
                     let userID = Auth.auth().currentUser!.uid
-                      self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications")
+                      self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
                       self.ref.observe(.value, with: { [weak self]  (snapshot) in
                           //print("value: \(snapshot)")
+                    
                           var _notification = Array<NotificationModel>()
                         var notificationCount = 0
                           for item in snapshot.children {
-                            
-                             notificationCount += 1
+                            let task = NotificationModel(snapshot: item as! DataSnapshot)
+                            if task.seen == false{
+                                notificationCount += 1
+                            }
+                             
                           }
-                       self!.tabBar.items![3].badgeValue = String(notificationCount)
+                        if (notificationCount>0){
+                             self!.tabBar.items![3].badgeValue = String(notificationCount)
+                        }
+                        else{
+                            self!.tabBar.items![3].badgeValue = nil
+                            
+                        }
+                      
                               
                           
                         //  print(_notification[0].title!)

@@ -11,12 +11,13 @@ import Firebase
 import FirebaseDatabase
 
 class NotificationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    let defaults = UserDefaults.standard
     var userr:User!
     var ref: DatabaseReference!
     var notifications = Array<NotificationModel>()
     @IBOutlet weak var notificationTable: UITableView!
     
-    
+    var uID=0
     
     override func viewDidLoad() {
         
@@ -26,21 +27,51 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
         navigationController?.navigationBar.isTranslucent = true
         
         self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
+//        scheduleNotification()
+        let udata=defaults.string(forKey: "uData")
+               do{
+                   
+                   
+                   let list  = try
+                       JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                   
+                   // userList=list
+                uID = list[0].id!
+                
+                   
+               }
+               catch let jsonErr{
+                   print("Error serializing json:",jsonErr)
+               }
+        
+        
         Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
+            
             if error != nil
             {
                 print(error)
             }
             else
             {
+                
+       
+
                 let userID = Auth.auth().currentUser!.uid
-                self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications")
+                self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
                 self.ref.observe(.value, with: { [weak self]  (snapshot) in
                     //print("value: \(snapshot)")
-                    
+                    self!.notifications.removeAll()
                     for item in snapshot.children {
                         let task = NotificationModel(snapshot: item as! DataSnapshot)
-                        self!.notifications.append(task)
+                        
+                            
+                             self!.notifications.append(task)
+                        if task.seen == false{
+                            (item as AnyObject).ref.updateChildValues(["seen":true])
+                           // self!.sendNotification(body: task.title!)
+                           
+                        }
+                       
                         
                     }
                     
@@ -48,12 +79,17 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                     //  print(_notification[0].title!)
                 })
+                //self.ref.updateChildValues(["seen":true])
                 
                 // guard var currentUser = Auth.auth().currentUser else {return}
                 //self.userr = User(user: currentUser)
                 // print(self.userr)
                 // print(user)
-                //Database.database().reference(withPath: "users").setValue(100)
+
+                
+                
+                
+             //   Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID)).childByAutoId().key.updateChildValues(["seen": true])
                 // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
                 
                 /*         do{
@@ -81,6 +117,45 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         notificationTable.delegate = self
         notificationTable.dataSource = self
+    }
+    
+    func sendNotification(body:String) {
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Pullu"
+        content.body = body
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default
+
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 10
+//        dateComponents.minute = 30
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+    
+    
+    func scheduleNotification() {
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Late wake up call"
+        content.body = "The early bird catches the worm, but the second mouse gets the cheese."
+        content.categoryIdentifier = "alarm"
+        content.userInfo = ["customData": "fizzbuzz"]
+        content.sound = UNNotificationSound.default
+
+        var dateComponents = DateComponents()
+        dateComponents.hour = 10
+        dateComponents.minute = 30
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
     }
     
     
