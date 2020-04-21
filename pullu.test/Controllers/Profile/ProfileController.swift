@@ -19,9 +19,10 @@ class ProfileController: UIViewController {
     @IBOutlet weak var mobileNumField: UITextField!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var creatDate: UITextField!
-    @IBOutlet weak var genderField: UITextField!
-    @IBOutlet weak var ixtisas: UITextField!
-    @IBOutlet weak var cityField: UITextField!
+    @IBOutlet weak var genderBtn: UIButton!
+    @IBOutlet weak var prefessionBtn: UIButton!
+    @IBOutlet weak var cityBtn: UIButton!
+    
     
     
     
@@ -49,9 +50,11 @@ class ProfileController: UIViewController {
                 self.mobileNumField.text = list[0].phone
                 self.dogumTarixField.text = list[0].bDate
                 self.creatDate.text = list[0].cDate
-                self.genderField.text = list[0].gender
-                self.ixtisas.text = list[0].profession
-                self.cityField.text = list[0].city
+                self.genderBtn.titleLabel?.text = list[0].gender
+                self.prefessionBtn.titleLabel?.text = list[0].profession
+                self.cityBtn.titleLabel?.text = list[0].city
+                
+                
               
             }
             
@@ -63,6 +66,11 @@ class ProfileController: UIViewController {
         
         // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
+    
+    @IBAction func updateBtn(_ sender: Any) {
+        
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isTranslucent = false

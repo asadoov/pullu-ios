@@ -48,6 +48,13 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
         }
         
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = -100
+               }
+               NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = 0.0
+               }
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.

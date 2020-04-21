@@ -972,25 +972,28 @@
                                                 <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="updateBtn:" destination="7Uc-1d-hBx" eventType="touchUpInside" id="IZ1-gx-Jc2"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gender" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="clL-5x-JBY">
-                                        <rect key="frame" x="25" y="190" width="364" height="34"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNd-vj-6oE">
+                                        <rect key="frame" x="25" y="190" width="364" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ixtisas" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dSA-LS-HrP">
-                                        <rect key="frame" x="25" y="232" width="364" height="34"/>
+                                        <color key="backgroundColor" red="0.98435026410000004" green="0.98451465370000002" blue="0.9843286872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Gender"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzM-lS-6aP">
+                                        <rect key="frame" x="25" y="234" width="364" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="şəhər" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-X7-bUl">
-                                        <rect key="frame" x="25" y="274" width="364" height="34"/>
+                                        <color key="backgroundColor" red="0.98435026410000004" green="0.98451465370000002" blue="0.9843286872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="profes"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWi-ec-wzq">
+                                        <rect key="frame" x="25" y="272" width="364" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <color key="backgroundColor" red="0.98435026410000004" green="0.98451465370000002" blue="0.9843286872" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="city"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -1000,14 +1003,14 @@
                     </view>
                     <navigationItem key="navigationItem" title="Profil" id="bUk-Ni-vbm"/>
                     <connections>
-                        <outlet property="cityField" destination="mf3-X7-bUl" id="1DE-uy-4g4"/>
+                        <outlet property="cityBtn" destination="hWi-ec-wzq" id="6Qx-rb-50V"/>
                         <outlet property="creatDate" destination="T7f-IB-gJP" id="A81-Te-AMs"/>
                         <outlet property="dogumTarixField" destination="KXE-KY-8Fz" id="XTn-dM-oFz"/>
                         <outlet property="emailField" destination="akt-qg-PdC" id="SZw-Wf-mmP"/>
-                        <outlet property="genderField" destination="clL-5x-JBY" id="HP1-EL-Csj"/>
-                        <outlet property="ixtisas" destination="dSA-LS-HrP" id="Yzz-pg-aQk"/>
+                        <outlet property="genderBtn" destination="CNd-vj-6oE" id="kgk-Cc-JwF"/>
                         <outlet property="mobileNumField" destination="uy3-6D-S4m" id="8Gd-gs-JdM"/>
                         <outlet property="nameField" destination="h8M-2Q-OED" id="KdV-nU-9be"/>
+                        <outlet property="prefessionBtn" destination="GzM-lS-6aP" id="S6b-lf-ypb"/>
                         <outlet property="surnameField" destination="qSe-F8-HWd" id="YzE-aO-ODn"/>
                     </connections>
                 </viewController>
@@ -3535,7 +3538,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Arxiv" image="archieve" id="ZAZ-N8-Zs4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8qq-pJ-r29">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.33333333333334"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3554,7 +3557,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Bildiriş" image="notification" id="vuM-ye-Pmy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="VHT-pD-3dO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.33333333333334"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3573,7 +3576,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="" image="Unknown-2" id="qbD-Kj-YU0"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="omT-Jn-iP0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.33333333333334"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="largeTitleTextAttributes">
