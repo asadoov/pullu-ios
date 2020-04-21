@@ -20,11 +20,13 @@ struct User:Codable{
     var phone: String?
     var birthDate: String?
     var gender: String?
-    var city: String?
+     var countryID: String?
+    var cityID: String?
     var profession: String?
     var regDate: String?
     var balance:String?
     var earning:String?
+     var pass: String?
     
     init(user: FirebaseAuth.User) {
         self.firebaseID = user.uid

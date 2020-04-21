@@ -154,6 +154,7 @@
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeStruct.swift; sourceTree = "<group>"; };
 		B618DCD1243209DD0020C2D8 /* AuditoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditoryController.swift; sourceTree = "<group>"; };
+		B625C052244E458E00724C21 /* pullu.test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pullu.test.entitlements; sourceTree = "<group>"; };
 		B62984442423716A001346B2 /* NewHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHomeViewController.swift; sourceTree = "<group>"; };
 		B62B854A23FD56C40069C08F /* CategoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStruct.swift; sourceTree = "<group>"; };
 		B62B854C23FD6BEA0069C08F /* TypeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeStruct.swift; sourceTree = "<group>"; };
@@ -446,6 +447,7 @@
 		0458299923C452D3004F6FA9 /* pullu.test */ = {
 			isa = PBXGroup;
 			children = (
+				B625C052244E458E00724C21 /* pullu.test.entitlements */,
 				047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */,
 				04C8751323C736B400E84091 /* AppDelegate.swift */,
 				B67D4FD823CA13C000E572E8 /* Models */,
@@ -1304,16 +1306,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B50AC22435A2523F7745E84B /* Pods-pullu.test.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3B2R562Q67;
+				DEVELOPMENT_TEAM = LC9W6SVFY7;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "az.seyidov.pullu-test";
+				PRODUCT_BUNDLE_IDENTIFIER = "az.rufat.pullu-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -1325,6 +1328,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 259A9ADBF30E384973B8D01C /* Pods-pullu.test.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3B2R562Q67;
