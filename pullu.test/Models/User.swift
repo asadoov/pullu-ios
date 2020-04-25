@@ -20,8 +20,8 @@ struct User:Codable{
     var phone: String?
     var birthDate: String?
     var gender: String?
-     var countryID: String?
-    var cityID: String?
+     var countryID: Int?
+    var cityID: Int?
     var profession: String?
     var regDate: String?
     var balance:String?
