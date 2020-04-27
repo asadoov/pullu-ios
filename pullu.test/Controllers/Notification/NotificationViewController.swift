@@ -74,7 +74,7 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
                        
                         
                     }
-                    
+                    self!.notifications.reverse()
                     self?.notificationTable.reloadData()
                     
                     //  print(_notification[0].title!)
