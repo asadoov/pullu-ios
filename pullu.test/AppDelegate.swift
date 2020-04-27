@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Yay!")
                 
                 let udata=self.defaults.string(forKey: "uData")
+                if udata != nil
+                {
                                   do{
                                       
                                       
@@ -111,6 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                              
                          }
                      }
+                }
                 
             } else {
                 print("D'oh")
