@@ -20,8 +20,112 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        
+        FirebaseApp.configure()
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+                   if granted {
+                       print("Yay!")
+                       
+                       let udata=self.defaults.string(forKey: "uData")
+                       if udata != nil
+                       {
+                                         do{
+                                             
+                                             
+                                             let list  = try
+                                                 JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                                             
+                                             // userList=list
+                                           self.uID = list[0].id!
+                                          
+                                             
+                                         }
+                                         catch let jsonErr{
+                                             print("Error serializing json:",jsonErr)
+                                         }
+                            Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
+                                
+                                if error != nil
+                                {
+                                    print(error)
+                                }
+                                else
+                                {
+
+                                    let userID = Auth.auth().currentUser!.uid
+                                   self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
+                                    self.ref.observe(.value, with: { [weak self]  (snapshot) in
+                                        //print("value: \(snapshot)")
+                                       
+                                        for item in snapshot.children {
+                                            let task = NotificationModel(snapshot: item as! DataSnapshot)
+                                           if (task.seen == false){
+                                               
+                                             //  self!.scheduleNotification(body: task.title!)
+                                               
+                                            let center = UNUserNotificationCenter.current()
+
+                                                   let content = UNMutableNotificationContent()
+                                                   content.title = "Bildiriş"
+                                            content.body = task.title!
+                                                   content.categoryIdentifier = "alarm"
+                                                   content.userInfo = ["customData": "fizzbuzz"]
+                                                   content.sound = UNNotificationSound.default
+
+                                                   var dateComponents = DateComponents()
+                                                   dateComponents.hour = 10
+                                                   dateComponents.minute = 30
+                                                   let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+                                                   let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                                                   center.add(request)
+                                            
+                                            }
+                                           
+                                            
+                                        }
+                                        
+                                        
+                                        
+                                        //  print(_notification[0].title!)
+                                    })
+                                    
+                                    // guard var currentUser = Auth.auth().currentUser else {return}
+                                    //self.userr = User(user: currentUser)
+                                    // print(self.userr)
+                                    // print(user)
+                                    //Database.database().reference(withPath: "users").setValue(100)
+                                    // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
+                                    
+                                    /*         do{
+                                     
+                                     
+                                     let notification  = try
+                                     JSONDecoder().decode(NotificationModel.self, from: Data((value as! String).utf8) )
+                                     
+                                     // userList=list
+                                     if notification.userID=="123"{
+                                     print(notification.data)
+                                     
+                                     }
+                                     //completionBlock(statistics)
+                                     
+                                     }
+                                     catch let jsonErr{
+                                     print("Error serializing json:",jsonErr)
+                                     }
+                                     
+                                     */
+                                    
+                                    
+                                }
+                            }
+                       }
+                       
+                   } else {
+                       print("D'oh")
+                   }
+               }
         
      
            return true
@@ -29,98 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        let center = UNUserNotificationCenter.current()
-
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-            if granted {
-                print("Yay!")
-                
-                let udata=self.defaults.string(forKey: "uData")
-                if udata != nil
-                {
-                                  do{
-                                      
-                                      
-                                      let list  = try
-                                          JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-                                      
-                                      // userList=list
-                                    self.uID = list[0].id!
-                                   
-                                      
-                                  }
-                                  catch let jsonErr{
-                                      print("Error serializing json:",jsonErr)
-                                  }
-                     Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
-                         
-                         if error != nil
-                         {
-                             print(error)
-                         }
-                         else
-                         {
-
-                             let userID = Auth.auth().currentUser!.uid
-                            self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
-                             self.ref.observe(.value, with: { [weak self]  (snapshot) in
-                                 //print("value: \(snapshot)")
-                                
-                                 for item in snapshot.children {
-                                     let task = NotificationModel(snapshot: item as! DataSnapshot)
-                                    if (task.seen == false){
-                                        
-                                        self!.scheduleNotification(body: task.title!)
-                                        
-                                     }
-                                    
-                                     
-                                 }
-                                 
-                                 
-                                 
-                                 //  print(_notification[0].title!)
-                             })
-                             
-                             // guard var currentUser = Auth.auth().currentUser else {return}
-                             //self.userr = User(user: currentUser)
-                             // print(self.userr)
-                             // print(user)
-                             //Database.database().reference(withPath: "users").setValue(100)
-                             // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
-                             
-                             /*         do{
-                              
-                              
-                              let notification  = try
-                              JSONDecoder().decode(NotificationModel.self, from: Data((value as! String).utf8) )
-                              
-                              // userList=list
-                              if notification.userID=="123"{
-                              print(notification.data)
-                              
-                              }
-                              //completionBlock(statistics)
-                              
-                              }
-                              catch let jsonErr{
-                              print("Error serializing json:",jsonErr)
-                              }
-                              
-                              */
-                             
-                             
-                         }
-                     }
-                }
-                
-            } else {
-                print("D'oh")
-            }
-        }
+    
         return true
     }
+   
   
     func scheduleNotification(body:String) {
         let center = UNUserNotificationCenter.current()
