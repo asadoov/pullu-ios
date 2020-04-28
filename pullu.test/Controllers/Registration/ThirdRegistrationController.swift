@@ -137,7 +137,7 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
                     
                     if statusCode.response==0{
                         
-                        self.performSegue(withIdentifier: "successRegPage", sender: self)
+                        self.performSegue(withIdentifier: "smsSuccesSegue", sender: self)
                     }
                     if statusCode.response==1   {
                         let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa birdaha sınayın", preferredStyle: UIAlertController.Style.alert)

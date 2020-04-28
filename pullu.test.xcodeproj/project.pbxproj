@@ -29,6 +29,7 @@
 		0484059323E7F200005E353C /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0484058423E7F200005E353C /* Nunito-LightItalic.ttf */; };
 		04AA335A2405482B00685D64 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA33592405482B00685D64 /* ProfileModel.swift */; };
 		04BDE98B241B91230057C6A1 /* ForgotLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE98A241B91230057C6A1 /* ForgotLastPageViewController.swift */; };
+		04CAED47245856480054AC4C /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CAED46245856480054AC4C /* EditProfileViewController.swift */; };
 		04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1A23FBFF54007380BA /* BalanceController.swift */; };
 		04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */; };
 		04E6BF592419071C002381F1 /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF582419071C002381F1 /* SendEmailViewController.swift */; };
@@ -140,6 +141,7 @@
 		04AA33592405482B00685D64 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		04BDE98A241B91230057C6A1 /* ForgotLastPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotLastPageViewController.swift; sourceTree = "<group>"; };
 		04C8751323C736B400E84091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04CAED46245856480054AC4C /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		04D6EF1A23FBFF54007380BA /* BalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceController.swift; sourceTree = "<group>"; };
 		04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalanceController.swift; sourceTree = "<group>"; };
 		04E6BF582419071C002381F1 /* SendEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailViewController.swift; sourceTree = "<group>"; };
@@ -847,6 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				B68294CF23F599420041E446 /* ProfileController.swift */,
+				04CAED46245856480054AC4C /* EditProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1114,6 +1117,7 @@
 				B67B9DCB23EEE18A00A3451C /* dbSelect.swift in Sources */,
 				B69C14FE241F6F5200F4D7EF /* BackgroundCell.swift in Sources */,
 				B6A40A9623FEC2E40043495D /* NewAdvertisementStruct.swift in Sources */,
+				04CAED47245856480054AC4C /* EditProfileViewController.swift in Sources */,
 				B67B9DCC23EEE18A00A3451C /* DbInsert.swift in Sources */,
 				B67B9DCD23EEE18A00A3451C /* Advertisement.swift in Sources */,
 				04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */,

@@ -8,8 +8,6 @@
 
 import UIKit
 
-//Cavidan Mirzə
-
 class ProfileController: UIViewController {
     
     
@@ -43,20 +41,33 @@ class ProfileController: UIViewController {
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
    
+            
+            
             DispatchQueue.main.async {
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+                dateFormatter.timeZone = TimeZone.current
+                dateFormatter.locale = Locale.current
+                let dt = dateFormatter.date(from: list[0].bDate!)
+                let dtc = dateFormatter.date(from: list[0].cDate!)
+                dateFormatter.dateFormat = "dd.MM.yyyy"
+                
+                
                 self.emailField.text = list[0].mail
                 self.nameField.text = list[0].name
                 self.surnameField.text = list[0].surname
                 self.mobileNumField.text = list[0].phone
-                self.dogumTarixField.text = list[0].bDate
-                self.creatDate.text = list[0].cDate
+                //self.dogumTarixField.text = list[0].bDate
+                //self.creatDate.text = list[0].cDate
                 self.genderBtn.titleLabel?.text = list[0].gender
                 self.prefessionBtn.titleLabel?.text = list[0].profession
                 self.cityBtn.titleLabel?.text = list[0].city
-                
-                
+                self.dogumTarixField.text = dateFormatter.string(from: dt!)
+                self.creatDate.text = dateFormatter.string(from: dtc!)
               
             }
+            
             
         }
         
@@ -68,7 +79,7 @@ class ProfileController: UIViewController {
     }
     
     @IBAction func updateBtn(_ sender: Any) {
-        
+        self.performSegue(withIdentifier: "editProfSegue", sender: self)
     }
     
     

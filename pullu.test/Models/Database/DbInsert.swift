@@ -249,6 +249,41 @@ class DbInsert {
         }
     }
     
+    //profil uptade
+    func profilUptade(newpass:String ,mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/uptade/profile"
+        let Parameters = ["newpass":newpass, "mail": mail,"code": code] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
     
     func addAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:UIProgressView, completionBlock: @escaping (_ result:Status) ->()){
         
