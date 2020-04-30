@@ -17,6 +17,7 @@ class ProfileModel:Codable{
     var bDate: String?
     var gender: String?
     var country: String?
+    var countryID: Int?
     var city: String?
     var profession: String?
     var cDate: String?
