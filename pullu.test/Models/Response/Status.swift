@@ -9,4 +9,6 @@
 import Foundation
 public class Status: Codable {
     public var response:Int?
+    public var responseString:String?
+
 }

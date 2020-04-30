@@ -292,7 +292,7 @@ class DbInsert {
         
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
         
-       // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
+        // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
         //        request.httpMethod = HTTPMethod.post.rawValue
         //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -310,18 +310,18 @@ class DbInsert {
                 multipartFormData.append(("\(newAdvertisement!.aCategoryID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aCategoryID")
                 if newAdvertisement!.files != nil  {
                     for file in newAdvertisement!.files! {
-                                       let mimeType = self.mimeType(for: file)
-                                       let ext = mimeType.components(separatedBy: "/")
-                                       //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
-                                       //                    {
-                                       
-                                       
-                                       multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)
-                                       //}
-                                       
-                                   }
+                        let mimeType = self.mimeType(for: file)
+                        let ext = mimeType.components(separatedBy: "/")
+                        //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
+                        //                    {
+                        
+                        
+                        multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)
+                        //}
+                        
+                    }
                 }
-               
+                
                 
                 multipartFormData.append(("\(newAdvertisement!.aBackgroundUrl ?? "")".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aBackgroundUrl")
                 multipartFormData.append(("\(newAdvertisement!.aCityID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aCityID")
@@ -350,8 +350,8 @@ class DbInsert {
                         //  print("Upload Progress: \(progress.fractionCompleted)")
                         DispatchQueue.main.async {
                             
-//
-                        progressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                            //
+                            progressView.setProgress(Float(progress.fractionCompleted), animated: true)
                         }
                     })
                     upload.responseData { response in
@@ -406,4 +406,59 @@ class DbInsert {
         //        }
         
     }
+    
+    func updateProfile(profile:UpdateProfileStruct,completionBlock: @escaping (_ result:Status) ->()){
+        
+        var jsonString = ""
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(profile)
+            jsonString = String(data: jsonData, encoding: .utf8)!
+            
+            
+            // print("JSON String : " + jsonString!)
+        }
+        catch {
+        }
+        if jsonString != "" {
+            let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/profile"
+            
+            //let json = "{\"What\":\"Ever\"}"
+            
+            let url = URL(string: PULLULINK)!
+            let jsonData = jsonString.data(using: .utf8, allowLossyConversion: false)!
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = HTTPMethod.post.rawValue
+            request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+            
+            Alamofire.request(request).responseJSON
+                {
+                    (response)
+                    in
+                    //  print(PULLULINK)
+                    
+                    do{
+                        
+                        
+                        let statusCode  = try
+                            JSONDecoder().decode(Status.self, from: response.data!)
+                        // userList=list
+                        //print(list)
+                        
+                        completionBlock(statusCode)
+                        
+                        
+                    }
+                    catch let jsonErr{
+                        print("Error serializing json:",jsonErr)
+                    }
+            }
+            
+        }
+        
+        
+    }
+    
 }
