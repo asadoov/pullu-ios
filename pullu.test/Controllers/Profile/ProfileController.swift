@@ -2,13 +2,11 @@
 //  ProfileController.swift
 //  pullu.test
 //
-//  Created by Rufat on 2/13/20.
+//  Created by Javidan Mirza on 4/30/20.
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import UIKit
-
-//Cavidan Mirzə
 
 class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var insert:DbInsert = DbInsert()
