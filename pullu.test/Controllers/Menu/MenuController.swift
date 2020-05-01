@@ -105,8 +105,8 @@ class MenuController: UIViewController {
             
             // userList=list
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-            balance.text = "Yüklənən məbləğ\n\(list[0].balance!) AZN"
-            earning.text = "Qazanılan məbləğ\n\(list[0].earning!) AZN"
+            balance.text = "Yüklənən məbləğ: \(list[0].balance!) AZN"
+            earning.text = "Qazanılan məbləğ: \(list[0].earning!) AZN"
             userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
             
             
