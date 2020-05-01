@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import  MBProgressHUD
 class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     let defaults = UserDefaults.standard
     var newUser: NewUser = NewUser()
@@ -125,51 +125,80 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
         newUser.city=selectedCity
         newUser.sector=selectedProfession
         //print("\(newUser.bDate)")
-        do{
-            dbInsert.SignUp(newUserData: newUser){
-                (statusCode)
-                in
-             
-                do {
-                    self.defaults.set(self.newUser.mail, forKey: "mail")
-                    self.defaults.set(self.newUser.pass, forKey: "pass")
+        if !selectedCountry.isEmpty && !selectedCity.isEmpty && !selectedProfession.isEmpty{
+            do{
+                dbInsert.SignUp(newUserData: newUser){
+                    (statusCode)
+                    in
                     
-                    
-                    if statusCode.response==0{
+                    do {
+                        self.defaults.set(self.newUser.mail, forKey: "mail")
+                        self.defaults.set(self.newUser.pass, forKey: "pass")
                         
-                        self.performSegue(withIdentifier: "successRegPage", sender: self)
+                        
+                        if statusCode.response==0{
+                            
+                            self.performSegue(withIdentifier: "successRegPage", sender: self)
+                        }
+                        if statusCode.response==1   {
+                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            warningAlert.mode = MBProgressHUDMode.text
+                            //            warningAlert.isSquare=true
+                            warningAlert.label.text = "Xəta"
+                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəht edin"
+                            warningAlert.hide(animated: true,afterDelay: 3)
+                            
+                        }
+                        if statusCode.response==2   {
+                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                            warningAlert.mode = MBProgressHUDMode.text
+                            //            warningAlert.isSquare=true
+                            warningAlert.label.text = "Diqqət"
+                            warningAlert.detailsLabel.text = "Mail artıq mövcuddur"
+                            warningAlert.hide(animated: true,afterDelay: 3)
+                            
+                            
+                        }
+                        
+                        // print("JSON String : " + jsonString!)
                     }
-                    if statusCode.response==1   {
-                        let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa birdaha sınayın", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
+                    catch {
+                        let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        warningAlert.mode = MBProgressHUDMode.text
+                        //            warningAlert.isSquare=true
+                        warningAlert.label.text = "Xəta"
+                        warningAlert.detailsLabel.text = "Biraz sonra birdaha cəht edin"
+                        warningAlert.hide(animated: true,afterDelay: 3)
+                        
+                        
                         
                     }
-                    if statusCode.response==2   {
-                                           let alert = UIAlertController(title: "Bildiriş", message: "Mail artıq mövcuddur", preferredStyle: UIAlertController.Style.alert)
-                                           alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                                           self.present(alert, animated: true, completion: nil)
-                                           
-                                       }
                     
-                    // print("JSON String : " + jsonString!)
-                }
-                catch {
-                    let alert = UIAlertController(title: "Bildiriş", message: "Biraz sonra birdaha cəht edin", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
                 }
                 
+                
             }
-            
-            
+            catch{
+                let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                warningAlert.mode = MBProgressHUDMode.text
+                //            warningAlert.isSquare=true
+                warningAlert.label.text = "Xəta"
+                warningAlert.detailsLabel.text = "Biraz sonra birdaha cəht edin"
+                warningAlert.hide(animated: true,afterDelay: 3)
+                
+                
+                
+            }
         }
-        catch{
-            let alert = UIAlertController(title: "Bildiriş", message: "Biraz sonra birdaha cəht edin", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+        else
+        {
             
-            
+            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+            warningAlert.mode = MBProgressHUDMode.text
+            //            warningAlert.isSquare=true
+            warningAlert.label.text = "Diqqət"
+            warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından "
+            warningAlert.hide(animated: true,afterDelay: 3)
         }
         
         // print(selectedCountry)

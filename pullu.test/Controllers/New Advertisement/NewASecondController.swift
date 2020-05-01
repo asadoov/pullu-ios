@@ -9,7 +9,7 @@
 import UIKit
 import OpalImagePicker
 import Photos
-
+import MBProgressHUD
 class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate{
     
     
@@ -34,7 +34,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+        
         //descriptionField.delegate = self
         descriptionField.layer.borderWidth = 1.0
         descriptionField.text = "Ətraflı məlumat"
@@ -145,6 +145,16 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             
         }
+        else
+        {
+            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+            warningAlert.mode = MBProgressHUDMode.text
+//            warningAlert.isSquare=true
+            warningAlert.label.text = "Diqqət"
+            warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından və media seçildiyindən əmin olun"
+            warningAlert.hide(animated: true,afterDelay: 3)
+            
+        }
         
         
         
@@ -180,7 +190,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         showActivityIndicator()
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
-       var a = 1
+        var a = 1
         for img in assets {
             
             
@@ -208,16 +218,16 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             if a == assets.count
             {
-                 completionBlock(true)
+                completionBlock(true)
                 
             }
-              a+=1
-        
+            a+=1
+            
             
             
         }
         
-
+        
         
     }
     
@@ -324,7 +334,7 @@ extension UIImage {
         case high    = 0.75
         case highest = 1
     }
-
+    
     /// Returns the data for the specified image in JPEG format.
     /// If the image object’s underlying image data has been purged, calling this function forces that data to be reloaded into memory.
     /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.

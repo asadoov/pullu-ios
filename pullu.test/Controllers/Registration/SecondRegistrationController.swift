@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     var newUser: NewUser = NewUser()
     @IBOutlet weak var name: UITextField!
@@ -86,6 +86,15 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "thirdRegPage", sender: self)
             }
+            
+        }
+        else{
+             let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        warningAlert.mode = MBProgressHUDMode.text
+            //            warningAlert.isSquare=true
+                        warningAlert.label.text = "Diqqət"
+                        warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından və media seçildiyindən əmin olun"
+                        warningAlert.hide(animated: true,afterDelay: 3)
             
         }
         

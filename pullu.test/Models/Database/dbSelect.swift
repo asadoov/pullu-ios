@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import MBProgressHUD
 public class dbSelect {
     
     
@@ -51,31 +52,78 @@ public class dbSelect {
         
     }
     
-    func getAds(username:String,pass:String,catID:Int?,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-         var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+    func getAds(username:String,pass:String,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+        
+        let Parameters:[String:Any]
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         if catID! > 0 {
-          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
-        }
-       
-       
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
-                
-                
-                var list  = try
-                    JSONDecoder().decode(Array<Advertisement>.self, from: json)
-                
-                // userList=list
-                
-                completionBlock(list)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
+            Parameters = ["mail": username,"pass":pass,"catID":catID!] as [String : Any]
+            //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        }else{
+            Parameters = ["mail": username,"pass":pass] as [String : Any]
             
         }
+        
+        
+        
+        
+        
+        
+        
+        
+        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
+                DispatchQueue.main.async {
+            progressView.progress = Float(progress.fractionCompleted)
+            }
+            print("progess!", Float(progress.fractionCompleted))
+        }
+            
+            
+            
+            
+            .responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    var list  = try
+                        JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(list)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    
+        
+        //        GetJson(jsonUrlString: url){
+        //            (json) in
+        //            do{
+        //
+        //
+        //
+        //
+        //                // userList=list
+        //
+        //
+        //
+        //            }
+        //            catch let jsonErr{
+        //                print("Error serializing json:",jsonErr)
+        //            }
+        //
+        //        }
         
     }
     
@@ -246,25 +294,25 @@ public class dbSelect {
     func aType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/atype"
-   
-                GetJson(jsonUrlString: url){
-                    (json) in
-                    do{
         
-        
-                        let aTypeList  = try
-                            JSONDecoder().decode(Array<TypeStruct>.self, from: json)
-        
-                        // userList=list
-        
-                        completionBlock(aTypeList)
-        
-                    }
-                    catch let jsonErr{
-                        print("Error serializing json:",jsonErr)
-                    }
-        
-                }
+        GetJson(jsonUrlString: url){
+            (json) in
+            do{
+                
+                
+                let aTypeList  = try
+                    JSONDecoder().decode(Array<TypeStruct>.self, from: json)
+                
+                // userList=list
+                
+                completionBlock(aTypeList)
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+        }
         
     }
     func aTariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
@@ -312,53 +360,53 @@ public class dbSelect {
         
     }
     func getAgeRange(completionBlock: @escaping (_ result:Array<AgeRangeStruct>) ->()){
-           
-           let url="https://pullu.az/api/androidmobileapp/get/age/range"
-      
-                   GetJson(jsonUrlString: url){
-                       (json) in
-                       do{
-           
-           
-                           let backroundImageList  = try
-                               JSONDecoder().decode(Array<AgeRangeStruct>.self, from: json)
-           
-                           // userList=list
-           
-                           completionBlock(backroundImageList)
-           
-                       }
-                       catch let jsonErr{
-                           print("Error serializing json:",jsonErr)
-                       }
-           
-                   }
-           
-       }
+        
+        let url="https://pullu.az/api/androidmobileapp/get/age/range"
+        
+        GetJson(jsonUrlString: url){
+            (json) in
+            do{
+                
+                
+                let backroundImageList  = try
+                    JSONDecoder().decode(Array<AgeRangeStruct>.self, from: json)
+                
+                // userList=list
+                
+                completionBlock(backroundImageList)
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+        }
+        
+    }
     
     func getBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
-           
-           let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
-      
-                   GetJson(jsonUrlString: url){
-                       (json) in
-                       do{
-           
-           
-                           let backroundImageList  = try
-                               JSONDecoder().decode(Array<BackroundImageStruct>.self, from: json)
-           
-                           // userList=list
-           
-                           completionBlock(backroundImageList)
-           
-                       }
-                       catch let jsonErr{
-                           print("Error serializing json:",jsonErr)
-                       }
-           
-                   }
-           
-       }
+        
+        let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
+        
+        GetJson(jsonUrlString: url){
+            (json) in
+            do{
+                
+                
+                let backroundImageList  = try
+                    JSONDecoder().decode(Array<BackroundImageStruct>.self, from: json)
+                
+                // userList=list
+                
+                completionBlock(backroundImageList)
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+        }
+        
+    }
     
 }

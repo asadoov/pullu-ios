@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 class FirstRegistrationController: UIViewController {
     
 
@@ -51,9 +51,12 @@ class FirstRegistrationController: UIViewController {
             
         }
         else{
-            let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa bütün boşluqlarıı doldurun!", preferredStyle: UIAlertController.Style.alert)
-                                       alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                                       self.present(alert, animated: true, completion: nil)
+            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        warningAlert.mode = MBProgressHUDMode.text
+            //            warningAlert.isSquare=true
+                        warningAlert.label.text = "Diqqət"
+                        warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından və media seçildiyindən əmin olun"
+                        warningAlert.hide(animated: true,afterDelay: 3)
             
         }
     }

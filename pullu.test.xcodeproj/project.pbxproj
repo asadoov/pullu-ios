@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0430E2562404F5C300F39810 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0430E2552404F5C300F39810 /* ArchiveController.swift */; };
 		047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F46A323FBBEFD005E9DFA /* WebViewController.swift */; };
 		04AA335A2405482B00685D64 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AA33592405482B00685D64 /* ProfileModel.swift */; };
 		04BDE98B241B91230057C6A1 /* ForgotLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE98A241B91230057C6A1 /* ForgotLastPageViewController.swift */; };
@@ -16,7 +15,9 @@
 		04E6BF592419071C002381F1 /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF582419071C002381F1 /* SendEmailViewController.swift */; };
 		04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* CheckPassViewController.swift */; };
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
+		AEFC09EDEAC416992009AD0E /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
+		B60D553C245B0BE000AAC26E /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60D553B245B0BE000AAC26E /* ArchiveController.swift */; };
 		B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */; };
 		B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCD1243209DD0020C2D8 /* AuditoryController.swift */; };
 		B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62984442423716A001346B2 /* NewHomeViewController.swift */; };
@@ -81,7 +82,6 @@
 		B68B623D245765B0007F6DFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A023C452D3004F6FA9 /* Main.storyboard */; };
 		B68B623E245765B0007F6DFA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 045829A823C452D5004F6FA9 /* LaunchScreen.storyboard */; };
 		B68B623F245766ED007F6DFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 047F46A523FBD6E9005E9DFA /* GoogleService-Info.plist */; };
-		B68B6240245767A5007F6DFA /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */; };
 		B68E5F4A24094DAF002B9168 /* CategoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68E5F4924094DAF002B9168 /* CategoryViewCell.swift */; };
 		B697C6CC241BBDE600AE9402 /* BackroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697C6CB241BBDE600AE9402 /* BackroundController.swift */; };
 		B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697C6CD241BBE6900AE9402 /* BackgroundImageStruct.swift */; };
@@ -113,7 +113,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0430E2552404F5C300F39810 /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		0458299723C452D3004F6FA9 /* pullu.test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pullu.test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045829A123C452D3004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		045829A423C452D3004F6FA9 /* pullu_test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pullu_test.xcdatamodel; sourceTree = "<group>"; };
@@ -145,11 +144,12 @@
 		04E6BF5A24190787002381F1 /* CheckPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPassViewController.swift; sourceTree = "<group>"; };
 		04E6BF5C24190831002381F1 /* CreatePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePassViewController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
-		259A9ADBF30E384973B8D01C /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
-		35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B50AC22435A2523F7745E84B /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
+		0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
+		B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B60501BC23F0299600928B7F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		B60D553B245B0BE000AAC26E /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		B61290F423D05B8C00FE9344 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeStruct.swift; sourceTree = "<group>"; };
 		B618DCD1243209DD0020C2D8 /* AuditoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditoryController.swift; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B68B6240245767A5007F6DFA /* Pods_pullu_test.framework in Frameworks */,
+				AEFC09EDEAC416992009AD0E /* Pods_pullu_test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +419,7 @@
 		0430E2522404F57C00F39810 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				0430E2552404F5C300F39810 /* ArchiveController.swift */,
+				B60D553B245B0BE000AAC26E /* ArchiveController.swift */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -706,7 +706,7 @@
 				B6CBE8B323EC438B002414CC /* libleveldb-library.a */,
 				B6CBE8B423EC438B002414CC /* libnanopb.a */,
 				B6CBE8B623EC438B002414CC /* libPromisesObjC.a */,
-				35DD874A0D52C5A0606CE48E /* Pods_pullu_test.framework */,
+				0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -977,8 +977,8 @@
 		CA3D62115FD4EA1DDBE1E8D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B50AC22435A2523F7745E84B /* Pods-pullu.test.debug.xcconfig */,
-				259A9ADBF30E384973B8D01C /* Pods-pullu.test.release.xcconfig */,
+				A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */,
+				B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -990,12 +990,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 045829AE23C452D5004F6FA9 /* Build configuration list for PBXNativeTarget "pullu.test" */;
 			buildPhases = (
-				4D9BDEA5342BDAAD2718D9E7 /* [CP] Check Pods Manifest.lock */,
+				EAF1FA2DA22F68531FC75D06 /* [CP] Check Pods Manifest.lock */,
 				0458299323C452D3004F6FA9 /* Sources */,
 				0458299423C452D3004F6FA9 /* Frameworks */,
 				0458299523C452D3004F6FA9 /* Resources */,
 				B688E5B023ED9458003D04D0 /* Embed Frameworks */,
-				DE739E7862AD473FA6AAEA1C /* [CP] Embed Pods Frameworks */,
+				6E4D6FB3D7A91071E6F5FA93 /* [CP] Embed Pods Frameworks */,
+				7A3A391D7211C1C1EA6ABB91 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1069,7 +1070,41 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4D9BDEA5342BDAAD2718D9E7 /* [CP] Check Pods Manifest.lock */ = {
+		6E4D6FB3D7A91071E6F5FA93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A3A391D7211C1C1EA6ABB91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAF1FA2DA22F68531FC75D06 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1089,23 +1124,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE739E7862AD473FA6AAEA1C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1136,10 +1154,10 @@
 				04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */,
 				B67B9DCE23EEE18A00A3451C /* User.swift in Sources */,
 				B67B9DCF23EEE18A00A3451C /* NewUser.swift in Sources */,
-				0430E2562404F5C300F39810 /* ArchiveController.swift in Sources */,
 				B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */,
 				B67B9DD023EEE18A00A3451C /* Country.swift in Sources */,
 				B6A40A9223FE68460043495D /* TariffViewCell.swift in Sources */,
+				B60D553C245B0BE000AAC26E /* ArchiveController.swift in Sources */,
 				B67B9DD123EEE18A00A3451C /* City.swift in Sources */,
 				B686A249242B675C00F62D5E /* CategoryViewController.swift in Sources */,
 				B67B9DD223EEE18A00A3451C /* Profession.swift in Sources */,
@@ -1322,13 +1340,13 @@
 		};
 		045829AF23C452D5004F6FA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B50AC22435A2523F7745E84B /* Pods-pullu.test.debug.xcconfig */;
+			baseConfigurationReference = A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1346,13 +1364,13 @@
 		};
 		045829B023C452D5004F6FA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 259A9ADBF30E384973B8D01C /* Pods-pullu.test.release.xcconfig */;
+			baseConfigurationReference = B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

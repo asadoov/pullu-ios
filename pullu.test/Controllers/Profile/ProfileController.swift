@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 //Cavidan Mirzə
 
 class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -78,8 +78,11 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     @IBOutlet weak var surnameField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var mobileNumField: UITextField!
+    
+    
+    @IBOutlet weak var mobileNumField: UIButton!
+    
+    @IBOutlet weak var emailField: UIButton!
     @IBOutlet weak var dogumTarixField: UITextField!
     @IBOutlet weak var createdDate: UITextField!
     
@@ -101,6 +104,14 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tap)
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
@@ -113,10 +124,10 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             self.profileList = list
             self.countryID = self.profileList[0].countryID
             DispatchQueue.main.async {
-                self.emailField.text = list[0].mail
+                self.emailField.setTitle(list[0].mail, for: .normal)
                 self.nameField.text = list[0].name
                 self.surnameField.text = list[0].surname
-                self.mobileNumField.text = list[0].phone
+                self.mobileNumField.setTitle(list[0].phone, for: .normal)
                 self.genderButton.setTitle(list[0].gender, for: .normal)
                 self.professionButton.setTitle(list[0].profession, for: .normal)
                 
@@ -140,7 +151,10 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
         // saveBtn.layer.insertSublayer(gradient, at: 0)
     }
-    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.view.backgroundColor = .blue
@@ -197,7 +211,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 editRadiusAlert.addAction(UIAlertAction(title: "Seç", style: .default, handler: { (action: UIAlertAction!) in
                     let selectedProfession = self.professionList[self.professionPicker.selectedRow(inComponent: 0)].id
                     self.professionButton.setTitle(self.professionList[self.professionPicker.selectedRow(inComponent: 0)].name, for: .normal)
-
+                    
                     self.uProfile.professionID = selectedProfession
                     self.infoChanged=true
                 }))
@@ -231,7 +245,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 editRadiusAlert.setValue(vc, forKey: "contentViewController")
                 editRadiusAlert.addAction(UIAlertAction(title: "Seç", style: .default, handler: { (action: UIAlertAction!) in
                     let selectedCity = self.cityList[self.cityPicker.selectedRow(inComponent: 0)].id
-                     self.cityButton.setTitle(self.cityList[self.cityPicker.selectedRow(inComponent: 0)].name, for: .normal)
+                    self.cityButton.setTitle(self.cityList[self.cityPicker.selectedRow(inComponent: 0)].name, for: .normal)
                     self.uProfile.cityID = selectedCity
                     self.infoChanged=true
                 }))
@@ -253,42 +267,67 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             uProfile.surname = surnameField.text
             infoChanged=true
         }
-        if(mobileNumField.text != profileList[0].phone){
-            uProfile.phone = mobileNumField.text
-            infoChanged=true
-        }
-        if(emailField.text != profileList[0].mail){
-            uProfile.mail = emailField.text
-            infoChanged=true
-        }
+        //        if(mobileNumField.text != profileList[0].phone){
+        //            uProfile.phone = Int(mobileNumField.text!)
+        //            infoChanged=true
+        //        }
+        //        if(emailField.text != profileList[0].mail){
+        //            uProfile.newMail = emailField.text
+        //            infoChanged=true
+        //        }
         if infoChanged {
+            let loadingNotification = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingNotification.mode = MBProgressHUDMode.annularDeterminate
+            loadingNotification.label.text="Gözləyin"
+            loadingNotification.detailsLabel.text = "Yeniliklər serverlərimizə yerləşdirilir..."
             let defaults = UserDefaults.standard
             
             // let userData = defaults.string(forKey: "uData")
             let  mail = defaults.string(forKey: "mail")
             let  pass = defaults.string(forKey: "pass")
+            
+            let udata=defaults.string(forKey: "uData")
+            do{
+                
+                
+                let list  = try
+                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                
+                // userList=list
+                uProfile.uID = list[0].id
+                
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
             uProfile.mail = mail
             uProfile.pass = pass
-            
-            insert.updateProfile(profile: uProfile)
+            insert.updateProfile(profile: uProfile,progressView: loadingNotification)
             {
                 (status)
                 in
+                DispatchQueue.main.async {
+                    loadingNotification.hide(animated: true)
+                    
+                }
                 if status.response == 0{
                     
-                    let alert = UIAlertController(title: "Bildiriş", message: "Məlumatlar uğurla yazıldı", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    let successAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    successAlert.mode = MBProgressHUDMode.text
+                    successAlert.label.text = "Uğurludur!"
+                    successAlert.hide(animated: true,afterDelay: 3)
                 }
                 else {
-                   // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
-                      let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                    // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                     alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
                         let alert = UIAlertController(title: "Ətraflı", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                         self.present(alert, animated: true, completion: nil)
-                     }))
+                        self.present(alert, animated: true, completion: nil)
+                    }))
                     self.present(alert, animated: true, completion: nil)
                     
                 }

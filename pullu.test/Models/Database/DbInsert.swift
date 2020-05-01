@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-
+import MBProgressHUD
 class DbInsert {
     var dbSelect: dbSelect!
     
@@ -369,7 +369,7 @@ class DbInsert {
         
     }
     
-    func updateProfile(profile:UpdateProfileStruct,completionBlock: @escaping (_ result:Status) ->()){
+    func updateProfile(profile:UpdateProfileStruct,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Status) ->()){
         
         var jsonString = ""
         let jsonEncoder = JSONEncoder()
@@ -378,7 +378,7 @@ class DbInsert {
             jsonString = String(data: jsonData, encoding: .utf8)!
             
             
-            // print("JSON String : " + jsonString!)
+            //print("JSON String : " + jsonString)
         }
         catch {
         }
@@ -395,7 +395,7 @@ class DbInsert {
             request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
             request.httpBody = jsonData
             
-            Alamofire.request(request).responseJSON
+        let req =    Alamofire.request(request).responseJSON
                 {
                     (response)
                     in
@@ -417,10 +417,50 @@ class DbInsert {
                         print("Error serializing json:",jsonErr)
                     }
             }
+            req.downloadProgress { (progress) in
+                    DispatchQueue.main.async {
+                progressView.progress = Float(progress.fractionCompleted)
+                }
+                //print("progess!", Float(progress.fractionCompleted))
+            }
             
         }
         
         
     }
+    func activateAccount(code:Int ,completionBlock: @escaping (_ result:Status) ->()){
+           
+           
+           
+           
+           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/activate/user"
+           let Parameters = ["code": code] as [String : Any]
+           
+           
+           
+           request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+               {
+                   (response)
+                   in
+                   //  print(PULLULINK)
+                   
+                   do{
+                       
+                       
+                       let statusCode  = try
+                           JSONDecoder().decode(Status.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(statusCode)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+       }
     
 }

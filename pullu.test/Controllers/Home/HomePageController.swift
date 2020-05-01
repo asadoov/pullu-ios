@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-
+import MBProgressHUD
 class HomePageController: UIViewController{
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
@@ -41,11 +41,16 @@ class HomePageController: UIViewController{
     var loadingIsOn = false
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
     var loadingView: UIView = UIView()
+    var loadingAlert:MBProgressHUD?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showActivityIndicator()
-    
+//        showActivityIndicator()
+    loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.determinate
+        loadingAlert!.label.text="Gözləyin"
+        loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
         
         
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -152,7 +157,7 @@ class HomePageController: UIViewController{
         }
         
         
-        db.getAds(username: mail!, pass: pass!,catID: 0){
+        db.getAds(username: mail!, pass: pass!,catID: 0,progressView: loadingAlert!){
             
             (list) in
             
@@ -208,8 +213,11 @@ class HomePageController: UIViewController{
                     self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.ReklamList.reloadData()
                     self.isPaidSegment.selectedSegmentIndex=0
-                    self.hideActivityIndicator()
-                    
+                    //self.hideActivityIndicator()
+                    DispatchQueue.main.async {
+                        self.loadingAlert!.hide(animated: true)
+                        
+                    }
                 }
                 
                 
@@ -395,7 +403,7 @@ class HomePageController: UIViewController{
         if mail != nil&&pass != nil{
             var typeCount=0
             
-            db.getAds(username: mail!, pass: pass!, catID: 0){
+            db.getAds(username: mail!, pass: pass!, catID: 0,progressView: loadingAlert!){
                 
                 (list) in
                 

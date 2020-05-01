@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
-
+import MBProgressHUD
 class CategoryViewController: UIViewController {
     @IBOutlet weak var aTableView: UITableView!
     var advertArray: [Advertisement] = [Advertisement]()
@@ -20,20 +20,24 @@ class CategoryViewController: UIViewController {
     var pass:String?
     var aID:Int?
     let  db:dbSelect=dbSelect()
-    
+    var loadingAlert:MBProgressHUD?
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
-      var loadingView: UIView = UIView()
+    var loadingView: UIView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showActivityIndicator()
+        //showActivityIndicator()
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.annularDeterminate
+        loadingAlert!.label.text="Gözləyin"
+        loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
         let defaults = UserDefaults.standard
         // Do any additional setup after loading the view.
         mail = defaults.string(forKey: "mail")
         pass = defaults.string(forKey: "pass")
         self.title=object?.name
-        db.getAds(username: mail!, pass: pass!, catID: object?.id!){
+        db.getAds(username: mail!, pass: pass!, catID: object?.id!,progressView: loadingAlert!){
             
             (list) in
             
@@ -77,7 +81,11 @@ class CategoryViewController: UIViewController {
                     
                     //self.ReklamCount.text="Reklam sayı \(String(typeCount))"
                     self.aTableView.reloadData()
-                    self.hideActivityIndicator()
+                    //                    self.hideActivityIndicator()
+                    DispatchQueue.main.async {
+                        self.loadingAlert!.hide(animated: true)
+                        
+                    }
                     
                 }
                 
@@ -92,142 +100,142 @@ class CategoryViewController: UIViewController {
     
     
     func showActivityIndicator() {
-            DispatchQueue.main.async {
-               self.loadingView = UIView()
-               self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
-               self.loadingView.center = self.view.center
-               self.loadingView.backgroundColor = UIColor.black
-               self.loadingView.alpha = 0.7
-               self.loadingView.clipsToBounds = true
-               self.loadingView.layer.cornerRadius = 10
-
-               self.spinner = UIActivityIndicatorView(style: .whiteLarge)
-               self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
-               self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
-
-               self.loadingView.addSubview(self.spinner)
-               self.view.addSubview(self.loadingView)
-               self.spinner.startAnimating()
-           }
-       }
-
-       func hideActivityIndicator() {
-            DispatchQueue.main.async {
-               self.spinner.stopAnimating()
-               self.loadingView.removeFromSuperview()
-           }
-       }
-      
+        DispatchQueue.main.async {
+            self.loadingView = UIView()
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.center = self.view.center
+            self.loadingView.backgroundColor = UIColor.black
+            self.loadingView.alpha = 0.7
+            self.loadingView.clipsToBounds = true
+            self.loadingView.layer.cornerRadius = 10
+            
+            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+            
+            self.loadingView.addSubview(self.spinner)
+            self.view.addSubview(self.loadingView)
+            self.spinner.startAnimating()
+        }
+    }
+    
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            self.spinner.stopAnimating()
+            self.loadingView.removeFromSuperview()
+        }
+    }
+    
     @IBAction func isPaidSegmentChanged(_ sender: Any) {
-      
-              self.advertArray.removeAll()
-              
-              if (!aTableView.isTracking && !aTableView.isDecelerating) {
-                  if isPaidSegment.selectedSegmentIndex == 0{
-                      if  isPaid != nil{
-                          advertArray = isPaid
-                          DispatchQueue.main.async {
-                                 self.aTableView.reloadData()
-                              
-                              
-                          }
-                      }
-                      // Table was scrolled by user.
-                      //                if dataArray.count>0{
-                      //
-                      //                    for item in dataArray{
-                      //                        if item.isPaid==1{
-                      //
-                      //                            advertArray.append(item)
-                      //                        }
-                      //
-                      //                    }
-                      //
-                      //                    DispatchQueue.main.async {
-                      //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                      //                        self.ReklamList.reloadData()
-                      //
-                      //
-                      //                    }
-                      //
-                      //                }
-                  }
-                  
-                  if isPaidSegment.selectedSegmentIndex==1{
-                      if  isNotPaid != nil{
-                          advertArray = isNotPaid
-                          DispatchQueue.main.async {
-                              self.aTableView.reloadData()
-                              
-                              
-                          }
-                      }
-                      
-                      // Table was scrolled by user.
-                      //                if dataArray.count>0{
-                      //                    for item in dataArray{
-                      //                        if item.isPaid==0{
-                      //
-                      //                            advertArray.append(item)
-                      //                        }
-                      //
-                      //                    }
-                      //                    DispatchQueue.main.async {
-                      //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-                      //
-                      //                        self.ReklamList.reloadData()
-                      //
-                      //
-                      //                    }
-                      //                }
-                  }
-                  
-              }
-              else  {
-                  
-                  if isPaidSegment.selectedSegmentIndex == 0{
-                      
-                      isPaidSegment.selectedSegmentIndex = 1
-                      
-                  }
-                  if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
-                  
-              }
-              
-              
-              
-              
-              
-              
-          
+        
+        self.advertArray.removeAll()
+        
+        if (!aTableView.isTracking && !aTableView.isDecelerating) {
+            if isPaidSegment.selectedSegmentIndex == 0{
+                if  isPaid != nil{
+                    advertArray = isPaid
+                    DispatchQueue.main.async {
+                        self.aTableView.reloadData()
+                        
+                        
+                    }
+                }
+                // Table was scrolled by user.
+                //                if dataArray.count>0{
+                //
+                //                    for item in dataArray{
+                //                        if item.isPaid==1{
+                //
+                //                            advertArray.append(item)
+                //                        }
+                //
+                //                    }
+                //
+                //                    DispatchQueue.main.async {
+                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                //                        self.ReklamList.reloadData()
+                //
+                //
+                //                    }
+                //
+                //                }
+            }
+            
+            if isPaidSegment.selectedSegmentIndex==1{
+                if  isNotPaid != nil{
+                    advertArray = isNotPaid
+                    DispatchQueue.main.async {
+                        self.aTableView.reloadData()
+                        
+                        
+                    }
+                }
+                
+                // Table was scrolled by user.
+                //                if dataArray.count>0{
+                //                    for item in dataArray{
+                //                        if item.isPaid==0{
+                //
+                //                            advertArray.append(item)
+                //                        }
+                //
+                //                    }
+                //                    DispatchQueue.main.async {
+                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+                //
+                //                        self.ReklamList.reloadData()
+                //
+                //
+                //                    }
+                //                }
+            }
+            
+        }
+        else  {
+            
+            if isPaidSegment.selectedSegmentIndex == 0{
+                
+                isPaidSegment.selectedSegmentIndex = 1
+                
+            }
+            if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
+            
+        }
+        
+        
+        
+        
+        
+        
+        
     }
     
     // MARK: - Navigation
-      
-      // In a storyboard-based application, you will often want to do a little preparation before navigation
-      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-          if(segue.identifier == "photoReklamPage"){
-              let displayVC = segue.destination as! AboutAdvertController
-              displayVC.advertID = aID
-          }
-          if(segue.identifier == "textReklamPage"){
-              let displayVC = segue.destination as! TextReklamController
-              displayVC.advertID = aID
-          }
-          if(segue.identifier == "videoReklamPage"){
-              let displayVC = segue.destination as! VideoReklamController
-              displayVC.advertID = aID
-          }
-//          if(segue.identifier == "aCatSegue"){
-//              let displayVC = segue.destination as! CategoryViewController
-//              displayVC.object = catObject
-//          }
-          
-          // Get the new view controller using segue.destination.
-          // Pass the selected object to the new view controller.
-      }
     
-  
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "photoReklamPage"){
+            let displayVC = segue.destination as! AboutAdvertController
+            displayVC.advertID = aID
+        }
+        if(segue.identifier == "textReklamPage"){
+            let displayVC = segue.destination as! TextReklamController
+            displayVC.advertID = aID
+        }
+        if(segue.identifier == "videoReklamPage"){
+            let displayVC = segue.destination as! VideoReklamController
+            displayVC.advertID = aID
+        }
+        //          if(segue.identifier == "aCatSegue"){
+        //              let displayVC = segue.destination as! CategoryViewController
+        //              displayVC.object = catObject
+        //          }
+        
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    
+    
     
 }
 extension CategoryViewController:UITableViewDelegate,UITableViewDataSource
