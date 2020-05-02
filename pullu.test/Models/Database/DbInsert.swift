@@ -462,5 +462,72 @@ class DbInsert {
            }
            
        }
-    
+    func verifyMobile(mail:String,pass:String,newPhone:Int ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/mobile"
+        let Parameters = ["mail": mail,"pass": pass,"newPhone": newPhone] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func updatePhone(mail:String,pass:String,newPhone:Int,code:Int ,completionBlock: @escaping (_ result:Status) ->()){
+           
+           
+           
+           
+           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/phone"
+        let Parameters = ["mail": mail,"pass": pass,"phone": newPhone,"code":code] as [String : Any]
+           
+           
+           
+           request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+               {
+                   (response)
+                   in
+                   //  print(PULLULINK)
+                   
+                   do{
+                       
+                       
+                       let statusCode  = try
+                           JSONDecoder().decode(Status.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(statusCode)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+       }
 }

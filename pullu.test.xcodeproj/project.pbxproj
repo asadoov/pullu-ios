@@ -15,7 +15,6 @@
 		04E6BF592419071C002381F1 /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF582419071C002381F1 /* SendEmailViewController.swift */; };
 		04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* CheckPassViewController.swift */; };
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
-		AEFC09EDEAC416992009AD0E /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
 		B60D553C245B0BE000AAC26E /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60D553B245B0BE000AAC26E /* ArchiveController.swift */; };
 		B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */; };
@@ -94,6 +93,7 @@
 		B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDDD2433C13600D533B3 /* PreviewController.swift */; };
 		B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */; };
 		B6E0C38A245A1ABC00AFB528 /* UpdateProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */; };
+		D2E357998E73B8EA3DF84FD7 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0595F0A66FBB5AD7464EA7F /* Pods_pullu_test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -144,9 +144,8 @@
 		04E6BF5A24190787002381F1 /* CheckPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPassViewController.swift; sourceTree = "<group>"; };
 		04E6BF5C24190831002381F1 /* CreatePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePassViewController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
-		0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
-		B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
+		A0595F0A66FBB5AD7464EA7F /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE8717CF02DEB1916DE6D1C1 /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B60501BC23F0299600928B7F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		B60D553B245B0BE000AAC26E /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
@@ -402,6 +401,7 @@
 		B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileStruct.swift; sourceTree = "<group>"; };
 		B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheckController.swift; sourceTree = "<group>"; };
+		BF427D74D93ABE7B1167097F /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,7 +409,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEFC09EDEAC416992009AD0E /* Pods_pullu_test.framework in Frameworks */,
+				D2E357998E73B8EA3DF84FD7 /* Pods_pullu_test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +706,7 @@
 				B6CBE8B323EC438B002414CC /* libleveldb-library.a */,
 				B6CBE8B423EC438B002414CC /* libnanopb.a */,
 				B6CBE8B623EC438B002414CC /* libPromisesObjC.a */,
-				0706FA19E098CEC5CDFED13E /* Pods_pullu_test.framework */,
+				A0595F0A66FBB5AD7464EA7F /* Pods_pullu_test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -977,8 +977,8 @@
 		CA3D62115FD4EA1DDBE1E8D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */,
-				B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */,
+				AE8717CF02DEB1916DE6D1C1 /* Pods-pullu.test.debug.xcconfig */,
+				BF427D74D93ABE7B1167097F /* Pods-pullu.test.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -990,13 +990,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 045829AE23C452D5004F6FA9 /* Build configuration list for PBXNativeTarget "pullu.test" */;
 			buildPhases = (
-				EAF1FA2DA22F68531FC75D06 /* [CP] Check Pods Manifest.lock */,
+				D46EF0DF86E3999951D24911 /* [CP] Check Pods Manifest.lock */,
 				0458299323C452D3004F6FA9 /* Sources */,
 				0458299423C452D3004F6FA9 /* Frameworks */,
 				0458299523C452D3004F6FA9 /* Resources */,
 				B688E5B023ED9458003D04D0 /* Embed Frameworks */,
-				6E4D6FB3D7A91071E6F5FA93 /* [CP] Embed Pods Frameworks */,
-				7A3A391D7211C1C1EA6ABB91 /* [CP] Copy Pods Resources */,
+				EECD4EC3BBDFE2966CF57CF3 /* [CP] Embed Pods Frameworks */,
+				D91BC6776A62D64F5089736B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1070,41 +1070,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6E4D6FB3D7A91071E6F5FA93 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7A3A391D7211C1C1EA6ABB91 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EAF1FA2DA22F68531FC75D06 /* [CP] Check Pods Manifest.lock */ = {
+		D46EF0DF86E3999951D24911 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1124,6 +1090,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D91BC6776A62D64F5089736B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EECD4EC3BBDFE2966CF57CF3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1340,13 +1340,13 @@
 		};
 		045829AF23C452D5004F6FA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A252A296498E4C907E58EA4E /* Pods-pullu.test.debug.xcconfig */;
+			baseConfigurationReference = AE8717CF02DEB1916DE6D1C1 /* Pods-pullu.test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1364,13 +1364,13 @@
 		};
 		045829B023C452D5004F6FA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B53E6165AC8C439BAC94DA0E /* Pods-pullu.test.release.xcconfig */;
+			baseConfigurationReference = BF427D74D93ABE7B1167097F /* Pods-pullu.test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

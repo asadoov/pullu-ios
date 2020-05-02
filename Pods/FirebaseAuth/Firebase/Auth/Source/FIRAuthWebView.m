@@ -15,7 +15,7 @@
  */
 
 #import "FIRAuthWebView.h"
-
+#import <WebKit/WebKit.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation FIRAuthWebView
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Initializes the subviews of this view.
  */
 - (void)initializeSubviews {
-  UIWebView *webView = [self createWebView];
+  WKWebView *webView = [self createWebView];
   UIActivityIndicatorView *spinner = [self createSpinner];
 
   // The order of the following controls z-order.
@@ -56,8 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
     @brief Creates a web view to be used by this view.
     @return The newly created web view.
  */
-- (UIWebView *)createWebView {
-  UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+- (WKWebView *)createWebView {
+  WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero];
   // Trickery to make the web view not do weird things (like showing a black background when
   // the prompt in the navigation bar animates changes.)
   webView.opaque = NO;

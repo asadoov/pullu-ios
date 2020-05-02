@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadView {
   FIRAuthWebView *webView = [[FIRAuthWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  webView.webView.delegate = self;
+ // webView.webView.delegate = self;
   self.view = webView;
   _webView = webView;
   self.navigationItem.leftBarButtonItem =
@@ -84,19 +84,19 @@ NS_ASSUME_NONNULL_BEGIN
   return ![_delegate webViewController:self canHandleURL:request.URL];
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {
+- (void)webViewDidStartLoad:(WKWebView *)webView {
   // Show & animate the activity indicator.
   _webView.spinner.hidden = NO;
   [_webView.spinner startAnimating];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+- (void)webViewDidFinishLoad:(WKWebView *)webView {
   // Hide & stop the activity indicator.
   _webView.spinner.hidden = YES;
   [_webView.spinner stopAnimating];
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+- (void)webView:(WKWebView *)webView didFailLoadWithError:(NSError *)error {
   if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
     // It's okay for the page to be redirected before it is completely loaded.  See b/32028062 .
     return;

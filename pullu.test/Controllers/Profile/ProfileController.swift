@@ -25,7 +25,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     let cityPicker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
     
     var infoChanged=false
-    
+      var txt:UITextField?
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -101,6 +101,8 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     var profileList: [ProfileModel] = [ProfileModel]()
     var uProfile = UpdateProfileStruct()
     
+    var  mail:String?
+    var  pass:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -116,9 +118,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale.current
+        // let userData = defaults.string(forKey: "uData")
+        //        var pass = defaults.string(forKey: "pass")
+        //        var mail = defaults.string(forKey: "mail")
+        self.mail = defaults.string(forKey: "mail")
+        self.pass = defaults.string(forKey: "pass")
         
-        let pass = defaults.string(forKey: "pass")
-        let mail = defaults.string(forKey: "mail")
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
             self.profileList = list
@@ -140,6 +145,11 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 dateFormatter.dateFormat = "dd.MM.yyyy"
                 self.dogumTarixField.text = dateFormatter.string(from:bFormattedDate!)
                 self.createdDate.text = dateFormatter.string(from:createdFormattedDate!)
+                
+                let defaults = UserDefaults.standard
+                
+                
+                
                 
             }
             
@@ -255,6 +265,141 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         }
         
     }
+    @IBAction func mobileButtonClick(_ sender: Any) {
+      
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Yeni nömrənizi qeyd edin", message: "", preferredStyle: UIAlertController.Style.alert)
+            alertController.addTextField { (txt : UITextField!) -> Void in
+                txt.placeholder = "Məs: 051XXXXXXX"
+                txt.keyboardType = .numberPad
+            }
+            let saveAction = UIAlertAction(title: "Göndər", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                
+                let phoneNum = alertController.textFields![0] as UITextField
+                if !phoneNum.text!.isEmpty{
+                    
+                    self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! ){
+                                      (status)
+                                      in
+                                      if status.response == 0
+                                      {
+                                          let alert = UIAlertController(title: "SMS KOD", message: "Sizə bir neçə dəqiqə ərzində gələn 4 rəqəmli sms verifikasiya kodunu daxil edin", preferredStyle: UIAlertController.Style.alert)
+                                          alert.addTextField { (textField : UITextField!) -> Void in
+                                              textField.placeholder = "XXXX"
+                                              textField.keyboardType = .numberPad
+                                          }
+                                          alert.addAction(UIAlertAction(title: "Göndər", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
+                                              let smsCode = alert.textFields![0] as UITextField
+                                            if !smsCode.text!.isEmpty{
+                                                
+                                                self.insert.updatePhone(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)!, code: Int(smsCode.text!)!){
+                                                    (status)
+                                                    in
+                                                  if status.response == 0{
+                                                        
+                                                        let successAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                                        successAlert.mode = MBProgressHUDMode.text
+                                                        successAlert.label.text = "Nömrəniz uğurla dəyişdirildi!"
+                                                        successAlert.hide(animated: true,afterDelay: 3)
+                                                    self.mobileNumField.setTitle(phoneNum.text!, for: .normal)
+                                                    }
+                                                    if status.response == 2{
+                                                        
+                                                        alert.message="Verifikasiya kodunun düzgünlüyünü yoxlayın və təkrar sınayın"
+                                                        self.present(alert, animated: true, completion: nil)
+                                                    }
+                                                    else {
+                                                        // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                        let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                        alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                            let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                            self.present(alert, animated: true, completion: nil)
+                                                        }))
+                                                        self.present(alert, animated: true, completion: nil)
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                }
+                                            }
+                                            else{
+                                                
+                                                alert.message="Zəhmət olmasa verifikasiya kodunu yazın"
+                                                                                                    self.present(alert, animated: true, completion: nil)
+                                                
+                                            }
+                                              
+                                              
+                                              
+                                          }))
+                                          alert.addAction(UIAlertAction(title: "Yenidən göndər", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
+                                              self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! )  {
+                                                  (status)
+                                                  in
+                                                  
+                                                if status.response == 0 {
+                                                    alert.message="Verifikasiya kodu yenidən göndərildi"
+                                                     self.present(alert, animated: true, completion: nil)
+                                                    
+                                                }
+                                                else {
+                                                    let errorAlert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                                                                             errorAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                                                             errorAlert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                                 let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                                                                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                                                                 self.present(alert, animated: true, completion: nil)
+                                                                                             }))
+                                                                                             self.present(errorAlert, animated: true, completion: nil)
+                                                }
+                                              }
+                                              
+                                              
+                                          }))
+                                          alert.addAction(UIAlertAction(title: "Bağla", style: UIAlertAction.Style.cancel, handler: nil))
+                                          self.present(alert, animated: true, completion: nil)
+                                          
+                                      }
+                                      else {
+                                          let errorAlert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                          errorAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                          errorAlert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                              let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                              alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                              self.present(alert, animated: true, completion: nil)
+                                          }))
+                                          self.present(errorAlert, animated: true, completion: nil)
+                                          
+                                      }
+                                      
+                                      
+                                  }
+                    
+                }
+                else {
+                    alertController.message="Zəhmət olmasa boşluğu doldurun"
+                    self.present(alertController, animated: true, completion: nil)
+                   
+                    
+                }
+              
+                // let secondTextField = alertController.textFields![1] as UITextField
+            })
+            let cancelAction = UIAlertAction(title: "Bağla", style: UIAlertAction.Style.default, handler: {
+                (action : UIAlertAction!) -> Void in })
+            
+            //            alertController.addTextField { (textField : UITextField!) -> Void in
+            //                             textField.placeholder = "Enter First Name"
+            //                         }
+             alertController.addAction(cancelAction)
+            alertController.addAction(saveAction)
+           
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func saveButtonClicked(_ sender: Any) {
         
@@ -280,11 +425,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             loadingNotification.mode = MBProgressHUDMode.annularDeterminate
             loadingNotification.label.text="Gözləyin"
             loadingNotification.detailsLabel.text = "Yeniliklər serverlərimizə yerləşdirilir..."
-            let defaults = UserDefaults.standard
             
-            // let userData = defaults.string(forKey: "uData")
-            let  mail = defaults.string(forKey: "mail")
-            let  pass = defaults.string(forKey: "pass")
             
             let udata=defaults.string(forKey: "uData")
             do{
@@ -316,7 +457,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     
                     let successAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                     successAlert.mode = MBProgressHUDMode.text
-                    successAlert.label.text = "Uğurludur!"
+                    successAlert.label.text = "Yeniliklər uğurla yükləndi!"
                     successAlert.hide(animated: true,afterDelay: 3)
                 }
                 else {
@@ -324,7 +465,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                        let alert = UIAlertController(title: "Ətraflı", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                        let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }))
@@ -339,6 +480,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         
     }
     
+   
     
     
     /*
@@ -352,3 +494,4 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
      */
     
 }
+
