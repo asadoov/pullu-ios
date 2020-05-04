@@ -7,16 +7,14 @@
 //
 
 import UIKit
-
+import FirebaseMessaging
 class MenuController: UIViewController {
     let defaults = UserDefaults.standard
     
     
     @IBOutlet weak var nameSurname: UILabel!
     
-    @IBOutlet weak var balance: UILabel!
     
-    @IBOutlet weak var earning: UILabel!
     
     @IBOutlet weak var headerView: UIView!
     
@@ -105,8 +103,7 @@ class MenuController: UIViewController {
             
             // userList=list
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-            balance.text = "Yüklənən məbləğ: \(list[0].balance!) AZN"
-            earning.text = "Qazanılan məbləğ: \(list[0].earning!) AZN"
+          
             userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
             
             
@@ -132,8 +129,11 @@ class MenuController: UIViewController {
     
     
     
-    
+
     @IBAction func signOut(_ sender: Any) {
+      
+     
+        self.defaults.set(nil, forKey: "uID")
         self.defaults.set(nil, forKey: "mail")
         self.defaults.set(nil, forKey: "pass")
         self.defaults.set(nil, forKey: "uData")
@@ -161,8 +161,19 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
         cell.object = menuItems[indexPath.row]
         // advertID=cell.object?.id!
         //print(advertID!)
+        
         if cell.object?.ID==0{
             self.dismiss(animated: true){
+                do {
+                    let uID = self.defaults.string(forKey: "uID")!
+                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                    
+                }
+                catch{
+                    
+                    
+                }
+               
                 self.defaults.set(nil, forKey: "mail")
                 self.defaults.set(nil, forKey: "pass")
                 self.defaults.set(nil, forKey: "uData")}

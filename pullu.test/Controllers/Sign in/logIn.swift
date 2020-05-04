@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import FirebaseMessaging
 class logIn: UIViewController {
     
     let defaults = UserDefaults.standard
@@ -84,6 +84,19 @@ class logIn: UIViewController {
                     DispatchQueue.main.async {
                         self.dismiss(animated: false)
                         {
+                           
+                                     
+                                  
+                                   Messaging.messaging().subscribe(toTopic: "\(usrList[0].id!)"){ error in
+                                               if error == nil{
+                                                   print("Subscribed to topic")
+                                               }
+                                               else{
+                                                   print("Not Subscribed to topic")
+                                               }
+                                           }
+                                   
+                            self.defaults.set(usrList[0].id, forKey: "uID")
                             self.defaults.set(usrList[0].mail, forKey: "mail")
                             self.defaults.set(self.pass.text, forKey: "pass")
                             //self.defaults.set(usrList, forKey: "userData")

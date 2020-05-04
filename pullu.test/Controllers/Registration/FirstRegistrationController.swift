@@ -55,7 +55,7 @@ class FirstRegistrationController: UIViewController {
                         warningAlert.mode = MBProgressHUDMode.text
             //            warningAlert.isSquare=true
                         warningAlert.label.text = "Diqqət"
-                        warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından və media seçildiyindən əmin olun"
+                        warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların düzgün doldurduğunuzdan əmin olun"
                         warningAlert.hide(animated: true,afterDelay: 3)
             
         }

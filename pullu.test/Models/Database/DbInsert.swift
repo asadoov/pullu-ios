@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 import MBProgressHUD
+
 class DbInsert {
     var dbSelect: dbSelect!
-    
+    var alamofire:AlamofireInterface!
     
     
     /* func getJson(link: String, param: Any, completion: @escaping (_ result: String) -> ()){
@@ -77,7 +78,7 @@ class DbInsert {
         
         
     }
-    func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:EarnMoney) ->()){
+    func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
@@ -86,7 +87,7 @@ class DbInsert {
         
         
         
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
                 (response)
                 in
@@ -95,7 +96,7 @@ class DbInsert {
                     
                     
                     let status  = try
-                        JSONDecoder().decode(EarnMoney.self, from: response.data!)
+                        JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     print(status)
                     

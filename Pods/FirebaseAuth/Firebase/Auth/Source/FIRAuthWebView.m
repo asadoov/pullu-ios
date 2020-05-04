@@ -15,7 +15,7 @@
  */
 
 #import "FIRAuthWebView.h"
-#import <WebKit/WebKit.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation FIRAuthWebView

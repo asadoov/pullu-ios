@@ -9,7 +9,7 @@ target 'pullu.test' do
   # Add the pods for any other Firebase products you want to use in your app
   # For example, to use Firebase Authentication and Cloud Firestore
 pod 'MBProgressHUD', '~> 1.2.0'
-
+  pod 'Firebase/Messaging'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseDatabase'

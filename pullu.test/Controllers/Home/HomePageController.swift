@@ -56,7 +56,7 @@ class HomePageController: UIViewController{
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         ReklamList.addSubview(myRefreshControl)
         
-        searchController.searchBar.placeholder = "Search..."
+        searchController.searchBar.placeholder = "Axtar..."
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchResultsUpdater = self
         searchController.searchBar.searchBarStyle = .minimal

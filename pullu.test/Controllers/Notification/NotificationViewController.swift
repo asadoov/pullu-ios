@@ -9,40 +9,45 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
-
+import MBProgressHUD
 class NotificationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     let defaults = UserDefaults.standard
     var userr:User!
     var ref: DatabaseReference!
     var notifications = Array<NotificationModel>()
     @IBOutlet weak var notificationTable: UITableView!
-    
+    var loadingAlert:MBProgressHUD?
     var uID=0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+        loadingAlert!.label.text="Bildirişlər yüklənir..."
+        //loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
+        
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         
         self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
-//        scheduleNotification()
+        //        scheduleNotification()
         let udata=defaults.string(forKey: "uData")
-               do{
-                   
-                   
-                   let list  = try
-                       JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-                   
-                   // userList=list
-                uID = list[0].id!
-                
-                   
-               }
-               catch let jsonErr{
-                   print("Error serializing json:",jsonErr)
-               }
+        do{
+            
+            
+            let list  = try
+                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+            
+            // userList=list
+            uID = list[0].id!
+            
+            
+        }
+        catch let jsonErr{
+            print("Error serializing json:",jsonErr)
+        }
         
         
         Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
@@ -54,8 +59,8 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
             else
             {
                 
-       
-
+                
+                
                 let userID = Auth.auth().currentUser!.uid
                 self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
                 self.ref.observe(.value, with: { [weak self]  (snapshot) in
@@ -64,16 +69,18 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
                     for item in snapshot.children {
                         let task = NotificationModel(snapshot: item as! DataSnapshot)
                         
-                            
-                             self!.notifications.append(task)
+                        
+                        self!.notifications.append(task)
                         if task.seen == false{
                             (item as AnyObject).ref.updateChildValues(["seen":true])
-                           // self!.sendNotification(body: task.title!)
-                           
+                            // self!.sendNotification(body: task.title!)
+                            
                         }
-                       
+                        
                         
                     }
+                    
+                    self!.loadingAlert!.hide(animated: true)
                     self!.notifications.reverse()
                     self?.notificationTable.reloadData()
                     
@@ -85,11 +92,11 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
                 //self.userr = User(user: currentUser)
                 // print(self.userr)
                 // print(user)
-
                 
                 
                 
-             //   Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID)).childByAutoId().key.updateChildValues(["seen": true])
+                
+                //   Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID)).childByAutoId().key.updateChildValues(["seen": true])
                 // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
                 
                 /*         do{
@@ -119,41 +126,41 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
         notificationTable.dataSource = self
     }
     
-    func sendNotification(body:String) {
-        let center = UNUserNotificationCenter.current()
-
-        let content = UNMutableNotificationContent()
-        content.title = "Pullu"
-        content.body = body
-        content.categoryIdentifier = "alarm"
-        content.userInfo = ["customData": "fizzbuzz"]
-        content.sound = UNNotificationSound.default
-
-//        var dateComponents = DateComponents()
-//        dateComponents.hour = 10
-//        dateComponents.minute = 30
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
-
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        center.add(request)
-    }
+    //    func sendNotification(body:String) {
+    //        let center = UNUserNotificationCenter.current()
+    //
+    //        let content = UNMutableNotificationContent()
+    //        content.title = "Pullu"
+    //        content.body = body
+    //        content.categoryIdentifier = "alarm"
+    //        content.userInfo = ["customData": "fizzbuzz"]
+    //        content.sound = UNNotificationSound.default
+    //
+    ////        var dateComponents = DateComponents()
+    ////        dateComponents.hour = 10
+    ////        dateComponents.minute = 30
+    //        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+    //
+    //        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+    //        center.add(request)
+    //    }
     
     
     func scheduleNotification() {
         let center = UNUserNotificationCenter.current()
-
+        
         let content = UNMutableNotificationContent()
         content.title = "Late wake up call"
         content.body = "The early bird catches the worm, but the second mouse gets the cheese."
         content.categoryIdentifier = "alarm"
         content.userInfo = ["customData": "fizzbuzz"]
         content.sound = UNNotificationSound.default
-
+        
         var dateComponents = DateComponents()
         dateComponents.hour = 10
         dateComponents.minute = 30
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-
+        
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         center.add(request)
     }
@@ -184,8 +191,27 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 75
+        return 75
         
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //        let cell: NotificationCell = (tableView.dequeueReusableCell(withIdentifier: "notifyCell", for: indexPath) as! NotificationCell)
+        //        cell.object =
+        
+        
+        //print(advertID!)
+        let moreAlert = UIAlertController(title: "\(notifications[indexPath.row].title!)", message: "\(notifications[indexPath.row].body!)", preferredStyle: UIAlertController.Style.alert)
+        moreAlert.addAction(UIAlertAction(title: "Bağla", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(moreAlert, animated: true, completion: nil)
+        //print(cell.object?.name)
+        //cell.delegate = self
+        
+        
+        //cell.reloadData()
     }
     
     /*

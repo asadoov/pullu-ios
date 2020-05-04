@@ -9,7 +9,10 @@
 import UIKit
 
 class NotificationCell: UITableViewCell {
-    @IBOutlet weak var notifyText: UITextView!
+ 
+    @IBOutlet weak var notificationTitle: UILabel!
+    
+    @IBOutlet weak var notificationBody: UILabel!
     var object:NotificationModel?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +25,8 @@ class NotificationCell: UITableViewCell {
         // Configure the view for the selected state
     }
     func reloadData() {
-        self.notifyText.text=object?.title!
+        self.notificationTitle.text=object?.title ?? ""
+         self.notificationBody.text=object?.body ?? ""
            // self.ReklamImage.contentMode = .scaleAspectFill
            
            

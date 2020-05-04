@@ -17,10 +17,10 @@
 #import "FIRAuthWebViewController.h"
 
 #import "FIRAuthWebView.h"
-
+#import "WebKit/WebKit.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FIRAuthWebViewController () <UIWebViewDelegate>
+@interface FIRAuthWebViewController () <WKUIDelegate>
 @end
 
 @implementation FIRAuthWebViewController {
@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadView {
   FIRAuthWebView *webView = [[FIRAuthWebView alloc] initWithFrame:[UIScreen mainScreen].bounds];
- // webView.webView.delegate = self;
+  //webView.webView.delegate = self;
   self.view = webView;
   _webView = webView;
   self.navigationItem.leftBarButtonItem =
@@ -78,9 +78,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - UIWebViewDelegate
 
-- (BOOL)webView:(UIWebView *)webView
+- (BOOL)webView:(WKWebView *)webView
     shouldStartLoadWithRequest:(NSURLRequest *)request
-                navigationType:(UIWebViewNavigationType)navigationType {
+ navigationType:(WKWebView*)navigationType {
   return ![_delegate webViewController:self canHandleURL:request.URL];
 }
 

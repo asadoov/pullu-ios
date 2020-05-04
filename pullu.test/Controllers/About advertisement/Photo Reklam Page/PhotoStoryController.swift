@@ -30,28 +30,52 @@ class PhotoStoryController: UIViewController {
         // print("advID\(advertID!) mail\(mail!) pass \(pass!)")
         // Do any additional setup after loading the view.
         let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            
             time+=1
-            if time==30{
+            if time==31{
                  self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
                  
                  (status)
                  in
-                 if (status.statusCode!==1)
+                 switch status.response
                  {
-                 let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz!", preferredStyle: UIAlertController.Style.alert)
-                 alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                 self.present(alert, animated: true, completion: nil)
-                 }
+                 case 0:
+                    let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
+                                    alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
+                                        (action: UIAlertAction!) in
+                                        
+                                      self.dismiss(animated: true)
+                                    }))
+                      self.present(alert, animated: true, completion: nil)
+                 default:
+                                                           // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                           let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                           alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                               let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                               self.present(alert, animated: true, completion: nil)
+                                                           }))
+                
                  
                  }
                  
-                self.dismiss(animated: true)
+                 }
+                 
+                
+                timer.invalidate()
+            }
+            else{
+                DispatchQueue.main.async {
+                                              self.timerLabel.text=String(Int(self.timerLabel.text!)!-1)
+                                          }
                 
             }
+           
+                
+               
             
-            DispatchQueue.main.async {
-                self.timerLabel.text=String(Int(self.timerLabel.text!)!-1)
-            }
+           
             
             
         }

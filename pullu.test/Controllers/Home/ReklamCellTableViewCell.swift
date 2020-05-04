@@ -66,7 +66,15 @@ class ReklamCellTableViewCell: UITableViewCell {
         aInfo.text=object?.description
         aType.text=object?.aTypeName
         aCategory.text=object?.catName
-        aPrice.text="\(object!.price!) AZN "
+        if object!.price! == "Razılaşma yolu ilə" {
+            
+            aPrice.text="\(object!.price!)"
+            
+        }
+        else  {
+            
+            aPrice.text="\(object!.price!) AZN "
+        }
         aDate.text=dateFormatter.string(from:dt!)
         //
         

@@ -74,7 +74,15 @@ class TabBarController: UITabBarController {
                              self!.tabBar.items![3].badgeValue = String(notificationCount)
                         }
                         else{
-                            self!.tabBar.items![3].badgeValue = nil
+                            do {
+                                 self?.tabBar.items?[3].badgeValue = nil
+                                
+                            }
+                            catch {
+                            
+                            
+                            }
+                           
                             
                         }
                       

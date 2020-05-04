@@ -408,5 +408,47 @@ public class dbSelect {
         }
         
     }
+    func getFinance(mail:String,pass:String,completionBlock: @escaping (_ result:Array<FinanceStruct>) ->()){
+  
+           let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/finance"
+           
+          
+           //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+
+              let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+               //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+          
+           
+           
+           
+           
+           
+           
+           
+           request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+               {
+                   (response)
+                   in
+                   //  print(PULLULINK)
+                   
+                   do{
+                       
+                       
+                       var list  = try
+                           JSONDecoder().decode(Array<FinanceStruct>.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(list)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+           
+       }
     
 }

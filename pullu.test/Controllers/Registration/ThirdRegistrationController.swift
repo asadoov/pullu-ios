@@ -145,7 +145,7 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
                             warningAlert.mode = MBProgressHUDMode.text
                             //            warningAlert.isSquare=true
                             warningAlert.label.text = "Xəta"
-                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəht edin"
+                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
                             warningAlert.hide(animated: true,afterDelay: 3)
                             
                         }
@@ -167,7 +167,7 @@ class ThirdRegistrationController: UIViewController, UIPickerViewDataSource, UIP
                         warningAlert.mode = MBProgressHUDMode.text
                         //            warningAlert.isSquare=true
                         warningAlert.label.text = "Xəta"
-                        warningAlert.detailsLabel.text = "Biraz sonra birdaha cəht edin"
+                        warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
                         warningAlert.hide(animated: true,afterDelay: 3)
                         
                         
