@@ -115,7 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0458299723C452D3004F6FA9 /* pullu.test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pullu.test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0458299723C452D3004F6FA9 /* Pullu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pullu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045829A123C452D3004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		045829A423C452D3004F6FA9 /* pullu_test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pullu_test.xcdatamodel; sourceTree = "<group>"; };
 		045829A923C452D5004F6FA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 		0458299823C452D3004F6FA9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0458299723C452D3004F6FA9 /* pullu.test.app */,
+				0458299723C452D3004F6FA9 /* Pullu.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1010,7 +1010,7 @@
 			);
 			name = pullu.test;
 			productName = pullu.test;
-			productReference = 0458299723C452D3004F6FA9 /* pullu.test.app */;
+			productReference = 0458299723C452D3004F6FA9 /* Pullu.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1363,7 +1363,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.innapp.pullu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pullu;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1387,7 +1387,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.innapp.pullu;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pullu;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

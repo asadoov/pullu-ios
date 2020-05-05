@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireImage
 import MBProgressHUD
+import FirebaseMessaging
 class HomePageController: UIViewController{
     
     @IBOutlet weak var isPaidSegment: UISegmentedControl!
@@ -103,10 +104,19 @@ class HomePageController: UIViewController{
         ReklamList.delegate = self
         ReklamList.dataSource = self
         
-        
+       
         
         //  self.getProducts()
         let defaults = UserDefaults.standard
+        
+        Messaging.messaging().subscribe(toTopic: "\(defaults.string(forKey: "uID")!)"){ error in
+                                                          if error == nil{
+                                                              print("Subscribed to topic")
+                                                          }
+                                                          else{
+                                                              print("Not Subscribed to topic")
+                                                          }
+               }
         
         // let userData = defaults.string(forKey: "uData")
         mail = defaults.string(forKey: "mail")
