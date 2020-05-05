@@ -48,10 +48,7 @@ class HomePageController: UIViewController{
         super.viewDidLoad()
         
 //        showActivityIndicator()
-    loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingAlert!.mode = MBProgressHUDMode.determinate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
+   
         
         
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
@@ -167,107 +164,106 @@ class HomePageController: UIViewController{
         }
         
         
-        db.getAds(username: mail!, pass: pass!,catID: 0,progressView: loadingAlert!){
-            
-            (list) in
-            
-            // var adsWithImage: [Advertisement] = [Advertisement]()
-            var k=0
-            var i:Int?
-            
-            for advert in list {
-                var typeCount = 0
-                
-                for itm in list{
-                    if itm.isPaid==1{
-                        typeCount += 1
-                    }
-                }
-                
-                //if (advert.isPaid==type) {
-                var item = advert
-                
-                //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
-                // self.dataArray.append(item)
-                //call img download
-                
-                // let item_index = self.dataArray.endIndex
-                //  element += 1
-                
-                
-                
-                if  item.isPaid==1{
-                    i=0
-                    // self.advertArray.append(item)
-                    self.isPaid.append(item)
-                    
-                    
-                    
-                    
-                }
-                if  item.isPaid==0{
-                    i=0
-                    // self.advertArray.append(item)
-                    self.isNotPaid.append(item)
-                    
-                    
-                  
-                    
-                }
-                
-                
-                self.advertArray = self.isPaid
-                
-                DispatchQueue.main.async {
-            
-                    self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                    self.ReklamList.reloadData()
-                    self.isPaidSegment.selectedSegmentIndex=0
-                    //self.hideActivityIndicator()
-                    DispatchQueue.main.async {
-                        self.loadingAlert!.hide(animated: true)
-                        
-                    }
-                }
-                
-                
-                
-                //  }
-                /*         DispatchQueue.main.async {
-                 
-                 
-                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                 //self.tableView.reloadData()
-                 self.ReklamList.reloadData()
-                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                 self.ReklamCount.text = String(typeCount)+" yeni reklam"
-                 //  self.tableView.rel§oadData()
-                 /* self.dismiss(animated: false){
-                 
-                 
-                 
-                 
-                 
-                 }*/
-                 
-                 }
-                 */
-                
-                //bunu cixardir melumatlar gelir yani- print(advert.name)
-            }
-            
-            
-           
-            
-            
-        }
-               
+//        db.getAds(username: mail!, pass: pass!,catID: 0,progressView: loadingAlert!){
+//
+//            (list) in
+//
+//            // var adsWithImage: [Advertisement] = [Advertisement]()
+//            var k=0
+//            var i:Int?
+//
+//            for advert in list {
+//                var typeCount = 0
+//
+//                for itm in list{
+//                    if itm.isPaid==1{
+//                        typeCount += 1
+//                    }
+//                }
+//
+//                //if (advert.isPaid==type) {
+//                var item = advert
+//
+//                //item.photo = UIImage(named: "loading")?.pngData()// Loading photosu lazimdi
+//                // self.dataArray.append(item)
+//                //call img download
+//
+//                // let item_index = self.dataArray.endIndex
+//                //  element += 1
+//
+//
+//
+//                if  item.isPaid==1{
+//                    i=0
+//                    // self.advertArray.append(item)
+//                    self.isPaid.append(item)
+//
+//
+//
+//
+//                }
+//                if  item.isPaid==0{
+//                    i=0
+//                    // self.advertArray.append(item)
+//                    self.isNotPaid.append(item)
+//
+//
+//
+//
+//                }
+//
+//
+//                self.advertArray = self.isPaid
+//
+//                DispatchQueue.main.async {
+//
+//                    self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+//                    self.ReklamList.reloadData()
+//                    self.isPaidSegment.selectedSegmentIndex=0
+//                    //self.hideActivityIndicator()
+//                    DispatchQueue.main.async {
+//                        self.loadingAlert!.hide(animated: true)
+//
+//                    }
+//                }
+//
+//
+//
+//                //  }
+//                /*         DispatchQueue.main.async {
+//
+//
+//                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+//                 //self.tableView.reloadData()
+//                 self.ReklamList.reloadData()
+//                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
+//                 self.ReklamCount.text = String(typeCount)+" yeni reklam"
+//                 //  self.tableView.rel§oadData()
+//                 /* self.dismiss(animated: false){
+//
+//
+//
+//
+//
+//                 }*/
+//
+//                 }
+//                 */
+//
+//                //bunu cixardir melumatlar gelir yani- print(advert.name)
+//            }
+//
+//
+//
+//
+//
+//        }
+//
         
         
         
     }
-    
-    
+   
     func showActivityIndicator() {
          DispatchQueue.main.async {
             self.loadingView = UIView()
@@ -299,7 +295,7 @@ class HomePageController: UIViewController{
     
         override func viewWillAppear(_ animated: Bool) {
             
-            ReklamList.reloadData()
+           refresh()
 //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //            navigationController?.navigationBar.shadowImage = UIImage()
 //            navigationController?.navigationBar.isTranslucent = true
@@ -408,6 +404,12 @@ class HomePageController: UIViewController{
     
     
     @objc func refresh() {
+        
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+               loadingAlert!.mode = MBProgressHUDMode.indeterminate
+               loadingAlert!.label.text="Gözləyin"
+               loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+        
         isPaid.removeAll()
         isNotPaid.removeAll()
         if mail != nil&&pass != nil{
@@ -463,6 +465,10 @@ class HomePageController: UIViewController{
                         self.ReklamList.reloadData()
                         
                         self.myRefreshControl.endRefreshing()
+                     
+                                                self.loadingAlert!.hide(animated: true)
+                        
+                        //
                         
                     }
                     
