@@ -24,7 +24,6 @@
 		B62984452423716A001346B2 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62984442423716A001346B2 /* NewHomeViewController.swift */; };
 		B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854A23FD56C40069C08F /* CategoryStruct.swift */; };
 		B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854C23FD6BEA0069C08F /* TypeStruct.swift */; };
-		B652A5D8245ED7E0000CC020 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B652A5D7245ED7E0000CC020 /* GoogleService-Info.plist */; };
 		B65FE46B23EF40440020C21F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65FE46A23EF40440020C21F /* TabBarController.swift */; };
 		B67B9DCA23EEE18A00A3451C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8751323C736B400E84091 /* AppDelegate.swift */; };
 		B67B9DCB23EEE18A00A3451C /* dbSelect.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6951DC523C503EE0020C7EE /* dbSelect.swift */; };
@@ -96,6 +95,7 @@
 		B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDDD2433C13600D533B3 /* PreviewController.swift */; };
 		B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */; };
 		B6E0C38A245A1ABC00AFB528 /* UpdateProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */; };
+		B6FA696C24620391008F614E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6FA696B24620390008F614E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -230,7 +230,6 @@
 		B652A1C923EDA51F00D75422 /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B652A1CA23EDA51F00D75422 /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B652A1CC23EDA51F00D75422 /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B652A5D7245ED7E0000CC020 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/Pullu Stuff/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B65327C623D1ED430068E9E7 /* AboutAdvertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAdvertController.swift; sourceTree = "<group>"; };
 		B65E10CF23C9084B0081F8BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B65FE46A23EF40440020C21F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TabBarController.swift; path = "../Tab BAr/TabBarController.swift"; sourceTree = "<group>"; };
@@ -405,6 +404,7 @@
 		B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileStruct.swift; sourceTree = "<group>"; };
 		B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheckController.swift; sourceTree = "<group>"; };
+		B6FA696B24620390008F614E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BDBADB7BB9E63D780D07E00F /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -451,7 +451,7 @@
 		0458299923C452D3004F6FA9 /* pullu.test */ = {
 			isa = PBXGroup;
 			children = (
-				B652A5D7245ED7E0000CC020 /* GoogleService-Info.plist */,
+				B6FA696B24620390008F614E /* GoogleService-Info.plist */,
 				B625C052244E458E00724C21 /* pullu.test.entitlements */,
 				04C8751323C736B400E84091 /* AppDelegate.swift */,
 				B67D4FD823CA13C000E572E8 /* Models */,
@@ -1062,7 +1062,7 @@
 				B68B623224576587007F6DFA /* Nunito-SemiBold.ttf in Resources */,
 				B68B623324576587007F6DFA /* Nunito-Bold.ttf in Resources */,
 				B68B623424576587007F6DFA /* Nunito-BoldItalic.ttf in Resources */,
-				B652A5D8245ED7E0000CC020 /* GoogleService-Info.plist in Resources */,
+				B6FA696C24620391008F614E /* GoogleService-Info.plist in Resources */,
 				B68B623524576587007F6DFA /* Nunito-Black.ttf in Resources */,
 				B68B623624576587007F6DFA /* Nunito-ExtraLight.ttf in Resources */,
 				B68B623724576587007F6DFA /* Nunito-SemiBoldItalic.ttf in Resources */,
