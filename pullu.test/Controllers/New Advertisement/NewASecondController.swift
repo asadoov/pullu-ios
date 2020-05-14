@@ -64,7 +64,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        if textView.text == "Ətraflı məlumat"
+        {textView.text = ""}
         
         textView.layer.borderColor = UIColor.red.cgColor
     }
@@ -116,7 +117,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             newAPreview.aDescription = descriptionField.text
             if price.text != "" {
                 newAdvertisement.aPrice = price.text
-                newAPreview.aPrice = "\(price.text!)"
+                newAPreview.aPrice = "\(price.text!) AZN"
             }
             
             
@@ -306,7 +307,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             price.isEnabled=true
             price.placeholder = "AZN"
             newAdvertisement.aPrice = ""
-            
+             newAPreview.aPrice = ""
         }
     }
     // MARK: - Navigation

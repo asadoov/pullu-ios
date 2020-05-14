@@ -27,5 +27,6 @@ struct Advertisement : Codable {
     var seen:Int?
     var views:Int?
     var downloaded:Bool?
+    var error:Bool?
     
 }

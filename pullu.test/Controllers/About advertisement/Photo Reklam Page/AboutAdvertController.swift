@@ -32,7 +32,8 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var sellerFullname: UILabel!
     
-    @IBOutlet weak var sellerPhone: UILabel!
+    @IBOutlet weak var sellerPhone: UITextView!
+    
     @IBOutlet weak var slideshow: ImageSlideshow!
     
     //    @IBOutlet weak var blurClocks: UIImageView!
@@ -41,6 +42,7 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        earnMoney.isEnabled=false
         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -101,7 +103,7 @@ class AboutAdvertController: UIViewController {
                 
                 self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
@@ -151,13 +153,18 @@ class AboutAdvertController: UIViewController {
                             
                         }
                         
-                        
+                        if self.imageSource.count == list[0].photoUrl!.count
+                        {
+                              self.dismiss(animated: false)
+                            self.earnMoney.isEnabled=true
+                            
+                        }
                         
                     }
                     
                     
                 }
-                     self.dismiss(animated: false)
+                   
                       
             }
             

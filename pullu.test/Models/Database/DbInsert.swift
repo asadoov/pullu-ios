@@ -248,7 +248,7 @@ class DbInsert {
     }
     
     
-    func addAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:UIProgressView, completionBlock: @escaping (_ result:Status) ->()){
+    func addAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:Status) ->()){
         
         
         
@@ -314,7 +314,7 @@ class DbInsert {
                         DispatchQueue.main.async {
                             
                             //
-                            progressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                            progressView.progress = Float(progress.fractionCompleted)
                         }
                     })
                     upload.responseData { response in

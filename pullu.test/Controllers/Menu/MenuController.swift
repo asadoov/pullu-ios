@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseMessaging
+import MBProgressHUD
 class MenuController: UIViewController {
     let defaults = UserDefaults.standard
     
@@ -34,27 +35,27 @@ class MenuController: UIViewController {
         let profileBtn:MenuStruct = MenuStruct()
         profileBtn.ID=1
         profileBtn.name="Profil"
-        profileBtn.icon  =  UIImage(named: "logout")?.pngData()
+        profileBtn.icon  =  UIImage(named: "profile")?.pngData()
         
         let staticsBtn:MenuStruct = MenuStruct()
         staticsBtn.ID=2
         staticsBtn.name="Statistik Məlumatlar"
-        staticsBtn.icon  =  UIImage(named: "logout")?.pngData()
+        staticsBtn.icon  =  UIImage(named: "Shape")?.pngData()
         
         let ruleBtn:MenuStruct = MenuStruct()
         ruleBtn.ID=3
         ruleBtn.name="Qayda və şərtlər"
-        ruleBtn.icon  =  UIImage(named: "logout")?.pngData()
+        ruleBtn.icon  =  UIImage(named: "rules")?.pngData()
         
         let aboutBtn:MenuStruct = MenuStruct()
         aboutBtn.ID=4
         aboutBtn.name="Proqram haqqında"
-        aboutBtn.icon  =  UIImage(named: "logout")?.pngData()
+        aboutBtn.icon  =  UIImage(named: "aboutUs")?.pngData()
         
         let financeBtn:MenuStruct = MenuStruct()
         financeBtn.ID=5
-        financeBtn.name="Maliyə"
-        financeBtn.icon  =  UIImage(named: "logout")?.pngData()
+        financeBtn.name="Maliyyə"
+        financeBtn.icon  =  UIImage(named: "balance")?.pngData()
         
         menuItems.append(profileBtn)
         menuItems.append(staticsBtn)
@@ -130,16 +131,6 @@ class MenuController: UIViewController {
     
     
 
-    @IBAction func signOut(_ sender: Any) {
-      
-     
-        self.defaults.set(nil, forKey: "uID")
-        self.defaults.set(nil, forKey: "mail")
-        self.defaults.set(nil, forKey: "pass")
-        self.defaults.set(nil, forKey: "uData")
-        self.dismiss(animated: true)
-        
-    }
     
     // MARK: - Navigation
     
@@ -157,47 +148,68 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
-        cell.object = menuItems[indexPath.row]
+//        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
+//        cell.object = menuItems[indexPath.row]
         // advertID=cell.object?.id!
         //print(advertID!)
         
-        if cell.object?.ID==0{
-            self.dismiss(animated: true){
-                do {
-                    let uID = self.defaults.string(forKey: "uID")!
-                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
-                    
-                }
-                catch{
-                    
-                    
-                }
-               
-                self.defaults.set(nil, forKey: "mail")
-                self.defaults.set(nil, forKey: "pass")
-                self.defaults.set(nil, forKey: "uData")}
+        if menuItems[indexPath.row].ID==0{
+            
+            let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.alert)
+                                      errorAlert.addAction(UIAlertAction(title: "Xeyir", style: UIAlertAction.Style.cancel, handler: nil))
+                                      errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                             self.dismiss(animated: true){
+                                                       do {
+                                                           let uID = self.defaults.string(forKey: "uID")!
+                                                                          Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                                                           
+                                                       }
+                                                       catch{
+                                                           
+                                                           
+                                                       }
+                                                      
+                                                       self.defaults.set(nil, forKey: "mail")
+                                                       self.defaults.set(nil, forKey: "pass")
+                                                       self.defaults.set(nil, forKey: "uData")}
+                                      }))
+                                      self.present(errorAlert, animated: true, completion: nil)
+            
+//            self.dismiss(animated: true){
+//                do {
+//                    let uID = self.defaults.string(forKey: "uID")!
+//                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+//                    
+//                }
+//                catch{
+//                    
+//                    
+//                }
+//               
+//                self.defaults.set(nil, forKey: "mail")
+//                self.defaults.set(nil, forKey: "pass")
+//                self.defaults.set(nil, forKey: "uData")}
             
             
         }
         
-        else if cell.object?.ID == 1{
+        else if menuItems[indexPath.row].ID == 1{
             self.performSegue(withIdentifier: "profSegue", sender: self)
             
         }
             
-        else if cell.object?.ID == 2{
+        else if menuItems[indexPath.row].ID == 2{
             self.performSegue(withIdentifier: "statiSegue", sender: self)
             
         }
         
-        else if cell.object?.ID == 5{
+        else if menuItems[indexPath.row].ID == 5{
             self.performSegue(withIdentifier: "finanSegue", sender: self)
             
         }
         // print(cell.object?.name)
         //cell.delegate = self
-        cell.reloadData()
+        //cell.reloadData()
         
     }
     
@@ -225,7 +237,7 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             
             cell.object = menuItems[indexPath.row]
             
-            
+            // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         catch
         {

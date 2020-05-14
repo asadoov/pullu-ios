@@ -23,7 +23,8 @@ class TextReklamController: UIViewController {
     @IBOutlet weak var aDescription: UITextView!
     @IBOutlet weak var sellerFullname: UILabel!
     
-    @IBOutlet weak var sellerPhone: UILabel!
+    @IBOutlet weak var sellerPhone: UITextView!
+    
     
     @IBOutlet weak var earnMoney: UIButton!
     
@@ -79,7 +80,7 @@ class TextReklamController: UIViewController {
                 
                 self.advertName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advertType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
