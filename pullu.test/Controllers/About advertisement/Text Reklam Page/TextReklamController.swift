@@ -44,7 +44,7 @@ class TextReklamController: UIViewController {
         loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating();
         
-        
+         self.defaults.set(nil, forKey: "aID")
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: false, completion: nil)
         // navigationController?.navigationBar.isTranslucent = false

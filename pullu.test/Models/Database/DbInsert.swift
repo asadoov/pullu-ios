@@ -150,14 +150,49 @@ class DbInsert {
         }
         
     }
+    
+    func sendPassChangeSMS(phone:String ,completionBlock: @escaping (_ result:Status) ->()){
+           
+           
+           
+           
+           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/sms/code"
+           let Parameters = ["phone": phone] as [String : Any]
+           
+           
+           
+           request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+               {
+                   (response)
+                   in
+                   
+                   do{
+                       
+                       
+                       let statusCode  = try
+                           JSONDecoder().decode(Status.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(statusCode)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+       }
+    
     // forgot pass / 4 regemli shifre yoxlanishi
-    func checkSendCode(mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func checkSendCode(login:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/confirm"
-        let Parameters = ["mail": mail,"code": code] as [String : Any]
+        let Parameters = ["login": login,"code": code] as [String : Any]
         
         
         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
@@ -184,13 +219,13 @@ class DbInsert {
         
     }
     // forgot pass/ yeni şifrə yaratmaq
-    func createNewPass(newpass:String ,mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func createNewPass(newpass:String ,login:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/newpass"
-        let Parameters = ["newpass":newpass, "mail": mail,"code": code] as [String : Any]
+        let Parameters = ["newpass":newpass, "login": login,"code": code] as [String : Any]
         
         
         
@@ -463,7 +498,7 @@ class DbInsert {
            }
            
        }
-    func verifyMobile(mail:String,pass:String,newPhone:Int ,completionBlock: @escaping (_ result:Status) ->()){
+    func verifyMobile(mail:String,pass:String,newPhone:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
@@ -497,7 +532,7 @@ class DbInsert {
         }
         
     }
-    func updatePhone(mail:String,pass:String,newPhone:Int,code:Int ,completionBlock: @escaping (_ result:Status) ->()){
+    func updatePhone(mail:String,pass:String,newPhone:String,code:Int ,completionBlock: @escaping (_ result:Status) ->()){
            
            
            

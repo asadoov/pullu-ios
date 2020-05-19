@@ -21,6 +21,7 @@ class PaidController: UITableViewController {
     var advertID:Int?
     var currentPage = 1
     var catID = 0
+            let defaults = UserDefaults.standard
     private let myRefreshControl = UIRefreshControl()
       let spinner = UIActivityIndicatorView(style: .gray)
     override func viewDidLoad() {
@@ -34,10 +35,10 @@ class PaidController: UITableViewController {
         paidTableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         paidTableView.addSubview(myRefreshControl)
-        let defaults = UserDefaults.standard
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
-        refresh()
+
+                       mail = defaults.string(forKey: "mail")
+                       pass = defaults.string(forKey: "pass")
+       refresh()
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -90,7 +91,7 @@ class PaidController: UITableViewController {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
         do{
             // cell.imageView?.image = nil
-            if advertArray[indexPath.row].photo == nil{
+            if advertArray.count > 0{
                 Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
                     if let catPicture = response.result.value {
                         //advert.photo=catPicture.pngData()
@@ -125,8 +126,9 @@ class PaidController: UITableViewController {
                     
                     
                 }
+                 cell.object = advertArray[indexPath.row]
             }
-            cell.object = advertArray[indexPath.row]
+           
             
             
         }
@@ -229,24 +231,29 @@ class PaidController: UITableViewController {
     }
     
     @objc func refresh() {
-        paginationEnabled = true
-        loading = true
-        advertArray.removeAll()
-        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingAlert!.mode = MBProgressHUDMode.indeterminate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
-        
+       
         
         if mail != nil&&pass != nil{
+            paginationEnabled = true
+                   loading = true
+                
+                   
+                   loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                   loadingAlert!.mode = MBProgressHUDMode.indeterminate
+                   loadingAlert!.label.text="Gözləyin"
+                   loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+                  
             var typeCount=0
             
             select.getAds(username: mail!, pass: pass!,isPaid: 1,page: 1, catID: catID,progressView: loadingAlert!){
                 
                 (list) in
+              
+                 self.loadingAlert!.hide(animated: true)
                 
                 if !list.isEmpty{
                     if list[0].error == nil{
+                          self.advertArray.removeAll()
                     
                             for advert in list {
                                 
@@ -289,7 +296,7 @@ class PaidController: UITableViewController {
                        
                         self.myRefreshControl.endRefreshing()
                         self.loading = false
-                        self.loadingAlert!.hide(animated: true)
+                       
                         self.paginationEnabled = true
                     }
                     else {
@@ -348,7 +355,20 @@ class PaidController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     
-    
+     override func viewWillAppear(_ animated: Bool) {
+                mail = defaults.string(forKey: "mail")
+                pass = defaults.string(forKey: "pass")
+        if  (defaults.string(forKey: "aID") != nil) {
+              refresh()
+        }
+             
+    //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    //            navigationController?.navigationBar.shadowImage = UIImage()
+    //            navigationController?.navigationBar.isTranslucent = true
+    //            navigationController?.view.backgroundColor = .clear
+    //            super.viewWillAppear(animated)
+            }
+        
     
     /*
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

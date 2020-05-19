@@ -43,14 +43,16 @@ class AboutAdvertController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         earnMoney.isEnabled=false
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+        earnMoney.titleLabel!.text = "Yüklənir..."
+         self.defaults.set(nil, forKey: "aID")
+//        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//        alert.view.addSubview(loadingIndicator)
+//        present(alert, animated: false, completion: nil)
         
         //   navigationController?.navigationBar.isTranslucent = false
         
@@ -93,7 +95,7 @@ class AboutAdvertController: UIViewController {
             
             DispatchQueue.main.async {
            
-                if list[0].isPaid==1{
+                if list[0].isPaid==1 && list[0].userID != self.userData[0].id{
                     self.earnMoney.isHidden=false
                 }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
@@ -155,7 +157,8 @@ class AboutAdvertController: UIViewController {
                         
                         if self.imageSource.count == list[0].photoUrl!.count
                         {
-                              self.dismiss(animated: false)
+                             // self.dismiss(animated: false)
+                            self.earnMoney.titleLabel!.text = "Reklamı izlə"
                             self.earnMoney.isEnabled=true
                             
                         }
