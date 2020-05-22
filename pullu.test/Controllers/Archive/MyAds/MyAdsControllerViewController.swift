@@ -16,7 +16,8 @@ class MyAdsController: UIViewController {
     var  mail:String?
     var  pass:String?
     var select:dbSelect=dbSelect()
-  
+   var aName:String?
+    var aDescription:String?
     @IBOutlet weak var aTableView: UITableView!
     
     override func viewDidLoad() {
@@ -101,7 +102,14 @@ class MyAdsController: UIViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+            if(segue.identifier == "editSegue"){
+                let displayVC = segue.destination as! EditAd
+                displayVC.aName = aName
+                displayVC.aDescription = aDescription
+            }
+    }
 //        if(segue.identifier == "photoReklamPage"){
 //            let displayVC = segue.destination as! AboutAdvertController
 //            displayVC.advertID = advertID
@@ -151,30 +159,34 @@ extension MyAdsController:UITableViewDelegate,UITableViewDataSource
     
     
     
-//    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
 //        cell.object = advertArray[indexPath.row]
 //        advertID=cell.object?.id!
-//        //print(advertID!)
-////        if cell.object?.aTypeId==2{
-////            self.performSegue(withIdentifier: "photoReklamPage", sender: self)
-////            
-////        }
-////        if cell.object?.aTypeId==1{
-////            self.performSegue(withIdentifier: "textReklamPage", sender: self)
-////            
-////        }
-////        if cell.object?.aTypeId==3{
-////            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-////            
-////        }
-//        //print(cell.object?.name)
-//        //cell.delegate = self
-//        cell.reloadData()
-//        
-//    }
-//    
+        aName = advertArray[indexPath.row].name
+               aDescription = advertArray[indexPath.row].description
+          self.performSegue(withIdentifier: "editSegue", sender: self)
+       
+        //print(advertID!)
+//        if cell.object?.aTypeId==2{
+//            self.performSegue(withIdentifier: "photoReklamPage", sender: self)
+//
+//        }
+//        if cell.object?.aTypeId==1{
+//            self.performSegue(withIdentifier: "textReklamPage", sender: self)
+//
+//        }
+//        if cell.object?.aTypeId==3{
+//            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
+//
+//        }
+        //print(cell.object?.name)
+        //cell.delegate = self
+        //cell.reloadData()
+        
+    }
+    
     
     
     // MARK: - Table view data source
