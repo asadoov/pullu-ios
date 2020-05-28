@@ -18,7 +18,7 @@ class AboutAdvertController: UIViewController {
     var pass:String?
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
-    
+      var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
@@ -42,7 +42,8 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        earnMoney.isEnabled=false
+      earnMoney.isEnabled=false
+               self.earnMoney.isHidden=true
         earnMoney.titleLabel!.text = "Yüklənir..."
          self.defaults.set(nil, forKey: "aID")
 //        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
@@ -95,9 +96,11 @@ class AboutAdvertController: UIViewController {
             
             DispatchQueue.main.async {
            
-                if list[0].isPaid==1 && list[0].userID != self.userData[0].id{
-                    self.earnMoney.isHidden=false
-                }
+              if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                            {
+                                  self.earnMoney.isHidden=false
+                              self.earnMoney.isEnabled=true
+                            }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 

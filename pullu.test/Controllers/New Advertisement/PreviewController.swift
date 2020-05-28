@@ -9,6 +9,7 @@
 import UIKit
 import ImageSlideshow
 import MBProgressHUD
+import AVKit
 class PreviewController: UIViewController {
     let defaults = UserDefaults.standard
     var newAdvertisement:NewAdvertisementStruct = NewAdvertisementStruct()
@@ -26,70 +27,102 @@ class PreviewController: UIViewController {
     @IBOutlet weak var aGender: UILabel!
     @IBOutlet weak var aAgeRange: UILabel!
     @IBOutlet weak var aProfession: UILabel!
-     var loadingAlert:MBProgressHUD?
+    var player: AVPlayer!
+    var loadingAlert:MBProgressHUD?
     var imageSource: [ImageSource] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
-        aImages.addGestureRecognizer(gestureRecognizer)
-        
-        aImages.pageIndicatorPosition = .init(horizontal: .center,vertical: .under)
-        aImages.contentScaleMode=UIViewContentMode.scaleAspectFill
-        let pageControl=UIPageControl()
-        pageControl.currentPageIndicatorTintColor=UIColor.darkGray
-        pageControl.pageIndicatorTintColor=UIColor.lightGray
-        aImages.pageIndicator=pageControl
-        
-        //    print("""
-        //        PROFESIYA - \(newAdvertisement.aProfessionID!)
-        //
-        //
-        // """)
-        //let previewImg = defaults.string(forKey: "previewImg")
-        // aImage.image=UIImage(data: Data(newAPreview.mediaBase64![0].utf8))
-        
-        
-        //aImage.image=UIImage(data:newAPreview.mediaBase64![0])
-        for image in newAPreview.mediaBase64!{
-            imageSource.append(ImageSource(image: UIImage(data: Data(base64Encoded: image)!)!))
+        switch newAdvertisement.aTypeID {
+        case 3:
+            //let videoURL = URL(string: newAPreview.mediaBase64![0])
+            self.player = AVPlayer(url: newAPreview.videoUrl!)
+            //                vc.player = self.player/
             
+            
+          //  self.player = AVPlayer(url: videoURL!)
+            
+            let playerLayer = AVPlayerLayer(player:self.player )
+            
+            DispatchQueue.main.async {
+                playerLayer.frame = self.aImages.bounds
+                self.aImages.layer.addSublayer(playerLayer)
+                //                          self.player?.play()
+            }
+                                         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapped(_:)))
+                                           self.aImages.addGestureRecognizer(gesture)
+            
+        default:
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AboutAdvertController.didTap))
+            aImages.addGestureRecognizer(gestureRecognizer)
+            
+            aImages.pageIndicatorPosition = .init(horizontal: .center,vertical: .under)
+            aImages.contentScaleMode=UIViewContentMode.scaleAspectFill
+            let pageControl=UIPageControl()
+            pageControl.currentPageIndicatorTintColor=UIColor.darkGray
+            pageControl.pageIndicatorTintColor=UIColor.lightGray
+            aImages.pageIndicator=pageControl
+            
+            //    print("""
+            //        PROFESIYA - \(newAdvertisement.aProfessionID!)
+            //
+            //
+            // """)
+            //let previewImg = defaults.string(forKey: "previewImg")
+            // aImage.image=UIImage(data: Data(newAPreview.mediaBase64![0].utf8))
+            
+            
+            //aImage.image=UIImage(data:newAPreview.mediaBase64![0])
+            for image in newAPreview.mediaBase64!{
+                imageSource.append(ImageSource(image: UIImage(data: Data(base64Encoded: image)!)!))
+                
+            }
+            self.aImages.setImageInputs(imageSource)
         }
-        self.aImages.setImageInputs(imageSource)
+        
         aCategory.text = newAPreview.aCategory
         aName.text = newAPreview.aTitle
         aPrice.text = "\(newAPreview.aPrice ?? "")"
         aDescription.text = newAPreview.aDescription
         aTariff.text = newAPreview.aTrf
         aType.text = newAPreview.aType
-//        aCountry.text = "Hədəf ölkə: \(newAPreview.aCountry ?? "")"
-//        aCity.text = "Hədəf şəhər: \(newAPreview.aCity ?? "")"
-//        switch newAPreview.aGender {
-//        case 0:
-//            aGender.text = "Hədəf şəhər: Hamısı"
-//        case 1:
-//            aGender.text = "Hədəf şəhər: Kişi"
-//            break
-//        case 2:
-//            aGender.text = "Hədəf şəhər: Qadın"
-//            break
-//
-//        default:  break
-//
-//        }
-//        aAgeRange.text = "Hədəf yaş aralığı: \(newAPreview.aAgeRange ?? "")"
-//        aProfession.text = "Hədəf ixtisas: \(newAPreview.aProfession ?? "")"
+        //        aCountry.text = "Hədəf ölkə: \(newAPreview.aCountry ?? "")"
+        //        aCity.text = "Hədəf şəhər: \(newAPreview.aCity ?? "")"
+        //        switch newAPreview.aGender {
+        //        case 0:
+        //            aGender.text = "Hədəf şəhər: Hamısı"
+        //        case 1:
+        //            aGender.text = "Hədəf şəhər: Kişi"
+        //            break
+        //        case 2:
+        //            aGender.text = "Hədəf şəhər: Qadın"
+        //            break
+        //
+        //        default:  break
+        //
+        //        }
+        //        aAgeRange.text = "Hədəf yaş aralığı: \(newAPreview.aAgeRange ?? "")"
+        //        aProfession.text = "Hədəf ixtisas: \(newAPreview.aProfession ?? "")"
         // Do any additional setup after loading the view.
     }
+        @objc func tapped(_ sender: UITapGestureRecognizer) {
+            //updateStatus()
+            let vc = AVPlayerViewController()
+            vc.player = player
+    
+            present(vc, animated: true) {
+                vc.player?.play()
+            }
+        }
     
     @IBAction func finishClicked(_ sender: Any) {
-      
+        
         
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.annularDeterminate
-             loadingAlert!.label.text="Gözləyin"
-             loadingAlert!.detailsLabel.text = "Reklamınız serverlərimizə yerləşdirilir"
-             
+        loadingAlert!.label.text="Gözləyin"
+        loadingAlert!.detailsLabel.text = "Reklamınız serverlərimizə yerləşdirilir"
+        
         let jsonEncoder = JSONEncoder()
         do {
             let jsonData = try jsonEncoder.encode(newAdvertisement)
@@ -105,9 +138,9 @@ class PreviewController: UIViewController {
                 
                 in
                 self.loadingAlert!.hide(animated: true)
-                
-                if status.response == 0 {
+                switch (status.response){
                     
+                case 0:
                     let alert = UIAlertController(title: "Uğurludur", message: "Bizi seçdiyiniz üçün təşəkkür edirik. Sizin reklamınız təsdiqləndikdən sonra yayımlanacaq. Daha sonra arxivim bölməsindən əlavə etdiyiniz reklamlarınıza baxa bilərsiniz.", preferredStyle: UIAlertController.Style.alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                         UIAlertAction in
@@ -117,13 +150,16 @@ class PreviewController: UIViewController {
                     }
                     alert.addAction(okAction)
                     self.present(alert, animated: true, completion: nil)
-                }
-                else {
-                    
+                case 4:
+                    let alert = UIAlertController(title: "Bildiriş", message: "Balansınızda kifayət qədər vəsait yoxdur, lütfən balansınızı 'Maliyyə' bölməsinə keçid edərək artırın", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                default:
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin.", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
+                
                 
             }
             
@@ -264,7 +300,7 @@ extension PreviewController:UITableViewDelegate,UITableViewDataSource
         
         
         
-       
+        
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import MBProgressHUD
 class PaidController: UITableViewController {
-    var loadingAlert:MBProgressHUD?
+    var loadingAlert:MBProgressHUD = MBProgressHUD()
     var advertArray: [Advertisement] = [Advertisement]()
     let  select:dbSelect=dbSelect()
     var mail:String?
@@ -21,9 +21,9 @@ class PaidController: UITableViewController {
     var advertID:Int?
     var currentPage = 1
     var catID = 0
-            let defaults = UserDefaults.standard
+    let defaults = UserDefaults.standard
     private let myRefreshControl = UIRefreshControl()
-      let spinner = UIActivityIndicatorView(style: .gray)
+    let spinner = UIActivityIndicatorView(style: .gray)
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,10 +35,24 @@ class PaidController: UITableViewController {
         paidTableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         paidTableView.addSubview(myRefreshControl)
-
-                       mail = defaults.string(forKey: "mail")
-                       pass = defaults.string(forKey: "pass")
-       refresh()
+        
+        mail = defaults.string(forKey: "mail")
+        pass = defaults.string(forKey: "pass")
+        select.SignIn(mail: mail!, pass: pass!){
+            (user)
+            in
+            if !user.isEmpty{
+                self.refresh()
+            }
+            else{
+                
+                self.dismiss(animated: true)
+            }
+            
+            
+            
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -78,11 +92,11 @@ class PaidController: UITableViewController {
             self.performSegue(withIdentifier: "textReklamPage", sender: self)
             
         }
-        //           if advertArray[indexPath.row].aTypeId==3{
-        //               self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-        //
-        //           }
-        //
+        if advertArray[indexPath.row].aTypeId==3{
+            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
+            
+        }
+        
         
         
     }
@@ -126,9 +140,9 @@ class PaidController: UITableViewController {
                     
                     
                 }
-                 cell.object = advertArray[indexPath.row]
+                cell.object = advertArray[indexPath.row]
             }
-           
+            
             
             
         }
@@ -159,17 +173,17 @@ class PaidController: UITableViewController {
             //                        loadingAlert.label.text="Gözləyin"
             //                        loadingAlert.detailsLabel.text = "Reklamları yeniləyirik..."
             spinner.startAnimating()
-                                  spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-
-                                  self.paidTableView.tableFooterView = spinner
-                                  self.paidTableView.tableFooterView?.isHidden = false
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            self.paidTableView.tableFooterView = spinner
+            self.paidTableView.tableFooterView?.isHidden = false
             var typeCount=0
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 0,page: page, catID: catID,progressView: loadingAlert!){
+            select.getAds(username: mail!, pass: pass!,isPaid: 0,page: page, catID: catID,progressView: loadingAlert){
                 
                 (list) in
                 self.spinner.stopAnimating()
-                                self.paidTableView.tableFooterView = nil
+                self.paidTableView.tableFooterView = nil
                 if !list.isEmpty {
                     for advert in list {
                         
@@ -231,78 +245,79 @@ class PaidController: UITableViewController {
     }
     
     @objc func refresh() {
-       
+        
         
         if mail != nil&&pass != nil{
             paginationEnabled = true
-                   loading = true
-                
-                   
-                   loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                   loadingAlert!.mode = MBProgressHUDMode.indeterminate
-                   loadingAlert!.label.text="Gözləyin"
-                   loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
-                  
+            loading = true
+            
+            
+//            loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+//            loadingAlert!.mode = MBProgressHUDMode.indeterminate
+//            loadingAlert!.label.text="Gözləyin"
+//            loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+            self.myRefreshControl.beginRefreshing()
             var typeCount=0
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 1,page: 1, catID: catID,progressView: loadingAlert!){
+            select.getAds(username: mail!, pass: pass!,isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
                 
                 (list) in
-              
-                 self.loadingAlert!.hide(animated: true)
+                
+                
                 
                 if !list.isEmpty{
                     if list[0].error == nil{
-                          self.advertArray.removeAll()
-                    
-                            for advert in list {
+                        self.advertArray.removeAll()
+                        
+                        for advert in list {
+                            
+                            //if (advert.isPaid==type) {
+                            let item = advert
+                            
+                            
+                            
+                            self.advertArray.append(item)
+                            
+                            
+                            
+                            
+                            
+                            DispatchQueue.main.async {
                                 
-                                //if (advert.isPaid==type) {
-                                let item = advert
+                                //                            if self.isPaidSegment.selectedSegmentIndex == 0{
+                                //                                self.advertArray = self.isPaid
+                                //                                typeCount=self.isPaid.count
+                                //                            }else {
+                                //                                self.advertArray = self.isNotPaid
+                                //                                typeCount=self.isNotPaid.count
+                                //                            }
+                                //
                                 
                                 
-                                
-                                self.advertArray.append(item)
-                                
-                                
-                                
-                                
-                                
-                                DispatchQueue.main.async {
-                                    
-                                    //                            if self.isPaidSegment.selectedSegmentIndex == 0{
-                                    //                                self.advertArray = self.isPaid
-                                    //                                typeCount=self.isPaid.count
-                                    //                            }else {
-                                    //                                self.advertArray = self.isNotPaid
-                                    //                                typeCount=self.isNotPaid.count
-                                    //                            }
-                                    //
-                                    
-                                    
-                                    //self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                                    self.myRefreshControl.endRefreshing()
-                                    self.paidTableView.reloadData()
-                                    
-                                    
-                                    
-                                }
+                                //self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                              //  self.loadingAlert!.hide(animated: true)
+                                self.myRefreshControl.endRefreshing()
+                                self.paidTableView.reloadData()
                                 
                                 
                                 
                             }
                             
+                            
+                            
+                        }
                         
-                       
+                        
+                        
                         self.myRefreshControl.endRefreshing()
                         self.loading = false
-                       
+                        
                         self.paginationEnabled = true
                     }
                     else {
                         
                         self.myRefreshControl.endRefreshing()
-                        self.loadingAlert!.hide(animated: true)
+                        //self.loadingAlert!.hide(animated: true)
                         let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                         warningAlert.mode = MBProgressHUDMode.text
                         //            warningAlert.isSquare=true
@@ -315,17 +330,17 @@ class PaidController: UITableViewController {
                     
                 }
                 else  {
-                                           
-                                           self.myRefreshControl.endRefreshing()
-                                                                  self.loadingAlert!.hide(animated: true)
-                                           let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                           warningAlert.mode = MBProgressHUDMode.text
-                                           //            warningAlert.isSquare=true
-                                           warningAlert.label.text = "Bildiriş"
-                                           warningAlert.detailsLabel.text = "Heç bir pullu reklam taapılmadı"
-                                           warningAlert.hide(animated: true,afterDelay: 3)
-                                           
-                                       }
+                    
+                    self.myRefreshControl.endRefreshing()
+                   // self.loadingAlert!.hide(animated: true)
+                    let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    warningAlert.mode = MBProgressHUDMode.text
+                    //            warningAlert.isSquare=true
+                    warningAlert.label.text = "Bildiriş"
+                    warningAlert.detailsLabel.text = "Heç bir pullu reklam taapılmadı"
+                    warningAlert.hide(animated: true,afterDelay: 3)
+                    
+                }
                 
             }
         }
@@ -355,20 +370,20 @@ class PaidController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     
-     override func viewWillAppear(_ animated: Bool) {
-                mail = defaults.string(forKey: "mail")
-                pass = defaults.string(forKey: "pass")
+    override func viewWillAppear(_ animated: Bool) {
+        mail = defaults.string(forKey: "mail")
+        pass = defaults.string(forKey: "pass")
         if  (defaults.string(forKey: "aID") != nil) {
-              refresh()
+            refresh()
         }
-             
-    //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    //            navigationController?.navigationBar.shadowImage = UIImage()
-    //            navigationController?.navigationBar.isTranslucent = true
-    //            navigationController?.view.backgroundColor = .clear
-    //            super.viewWillAppear(animated)
-            }
         
+        //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //            navigationController?.navigationBar.shadowImage = UIImage()
+        //            navigationController?.navigationBar.isTranslucent = true
+        //            navigationController?.view.backgroundColor = .clear
+        //            super.viewWillAppear(animated)
+    }
+    
     
     /*
      override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

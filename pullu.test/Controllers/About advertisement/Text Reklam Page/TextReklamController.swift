@@ -16,7 +16,7 @@ class TextReklamController: UIViewController {
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
     var pass:String?
-    
+    var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advertName: UILabel!
     
@@ -36,7 +36,8 @@ class TextReklamController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+            earnMoney.isEnabled=false
+                 self.earnMoney.isHidden=true
         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         
         let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -70,9 +71,13 @@ class TextReklamController: UIViewController {
             
             
             DispatchQueue.main.async {
-                if list[0].isPaid==1{
-                    self.earnMoney.isHidden=false
-                }
+              if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+               {
+                   self.earnMoney.isHidden=false
+                     self.earnMoney.isEnabled=true
+                 
+               }
+              
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 

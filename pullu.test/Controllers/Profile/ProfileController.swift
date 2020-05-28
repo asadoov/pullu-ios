@@ -127,7 +127,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
             self.profileList = list
-            self.countryID = self.profileList[0].countryID
+            //self.countryID = self.profileList[0].countryID
             DispatchQueue.main.async {
                 self.emailField.setTitle(list[0].mail, for: .normal)
                 self.nameField.text = list[0].name

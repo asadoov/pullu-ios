@@ -60,10 +60,10 @@ class NotPaidController: UITableViewController {
             self.performSegue(withIdentifier: "textReklamPage", sender: self)
             
         }
-        //           if advertArray[indexPath.row].aTypeId==3{
-        //               self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-        //
-        //           }
+                   if advertArray[indexPath.row].aTypeId==3{
+                       self.performSegue(withIdentifier: "videoReklamPage", sender: self)
+        
+                   }
         
         
         
