@@ -11,27 +11,26 @@ import Alamofire
 import MBProgressHUD
 class MyAdsController: UIViewController {
     var advertArray: [Advertisement] = [Advertisement]()
+     var ad: Advertisement = Advertisement()
     var advertID:Int?
     var loadingAlert:MBProgressHUD?
     var  mail:String?
     var  pass:String?
     var select:dbSelect=dbSelect()
-   var aName:String?
-    var aDescription:String?
+   let defaults = UserDefaults.standard
     @IBOutlet weak var aTableView: UITableView!
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let defaults = UserDefaults.standard
+       
         
-        
+       // let defaults = UserDefaults.standard
+                   
         
         // let userData = defaults.string(forKey: "uData")
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
-        refresh()
+     
     }
     
     @objc func refresh() {
@@ -44,7 +43,7 @@ class MyAdsController: UIViewController {
         
         if mail != nil&&pass != nil{
           //  var typeCount=0
-           
+            advertArray.removeAll()
             select.getMyAds(mail: mail!, pass: pass!){
                 
                 (list) in
@@ -97,7 +96,15 @@ class MyAdsController: UIViewController {
         }
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+                
+             mail = defaults.string(forKey: "mail")
+             pass = defaults.string(forKey: "pass")
+              refresh()
+        
+        
+        
+    }
     
     // MARK: - Navigation
     
@@ -106,8 +113,8 @@ class MyAdsController: UIViewController {
     
             if(segue.identifier == "editSegue"){
                 let displayVC = segue.destination as! EditAd
-                displayVC.aName = aName
-                displayVC.aDescription = aDescription
+                displayVC.ad = ad
+              
             }
     }
 //        if(segue.identifier == "photoReklamPage"){
@@ -164,8 +171,8 @@ extension MyAdsController:UITableViewDelegate,UITableViewDataSource
 //        let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
 //        cell.object = advertArray[indexPath.row]
 //        advertID=cell.object?.id!
-        aName = advertArray[indexPath.row].name
-               aDescription = advertArray[indexPath.row].description
+ad = advertArray[indexPath.row]
+              
           self.performSegue(withIdentifier: "editSegue", sender: self)
        
         //print(advertID!)
@@ -202,66 +209,66 @@ extension MyAdsController:UITableViewDelegate,UITableViewDataSource
     }
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        do{
-            // cell.imageView?.image = nil
-            if advertArray[indexPath.row].photo == nil{
-                Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                    if let catPicture = response.result.value {
-                        //advert.photo=catPicture.pngData()
-                        
-                        //  item.photo = UIImage(named: "damaged")?.pngData()
-                        if indexPath.row <= self.advertArray.count {
-                            
-                            if catPicture != nil {
-                                
-                                self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                
-                                
-                            }
-                            else {
-                                self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
-                                
-                            }
-                            
-                            self.advertArray[indexPath.row].downloaded=true
-                            
-                            
-                            // dataArray[dowloadedCount]=item
-                            
-                            
-                            cell.object = self.advertArray[indexPath.row]
-                        }
-                        
-                        
-                        cell.reloadData()
-                    }
-                    
-                    
-                    
-                }
-            }
-            cell.object = advertArray[indexPath.row]
-            
-            
-        }
-        catch
-        {
-            print(indexPath.row)
-        }
-        
-        //cell.delegate = self
-        cell.reloadData()
-        //cell.object = dataArray[indexPath.row]
-        //     cell.delegate = self
-        
-        
-        // Configure the cell...
-        
-        return cell
-    }
-    
+      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+          let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
+          do{
+              // cell.imageView?.image = nil
+              if advertArray.count > 0{
+                  Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
+                      if let catPicture = response.result.value {
+                          //advert.photo=catPicture.pngData()
+                          
+                          //  item.photo = UIImage(named: "damaged")?.pngData()
+                          if indexPath.row <= self.advertArray.count {
+                              
+                              if catPicture != nil {
+                                  
+                                  self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                  
+                                  
+                              }
+                              else {
+                                  self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
+                                  
+                              }
+                              
+                              self.advertArray[indexPath.row].downloaded=true
+                              
+                              
+                              // dataArray[dowloadedCount]=item
+                              
+                              
+                              cell.object = self.advertArray[indexPath.row]
+                          }
+                          
+                          
+                          cell.reloadData()
+                      }
+                      
+                      
+                      
+                  }
+                  cell.object = advertArray[indexPath.row]
+              }
+              
+              
+              
+          }
+          catch
+          {
+              print(indexPath.row)
+          }
+          
+          //cell.delegate = self
+          cell.reloadData()
+          //cell.object = dataArray[indexPath.row]
+          //     cell.delegate = self
+          
+          
+          // Configure the cell...
+          
+          return cell
+      }
     
     /*
      // Override to support conditional editing of the table view.

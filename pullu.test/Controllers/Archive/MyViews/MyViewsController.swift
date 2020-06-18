@@ -105,15 +105,18 @@ class MyViewsController: UIViewController {
         if(segue.identifier == "photoReklamPage"){
             let displayVC = segue.destination as! AboutAdvertController
             displayVC.advertID = advertID
+             displayVC.fromArchieve = true
         }
         if(segue.identifier == "textReklamPage"){
             let displayVC = segue.destination as! TextReklamController
             displayVC.advertID = advertID
+             displayVC.fromArchieve = true
         }
-//        if(segue.identifier == "videoReklamPage"){
-//            let displayVC = segue.destination as! VideoReklamController
-//            displayVC.advertID = advertID
-//        }
+        if(segue.identifier == "videoReklamPage"){
+            let displayVC = segue.destination as! VideoReklamController
+            displayVC.advertID = advertID
+            displayVC.fromArchieve = true
+        }
 //        if(segue.identifier == "aCatSegue"){
 //            let displayVC = segue.destination as! CategoryViewController
 //            displayVC.object = catObject
@@ -164,10 +167,10 @@ extension MyViewsController:UITableViewDelegate,UITableViewDataSource
             self.performSegue(withIdentifier: "textReklamPage", sender: self)
             
         }
-//        if advertArray[indexPath.row].aTypeId==3{
-//            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-//
-//        }
+        if advertArray[indexPath.row].aTypeId==3{
+            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
+
+        }
         //print(cell.object?.name)
         //cell.delegate = self
      

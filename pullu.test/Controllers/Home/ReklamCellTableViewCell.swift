@@ -9,15 +9,17 @@
 import UIKit
 import AlamofireImage
 import Alamofire
+import AVKit
 protocol ReklamCellDelegate {
     func orderClick(object: Advertisement)
 }
 
 class ReklamCellTableViewCell: UITableViewCell {
-   
+    var player:AVPlayer?
     @IBOutlet weak var aImage: UIImageView!
     @IBOutlet weak var aTitle: UILabel!
     
+    @IBOutlet weak var aStatus: UILabel!
     @IBOutlet weak var cell: UIView!
     @IBOutlet weak var aTypeImage: UIImageView!
     @IBOutlet weak var aPrice: UILabel!
@@ -85,7 +87,33 @@ class ReklamCellTableViewCell: UITableViewCell {
                                     break
                                 }
                     }
+            if aStatus != nil {
+                var statusText = "---"
+               
                    
+                    
+                
+                switch object?.isActive{
+                case 1:
+                    //metn
+                   statusText = "Yayımlanır"
+                    aStatus.backgroundColor = UIColor(red: 0.16, green: 0.65, blue: 0.27, alpha: 1.00)
+                case 0:
+                    //shekil
+                  statusText = "Gözləyir"
+                     aStatus.backgroundColor = UIColor(red: 1.00, green: 0.76, blue: 0.03, alpha: 1.00)
+                
+                default:
+                    break
+                }
+                if ((object!.views! >= object!.tariffViewCount!)&&object!.isPaid!==1) {
+                    
+                    statusText = "Vaxtı bitib"
+                    aStatus.backgroundColor = UIColor(red: 0.42, green: 0.46, blue: 0.49, alpha: 1.00)
+                }
+                
+                aStatus.text = statusText
+            }
                     
                     if aCategory != nil { aCategory.text=object?.catName}
                     if object!.price! == "Razılaşma yolu ilə" {
@@ -101,21 +129,38 @@ class ReklamCellTableViewCell: UITableViewCell {
                     //
                     
                     
+            if object?.aTypeId == 1 || object?.aTypeId == 2
+            {
+                if object?.photo != nil {
+                                       
+                                       self.aImage.image=UIImage(data: object!.photo!)
+                                     
+                                   }
+                                   else {
+                                       if object?.downloaded == true {
+                                           aImage.image=UIImage(named: "damaged")
+                                           //loadingIndicator.stopAnimating()
+                                       }
+                                       
+                                   }
+                                   
+                  loadingIndicator.stopAnimating()
+            }
+             if object!.aTypeId == 3 {
+                let videoURL = URL(string: (object?.photoUrl![0])!)
+                       self.player = AVPlayer(url: videoURL!)
+                      
+                                                      let playerLayer = AVPlayerLayer(player:self.player )
+                                                                                    
+                      DispatchQueue.main.async {
+                          playerLayer.frame = self.aImage.frame
+                                          self.aImage.layer.addSublayer(playerLayer)
+//                          self.player?.play()
+                                     }
+                  loadingIndicator.stopAnimating()
+            }
                     
-                    
-                    if object?.photo != nil {
-                        
-                        self.aImage.image=UIImage(data: object!.photo!)
-                        loadingIndicator.stopAnimating()
-                    }
-                    else {
-                        if object?.downloaded == true {
-                            aImage.image=UIImage(named: "damaged")
-                            loadingIndicator.stopAnimating()
-                        }
-                        
-                    }
-                    
+                   
                     
                     
                     

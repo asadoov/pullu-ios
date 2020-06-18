@@ -28,27 +28,36 @@ public class dbSelect {
         
     }
     
-    func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func SignIn(mail:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
-                
-                
-                var list  = try
-                    JSONDecoder().decode(Array<User>.self, from: json)
-                // userList=list
-                
-                completionBlock(list)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
-            
-            
-        }
+        let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
+        
+         let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+         var list:Array<User> = Array<User>()
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+                           {
+                               (response)
+                               in
+                               //  print(PULLULINK)
+                               
+                               do{
+                                   
+                                   
+                                     list = try
+                                        JSONDecoder().decode(Array<User>.self, from: response.data!)
+                                                  // userList=list
+                                                  
+                                completionBlock(list)
+                                   
+                                   
+                               }
+                               catch{
+                                   //print("Error serializing json:",jsonErr)
+                                completionBlock(list)
+                               }
+                       }
+                       
+   
         
     }
     
@@ -512,7 +521,7 @@ public class dbSelect {
                 
                 
                 
-        var list:Array<Advertisement>?
+        var list:Array<Advertisement> = Array <Advertisement>()
                 
                 request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
                     {
@@ -528,13 +537,13 @@ public class dbSelect {
                             // userList=list
                             //print(list)
                             
-                            completionBlock(list!)
+                            completionBlock(list)
                             
                             
                         }
                         catch{
                             //print("Error serializing json:",jsonErr)
-                            completionBlock(list!)
+                            completionBlock(list)
                         }
                 }
                 
