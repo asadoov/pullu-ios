@@ -73,8 +73,8 @@ class logIn: UIViewController {
         var usrList:Array<User>=Array<User>()
         let db: dbSelect=dbSelect()
         
-        if (uName.text != "" && pass.text != "") {
-            db.SignIn(username: uName.text!, pass: pass.text!) { (rslt) in
+        if (uName.text != "" && pass.text != "") { 
+            db.SignIn(mail: uName.text!, pass: pass.text!) { (rslt) in
                 
                 usrList = rslt
                 if(usrList.count > 0){

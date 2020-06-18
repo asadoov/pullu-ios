@@ -127,7 +127,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         select.getProfileInfo(mail: mail, pass: pass) {
             (list) in
             self.profileList = list
-            self.countryID = self.profileList[0].countryID
+            //self.countryID = self.profileList[0].countryID
             DispatchQueue.main.async {
                 self.emailField.setTitle(list[0].mail, for: .normal)
                 self.nameField.text = list[0].name
@@ -278,12 +278,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 let phoneNum = alertController.textFields![0] as UITextField
                 if !phoneNum.text!.isEmpty{
                     
-                    self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! ){
+                    self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: phoneNum.text! ){
                         (status)
                         in
                         if status.response == 0
                         {
-                            let alert = UIAlertController(title: "SMS KOD", message: "Sizə bir neçə dəqiqə ərzində gələn 4 rəqəmli sms verifikasiya kodunu daxil edin", preferredStyle: UIAlertController.Style.alert)
+                            let alert = UIAlertController(title: "SMS KOD", message: "'\(phoneNum.text!)' nömrəsinə göndərilən 4 rəqəmli sms verifikasiya kodunu daxil edin", preferredStyle: UIAlertController.Style.alert)
                             alert.addTextField { (textField : UITextField!) -> Void in
                                 textField.placeholder = "XXXX"
                                 textField.keyboardType = .numberPad
@@ -292,7 +292,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 let smsCode = alert.textFields![0] as UITextField
                                 if !smsCode.text!.isEmpty{
                                     
-                                    self.insert.updatePhone(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)!, code: Int(smsCode.text!)!){
+                                    self.insert.updatePhone(mail: self.mail!, pass: self.pass!, newPhone: phoneNum.text!, code: Int(smsCode.text!)!){
                                         (status)
                                         in
                                         switch status.response
@@ -309,6 +309,9 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                         case 2:
                                             alert.message="Verifikasiya kodunun düzgünlüyünü yoxlayın və təkrar sınayın"
                                             self.present(alert, animated: true, completion: nil)
+                                            case 4:
+                                                                                       alert.message="Bu nömrə ilə artıq qeydiyyatdan keçilib"
+                                                                                       self.present(alert, animated: true, completion: nil)
                                             
                                         default:
                                             // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
@@ -338,7 +341,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 
                             }))
                             alert.addAction(UIAlertAction(title: "Yenidən göndər", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
-                                self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! )  {
+                                self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: phoneNum.text! )  {
                                     (status)
                                     in
                                     

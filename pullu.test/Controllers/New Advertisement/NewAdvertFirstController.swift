@@ -38,12 +38,12 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         loadingIndicator.startAnimating();
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: false, completion: nil)
-        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -200
-        }
-        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = 0.0
-        }
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = -200
+//        }
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = 0.0
+//        }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         select.aType(){

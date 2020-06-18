@@ -18,4 +18,5 @@ pod 'OpalImagePicker'
 pod 'Alamofire', '~> 4.8'
     pod 'AlamofireImage', '~> 3.5'
 pod 'ImageSlideshow', '~> 1.8.3'
+pod ’SJSegmentedScrollView’, ‘1.3.8'
 end

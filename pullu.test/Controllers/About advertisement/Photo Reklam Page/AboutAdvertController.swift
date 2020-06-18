@@ -18,7 +18,7 @@ class AboutAdvertController: UIViewController {
     var pass:String?
     var select:dbSelect=dbSelect()
     var userData = Array<User>()
-    
+      var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
@@ -32,7 +32,8 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var sellerFullname: UILabel!
     
-    @IBOutlet weak var sellerPhone: UILabel!
+    @IBOutlet weak var sellerPhone: UITextView!
+    
     @IBOutlet weak var slideshow: ImageSlideshow!
     
     //    @IBOutlet weak var blurClocks: UIImageView!
@@ -41,14 +42,18 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+      earnMoney.isEnabled=false
+               self.earnMoney.isHidden=true
+        earnMoney.titleLabel!.text = "Yüklənir..."
+         self.defaults.set(nil, forKey: "aID")
+//        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//        alert.view.addSubview(loadingIndicator)
+//        present(alert, animated: false, completion: nil)
         
         //   navigationController?.navigationBar.isTranslucent = false
         
@@ -91,9 +96,11 @@ class AboutAdvertController: UIViewController {
             
             DispatchQueue.main.async {
            
-                if list[0].isPaid==1{
-                    self.earnMoney.isHidden=false
-                }
+              if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                            {
+                                  self.earnMoney.isHidden=false
+                              self.earnMoney.isEnabled=true
+                            }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -101,7 +108,7 @@ class AboutAdvertController: UIViewController {
                 
                 self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
@@ -151,13 +158,19 @@ class AboutAdvertController: UIViewController {
                             
                         }
                         
-                        
+                        if self.imageSource.count == list[0].photoUrl!.count
+                        {
+                             // self.dismiss(animated: false)
+                            self.earnMoney.titleLabel!.text = "Reklamı izlə"
+                            self.earnMoney.isEnabled=true
+                            
+                        }
                         
                     }
                     
                     
                 }
-                     self.dismiss(animated: false)
+                   
                       
             }
             
