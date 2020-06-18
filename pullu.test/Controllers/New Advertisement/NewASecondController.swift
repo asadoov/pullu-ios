@@ -32,6 +32,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
     var loadingView: UIView = UIView()
     var filesAsset:[PHAsset] = []
+    var loadingAlert:MBProgressHUD?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -131,7 +132,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                             if completed == true
                             {
                                 
-                                self.hideActivityIndicator()
+                               // self.hideActivityIndicator()
                                 // self.dismiss(animated: true)
                                 
                                 self.performSegue(withIdentifier: "auditorySegue", sender: true)
@@ -139,10 +140,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         }
                         
                     }
-                    else
-                    {
-                        self.performSegue(withIdentifier: "auditorySegue", sender: true)
-                    }
+              
                     
                 }
                 else {
@@ -164,7 +162,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                 
                 
                 
-                if filesAsset.count > 0 {
+        
                     self.fileChooser(assets: filesAsset)
                     {
                         (completed)
@@ -172,18 +170,15 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         if completed == true
                         {
                             
-                            self.hideActivityIndicator()
+//                            self.hideActivityIndicator()
                             // self.dismiss(animated: true)
-                            
+                              DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                            }
                         }
                     }
                     
-                }
-                else
-                {
-                    self.performSegue(withIdentifier: "auditorySegue", sender: true)
-                }
+               
                 
                 
                 
@@ -238,7 +233,12 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
-        showActivityIndicator()
+        
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+        loadingAlert!.label.text="Gözləyin"
+        loadingAlert!.detailsLabel.text = "Media emal olunur"
+//        showActivityIndicator()
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
         
@@ -267,6 +267,12 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         
                         originalImage += 1
                 }
+                   DispatchQueue.main.async {
+                    self.loadingAlert!.hide(animated: true)
+                }
+                     completionBlock(true)
+                
+                              
                 
             case 3:
                 //                PHCachingImageManager().requestAVAsset(forVideo: assets[0], options: nil) { (assets, audioMix, info) in
@@ -286,7 +292,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                 ////                                      }
                 ////                                  }
                 //                              }
-                PHCachingImageManager().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
+                //PHCachingImageManager(). <- Problemli
+                PHImageManager.default().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
                     if let avassetURL = avasset as? AVURLAsset {
                         guard let video = try? Data(contentsOf: avassetURL.url) else {
                             return
@@ -297,22 +304,29 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         do {
                             let videoData = try  Data.init(contentsOf: avassetURL.url)
                             print(avassetURL.url)
-                            var  orginalVideo = avassetURL.url
+                            let  orginalVideo = avassetURL.url
                             print("File size before compression: \(Double(videoData.count / 1048576)) mb")
                             let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".MP4")
                             print(compressedURL)
-                            self.compressVideo(inputURL: avassetURL.url , outputURL: compressedURL) { (exportSession) in
+                            self.compressVideo(inputURL: orginalVideo , outputURL: compressedURL) { (exportSession) in
                                 guard let session = exportSession else {
                                     return
                                 }
                                 switch session.status {
                                 case .unknown:
+                                    self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                          
+                                    self.loadingAlert!.label.text="Xəta"
+                                    self.loadingAlert!.detailsLabel.text = "Yenidən cəht edin"
+                                    self.loadingAlert!.hide(animated: true,afterDelay: 3)
                                     print("unknown")
                                     break
                                 case .waiting:
+                                
                                     print("waiting")
                                     break
                                 case .exporting:
+                                
                                     print("exporting")
                                     break
                                 case .completed:
@@ -322,9 +336,11 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                         print(compressedData)
                                         self.newAdvertisement.files!.append(compressedData)
                                         // self.newAdvertisement.videoName = avassetURL.url.lastPathComponent
-                                        self.newAdvertisement.videoPathExtension = avassetURL.url.pathExtension
-                                        self.newAPreview.videoUrl = avassetURL.url
+                                        self.newAdvertisement.videoPathExtension = orginalVideo.pathExtension
+                                        self.newAPreview.videoUrl = orginalVideo
                                         print("File size AFTER compression: \(Double(compressedData.count / 1048576)) mb")
+                                     
+                                            completionBlock(true)
                                     }
                                     catch{
                                         print(error)
@@ -337,9 +353,26 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                 case .cancelled:
                                     print("cancelled")
                                     break
+                                @unknown default:
+                                   print("fatal error")
                                 }
+                                 
+                            DispatchQueue.main.async {
+                                                                 self.loadingAlert!.hide(animated: true)
+                                                                 }
+                                              
                             }
                         } catch {
+                     DispatchQueue.main.async {
+                                                                                
+                                                                                   
+                            self.loadingAlert!.hide(animated: true)
+                                self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                             
+                                self.loadingAlert!.label.text="Xəta"
+                                self.loadingAlert!.detailsLabel.text = "\(error)"
+                                self.loadingAlert!.show(animated: true)
+                            }
                             print(error)
                             //return
                         }
@@ -366,7 +399,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             if a == assets.count
             {
-                completionBlock(true)
+               
                 
             }
             a+=1
@@ -375,7 +408,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
         }
         
-        
+    
         
     }
     func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
@@ -393,10 +426,11 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     @IBAction func selectMedia(_ sender: Any) {
-        if newAdvertisement.files !=  nil {
-            newAdvertisement.files!.removeAll()
-            newAPreview.mediaBase64!.removeAll()
-        }
+      
+            newAdvertisement.files?.removeAll()
+            newAPreview.mediaBase64?.removeAll()
+        newAPreview.videoUrl = URL(string: "")
+    
         let imagePicker = OpalImagePickerController()
         if newAdvertisement.aTypeID == 1 {
             performSegue(withIdentifier: "backgroundsSegue", sender: true)
@@ -424,7 +458,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
         if newAdvertisement.aTypeID == 3 {
             let configuration = OpalImagePickerConfiguration()
-            configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Siz sadəcə 1 vide seçə bilərsiniz", comment: "")
+            configuration.maximumSelectionsAllowedMessage = NSLocalizedString("Yalnız 1 video seçmək mümkündür", comment: "")
             imagePicker.configuration = configuration
             imagePicker.maximumSelectionsAllowed=1
             imagePicker.allowedMediaTypes = Set([.video])

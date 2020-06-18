@@ -66,6 +66,12 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
 //    }
 //
     
+    @IBAction func phoneTextChanged(_ sender: Any) {
+        
+        if (phone.text!.count > 9) {
+            phone.deleteBackward()
+        }
+    }
     @IBAction func nextClick(_ sender: Any) {
         var currentDate = Date()
         
