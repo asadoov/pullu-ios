@@ -28,40 +28,49 @@ public class dbSelect {
         
     }
     
-    func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func SignIn(mail:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
-                
-                
-                var list  = try
-                    JSONDecoder().decode(Array<User>.self, from: json)
-                // userList=list
-                
-                completionBlock(list)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
-            
-            
-        }
+        let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
+        
+         let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+         var list:Array<User> = Array<User>()
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+                           {
+                               (response)
+                               in
+                               //  print(PULLULINK)
+                               
+                               do{
+                                   
+                                   
+                                     list = try
+                                        JSONDecoder().decode(Array<User>.self, from: response.data!)
+                                                  // userList=list
+                                                  
+                                completionBlock(list)
+                                   
+                                   
+                               }
+                               catch{
+                                   //print("Error serializing json:",jsonErr)
+                                completionBlock(list)
+                               }
+                       }
+                       
+   
         
     }
     
-    func getAds(username:String,pass:String,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
         
         let Parameters:[String:Any]
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         if catID! > 0 {
-            Parameters = ["mail": username,"pass":pass,"catID":catID!] as [String : Any]
+            Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
             //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
         }else{
-            Parameters = ["mail": username,"pass":pass] as [String : Any]
+            Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid] as [String : Any]
             
         }
         
@@ -69,7 +78,7 @@ public class dbSelect {
         
         
         
-        
+              var list:Array<Advertisement> = Array<Advertisement>()
         
         
         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
@@ -86,22 +95,27 @@ public class dbSelect {
             {
                 (response)
                 in
-                //  print(PULLULINK)
+              
                 
                 do{
                     
                     
-                    var list  = try
+                     list  = try
                         JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
                     // userList=list
                     //print(list)
-                    
+                    //list[0].error = false
                     completionBlock(list)
                     
                     
                 }
-                catch let jsonErr{
-                    print("Error serializing json:",jsonErr)
+                catch {
+                    //print("Error serializing json:",jsonErr)
+                    var advertisement = Advertisement()
+                    advertisement.error = true
+                    list.append(advertisement)
+                    
+                    completionBlock(list)
                 }
         }
         
@@ -450,5 +464,90 @@ public class dbSelect {
            
            
        }
+     func getMyViews(mail:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    
+             let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/views"
+             
+            
+             //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+
+                let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+                 //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+            
+             
+             
+             
+             
+             
+             
+             
+             request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+                 {
+                     (response)
+                     in
+                     //  print(PULLULINK)
+                     
+                     do{
+                         
+                         
+                         var list  = try
+                             JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
+                         // userList=list
+                         //print(list)
+                         
+                         completionBlock(list)
+                         
+                         
+                     }
+                     catch let jsonErr{
+                         print("Error serializing json:",jsonErr)
+                     }
+             }
+             
+             
+         }
+    func getMyAds(mail:String,pass:String,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+       
+                let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/my/ads"
+                
+               
+                //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+
+                   let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+                    //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+               
+                
+                
+                
+                
+                
+        var list:Array<Advertisement> = Array <Advertisement>()
+                
+                request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+                    {
+                        (response)
+                        in
+                        //  print(PULLULINK)
+                        
+                        do{
+                            
+                            
+                             list  = try
+                                JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
+                            // userList=list
+                            //print(list)
+                            
+                            completionBlock(list)
+                            
+                            
+                        }
+                        catch{
+                            //print("Error serializing json:",jsonErr)
+                            completionBlock(list)
+                        }
+                }
+                
+                
+            }
     
 }

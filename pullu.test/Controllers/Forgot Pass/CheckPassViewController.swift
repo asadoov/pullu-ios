@@ -7,15 +7,15 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 class CheckPassViewController: UIViewController, UITextFieldDelegate {
-
+ var loadingAlert:MBProgressHUD?
     @IBOutlet weak var pass1text: UITextField!
     @IBOutlet weak var pass2text: UITextField!
     @IBOutlet weak var pass3text: UITextField!
     @IBOutlet weak var pass4text: UITextField!
     var dbIns : DbInsert = DbInsert()
-    var usrEmail: String = ""
+    var login: String = ""
     var verifyNumber: String = ""
     
     
@@ -76,26 +76,29 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func nextButton(_ sender: Any) {
         
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        
-        
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-        
+//        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//
+//
+//        alert.view.addSubview(loadingIndicator)
+//        present(alert, animated: true, completion: nil)
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+               loadingAlert!.mode = MBProgressHUDMode.indeterminate
+               loadingAlert!.label.text="Gözləyin"
+               loadingAlert!.detailsLabel.text = "Verifikasiya kodu yoxlanır..."
         
         
          verifyNumber = "\(pass1text.text!)\(pass2text.text!)\(pass3text.text!)\(pass4text.text!)"
         
         print(verifyNumber)
-        dbIns.checkSendCode(mail: usrEmail, code: verifyNumber) {
+        dbIns.checkSendCode(login: login, code: verifyNumber) {
             (Status) in
             
-            
+           self.loadingAlert!.hide(animated: true)
             
             switch Status.response {
                 
@@ -106,9 +109,14 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
                 break
                 
             case 1:
-                let alert = UIAlertController(title: "Bildiriş", message: " error 1 ", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                           alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                               let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(Status.response!)\n\(Status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+                                                               alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                               self.present(alert, animated: true, completion: nil)
+                                                           }))
+                                                           self.present(alert, animated: true, completion: nil)
                 break
                 
                 case 2:
@@ -129,7 +137,7 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "changePassSegue") {
             let changeParam = segue.destination as! CreatePassViewController
-            changeParam.usrEml = usrEmail
+            changeParam.login = login
             changeParam.usrCode = verifyNumber
         }
         // Get the new view controller using segue.destination.

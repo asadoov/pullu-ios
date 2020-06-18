@@ -71,7 +71,7 @@ class TabBarController: UITabBarController {
                              
                           }
                         if (notificationCount>0){
-                             self!.tabBar.items![3].badgeValue = String(notificationCount)
+                             self?.tabBar.items?[3].badgeValue = String(notificationCount)
                         }
                         else{
                             do {

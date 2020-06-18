@@ -12,6 +12,7 @@ import SJSegmentedScrollView
 
 class ArchiveController: UIViewController {
 
+    @IBOutlet weak var container: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,13 +34,14 @@ class ArchiveController: UIViewController {
             segmentedViewController.segmentTitleColor = UIColor.black
             segmentedViewController.selectedSegmentViewColor = UIColor.black
             segmentedViewController.selectedSegmentViewHeight = 3
-            segmentedViewController.segmentViewHeight = 80
+            segmentedViewController.segmentViewHeight = 50
             segmentedViewController.headerViewHeight = 95
             
             addChild(segmentedViewController)
-            self.view.addSubview(segmentedViewController.view)
-            segmentedViewController.view.frame = self.view.bounds
+            container.addSubview(segmentedViewController.view)
+            segmentedViewController.view.frame = container.bounds
             segmentedViewController.didMove(toParent: self)
+          //  container.bounds = view.frame.insetBy(dx: 10.0, dy: 10.0)
         
         }
         // Do any additional setup after loading the view.

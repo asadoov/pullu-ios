@@ -16,9 +16,10 @@ class PhotoStoryController: UIViewController {
     let insert:DbInsert=DbInsert()
     var imageSource: [ImageSource] = []
     @IBOutlet weak var slideshow: ImageSlideshow!
+     let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+         self.defaults.set(nil, forKey: "aID")
         // Do any additional setup after loading the view.
         DispatchQueue.main.async {
             
@@ -43,7 +44,7 @@ class PhotoStoryController: UIViewController {
                     let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                         (action: UIAlertAction!) in
-                                        
+                                        self.defaults.set(self.advertID, forKey: "aID")
                                       self.dismiss(animated: true)
                                     }))
                       self.present(alert, animated: true, completion: nil)
