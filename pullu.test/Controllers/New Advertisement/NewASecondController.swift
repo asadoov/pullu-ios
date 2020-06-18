@@ -123,7 +123,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                     
                     
                     
-                    if filesAsset.count > 0 {
+              
                         self.fileChooser(assets: filesAsset)
                         {
                             (completed)
@@ -131,18 +131,14 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                             if completed == true
                             {
                                 
-                                self.hideActivityIndicator()
+//                                self.hideActivityIndicator()
                                 // self.dismiss(animated: true)
                                 
                                 self.performSegue(withIdentifier: "auditorySegue", sender: true)
                             }
                         }
                         
-                    }
-                    else
-                    {
-                        self.performSegue(withIdentifier: "auditorySegue", sender: true)
-                    }
+                   
                     
                 }
                 else {
@@ -174,8 +170,9 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                             
                             self.hideActivityIndicator()
                             // self.dismiss(animated: true)
-                            
+                                DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                            }
                         }
                     }
                     
@@ -238,7 +235,10 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
-        showActivityIndicator()
+      var loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert.mode = MBProgressHUDMode.indeterminate
+                   loadingAlert.label.text="Media hazırlanır"
+                   loadingAlert.detailsLabel.text = "Gözləyin..."
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
         
@@ -286,7 +286,9 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                 ////                                      }
                 ////                                  }
                 //                              }
-                PHCachingImageManager().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
+               // PHCachingImageManager() <- old wrong algorithm
+                
+                PHImageManager.default().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
                     if let avassetURL = avasset as? AVURLAsset {
                         guard let video = try? Data(contentsOf: avassetURL.url) else {
                             return
@@ -297,11 +299,11 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         do {
                             let videoData = try  Data.init(contentsOf: avassetURL.url)
                             print(avassetURL.url)
-                            var  orginalVideo = avassetURL.url
+                            let  orginalVideo = avassetURL.url
                             print("File size before compression: \(Double(videoData.count / 1048576)) mb")
                             let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".MP4")
                             print(compressedURL)
-                            self.compressVideo(inputURL: avassetURL.url , outputURL: compressedURL) { (exportSession) in
+                            self.compressVideo(inputURL: orginalVideo , outputURL: compressedURL) { (exportSession) in
                                 guard let session = exportSession else {
                                     return
                                 }
@@ -322,9 +324,13 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                         print(compressedData)
                                         self.newAdvertisement.files!.append(compressedData)
                                         // self.newAdvertisement.videoName = avassetURL.url.lastPathComponent
-                                        self.newAdvertisement.videoPathExtension = avassetURL.url.pathExtension
-                                        self.newAPreview.videoUrl = avassetURL.url
+                                        self.newAdvertisement.videoPathExtension =  orginalVideo.pathExtension
+                                        self.newAPreview.videoUrl = orginalVideo
                                         print("File size AFTER compression: \(Double(compressedData.count / 1048576)) mb")
+                                            DispatchQueue.main.async {
+                                                loadingAlert.hide(animated: true)
+                                        }
+                                         completionBlock(true)
                                     }
                                     catch{
                                         print(error)
@@ -337,6 +343,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                 case .cancelled:
                                     print("cancelled")
                                     break
+                                @unknown default:
+                                    print("Fatal error")
                                 }
                             }
                         } catch {
@@ -366,7 +374,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             if a == assets.count
             {
-                completionBlock(true)
+               
                 
             }
             a+=1

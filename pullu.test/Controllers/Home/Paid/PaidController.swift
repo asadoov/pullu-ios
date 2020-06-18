@@ -252,10 +252,7 @@ class PaidController: UITableViewController {
             loading = true
             
             
-//            loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-//            loadingAlert!.mode = MBProgressHUDMode.indeterminate
-//            loadingAlert!.label.text="Gözləyin"
-//            loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+
             self.myRefreshControl.beginRefreshing()
             var typeCount=0
             
