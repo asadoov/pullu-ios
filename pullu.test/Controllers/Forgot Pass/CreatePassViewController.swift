@@ -13,7 +13,7 @@ class CreatePassViewController: UIViewController {
     @IBOutlet weak var newPassText: UITextField!
     @IBOutlet weak var newPassRepttext: UITextField!
     var dbIns : DbInsert = DbInsert()
-    var usrEml: String?
+    var login: String?
     var usrCode: String?
     
      override func viewDidLoad() {
@@ -58,7 +58,7 @@ class CreatePassViewController: UIViewController {
             if (self.newPassText.text! == self.newPassRepttext.text!){
         
         
-        dbIns.createNewPass(newpass: newPassText.text!, mail: usrEml!, code: usrCode!){
+        dbIns.createNewPass(newpass: newPassText.text!, login: login!, code: usrCode!){
             (Status) in
             
             

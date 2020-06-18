@@ -25,4 +25,5 @@ class NewAdvertisementStruct: Codable {
     var aProfessionID:Int?
     var aBackgroundUrl:String?
     var files:Array<Data>?
+        var videoPathExtension:String?
 }
