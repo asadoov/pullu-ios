@@ -49,12 +49,12 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
         return  genders.count
     }
     
-    @IBAction func mobileValueChanged(_ sender: Any) {
-        if phone.text!.count > 3{
-    print("limiti kecdi")
-            
-        }
+    @IBAction func phoneTextChanged(_ sender: Any) {
+        if (phone.text!.count > 9) {
+               phone.deleteBackward()
+           }
     }
+   
     //    func textField34(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
 //                           replacementString string: String) -> Bool
 //    {
