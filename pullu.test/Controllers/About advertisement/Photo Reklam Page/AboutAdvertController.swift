@@ -25,10 +25,12 @@ class AboutAdvertController: UIViewController {
     @IBOutlet weak var aDescription: UITextView!
     
     
-    @IBOutlet weak var advType: UILabel!
+    @IBOutlet weak var aTypeText: UILabel!
     
-    @IBOutlet weak var balance: UILabel!
     
+   
+    
+    @IBOutlet weak var balanceText: UILabel!
     
     @IBOutlet weak var sellerFullname: UILabel!
     
@@ -76,18 +78,23 @@ class AboutAdvertController: UIViewController {
         slideshow.pageIndicator=pageControl
         
         // Do any additional setup after loading the view.
-        do{
-            let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
-            self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            self.mail=self.userData[0].mail
+        let udata = self.defaults.string(forKey: "uData")
+        if udata != nil {
+            do{
+                       
+                       pass = self.defaults.string(forKey: "pass")
+                       self.userData  = try
+                           JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                       self.mail=self.userData[0].mail
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+            
         }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
+       
         //print("mail: \(userData[0].mail) pass: \(pass) advertID: \(advertID)")
-        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
+        select.getAdvertById(advertID: advertID!)
         {
             (list)
             in
@@ -110,8 +117,12 @@ class AboutAdvertController: UIViewController {
                 self.sellerFullname.text=list[0].sellerFullName!
                 self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
-                self.advType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+                self.aTypeText.text="Reklam tipi: \(list[0].aTypeName!)"
+                if self.userData.count>0 {
+                    self.balanceText.text = "Balans: \(self.userData[0].earning!) AZN"
+                    
+                }
+                
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 
                 //  self.tableView.reloadData()

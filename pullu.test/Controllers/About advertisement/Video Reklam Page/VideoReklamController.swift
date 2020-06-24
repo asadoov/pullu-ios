@@ -26,8 +26,9 @@ class VideoReklamController: UIViewController {
     @IBOutlet weak var playerUIView: UIView!
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var aDescription: UITextView!
-    @IBOutlet weak var advType: UILabel!
-    @IBOutlet weak var balance: UILabel!
+    @IBOutlet weak var aTypeText: UILabel!
+    
+    @IBOutlet weak var balanceText: UILabel!
     @IBOutlet weak var advName: UILabel!
      var fromArchieve:Bool = false
     @IBOutlet weak var sellerPhone: UITextView!
@@ -40,20 +41,24 @@ class VideoReklamController: UIViewController {
         earnMoney.titleLabel!.text = "Yüklənir..."
         self.defaults.set(nil, forKey: "aID")
         // Do any additional setup after loading the view.
-        do{
-            let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
-            self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            self.mail=self.userData[0].mail
+        let udata = self.defaults.string(forKey: "uData")
+        if udata != nil  {
+            do{
+                       
+                       pass = self.defaults.string(forKey: "pass")
+                       self.userData  = try
+                           JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                       self.mail=self.userData[0].mail
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
         }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
+       
         
         
         
-        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
+        select.getAdvertById(advertID: advertID!)
         {
             (list)
             in
@@ -63,12 +68,7 @@ class VideoReklamController: UIViewController {
             DispatchQueue.main.async {
                 self.earnMoney.isEnabled = true
                 
-                 if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
-                               {
-                                    self.earnMoney.isHidden=false
-                                                         self.earnMoney.isEnabled=true
-                                 
-                               }
+                 
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -78,8 +78,18 @@ class VideoReklamController: UIViewController {
                 self.sellerFullname.text=list[0].sellerFullName!
                 self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
-                self.advType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+                self.aTypeText.text="Reklam tipi: \(list[0].aTypeName!)"
+                if self.userData.count>0{
+                    if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                    {
+                         self.earnMoney.isHidden=false
+                                              self.earnMoney.isEnabled=true
+                      
+                    }
+                    
+                    self.balanceText.text = "Balans: \(self.userData[0].earning!) AZN"
+                }
+                
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                // let vc = AVPlayerViewController()
                 

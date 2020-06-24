@@ -14,6 +14,7 @@ class logIn: UIViewController {
     
     
     
+    
     @IBOutlet weak var uName: UITextField!
     @IBOutlet weak var pass: UITextField!
     
@@ -55,6 +56,10 @@ class logIn: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true);
+    }
+    
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)

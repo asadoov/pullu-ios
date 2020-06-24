@@ -25,12 +25,14 @@ class TextReklamController: UIViewController {
     
     @IBOutlet weak var sellerPhone: UITextView!
     
+    @IBOutlet weak var aTypeText: UILabel!
     
+    @IBOutlet weak var balanceText: UILabel!
     @IBOutlet weak var earnMoney: UIButton!
     
-    @IBOutlet weak var advertType: UILabel!
+    
     @IBOutlet weak var advertPrice: UILabel!
-    @IBOutlet weak var balance: UILabel!
+   
     
     @IBOutlet weak var advertImage: UIImageView!
     override func viewDidLoad() {
@@ -52,18 +54,21 @@ class TextReklamController: UIViewController {
         
         
         // Do any additional setup after loading the view.
+         let udata = self.defaults.string(forKey: "uData")
+        if udata != nil {
+            do{
+               
+                pass = self.defaults.string(forKey: "pass")
+                
+                self.userData  = try
+                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+        }
         
-        do{
-            let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
-            
-            self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-        }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
-        select.getAdvertById(advertID: advertID,mail:self.userData[0].mail,pass:pass )
+        select.getAdvertById(advertID: advertID! )
         {
             (list)
             in
@@ -87,8 +92,11 @@ class TextReklamController: UIViewController {
                 self.sellerFullname.text=list[0].sellerFullName!
                 self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
-                self.advertType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+                self.aTypeText.text="Reklam tipi: \(list[0].aTypeName!)"
+                if self.userData.count>0{
+                    self.balanceText.text = "Balans: \(self.userData[0].earning!) AZN"
+                }
+                
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 
                 let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)

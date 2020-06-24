@@ -7,11 +7,12 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
-    
+     let defaults = UserDefaults.standard
     var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()
     var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
+     var loadingAlert:MBProgressHUD?
     @IBOutlet weak var aTypePicker: UIPickerView!
     @IBOutlet weak var aCatPicker: UIPickerView!
     
@@ -30,14 +31,10 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+          loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+              loadingAlert!.mode = MBProgressHUDMode.indeterminate
+              loadingAlert!.label.text="Gözləyin"
+              loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
 //        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
 //            self.view.frame.origin.y = -200
 //        }
@@ -61,8 +58,8 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
             self.catList=list
             DispatchQueue.main.async {
                 self.aCatPicker.reloadAllComponents();
-                self.dismiss(animated: true)
-                
+              
+                self.loadingAlert?.hide(animated: true)
             }
         }
         
@@ -71,9 +68,23 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         //        navigationController?.navigationBar.isTranslucent = true
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+           let udata=defaults.string(forKey: "uData")
+                  if  udata == nil {
+                        self.performSegue(withIdentifier: "signInSegue", sender: self)
+                  }
+
+       }
     
-    
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//           let udata=defaults.string(forKey: "uData")
+//                             if  udata == nil {
+//                                   self.performSegue(withIdentifier: "signInSegue", sender: self)
+//                             }
+//
+//       }
+       
     
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.

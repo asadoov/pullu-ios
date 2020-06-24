@@ -142,8 +142,9 @@ class HomePageController: UIViewController{
         
         //  self.getProducts()
         let defaults = UserDefaults.standard
-        
-        Messaging.messaging().subscribe(toTopic: "\(defaults.string(forKey: "uID")!)"){ error in
+        let uID = defaults.string(forKey: "uID") ?? nil
+        if  uID != nil{
+        Messaging.messaging().subscribe(toTopic: "\(uID!)"){ error in
                                                           if error == nil{
                                                               print("Subscribed to topic")
                                                           }
@@ -151,6 +152,7 @@ class HomePageController: UIViewController{
                                                               print("Not Subscribed to topic")
                                                           }
                }
+        }
         
         // let userData = defaults.string(forKey: "uData")
         mail = defaults.string(forKey: "mail")

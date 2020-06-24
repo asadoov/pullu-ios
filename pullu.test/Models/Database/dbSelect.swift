@@ -61,9 +61,10 @@ public class dbSelect {
         
     }
     
-    func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
-        
+    func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+        //let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+        let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
+             
         let Parameters:[String:Any]
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         if catID! > 0 {
@@ -78,7 +79,7 @@ public class dbSelect {
         
         
         
-              var list:Array<Advertisement> = Array<Advertisement>()
+        
         
         
         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
@@ -100,8 +101,8 @@ public class dbSelect {
                 do{
                     
                     
-                     list  = try
-                        JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
+                    let list:ResponseStruct<Advertisement> = try
+                        JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
                     // userList=list
                     //print(list)
                     //list[0].error = false
@@ -109,13 +110,10 @@ public class dbSelect {
                     
                     
                 }
-                catch {
-                    //print("Error serializing json:",jsonErr)
-                    var advertisement = Advertisement()
-                    advertisement.error = true
-                    list.append(advertisement)
-                    
-                    completionBlock(list)
+                catch let jsonErr {
+                    print("Error serializing json:",jsonErr)
+                   
+                   
                 }
         }
         
@@ -211,9 +209,9 @@ public class dbSelect {
         }
         
     }
-    func getAdvertById(advertID:Int?,mail:String?,pass:String?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    func getAdvertById(advertID:Int?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{

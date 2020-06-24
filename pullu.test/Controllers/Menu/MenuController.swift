@@ -96,22 +96,25 @@ class MenuController: UIViewController {
         
         
         let udata=defaults.string(forKey: "uData")
-        do{
-            
-            
-            let list  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            
-            // userList=list
-            nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-          
-            userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
-            
-            
+        if udata != nil {
+            do{
+                
+                
+                let list  = try
+                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                
+                // userList=list
+                nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
+              
+                userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
+                
+                
+            }
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
         }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
+        
         // Do any additional setup after loading the view.
     }
 //    override func viewWillAppear(_ animated: Bool) {

@@ -29,6 +29,6 @@ struct Advertisement : Codable {
     var views:Int?
     var tariffViewCount:Int?
     var downloaded:Bool?
-    var error:Bool?
+    
     
 }

@@ -60,6 +60,7 @@
 		B67B9DE923EEE19E00A3451C /* pullu_test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 045829A323C452D3004F6FA9 /* pullu_test.xcdatamodeld */; };
 		B67B9DEA23EEE19E00A3451C /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */; };
 		B67B9DEB23EEE19E00A3451C /* ConnectionCheckController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */; };
+		B680C41524A3589500A99F0A /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680C41424A3589500A99F0A /* ResponseStruct.swift */; };
 		B68172DF245F751E000A4119 /* FinanceStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68172DE245F751E000A4119 /* FinanceStruct.swift */; };
 		B68294D023F599420041E446 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68294CF23F599420041E446 /* ProfileController.swift */; };
 		B682CB742465A2EC007EFD0E /* StatisticsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B682CB732465A2EC007EFD0E /* StatisticsCell.swift */; };
@@ -254,6 +255,7 @@
 		B67D4FD623CA0EE400E572E8 /* SecondRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRegistrationController.swift; sourceTree = "<group>"; };
 		B67D4FD923CA13DF00E572E8 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		B67FA3A823E1B17E000DAF92 /* earnMoney.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = earnMoney.swift; sourceTree = "<group>"; };
+		B680C41424A3589500A99F0A /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
 		B68172DE245F751E000A4119 /* FinanceStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceStruct.swift; sourceTree = "<group>"; };
 		B68294CF23F599420041E446 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		B682CB732465A2EC007EFD0E /* StatisticsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsCell.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				B6D7ACF523CA8591005AAB76 /* City.swift */,
 				B6D7ACF123CA7D92005AAB76 /* Country.swift */,
 				B68172DE245F751E000A4119 /* FinanceStruct.swift */,
+				B680C41424A3589500A99F0A /* ResponseStruct.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */,
+				B680C41524A3589500A99F0A /* ResponseStruct.swift in Sources */,
 				B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */,
 				B60C14AE2460384A005D70CF /* AlamofireInterface.swift in Sources */,
 				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,
@@ -1412,7 +1416,7 @@
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1436,7 +1440,7 @@
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

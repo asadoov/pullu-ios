@@ -11,11 +11,11 @@ import Foundation
 import SJSegmentedScrollView
 
 class ArchiveController: UIViewController {
-
+ let defaults = UserDefaults.standard
     @IBOutlet weak var container: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         if let storyboard = self.storyboard {
             
@@ -47,7 +47,13 @@ class ArchiveController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        let udata=defaults.string(forKey: "uData")
+        if  udata == nil {
+           self.performSegue(withIdentifier: "signInSegue", sender: self)
+        }
+        
+    }
     /*
     // MARK: - Navigation
 
