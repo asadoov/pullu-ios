@@ -10,6 +10,7 @@ import UIKit
 import OpalImagePicker
 import Photos
 import MBProgressHUD
+import AVKit
 class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextViewDelegate{
     
     
@@ -64,7 +65,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        if textView.text == "Ətraflı məlumat"
+        {textView.text = ""}
         
         textView.layer.borderColor = UIColor.red.cgColor
     }
@@ -109,38 +111,84 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
     
     @IBAction func nextBtn(_ sender: Any) {
         if ((price.text != "" || newAdvertisement.aPrice != "") && descriptionField.text != "" && descriptionField.text != "Ətraflı məlumat" && (filesAsset.count > 0 || newAdvertisement.aBackgroundUrl != nil) ){
-            
-            
-            
-            newAdvertisement.aDescription = descriptionField.text
-            newAPreview.aDescription = descriptionField.text
-            if price.text != "" {
-                newAdvertisement.aPrice = price.text
-                newAPreview.aPrice = "\(price.text!)"
-            }
-            
-            
-            
-            if filesAsset.count > 0 {
-                self.fileChooser(assets: filesAsset)
-                {
-                    (completed)
-                    in
-                    if completed == true
-                    {
-                        
-                        self.hideActivityIndicator()
-                        // self.dismiss(animated: true)
-                        
-                        self.performSegue(withIdentifier: "auditorySegue", sender: true)
+            switch newAdvertisement.aTypeID {
+            case 1:
+                if (descriptionField.text.count > 100){
+                    newAdvertisement.aDescription = descriptionField.text
+                    newAPreview.aDescription = descriptionField.text
+                    if price.text != "" {
+                        newAdvertisement.aPrice = price.text
+                        newAPreview.aPrice = "\(price.text!) AZN"
                     }
+                    
+                    
+                    
+              
+                        self.fileChooser(assets: filesAsset)
+                        {
+                            (completed)
+                            in
+                            if completed == true
+                            {
+                                
+//                                self.hideActivityIndicator()
+                                // self.dismiss(animated: true)
+                                
+                                self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                            }
+                        }
+                        
+                   
+                    
+                }
+                else {
+                    
+                    let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    warningAlert.mode = MBProgressHUDMode.text
+                    //            warningAlert.isSquare=true
+                    warningAlert.label.text = "Diqqət"
+                    warningAlert.detailsLabel.text = "Mətn reklamı minimum 100 simvoldan ibarət olmalıdır"
+                    warningAlert.hide(animated: true,afterDelay: 3)
+                }
+            default:
+                newAdvertisement.aDescription = descriptionField.text
+                newAPreview.aDescription = descriptionField.text
+                if price.text != "" {
+                    newAdvertisement.aPrice = price.text
+                    newAPreview.aPrice = "\(price.text!) AZN"
                 }
                 
+                
+                
+                if filesAsset.count > 0 {
+                    self.fileChooser(assets: filesAsset)
+                    {
+                        (completed)
+                        in
+                        if completed == true
+                        {
+                            
+                            self.hideActivityIndicator()
+                            // self.dismiss(animated: true)
+                                DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                            }
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                }
+                
+                
+                
             }
-            else
-            {
-                self.performSegue(withIdentifier: "auditorySegue", sender: true)
-            }
+            
+            
+            
+            
             
             
             
@@ -149,7 +197,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         {
             let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             warningAlert.mode = MBProgressHUDMode.text
-//            warningAlert.isSquare=true
+            //            warningAlert.isSquare=true
             warningAlert.label.text = "Diqqət"
             warningAlert.detailsLabel.text = "Zəhmət olmasa bütün boşluqların doldurulmasından və media seçildiyindən əmin olun"
             warningAlert.hide(animated: true,afterDelay: 3)
@@ -187,38 +235,146 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
-        showActivityIndicator()
+      var loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert.mode = MBProgressHUDMode.indeterminate
+                   loadingAlert.label.text="Media hazırlanır"
+                   loadingAlert.detailsLabel.text = "Gözləyin..."
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
+        
+        
+        
         var a = 1
-        for img in assets {
-            
-            
-            
-            var originalImage = 1
-            PHImageManager.default().requestImage(
-                for: img,
-                targetSize: .init(),
-                contentMode: .aspectFit,
-                options: nil) { (image, _) in
-                    // result = image
-                    if originalImage%2 == 0 {
+        for file in assets {
+            switch newAdvertisement.aTypeID {
+            case 2:
+                var originalImage = 1
+                PHImageManager.default().requestImage(
+                    for: file,
+                    targetSize: .init(),
+                    contentMode: .aspectFit,
+                    options: nil) { (image, _) in
+                        // result = image
+                        if originalImage%2 == 0 {
+                            
+                            self.newAdvertisement.files?.append((image?.jpeg(.lowest))!)
+                            
+                            self.newAPreview.mediaBase64?.append((image?.jpeg(.lowest)!.base64EncodedString())!)
+                            //                                                    let strBase64 =  image?.pngData()!.base64EncodedString()
+                            //                                                    print(strBase64!)
+                            
+                        }
                         
-                        self.newAdvertisement.files?.append((image?.jpeg(.lowest))!)
+                        originalImage += 1
+                }
+                
+            case 3:
+                //                PHCachingImageManager().requestAVAsset(forVideo: assets[0], options: nil) { (assets, audioMix, info) in
+                //                                  let asset = assets as! AVURLAsset
+                //                   let video =  try! Data(contentsOf: asset.url)
+                //                    self.newAdvertisement.files!.append(video)
+                //
+                //
+                //                                           self.newAPreview.videoUrl = asset.url
+                ////                                  DispatchQueue.main.async {
+                ////
+                ////                                      let player = AVPlayer(url: asset.url)
+                ////                                      let playerViewController = AVPlayerViewController()
+                ////                                      playerViewController.player = player
+                ////                                      self.present(playerViewController, animated: true) {
+                ////                                          playerViewController.player!.play()
+                ////                                      }
+                ////                                  }
+                //                              }
+               // PHCachingImageManager() <- old wrong algorithm
+                
+                PHImageManager.default().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
+                    if let avassetURL = avasset as? AVURLAsset {
+                        guard let video = try? Data(contentsOf: avassetURL.url) else {
+                            return
+                        }
                         
-                        self.newAPreview.mediaBase64?.append((image?.jpeg(.lowest)!.base64EncodedString())!)
-                        //                                                    let strBase64 =  image?.pngData()!.base64EncodedString()
-                        //                                                    print(strBase64!)
                         
+                        
+                        do {
+                            let videoData = try  Data.init(contentsOf: avassetURL.url)
+                            print(avassetURL.url)
+                            let  orginalVideo = avassetURL.url
+                            print("File size before compression: \(Double(videoData.count / 1048576)) mb")
+                            let compressedURL = NSURL.fileURL(withPath: NSTemporaryDirectory() + NSUUID().uuidString + ".MP4")
+                            print(compressedURL)
+                            self.compressVideo(inputURL: orginalVideo , outputURL: compressedURL) { (exportSession) in
+                                guard let session = exportSession else {
+                                    return
+                                }
+                                switch session.status {
+                                case .unknown:
+                                    print("unknown")
+                                    break
+                                case .waiting:
+                                    print("waiting")
+                                    break
+                                case .exporting:
+                                    print("exporting")
+                                    break
+                                case .completed:
+                                    do {
+                                        let compressedData = try  Data.init(contentsOf: compressedURL)
+                                        //self.compressVideo = compressedURL
+                                        print(compressedData)
+                                        self.newAdvertisement.files!.append(compressedData)
+                                        // self.newAdvertisement.videoName = avassetURL.url.lastPathComponent
+                                        self.newAdvertisement.videoPathExtension =  orginalVideo.pathExtension
+                                        self.newAPreview.videoUrl = orginalVideo
+                                        print("File size AFTER compression: \(Double(compressedData.count / 1048576)) mb")
+                                            DispatchQueue.main.async {
+                                                loadingAlert.hide(animated: true)
+                                        }
+                                         completionBlock(true)
+                                    }
+                                    catch{
+                                        print(error)
+                                    }
+                                    
+                                    
+                                case .failed:
+                                    print("failed")
+                                    break
+                                case .cancelled:
+                                    print("cancelled")
+                                    break
+                                @unknown default:
+                                    print("Fatal error")
+                                }
+                            }
+                        } catch {
+                            print(error)
+                            //return
+                        }
+                        
+                        
+                        
+                        
+                        //videoData = video
                     }
-                    
-                    originalImage += 1
+                })
+                
+                
+                
+                
+                
+                
+                
+            default:
+                break
             }
+            
+            
             
             
             if a == assets.count
             {
-                completionBlock(true)
+               
                 
             }
             a+=1
@@ -230,7 +386,20 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         
         
     }
-    
+    func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
+        let urlAsset = AVURLAsset(url: inputURL, options: nil)
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+            handler(nil)
+            
+            return
+        }
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = AVFileType.mp4
+        exportSession.shouldOptimizeForNetworkUse = true
+        exportSession.exportAsynchronously { () -> Void in
+            handler(exportSession)
+        }
+    }
     @IBAction func selectMedia(_ sender: Any) {
         if newAdvertisement.files !=  nil {
             newAdvertisement.files!.removeAll()
@@ -269,6 +438,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             imagePicker.allowedMediaTypes = Set([.video])
             presentOpalImagePickerController(imagePicker, animated: true,
                                              select: { (assets) in
+                                                self.filesAsset = assets
+                                                self.dismiss(animated:true)
                                                 //Select Assets
                                                 
             }, cancel: {
@@ -306,7 +477,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             price.isEnabled=true
             price.placeholder = "AZN"
             newAdvertisement.aPrice = ""
-            
+            newAPreview.aPrice = ""
         }
     }
     // MARK: - Navigation

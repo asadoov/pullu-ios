@@ -23,4 +23,6 @@ class NewAPreviewStruct {
     var aAgeRange:String?
     var aProfession:String?
     var mediaBase64:Array<String>?
+    var videoUrl:URL?
+
 }

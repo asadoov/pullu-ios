@@ -16,9 +16,10 @@ class ReklamStoryController: UIViewController {
     var mail:String?
     var pass:String?
     var advertDescription:String?
-
+  let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.defaults.set(nil, forKey: "aID")
         advertDescriptionLabel.text=advertDescription
         var time=0
        // print("advID\(advertID!) mail\(mail!) pass \(pass!)")
@@ -37,7 +38,7 @@ class ReklamStoryController: UIViewController {
                                      let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                                      alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                                          (action: UIAlertAction!) in
-                                                         
+                                                          self.defaults.set(self.advertID, forKey: "aID")
                                                        self.dismiss(animated: true)
                                                      }))
                                        self.present(alert, animated: true, completion: nil)

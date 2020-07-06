@@ -17,10 +17,28 @@ class VideoReklamController: UIViewController {
     var select:dbSelect=dbSelect()
     let defaults = UserDefaults.standard
     var userData = Array<User>()
-    @IBOutlet weak var videoPlayer: UIImageView!
+    //var player:AVPlayer?
+    var playing = false
+    var player: AVPlayer!
+    var playerViewController: AVPlayerViewController!
+    @IBOutlet weak var sellerFullname: UILabel!
+    @IBOutlet weak var earnMoney: UIButton!
+    @IBOutlet weak var playerUIView: UIView!
+    @IBOutlet weak var viewCount: UILabel!
+    @IBOutlet weak var aDescription: UITextView!
+    @IBOutlet weak var advType: UILabel!
+    @IBOutlet weak var balance: UILabel!
+    @IBOutlet weak var advName: UILabel!
+     var fromArchieve:Bool = false
+    @IBOutlet weak var sellerPhone: UITextView!
+    var url:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        earnMoney.isEnabled=false
+          self.earnMoney.isHidden=true
+        earnMoney.titleLabel!.text = "Yüklənir..."
+        self.defaults.set(nil, forKey: "aID")
         // Do any additional setup after loading the view.
         do{
             let udata = self.defaults.string(forKey: "uData")
@@ -32,6 +50,9 @@ class VideoReklamController: UIViewController {
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
         }
+        
+        
+        
         select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
         {
             (list)
@@ -40,49 +61,108 @@ class VideoReklamController: UIViewController {
             
             
             DispatchQueue.main.async {
-                /*  if list[0].isPaid==1{
-                 self.earnMoney.isHidden=false
-                 }
-                 */
+                self.earnMoney.isEnabled = true
+                
+                 if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                               {
+                                    self.earnMoney.isHidden=false
+                                                         self.earnMoney.isEnabled=true
+                                 
+                               }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 
-              /*  self.advName.text=list[0].name!
+                self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
-                self.advDescription.text = list[0].description!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
+                self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
                 self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
- 
- */
-                //  self.tableView.reloadData()
+               // let vc = AVPlayerViewController()
                 
-                
-                
+                self.url = list[0].photoUrl![0]
+               let videoURL = URL(string: self.url!)
+                                  self.player = AVPlayer(url: videoURL!)
+                      //                vc.player = self.player/
+                                      
+                                      
+                                    self.playerViewController = AVPlayerViewController()
+                                      self.playerViewController.player = self.player
+                                      self.playerViewController.view.frame = self.playerUIView.bounds
+                  self.playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                                      self.playerViewController.player?.pause()
+                                      self.playerUIView.addSubview(self.playerViewController.view)
               
-                    var url="http://13.92.237.16/media/07082019143318-1925388739.mp4"
-                    
-            let videoURL = URL(string: url)
-                let player = AVPlayer(url: videoURL!)
-                let playerViewController = AVPlayerViewController()
-                playerViewController.player = player
-                self.present(playerViewController, animated: true) {
-                    playerViewController.player!.play()
-                }
-                    
-                    
+                //
                 
+                
+                //                    let playerLayer = AVPlayerLayer(player:self.player )
+                //                                                  playerLayer.frame = self.playerUIView.frame
+                //                    playerLayer.bounds=self.playerUIView.frame
+                
+                //                             let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapped(_:)))
+                //                    self.playerUIView.addGestureRecognizer(gesture)
+                DispatchQueue.main.async {
+                    // self.playerUIView.layer.addSublayer(playerLayer)
+             
+                }
+               
                 
                 
             }
+            
+            
         }
-        // Do any additional setup after loading the view.
+        
+    }
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//    }
+//
+//    @objc func tapped(_ sender: UITapGestureRecognizer) {
+//        //updateStatus()
+//        let vc = AVPlayerViewController()
+//        vc.player = player
+//
+//        present(vc, animated: true) {
+//            vc.player?.play()
+//        }
+//    }
+    private func updateStatus() {
+        if playing {
+            player?.pause()
+        } else {
+            player?.play()
+        }
     }
     
-    
+    @IBAction func earnMoneyClicked(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+               let newViewController = storyBoard.instantiateViewController(withIdentifier: "VideoStoryPage") as! VideoStory
+              
+               newViewController.advertID=advertID
+               newViewController.mail=mail
+               newViewController.pass=pass
+        newViewController.url = url
+               self.present(newViewController, animated: true, completion: nil)
+    }
+    //    func updateUI() {
+    //        if playing {
+    //            setBackgroundImage(name: "pause-button")
+    //        } else {
+    //            setBackgroundImage(name: "play-button")
+    //        }
+    //    }
+    //    private func setBackgroundImage(name: String) {
+    //           UIGraphicsBeginImageContext(frame.size)
+    //           UIImage(named: name)?.draw(in: bounds)
+    //           guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
+    //           UIGraphicsEndImageContext()
+    //           backgroundColor = UIColor(patternImage: image)
+    //       }
     /*
      // MARK: - Navigation
      

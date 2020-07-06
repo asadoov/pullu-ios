@@ -8,7 +8,7 @@
 
 import UIKit
 import MBProgressHUD
-class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
+class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate, UITextFieldDelegate {
     var newUser: NewUser = NewUser()
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var surname: UITextField!
@@ -22,6 +22,8 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
     let genders=["Cins","Kişi","Qadın"]
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        phone.delegate = self
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
@@ -46,6 +48,23 @@ class SecondRegistrationController: UIViewController,UIPickerViewDataSource,UIPi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return  genders.count
     }
+    
+    @IBAction func phoneTextChanged(_ sender: Any) {
+        if (phone.text!.count > 9) {
+               phone.deleteBackward()
+           }
+    }
+   
+    //    func textField34(textField: UITextField, shouldChangeCharactersInRange range: NSRange,
+//                           replacementString string: String) -> Bool
+//    {
+//        let maxLength = 9
+//        let currentString: NSString = (textField.text as NSString?)!
+//        let newString: NSString =
+//            currentString.replacingCharacters(in: range, with: string) as NSString
+//        return newString.length <= maxLength
+//    }
+//
     
     @IBAction func nextClick(_ sender: Any) {
         var currentDate = Date()
