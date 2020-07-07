@@ -156,7 +156,7 @@ class DbInsert {
            
            
            
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/sms/code"
+           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/reset/sms"
            let Parameters = ["phone": phone] as [String : Any]
            
            
