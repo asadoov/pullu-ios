@@ -154,7 +154,7 @@ class NotPaidController: UITableViewController {
         
         
         
-        if mail != nil&&pass != nil && paginationEnabled{
+        if paginationEnabled{
             //                loading = true
             //                       var loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             //                        loadingAlert.mode = MBProgressHUDMode.indeterminate
@@ -169,13 +169,13 @@ class NotPaidController: UITableViewController {
             
             var typeCount=0
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 0,page: page, catID: catID,progressView: loadingAlert!){
+            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 0,page: page, catID: catID,progressView: loadingAlert!){
                 
                 (list) in
                  self.spinner.stopAnimating()
                  self.notPaidTableView.tableFooterView = nil
-                if !list.isEmpty {
-                    for advert in list {
+                if !list.data.isEmpty {
+                    for advert in list.data {
                         
                         //if (advert.isPaid==type) {
                         let item = advert
@@ -243,19 +243,19 @@ class NotPaidController: UITableViewController {
         loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
         
         
-        if mail != nil&&pass != nil{
+     
             // var typeCount=0
             
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 0,page: 1, catID: catID,progressView: loadingAlert!){
+            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 0,page: 1, catID: catID,progressView: loadingAlert!){
                 
                 (list) in
                 
-                if !list.isEmpty{
-                    if list[0].error == nil{
-                        if list.count > 0{
+                if !list.data.isEmpty{
+                    if list.status != 3{
+                        if list.data.count > 0{
                             
-                            for advert in list {
+                            for advert in list.data {
                                                       
                                                       //if (advert.isPaid==type) {
                                                       let item = advert
@@ -339,7 +339,7 @@ class NotPaidController: UITableViewController {
             
             
             
-        }
+        
         
     }
     
@@ -424,3 +424,4 @@ class NotPaidController: UITableViewController {
      */
     
 }
+

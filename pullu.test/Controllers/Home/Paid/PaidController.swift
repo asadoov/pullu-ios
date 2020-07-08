@@ -38,20 +38,21 @@ class PaidController: UITableViewController {
         
         mail = defaults.string(forKey: "mail")
         pass = defaults.string(forKey: "pass")
-        select.SignIn(mail: mail!, pass: pass!){
-            (user)
-            in
-            if !user.isEmpty{
-                self.refresh()
-            }
-            else{
-                
-                self.dismiss(animated: true)
-            }
-            
-            
-            
-        }
+        self.refresh()
+//        select.SignIn(mail: mail!, pass: pass!){
+//            (user)
+//            in
+//            if !user.isEmpty{
+//                self.refresh()
+//            }
+//            else{
+//
+//                self.dismiss(animated: true)
+//            }
+//
+//
+//
+//        }
         
     }
     
@@ -166,7 +167,7 @@ class PaidController: UITableViewController {
         
         
         
-        if mail != nil&&pass != nil && paginationEnabled{
+        if paginationEnabled{
             //                loading = true
             //                       var loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             //                        loadingAlert.mode = MBProgressHUDMode.indeterminate
@@ -179,13 +180,13 @@ class PaidController: UITableViewController {
             self.paidTableView.tableFooterView?.isHidden = false
             var typeCount=0
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 0,page: page, catID: catID,progressView: loadingAlert){
+            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 0,page: page, catID: catID,progressView: loadingAlert){
                 
                 (list) in
                 self.spinner.stopAnimating()
                 self.paidTableView.tableFooterView = nil
-                if !list.isEmpty {
-                    for advert in list {
+                if !list.data.isEmpty {
+                    for advert in list.data {
                         
                         //if (advert.isPaid==type) {
                         let item = advert
@@ -247,7 +248,7 @@ class PaidController: UITableViewController {
     @objc func refresh() {
         
         
-        if mail != nil&&pass != nil{
+      
             paginationEnabled = true
             loading = true
             
@@ -256,17 +257,17 @@ class PaidController: UITableViewController {
             self.myRefreshControl.beginRefreshing()
             var typeCount=0
             
-            select.getAds(username: mail!, pass: pass!,isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
+            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
                 
                 (list) in
                 
                 
                 
-                if !list.isEmpty{
-                    if list[0].error == nil{
+                if !list.data.isEmpty{
+                    if list.status != 3{
                         self.advertArray.removeAll()
                         
-                        for advert in list {
+                        for advert in list.data {
                             
                             //if (advert.isPaid==type) {
                             let item = advert
@@ -342,7 +343,7 @@ class PaidController: UITableViewController {
             }
         }
         
-    }
+    
     
     
     // MARK: - Navigation
@@ -438,3 +439,4 @@ class PaidController: UITableViewController {
      */
     
 }
+
