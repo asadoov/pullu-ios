@@ -17,6 +17,7 @@
 		04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* CheckPassViewController.swift */; };
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
 		04ED33B724634A60006BC601 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED33B624634A60006BC601 /* ArchiveController.swift */; };
+		04F0152F24B4E35700FFA122 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0152E24B4E35700FFA122 /* ResponseStruct.swift */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
 		B60C14AE2460384A005D70CF /* AlamofireInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C14AD2460384A005D70CF /* AlamofireInterface.swift */; };
 		B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */; };
@@ -154,6 +155,7 @@
 		04E6BF5C24190831002381F1 /* CreatePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePassViewController.swift; sourceTree = "<group>"; };
 		04ED33B624634A60006BC601 /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
+		04F0152E24B4E35700FFA122 /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
 		834F6BED4721ADEBDFAF031C /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A361E0E95A9446DD3B34B3B6 /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				B6D7ACF523CA8591005AAB76 /* City.swift */,
 				B6D7ACF123CA7D92005AAB76 /* Country.swift */,
 				B68172DE245F751E000A4119 /* FinanceStruct.swift */,
+				04F0152E24B4E35700FFA122 /* ResponseStruct.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */,
+				04F0152F24B4E35700FFA122 /* ResponseStruct.swift in Sources */,
 				B618DCD2243209DD0020C2D8 /* AuditoryController.swift in Sources */,
 				B60C14AE2460384A005D70CF /* AlamofireInterface.swift in Sources */,
 				B697C6CE241BBE6900AE9402 /* BackgroundImageStruct.swift in Sources */,

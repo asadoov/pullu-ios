@@ -61,85 +61,76 @@ public class dbSelect {
         
     }
     
-    func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
-        
-        let Parameters:[String:Any]
-        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
-        if catID! > 0 {
-            Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
-            //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
-        }else{
-            Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid] as [String : Any]
-            
-        }
-        
-        
-        
-        
-        
-              var list:Array<Advertisement> = Array<Advertisement>()
-        
-        
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
-                DispatchQueue.main.async {
-            progressView.progress = Float(progress.fractionCompleted)
-            }
-            print("progess!", Float(progress.fractionCompleted))
-        }
-            
-            
-            
-            
-            .responseJSON
-            {
-                (response)
-                in
+    func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+         //let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+         let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
               
-                
-                do{
+         let Parameters:[String:Any]
+         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+         if catID! > 0 {
+             Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
+             //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+         }else{
+             Parameters = ["mail": username,"pass":pass,"pageNo":page,"isPaid":isPaid] as [String : Any]
+             
+         }
+      
+         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
+                 DispatchQueue.main.async {
+             progressView.progress = Float(progress.fractionCompleted)
+             }
+             print("progess!", Float(progress.fractionCompleted))
+         }
+             
+             
+             
+             
+             .responseJSON
+             {
+                 (response)
+                 in
+               
+                 
+                 do{
+                     
+                     
+                     let list:ResponseStruct<Advertisement> = try
+                         JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
+                     // userList=list
+                     //print(list)
+                     //list[0].error = false
+                     completionBlock(list)
+                     
+                     
+                 }
+                 catch let jsonErr {
+                     print("Error serializing json:",jsonErr)
                     
                     
-                     list  = try
-                        JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
-                    // userList=list
-                    //print(list)
-                    //list[0].error = false
-                    completionBlock(list)
-                    
-                    
-                }
-                catch {
-                    //print("Error serializing json:",jsonErr)
-                    var advertisement = Advertisement()
-                    advertisement.error = true
-                    list.append(advertisement)
-                    
-                    completionBlock(list)
-                }
-        }
-        
-    
-        
-        //        GetJson(jsonUrlString: url){
-        //            (json) in
-        //            do{
-        //
-        //
-        //
-        //
-        //                // userList=list
-        //
-        //
-        //
-        //            }
-        //            catch let jsonErr{
-        //                print("Error serializing json:",jsonErr)
-        //            }
-        //
-        //        }
-        
-    }
+                 }
+         }
+         
+     
+         
+         //        GetJson(jsonUrlString: url){
+         //            (json) in
+         //            do{
+         //
+         //
+         //
+         //
+         //                // userList=list
+         //
+         //
+         //
+         //            }
+         //            catch let jsonErr{
+         //                print("Error serializing json:",jsonErr)
+         //            }
+         //
+         //        }
+         
+     }
     
     func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
         
