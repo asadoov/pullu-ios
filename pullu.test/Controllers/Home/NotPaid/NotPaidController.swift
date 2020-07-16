@@ -239,8 +239,7 @@ class NotPaidController: UITableViewController {
         advertArray.removeAll()
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+        
         
         
      

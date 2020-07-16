@@ -26,12 +26,11 @@ class ChangePassViewController: UIViewController {
             if newPass.text == repeatNewPass.text{
                 loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                 loadingAlert!.mode = MBProgressHUDMode.indeterminate
-                loadingAlert!.label.text="Gözləyin"
-                loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+               
                 let defaults = UserDefaults.standard
-                       var  mail  = defaults.string(forKey: "mail")
+                let  mail  = defaults.string(forKey: "mail")
                        
-                       var insert:DbInsert = DbInsert()
+                let insert:DbInsert = DbInsert()
                 insert.uPass(mail: mail!, pass: oldPass.text!, newPass:newPass.text! ){
                     
                     (status)

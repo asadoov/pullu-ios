@@ -18,8 +18,7 @@ class AddBalanceController: UIViewController {
         super.viewDidLoad()
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Səhifə yüklənir..."
+       
         // Do any additional setup after loading the view.
        
         var pass = defaults.string(forKey: "pass")

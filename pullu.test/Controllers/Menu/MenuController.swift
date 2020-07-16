@@ -9,9 +9,11 @@
 import UIKit
 import FirebaseMessaging
 import MBProgressHUD
+import Alamofire
 class MenuController: UIViewController {
     let defaults = UserDefaults.standard
     
+    @IBOutlet weak var userImage: UIImageView!
     
     @IBOutlet weak var nameSurname: UILabel!
     
@@ -21,12 +23,25 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var userID: UILabel!
     
+     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var select:dbSelect=dbSelect()
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userImage.layer.masksToBounds = true
+        userImage!.layer.borderColor = UIColor.white.cgColor
+        userImage!.layer.borderWidth = 1.5
+        userImage.layer.cornerRadius = userImage.bounds.width / 2
+        
+        loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = UIColor.lightGray
+        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        userImage.addSubview(loadingIndicator)
+        
         let logOutBtn:MenuStruct = MenuStruct()
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
@@ -106,7 +121,34 @@ class MenuController: UIViewController {
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
           
             userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
-            
+            Alamofire.request(list[0].photoURL!).responseImage { response in
+                if let catPicture = response.result.value {
+                    //advert.photo=catPicture.pngData()
+                    
+                    //  item.photo = UIImage(named: "damaged")?.pngData()
+                   
+                        
+                        if catPicture != nil {
+                            
+                            self.userImage.image=catPicture
+                            self.loadingIndicator.stopAnimating()
+                            
+                        }
+                        else {
+                            self.userImage.image=UIImage(named: "damaged")
+                            
+                        }
+                        
+                      
+                    
+                    
+                    
+                   
+                }
+                
+                
+                
+            }
             
         }
         catch let jsonErr{
@@ -158,7 +200,10 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.alert)
                                       errorAlert.addAction(UIAlertAction(title: "Xeyir", style: UIAlertAction.Style.cancel, handler: nil))
                                       errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                             self.dismiss(animated: true){
+                                        self.navigationController?.popViewController(animated: true)
+
+                                       
+                                             self.dismiss(animated: false){
                                                        do {
                                                            let uID = self.defaults.string(forKey: "uID")!
                                                                           Messaging.messaging().unsubscribe(fromTopic: "\(uID)")

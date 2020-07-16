@@ -1,13 +1,14 @@
 //
-//  Country.swift
+//  Interest.swift
 //  pullu.test
 //
-//  Created by Rufat Asadov on 1/12/20.
+//  Created by Rufat Asadov on 7/15/20.
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
+
 import Foundation
-struct Country:Codable{
+struct Interest:Codable{
     
     var id: Int?
     var name: String?

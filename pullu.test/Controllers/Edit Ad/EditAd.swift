@@ -67,8 +67,7 @@ class EditAd: UIViewController, UITextViewDelegate {
             
             loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             loadingAlert!.mode = MBProgressHUDMode.indeterminate
-            loadingAlert!.label.text="Gözləyin"
-            loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+          
             
             insert.updateAd(mail: mail!, pass: pass!, aID: ad.id!, aName: aNameBox.text!, aDescription: aDescriptionBox.text!, aPrice: Int(aPriceBox.text!)!){
                 
@@ -109,8 +108,7 @@ class EditAd: UIViewController, UITextViewDelegate {
             
             self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
-            self.loadingAlert!.label.text="Gözləyin"
-            self.loadingAlert!.detailsLabel.text = "Reklamınız silinir..."
+            
             self.loadingAlert?.show(animated: true)
             
             self.insert.deleteAd(mail: self.mail!, pass: self.pass!, aID: self.ad.id!){

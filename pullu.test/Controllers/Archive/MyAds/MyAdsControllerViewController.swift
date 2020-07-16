@@ -37,8 +37,7 @@ class MyAdsController: UIViewController {
         
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+       
         
         
         if mail != nil&&pass != nil{

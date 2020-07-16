@@ -120,8 +120,7 @@ class PreviewController: UIViewController {
         
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.annularDeterminate
-        loadingAlert!.label.text="Gözləyin"
-        loadingAlert!.detailsLabel.text = "Reklamınız serverlərimizə yerləşdirilir"
+        
         
         let jsonEncoder = JSONEncoder()
         do {

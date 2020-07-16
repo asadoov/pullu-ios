@@ -28,11 +28,11 @@ public class dbSelect {
         
     }
     
-    func SignIn(mail:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func signIn(phone:Int,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
         
-        let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
-        
-         let Parameters = ["mail": mail,"pass":pass] as [String : Any]
+       // let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
+         let PULLULINK="http://127.0.0.1:44301/api/androidmobileapp/user/login"
+         let Parameters = ["phone": phone,"pass":pass] as [String : Any]
          var list:Array<User> = Array<User>()
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
                            {
@@ -62,8 +62,9 @@ public class dbSelect {
     }
     
     func getAds(username:String,pass:String,isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
-         //let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
-         let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
+      //   let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+         let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/Ads"
+        // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
               
          let Parameters:[String:Any]
          //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -178,7 +179,50 @@ public class dbSelect {
         }
         
     }
-    
+    func getInterests(completionBlock: @escaping (_ result:Array<Interest>) ->()){
+        
+     let PULLULINK = "http://pullu.az:81/api/androidmobileapp/get/interests"
+                          
+                         
+                          //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+
+                            //let Parameters = ["mobile": mobile,"code":otp] as [String : Any]
+                              //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+                         
+                          
+                          
+                          
+                          
+                          
+                 
+                         
+                         
+                         request(PULLULINK ,method: .get, encoding: URLEncoding(destination: .queryString)).responseJSON
+                             {
+                                 (response)
+                                 in
+                                 //  print(PULLULINK)
+                                 
+                                 do{
+                                     
+                                     
+                                     let list  = try
+                                        JSONDecoder().decode(Array<Interest>.self, from: response.data!)
+                                     
+                                     // userList=list
+                                     
+                                     completionBlock(list)
+                                     
+                                     
+                                 }
+                                 catch let jsonErr{
+                                     print("Error serializing json:",jsonErr)
+                                 }
+                         }
+                          
+                          
+        
+    }
     func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/professions"
@@ -540,5 +584,48 @@ public class dbSelect {
                 
                 
             }
+    func verifyOtp(mobile:Int,otp:Int,completionBlock: @escaping (_ result:Status) ->()){
+          
+                   let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/otp"
+                   
+                  
+                   //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+
+                      let Parameters = ["mobile": mobile,"code":otp] as [String : Any]
+                       //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+                  
+                   
+                   
+                   
+                   
+                   
+          
+                  
+                  
+                  request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+                      {
+                          (response)
+                          in
+                          //  print(PULLULINK)
+                          
+                          do{
+                              
+                              
+                              let statusCode  = try
+                                  JSONDecoder().decode(Status.self, from: response.data!)
+                              // userList=list
+                              //print(list)
+                              
+                              completionBlock(statusCode)
+                              
+                              
+                          }
+                          catch let jsonErr{
+                              print("Error serializing json:",jsonErr)
+                          }
+                  }
+                   
+                   
+               }
     
 }

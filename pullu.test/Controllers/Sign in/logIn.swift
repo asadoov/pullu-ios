@@ -14,9 +14,10 @@ class logIn: UIViewController {
     
     
     
-    @IBOutlet weak var uName: UITextField!
+   
     @IBOutlet weak var pass: UITextField!
     
+    var phoneNum:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -37,28 +38,18 @@ class logIn: UIViewController {
         
         view.addGestureRecognizer(tap)
         
-        if (ConnectionCheck.isConnectedToNetwork() ) {
-            print("Connected")
-            if defaults.string(forKey: "uData") != nil {
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "segue", sender: self)
-                }
-            }
-            
-            
-        }
-        else{
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "offline", sender: self)
-            }
-            print("disConnected")
-        }
+     
         // Do any additional setup after loading the view.
     }
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    @IBAction func closePage(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func SignIn_Click(_ sender: Any) {
         let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         
@@ -71,10 +62,10 @@ class logIn: UIViewController {
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
         var usrList:Array<User>=Array<User>()
-        let db: dbSelect=dbSelect()
+        let select: dbSelect=dbSelect()
         
-        if (uName.text != "" && pass.text != "") { 
-            db.SignIn(mail: uName.text!, pass: pass.text!) { (rslt) in
+        if (phoneNum! > 0 && pass.text != "") {
+            select.signIn(phone: phoneNum!, pass: pass.text!) { (rslt) in
                 
                 usrList = rslt
                 if(usrList.count > 0){
@@ -98,6 +89,7 @@ class logIn: UIViewController {
                                    
                             self.defaults.set(usrList[0].id, forKey: "uID")
                             self.defaults.set(usrList[0].mail, forKey: "mail")
+                            self.defaults.set(usrList[0].phone, forKey: "phone")
                             self.defaults.set(self.pass.text, forKey: "pass")
                             //self.defaults.set(usrList, forKey: "userData")
                             let jsonEncoder = JSONEncoder()

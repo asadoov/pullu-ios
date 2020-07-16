@@ -58,8 +58,7 @@ var loadingAlert:MBProgressHUD?
 //        present(alert, animated: true, completion: nil)
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                       loadingAlert!.mode = MBProgressHUDMode.indeterminate
-                      loadingAlert!.label.text="Gözləyin"
-                      loadingAlert!.detailsLabel.text = "Verifikasiya kodu göndərilir..."
+                      
                
         
         let login = loginTextField.text

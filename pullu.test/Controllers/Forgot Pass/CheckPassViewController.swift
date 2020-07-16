@@ -88,8 +88,7 @@ class CheckPassViewController: UIViewController, UITextFieldDelegate {
 //        present(alert, animated: true, completion: nil)
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                loadingAlert!.mode = MBProgressHUDMode.indeterminate
-               loadingAlert!.label.text="Gözləyin"
-               loadingAlert!.detailsLabel.text = "Verifikasiya kodu yoxlanır..."
+              
         
         
          verifyNumber = "\(pass1text.text!)\(pass2text.text!)\(pass3text.text!)\(pass4text.text!)"

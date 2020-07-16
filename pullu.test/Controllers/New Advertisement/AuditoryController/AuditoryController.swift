@@ -33,7 +33,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         genders.append("Kişi")
         genders.append("Qadın")
         var chooseCountry:Country = Country()
-        chooseCountry.ID = 0
+        chooseCountry.id = 0
         chooseCountry.name = "Bütün ölkələr"
         self.countries.append(chooseCountry)
         var chooseCity:City = City()

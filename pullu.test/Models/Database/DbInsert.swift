@@ -38,40 +38,69 @@ class DbInsert {
     
     
     
-    func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
+    func signUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
-        let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"profession":newUserData.sector!]
+       // let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/signUp"
+        let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/signUp"
+//        let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"interestIds":newUserData.interestIds!] as [String : Any]
         
         
         
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
-            {
-                (response)
-                in
-                
-                do{
-                    
-                    
-                    let statusCode  = try
-                        JSONDecoder().decode(Status.self, from: response.data!)
-                    // userList=list
-                    //print(list)
-                    
-                    completionBlock(statusCode)
-                    
-                    
-                }
-                catch let jsonErr{
-                    print("Error serializing json:",jsonErr)
-                }
-        }
-        
+    
+           var jsonString = ""
+           let jsonEncoder = JSONEncoder()
+           do {
+               let jsonData = try jsonEncoder.encode(newUserData)
+               jsonString = String(data: jsonData, encoding: .utf8)!
+               
+               
+               //print("JSON String : " + jsonString)
+           }
+           catch {
+           }
+           if jsonString != "" {
+              // let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/profile"
+               
+               //let json = "{\"What\":\"Ever\"}"
+               
+               let url = URL(string: PULLULINK)!
+               let jsonData = jsonString.data(using: .utf8, allowLossyConversion: false)!
+               
+               var request = URLRequest(url: url)
+               request.httpMethod = HTTPMethod.post.rawValue
+               request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+               request.httpBody = jsonData
+               
+           let req =    Alamofire.request(request).responseJSON
+                   {
+                       (response)
+                       in
+                    print(response.description)
+                       
+                       do{
+                           
+                           
+                           let statusCode  = try
+                               JSONDecoder().decode(Status.self, from: response.data!)
+                           // userList=list
+                           //print(list)
+                           
+                           completionBlock(statusCode)
+                           
+                           
+                       }
+                       catch let jsonErr{
+                           print("Error serializing json:",jsonErr)
+                       }
+               }
+           
+               
+           }
         
         
         
@@ -673,4 +702,38 @@ class DbInsert {
           }
           
       }
+    func sendSms(phone:Int,completionBlock: @escaping (_ result:Status) ->()){
+             
+             
+             
+             
+             let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/send/sms"
+        let Parameters = ["phone":phone] as [String : Any]
+             
+             
+             
+             request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+                 {
+                     (response)
+                     in
+                     //  print(PULLULINK)
+                     
+                     do{
+                         
+                         
+                         let statusCode  = try
+                             JSONDecoder().decode(Status.self, from: response.data!)
+                         // userList=list
+                         //print(list)
+                         
+                         completionBlock(statusCode)
+                         
+                         
+                     }
+                     catch let jsonErr{
+                         print("Error serializing json:",jsonErr)
+                     }
+             }
+             
+         }
 }
