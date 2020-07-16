@@ -7,14 +7,21 @@
 //
 
 import UIKit
-
+import Alamofire
 class MyViewers: UITableViewController {
-    var interestList:Array<Interest> =  Array<Interest>()
+     let defaults = UserDefaults.standard
+    var viewerList:Array<ViewerStruct> =  Array<ViewerStruct>()
     var select:dbSelect = dbSelect()
-    @IBOutlet var interestsTable: UITableView!
+    @IBOutlet var viewersTable: UITableView!
+    var phone:Int?
+    var pass:String?
+    var aID:Int?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        viewersTable.dataSource = self
+        viewersTable.delegate = self
+        phone = defaults.integer(forKey: "phone")
+        pass = defaults.string(forKey: "pass")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -23,19 +30,50 @@ class MyViewers: UITableViewController {
         //self.navigationItem.hidesBackButton = true
 //        let newBackButton = UIBarButtonItem(title: "Geri", style: UIBarButtonItem.Style.plain, target: self, action: #selector(InterestsController.back(sender:)))
                //self.navigationItem.leftBarButtonItem = newBackButton
-        select.getInterests()
+        select.myAdViewers(phone: phone!, pass: pass!, aID: aID!)
             {
-                (list)
+                (obj)
                 in
-                for item in list{
-                    self.interestList.append(item)
-                    DispatchQueue.main.async {
-                        self.interestsTable.reloadData();
-                    }
+                switch (obj.status)
+                {
+                case 1:
+                    for item in obj.data{
+                                       self.viewerList.append(item)
+                                       DispatchQueue.main.async {
+                                           self.viewersTable.reloadData();
+                                       }
+                                   }
+                    break
+                case 2:
+                
+                                               let alert = UIAlertController(title: "Bildiriş", message: "Reklama hələki heç kəs baxmayıb", preferredStyle: UIAlertController.Style.alert)
+                                               alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                               self.present(alert, animated: true, completion: nil)
+                                           
+                    break
+                case  3:
+             
+                                                                  let alert = UIAlertController(title: "Bildiriş", message: "Sizin bu reklamın statistikasına baxmağa icazəniz yoxdur", preferredStyle: UIAlertController.Style.alert)
+                                                                  alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                                                  self.present(alert, animated: true, completion: nil)
+                    break
+                    
+                    case  4:
+                                       self.dismiss(animated: false)
+                                       break
+               
+                 default:
+                    let alert = UIAlertController(title: "Xəta", message: "Xidmət səviyyəsinin yüksəldilməsi məqsədi ilə bizimlə bu xəta barədə bölüşməyiniz xahiş olunur", preferredStyle: UIAlertController.Style.alert)
+                                   alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                   self.present(alert, animated: true, completion: nil)
+                    break
                 }
+               
         }
     }
-
+    
+  
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -45,16 +83,45 @@ class MyViewers: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return interestList.count
+        return viewerList.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
           
-         let cell = tableView.dequeueReusableCell(withIdentifier: "interestCell")!
+          let cell: ViewerCell = (tableView.dequeueReusableCell(withIdentifier: "viewerCell", for: indexPath) as! ViewerCell)
            do{
                // cell.imageView?.image = nil
-               if interestList.count > 0{
+               if viewerList.count > 0{
                 
-                 cell.textLabel?.text = interestList[indexPath.row].name
+                Alamofire.request(viewerList[indexPath.row].photoURL!).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
+                        
+                        //  item.photo = UIImage(named: "damaged")?.pngData()
+                       
+                            
+                            if catPicture != nil {
+                                
+                                cell.userImage?.image=catPicture
+                                cell.loadingIndicator.stopAnimating()
+                                
+                            }
+                            else {
+                                cell.userImage?.image=UIImage(named: "damaged")
+                                
+                            }
+                            
+                          
+                        
+                        
+                        
+                       
+                    }
+                    
+                    
+                    
+                }
+                
+                cell.userNameSurname?.text = " \(viewerList[indexPath.row].name!) \(viewerList[indexPath.row].surname!)"
                }
                
                
@@ -73,46 +140,8 @@ class MyViewers: UITableViewController {
 //
 //    }
  
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if let selectedRows = tableView.indexPathsForSelectedRows?.filter({ $0.section == indexPath.section }) {
-            if selectedRows.count > 3 {
-                let alert = UIAlertController(title: "Bildiriş", message: "Maximum 4 maraq dairəsi seçmək mümkündür", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return nil
-                
-            }
-         
-            
-        }
-
-        return indexPath
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        var values : Array<Interest> = Array<Interest>()
-           let selected_indexPaths = tableView.indexPathsForSelectedRows
-        if selected_indexPaths != nil{
-            
-        
-           for indexPath in selected_indexPaths! {
-              
-               values.append(interestList[indexPath.row])
-               //print(interestList[indexPath.row].name!)
-           }
-       
-    }
-        else
-        {
-            var defaultInterest:Interest = Interest()
-            defaultInterest.name = "Maraqlarınızı seçin..."
-            values.append(defaultInterest)
-        }
-        let imageDataDict:[String: Array<Interest>] = ["interests": values]
-
-               // post a notification
-               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationName"), object: nil, userInfo: imageDataDict)
-       }
+   
+    
    
    
     /*

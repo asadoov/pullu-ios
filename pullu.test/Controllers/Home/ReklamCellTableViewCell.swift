@@ -11,11 +11,16 @@ import AlamofireImage
 import Alamofire
 import AVKit
 protocol ReklamCellDelegate {
-    func orderClick(object: Advertisement)
+    
+    func showViewersClick(cell: ReklamCellTableViewCell)
+
 }
 
 class ReklamCellTableViewCell: UITableViewCell {
     var player:AVPlayer?
+    
+    @IBOutlet weak var showViewers: UIButton!
+    
     @IBOutlet weak var aImage: UIImageView!
     @IBOutlet weak var aTitle: UILabel!
     
@@ -30,7 +35,11 @@ class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var aCategory: UILabel!
     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var object:Advertisement?
-    // var delegate: ReklamCellDelegate?
+    
+    //2. create delegate variable
+     var delegate: ReklamCellDelegate?
+    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -40,6 +49,11 @@ class ReklamCellTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    @IBAction func showViewersClick(_ sender: Any) {
+        
+        delegate?.showViewersClick(cell: self)
     }
     
     @IBOutlet weak var advertClick: UIView!

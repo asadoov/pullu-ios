@@ -3637,9 +3637,12 @@ baxışı</string>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMt-eX-rTb">
-                                                            <rect key="frame" x="250" y="232" width="32" height="32"/>
+                                                            <rect key="frame" x="8" y="101" width="40" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Button" image="eye"/>
+                                                            <connections>
+                                                                <action selector="showViewersClick:" destination="V9q-qZ-PiH" eventType="touchUpInside" id="Swh-nX-ewf"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -3674,22 +3677,23 @@ baxışı</string>
                     <connections>
                         <outlet property="aTableView" destination="cUz-Sg-hrf" id="hPK-m3-g2e"/>
                         <segue destination="Ug0-M6-ADw" kind="show" identifier="editSegue" id="Oob-4Q-a44"/>
+                        <segue destination="RaX-Uo-llo" kind="show" identifier="myAdViewersSegue" id="ZFt-tT-IM4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eD-J9-QS3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2251.875" y="-241.90140845070422"/>
         </scene>
-        <!--My Viewers-->
+        <!--Baxışlar-->
         <scene sceneID="4ne-Cb-oob">
             <objects>
-                <tableViewController id="RaX-Uo-llo" customClass="MyViewers" customModule="Pullu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Baxışlar" id="RaX-Uo-llo" customClass="MyViewers" customModule="Pullu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dqn-GS-fbI">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="1EY-Wn-Kj7" customClass="ViewerCell" customModule="Pullu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="viewerCell" id="1EY-Wn-Kj7" customClass="ViewerCell" customModule="Pullu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1EY-Wn-Kj7" id="LO1-qO-6DM">
@@ -3720,6 +3724,10 @@ baxışı</string>
                             <outlet property="delegate" destination="RaX-Uo-llo" id="NDx-RA-9dc"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="cvn-6A-9f0"/>
+                    <connections>
+                        <outlet property="viewersTable" destination="dqn-GS-fbI" id="NqF-U0-WIZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hA3-J1-ITR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

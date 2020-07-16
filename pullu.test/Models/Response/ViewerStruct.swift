@@ -9,7 +9,7 @@
 import Foundation
 struct ViewerStruct:Codable{
     
-    var photoUrl: String?
+    var photoURL: String?
     var name: String?
     var surname: String?
    

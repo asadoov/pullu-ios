@@ -6,10 +6,18 @@
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
+//Delegate help : https://stackoverflow.com/a/39585749
 import UIKit
 import Alamofire
 import MBProgressHUD
-class MyAdsController: UIViewController {
+class MyAdsController: UIViewController,ReklamCellDelegate {
+    func showViewersClick(cell: ReklamCellTableViewCell) {
+        let indexPath = self.aTableView.indexPath(for: cell)
+        advertID = advertArray[indexPath!.row].id
+        performSegue(withIdentifier: "myAdViewersSegue", sender: self)
+              // print(indexPath!.row)
+    }
+    
     var advertArray: [Advertisement] = [Advertisement]()
      var ad: Advertisement = Advertisement()
     var advertID:Int?
@@ -32,6 +40,8 @@ class MyAdsController: UIViewController {
         // let userData = defaults.string(forKey: "uData")
      
     }
+    
+    
     
     @objc func refresh() {
         
@@ -115,6 +125,12 @@ class MyAdsController: UIViewController {
                 displayVC.ad = ad
               
             }
+       
+        if(segue.identifier == "myAdViewersSegue"){
+            let displayVC = segue.destination as! MyViewers
+            displayVC.aID = advertID
+          
+        }
     }
 //        if(segue.identifier == "photoReklamPage"){
 //            let displayVC = segue.destination as! AboutAdvertController
@@ -247,6 +263,7 @@ ad = advertArray[indexPath.row]
                       
                       
                   }
+                cell.delegate = self
                   cell.object = advertArray[indexPath.row]
               }
               

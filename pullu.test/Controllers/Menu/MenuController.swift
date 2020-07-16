@@ -202,21 +202,22 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
                                       errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
                                         self.navigationController?.popViewController(animated: true)
 
+                                        do {
+                                                                                                  let uID = self.defaults.string(forKey: "uID")!
+                                                                                                                 Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                                                                                                  
+                                                                                              }
+                                                                                              catch{
+                                                                                                  
+                                                                                                  
+                                                                                              }
+                                                                                             
+                                                                                              self.defaults.set(nil, forKey: "mail")
+                                                                                              self.defaults.set(nil, forKey: "pass")
+                                                                                              self.defaults.set(nil, forKey: "uData")
                                        
-                                             self.dismiss(animated: false){
-                                                       do {
-                                                           let uID = self.defaults.string(forKey: "uID")!
-                                                                          Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
-                                                           
-                                                       }
-                                                       catch{
-                                                           
-                                                           
-                                                       }
+                                             self.dismiss(animated: true)
                                                       
-                                                       self.defaults.set(nil, forKey: "mail")
-                                                       self.defaults.set(nil, forKey: "pass")
-                                                       self.defaults.set(nil, forKey: "uData")}
                                       }))
                                       self.present(errorAlert, animated: true, completion: nil)
             
