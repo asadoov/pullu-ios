@@ -1142,7 +1142,7 @@
             </objects>
             <point key="canvasLocation" x="10955.625" y="1976.4084507042253"/>
         </scene>
-        <!--Smart Pay-->
+        <!--Mədaxil-->
         <scene sceneID="6uA-1z-4wy">
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="cHx-tw-vvK" customClass="WebViewController" customModule="Pullu" customModuleProvider="target" sceneMemberID="viewController">
@@ -1168,14 +1168,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EmB-G6-4cl"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Smart Pay" id="y4T-Yx-dnU"/>
+                    <navigationItem key="navigationItem" title="Mədaxil" id="y4T-Yx-dnU"/>
                     <connections>
                         <outlet property="webView" destination="PUQ-tF-FKJ" id="mKa-ty-xsf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="do3-7I-EuK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9024.7999999999993" y="2825.0374812593705"/>
+            <point key="canvasLocation" x="7099" y="2823"/>
         </scene>
         <!--Balance Controller-->
         <scene sceneID="Rf4-Dy-O9L">
@@ -1477,12 +1477,12 @@ isə Qazanılan məbləğ istifadə olunur</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJh-Zi-0tk">
-                                <rect key="frame" x="94" y="417" width="129" height="49"/>
+                                <rect key="frame" x="16" y="411" width="129" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.84064692259999996" green="0.84074205160000004" blue="0.84059208630000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="tintColor" red="0.84064692259999996" green="0.84074205160000004" blue="0.84059208630000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Balansı artır">
+                                <state key="normal" title="Mədaxil">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1515,9 +1515,27 @@ isə Qazanılan məbləğ istifadə olunur</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Bitmap2" translatesAutoresizingMaskIntoConstraints="NO" id="wBh-cd-HlB">
-                                <rect key="frame" x="103" y="357" width="111" height="37"/>
+                                <rect key="frame" x="16" y="343" width="111" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbV-Ig-nWr">
+                                <rect key="frame" x="175" y="411" width="129" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84064692259999996" green="0.84074205160000004" blue="0.84059208630000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="tintColor" red="0.84064692259999996" green="0.84074205160000004" blue="0.84059208630000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Məxaric">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="paymentButton:" destination="Luh-Q6-WLe" eventType="touchUpInside" id="ide-kw-n50"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="eea-LQ-Aid"/>
@@ -1527,6 +1545,7 @@ isə Qazanılan məbləğ istifadə olunur</string>
                         <outlet property="balance" destination="D1h-Fk-kmD" id="nHp-vK-mPc"/>
                         <outlet property="earning" destination="pkb-W6-GAs" id="3rV-Uc-Yi4"/>
                         <segue destination="cHx-tw-vvK" kind="show" identifier="paymentViewSegue" id="shB-8O-sDV"/>
+                        <segue destination="5mi-CR-pOy" kind="show" id="7kd-Zo-ZhQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhY-dm-xaA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2201,6 +2220,35 @@ baxışı</string>
                 <exit id="WUt-Hv-lSf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="6479.7101449275369" y="4115.217391304348"/>
+        </scene>
+        <!--Məxaric-->
+        <scene sceneID="amC-u0-8fJ">
+            <objects>
+                <tableViewController id="5mi-CR-pOy" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JAN-t7-wmB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ROJ-iw-zlc">
+                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ROJ-iw-zlc" id="jq0-kE-Lio">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5mi-CR-pOy" id="ArD-dR-GIg"/>
+                            <outlet property="delegate" destination="5mi-CR-pOy" id="40y-nC-XMM"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Məxaric" id="JeP-VU-HHb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jpz-Ce-mCF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9053" y="2823"/>
         </scene>
         <!--Reklam önizləmə-->
         <scene sceneID="3Ek-v2-a0d">
