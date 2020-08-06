@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import MBProgressHUD
-public class dbSelect {
+public class DbSelect {
     
     
     func GetJson(jsonUrlString:String,completionBlock: @escaping (_ result:Data) ->()){

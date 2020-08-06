@@ -22,7 +22,7 @@ class StatisticsController: UIViewController {
     @IBOutlet weak var myAds: UILabel!
     @IBOutlet weak var myNotPaidAds: UILabel!
     @IBOutlet weak var myPaidAds: UILabel!
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     let defaults = UserDefaults.standard
     var statisticsData:Statistics=Statistics()
     let headerTitles = ["Tətbiq statistikası", "İstifadəçi statistikası"]

@@ -11,7 +11,7 @@ import Alamofire
 import MBProgressHUD
 
 class DbInsert {
-    var dbSelect: dbSelect!
+    var dbSelect: DbSelect!
     var alamofire:AlamofireInterface!
     
     
@@ -736,4 +736,38 @@ class DbInsert {
              }
              
          }
+    func Withdraw(mobile:Int64?,pass:String?,account:Int64?,serviceID:Int?,amount:Int64?,completionBlock: @escaping (_ result:Status) ->()){
+         
+         
+         
+         
+         let PULLULINK = "http://pullu.az:81/api/payment/withdraw"
+        let Parameters = ["mobile":mobile!,"pass":pass!,"account":account!,"serviceID":serviceID!,"amount":amount!] as [String : Any]
+         
+         
+         
+         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+             {
+                 (response)
+                 in
+                 //  print(PULLULINK)
+                 
+                 do{
+                     
+                     
+                     let statusCode  = try
+                         JSONDecoder().decode(Status.self, from: response.data!)
+                     // userList=list
+                     //print(list)
+                     
+                     completionBlock(statusCode)
+                     
+                     
+                 }
+                 catch let jsonErr{
+                     print("Error serializing json:",jsonErr)
+                 }
+         }
+         
+     }
 }

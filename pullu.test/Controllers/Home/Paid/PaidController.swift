@@ -12,7 +12,7 @@ import MBProgressHUD
 class PaidController: UITableViewController {
     var loadingAlert:MBProgressHUD = MBProgressHUD()
     var advertArray: [Advertisement] = [Advertisement]()
-    let  select:dbSelect=dbSelect()
+    let  select:DbSelect=DbSelect()
     var mail:String?
     var pass:String?
     @IBOutlet var paidTableView: UITableView!

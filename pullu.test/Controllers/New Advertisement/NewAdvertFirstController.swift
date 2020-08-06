@@ -22,7 +22,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
     
     
     
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var catList:Array<CategoryStruct>=[]
     var typeList:Array<TypeStruct>=[]
     var isPaidFinished=true

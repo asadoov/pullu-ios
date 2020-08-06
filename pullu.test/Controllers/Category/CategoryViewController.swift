@@ -20,7 +20,7 @@ class CategoryViewController: UIViewController {
     var mail:String?
     var pass:String?
     var aID:Int?
-    let  db:dbSelect=dbSelect()
+    let  db:DbSelect=DbSelect()
     var loadingAlert:MBProgressHUD?
     
     var spinner = UIActivityIndicatorView(style: .whiteLarge)

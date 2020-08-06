@@ -24,7 +24,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
     var loadingAlert:MBProgressHUD?
     var  mail:String?
     var  pass:String?
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
    let defaults = UserDefaults.standard
     @IBOutlet weak var aTableView: UITableView!
    

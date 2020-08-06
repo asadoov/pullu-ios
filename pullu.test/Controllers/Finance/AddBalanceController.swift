@@ -11,9 +11,10 @@ import MBProgressHUD
 class AddBalanceController: UIViewController {
     @IBOutlet weak var balance: UILabel!
     @IBOutlet weak var earning: UILabel!
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
     var defaults = UserDefaults.standard
     var loadingAlert:MBProgressHUD?
+    var earningValue = 0.00
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -28,6 +29,7 @@ class AddBalanceController: UIViewController {
             in
             self.balance.text = "Yüklənən məbləğ \(list[0].balance!) AZN"
             self.earning.text = "Qazanılan məbləğ \(list[0].earning!) AZN"
+            self.earningValue = Double(list[0].earning!)!
             DispatchQueue.main.async {
                 self.loadingAlert!.hide(animated: true)
                 
@@ -41,19 +43,30 @@ class AddBalanceController: UIViewController {
         
     }
     
+    @IBAction func WithdrawButtonClick(_ sender: Any) {
+        if earningValue > 0.99
+        {
+    self.performSegue(withIdentifier: "serviceListSegue", sender: self)
+        }
+        else {
+            let alert = UIAlertController(title: "Bildiriş", message: "Məxaric üçün,sizin, kifayət qədər qazancınız yoxdur", preferredStyle: UIAlertController.Style.alert)
+                                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                     self.present(alert, animated: true, completion: nil)
+        }
+    }
     
     // MARK: - Navigation
-    /*
+    
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      
-     if (segue.identifier == "paymentViewSegue") {
-     let displayVC = segue.destination as! WebViewController
+     if (segue.identifier == "serviceListSegue") {
+     let displayVC = segue.destination as! WithdrawServicesController
+        displayVC.earningValue = earningValue
      //displayVC.id =
      }
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-     */
-    
+     
 }

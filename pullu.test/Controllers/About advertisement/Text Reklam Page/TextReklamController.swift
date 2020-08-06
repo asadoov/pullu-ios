@@ -13,7 +13,7 @@ class TextReklamController: UIViewController {
     
     let defaults = UserDefaults.standard
     var advertID:Int?
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var userData = Array<User>()
     var pass:String?
     var fromArchieve:Bool = false

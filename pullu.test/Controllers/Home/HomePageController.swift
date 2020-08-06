@@ -37,7 +37,7 @@ class HomePageController: UIViewController{
     var catList:Array<CategoryStruct> = []
     var catObject:CategoryStruct?
     private let myRefreshControl = UIRefreshControl()
-    let  db:dbSelect=dbSelect()
+    let  db:DbSelect=DbSelect()
     var mail:String?
     var pass:String?
     var loadingIsOn = false

@@ -24,7 +24,7 @@ class MenuController: UIViewController {
     @IBOutlet weak var userID: UILabel!
     
      let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
     
@@ -197,28 +197,29 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
         
         if menuItems[indexPath.row].ID==0{
             
-            let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.alert)
-                                      errorAlert.addAction(UIAlertAction(title: "Xeyir", style: UIAlertAction.Style.cancel, handler: nil))
-                                      errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                        self.navigationController?.popViewController(animated: true)
+            let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.actionSheet)
+            errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
+                                                   self.navigationController?.popViewController(animated: true)
 
-                                        do {
-                                                                                                  let uID = self.defaults.string(forKey: "uID")!
-                                                                                                                 Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
-                                                                                                  
-                                                                                              }
-                                                                                              catch{
-                                                                                                  
-                                                                                                  
-                                                                                              }
-                                                                                             
-                                                                                              self.defaults.set(nil, forKey: "mail")
-                                                                                              self.defaults.set(nil, forKey: "pass")
-                                                                                              self.defaults.set(nil, forKey: "uData")
-                                       
-                                             self.dismiss(animated: true)
-                                                      
-                                      }))
+                                                   do {
+                                                                                                             let uID = self.defaults.string(forKey: "uID")!
+                                                                                                                            Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                                                                                                             
+                                                                                                         }
+                                                                                                         catch{
+                                                                                                             
+                                                                                                             
+                                                                                                         }
+                                                                                                        
+                                                                                                         self.defaults.set(nil, forKey: "mail")
+                                                                                                         self.defaults.set(nil, forKey: "pass")
+                                                                                                         self.defaults.set(nil, forKey: "uData")
+                                                  
+                                                   self.dismiss(animated: true)
+                                                                 
+                                                 }))
+                                      errorAlert.addAction(UIAlertAction(title: "Xeyir", style: UIAlertAction.Style.cancel, handler: nil))
+                                     
                                       self.present(errorAlert, animated: true, completion: nil)
             
 //            self.dismiss(animated: true){

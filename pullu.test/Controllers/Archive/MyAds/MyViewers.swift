@@ -11,7 +11,7 @@ import Alamofire
 class MyViewers: UITableViewController {
      let defaults = UserDefaults.standard
     var viewerList:Array<ViewerStruct> =  Array<ViewerStruct>()
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
     @IBOutlet var viewersTable: UITableView!
     var phone:Int?
     var pass:String?

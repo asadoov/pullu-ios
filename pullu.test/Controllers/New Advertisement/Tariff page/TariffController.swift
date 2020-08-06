@@ -10,7 +10,7 @@ import UIKit
 
 class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     
     var tariffList:Array<TariffStruct>=[]
     var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()

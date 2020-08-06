@@ -15,7 +15,7 @@ class MyViewsController: UIViewController {
     var loadingAlert:MBProgressHUD?
     var  mail:String?
     var  pass:String?
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
   
     @IBOutlet weak var aTableView: UITableView!
     

@@ -97,7 +97,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     
     var defaults = UserDefaults.standard
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var profileList: [ProfileModel] = [ProfileModel]()
     var uProfile = UpdateProfileStruct()
     

@@ -10,7 +10,7 @@ import UIKit
 
 class InterestsController: UITableViewController {
     var interestList:Array<Interest> =  Array<Interest>()
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
     @IBOutlet var interestsTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()

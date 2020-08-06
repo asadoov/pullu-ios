@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
-    @IBOutlet weak var oparatorChooser: UITextField!
+    @IBOutlet weak var operatorChooser: UITextField!
     
     @IBOutlet weak var phoneNum: UITextField!
      let defaults = UserDefaults.standard
@@ -29,7 +29,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
         return data[row]
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        oparatorChooser.text = data[row]
+        operatorChooser.text = data[row]
     }
     
     
@@ -42,7 +42,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         picker.delegate = self
         picker.dataSource = self
-        oparatorChooser.inputView = picker
+        operatorChooser.inputView = picker
         //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
         //tap.cancelsTouchesInView = false
         
@@ -87,9 +87,9 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
         loadingAlert.mode = MBProgressHUDMode.indeterminate
                                //            warningAlert.isSquare=true
                             
-        if ((phoneNum.text?.isEmpty) != nil && phoneNum.text?.count==7 && (oparatorChooser.text?.isEmpty) != nil){
+        if ((phoneNum.text?.isEmpty) != nil && phoneNum.text?.count==7 && (operatorChooser.text?.isEmpty) != nil){
             let insert = DbInsert()
-          phoneNumWithOperator = oparatorChooser.text! + phoneNum.text!
+          phoneNumWithOperator = operatorChooser.text! + phoneNum.text!
             insert.sendSms(phone: Int(phoneNumWithOperator)!){
                 (status)
                 in

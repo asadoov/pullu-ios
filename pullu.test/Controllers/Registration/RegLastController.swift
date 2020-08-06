@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
     var insert:DbInsert = DbInsert()
     var newUser: NewUser = NewUser()
     @IBOutlet weak var nameBox: UITextField!

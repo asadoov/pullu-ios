@@ -12,7 +12,7 @@ import MBProgressHUD
 class NotPaidController: UITableViewController {
     var loadingAlert:MBProgressHUD?
     var advertArray: [Advertisement] = [Advertisement]()
-    let  select:dbSelect=dbSelect()
+    let  select:DbSelect=DbSelect()
     var mail:String?
     var pass:String?
     private let myRefreshControl = UIRefreshControl()

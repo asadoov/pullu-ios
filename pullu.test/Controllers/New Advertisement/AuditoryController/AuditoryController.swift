@@ -21,7 +21,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     var genders:Array<String> = []
     var professions:Array<Profession> = []
     var ageRanges:Array<AgeRangeStruct> = []
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
    
     
     let defaults = UserDefaults.standard

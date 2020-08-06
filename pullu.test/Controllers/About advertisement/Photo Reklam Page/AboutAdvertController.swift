@@ -16,7 +16,7 @@ class AboutAdvertController: UIViewController {
     var advertID:Int?
     var mail:String?
     var pass:String?
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var userData = Array<User>()
       var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!

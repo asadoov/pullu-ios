@@ -14,7 +14,7 @@ class CheckOtp: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var pass2text: UITextField!
     @IBOutlet weak var pass3text: UITextField!
     @IBOutlet weak var pass4text: UITextField!
-    var select : dbSelect = dbSelect()
+    var select : DbSelect = DbSelect()
     var login: String = ""
     var verifyNumber: String = ""
     var phoneNum = 0

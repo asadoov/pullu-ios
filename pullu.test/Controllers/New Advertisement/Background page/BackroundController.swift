@@ -13,7 +13,7 @@ class BackroundController: UIViewController {
     var newAdverisement:NewAdvertisementStruct=NewAdvertisementStruct()
     @IBOutlet weak var backgroundsCollection: UICollectionView!
     
-    var select:dbSelect = dbSelect()
+    var select:DbSelect = DbSelect()
     var backgroundImageList:Array<BackroundImageStruct> = []
     
     override func viewDidLoad() {

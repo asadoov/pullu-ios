@@ -62,7 +62,7 @@ class logIn: UIViewController {
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
         var usrList:Array<User>=Array<User>()
-        let select: dbSelect=dbSelect()
+        let select: DbSelect=DbSelect()
         
         if (phoneNum! > 0 && pass.text != "") {
             select.signIn(phone: phoneNum!, pass: pass.text!) { (rslt) in
