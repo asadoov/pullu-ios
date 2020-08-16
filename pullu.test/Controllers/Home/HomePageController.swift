@@ -30,6 +30,7 @@ class HomePageController: UIViewController{
     //@IBOutlet weak var navItem: UINavigationItem!
     
     
+    @IBOutlet weak var catView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
     var isPaid: [Advertisement] = [Advertisement]()
     var isNotPaid: [Advertisement] = [Advertisement]()
@@ -82,11 +83,13 @@ class HomePageController: UIViewController{
                 let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                         segmentControllers: [myViewController,
                                                                             myShareController])
-                segmentedViewController.segmentBackgroundColor = UIColor.darkGray
-                segmentedViewController.segmentTitleColor = UIColor.white
+                segmentedViewController.segmentBackgroundColor = UIColor.white
+                segmentedViewController.segmentTitleColor = UIColor.black
+            catView.layer.borderWidth = 1
+            catView.layer.borderColor = UIColor.gray.cgColor
            
             segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
-            segmentedViewController.selectedSegmentViewColor = UIColor.white
+            segmentedViewController.selectedSegmentViewColor = UIColor.black
                 segmentedViewController.selectedSegmentViewHeight = 3
                 segmentedViewController.segmentViewHeight = 40
             segmentedViewController.headerViewHeight =  95

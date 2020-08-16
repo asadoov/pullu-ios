@@ -19,19 +19,20 @@ protocol ReklamCellDelegate {
 class ReklamCellTableViewCell: UITableViewCell {
     var player:AVPlayer?
     
-    @IBOutlet weak var showViewers: UIButton!
+//    @IBOutlet weak var showViewers: UIButton!
     
     @IBOutlet weak var aImage: UIImageView!
     @IBOutlet weak var aTitle: UILabel!
     
+    @IBOutlet weak var aView: UIView!
     @IBOutlet weak var aStatus: UILabel!
     @IBOutlet weak var cell: UIView!
     @IBOutlet weak var aTypeImage: UIImageView!
     @IBOutlet weak var aPrice: UILabel!
-    @IBOutlet weak var aInfo: UILabel!
+   @IBOutlet weak var aInfo: UILabel!
     @IBOutlet weak var aDate: UILabel!
-    @IBOutlet weak var aType: UILabel!
-    @IBOutlet weak var aViews: UILabel!
+//    @IBOutlet weak var aType: UILabel!
+//    @IBOutlet weak var aViews: UILabel!
     @IBOutlet weak var aCategory: UILabel!
     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var object:Advertisement?
@@ -56,11 +57,11 @@ class ReklamCellTableViewCell: UITableViewCell {
         delegate?.showViewersClick(cell: self)
     }
     
-    @IBOutlet weak var advertClick: UIView!
-    
+//    @IBOutlet weak var advertClick: UIView!
+//
     
     override func prepareForReuse() {
-        
+       
         aImage.image=UIImage(named: "background")
         
         loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
@@ -72,6 +73,11 @@ class ReklamCellTableViewCell: UITableViewCell {
     }
     func reloadData() {
         if object != nil {
+            aImage.layer.borderWidth = 1
+                   aImage.layer.borderColor = UIColor.gray.cgColor
+            
+            aView?.layer.borderWidth = 1
+            aView?.layer.borderColor = UIColor.gray.cgColor
             //        paidCell.layer.borderWidth = 1.0
             //        paidCell.layer.borderColor = UIColor.lightGray.cgColor
                     if cell != nil { cell.backgroundColor =  UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)}
@@ -83,8 +89,8 @@ class ReklamCellTableViewCell: UITableViewCell {
                     //  dateFormatter.dateFormat = "EEEE, dd MMMM"
                     dateFormatter.dateFormat = "dd.MM.yyyy"
                     aTitle.text=object?.name
-                    aInfo.text=object?.description
-                    if aType != nil { aType.text=object?.aTypeName}
+                   // aInfo.text=object?.description
+                   // if aType != nil { aType.text=object?.aTypeName}
                     if aTypeImage != nil {
                         
                          switch object?.aTypeId {
@@ -139,7 +145,7 @@ class ReklamCellTableViewCell: UITableViewCell {
                         
                         aPrice.text="\(object!.price!) AZN "
                     }
-                    aDate.text=dateFormatter.string(from:dt!)
+                    //aDate.text=dateFormatter.string(from:dt!)
                     //
                     
                     
