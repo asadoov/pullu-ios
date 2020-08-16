@@ -15,6 +15,7 @@ class PaidController: UITableViewController {
     let  select:DbSelect=DbSelect()
     var mail:String?
     var pass:String?
+    
     @IBOutlet var paidTableView: UITableView!
     var paginationEnabled=true
     var loading = false
@@ -32,6 +33,7 @@ class PaidController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         paidTableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         paidTableView.addSubview(myRefreshControl)
