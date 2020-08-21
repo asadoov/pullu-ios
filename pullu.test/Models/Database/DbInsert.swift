@@ -186,7 +186,7 @@ class DbInsert {
         
     }
     
-    func sendPassChangeSMS(phone:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func sendPassChangeSMS(phone:Int64 ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
@@ -230,7 +230,7 @@ class DbInsert {
         let Parameters = ["phone": phone,"otp": otp] as [String : Any]
         
         
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
                 (response)
                 in

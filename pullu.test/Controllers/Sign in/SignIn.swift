@@ -162,11 +162,13 @@ class SignIn: UIViewController {
         
     }
     
-//    @IBAction func forgotPassButton(_ sender: Any) {
-//        DispatchQueue.main.async {
-//            self.performSegue(withIdentifier: "forgPassSegue", sender: self)
-//        }
-//    }
+    
+    
+    @IBAction func forgotPassButton(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "passRecoverySegue", sender: self)
+        }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -177,7 +179,23 @@ class SignIn: UIViewController {
             
         }
         
-        
+        if(segue.identifier == "passRecoverySegue"){
+            
+            if let navController = segue.destination as? UINavigationController {
+            
+                                   if let chidVC = navController.topViewController as? PassRecoveryViewController {
+                                        //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                                    chidVC.phone = phoneNum!
+            
+                                   }
+            
+                               }
+            
+            //  let displayVC = segue.destination as! PassRecoveryViewController
+            //displayVC.navigationItem.hidesBackButton = true
+            
+            
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }

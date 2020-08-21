@@ -13,8 +13,8 @@
 		04BDE98B241B91230057C6A1 /* ForgotLastPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BDE98A241B91230057C6A1 /* ForgotLastPageViewController.swift */; };
 		04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1A23FBFF54007380BA /* BalanceController.swift */; };
 		04D6EF1D23FBFF6A007380BA /* AddBalanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */; };
-		04E6BF592419071C002381F1 /* SendEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF582419071C002381F1 /* SendEmailViewController.swift */; };
-		04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* CheckPassViewController.swift */; };
+		04E6BF592419071C002381F1 /* PassRecoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF582419071C002381F1 /* PassRecoveryViewController.swift */; };
+		04E6BF5B24190787002381F1 /* PassRecoveryCheckOtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5A24190787002381F1 /* PassRecoveryCheckOtpViewController.swift */; };
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
 		04ED33B724634A60006BC601 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED33B624634A60006BC601 /* ArchiveController.swift */; };
 		04F0152F24B4E35700FFA122 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0152E24B4E35700FFA122 /* ResponseStruct.swift */; };
@@ -164,8 +164,8 @@
 		04C8751323C736B400E84091 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04D6EF1A23FBFF54007380BA /* BalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceController.swift; sourceTree = "<group>"; };
 		04D6EF1C23FBFF6A007380BA /* AddBalanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBalanceController.swift; sourceTree = "<group>"; };
-		04E6BF582419071C002381F1 /* SendEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendEmailViewController.swift; sourceTree = "<group>"; };
-		04E6BF5A24190787002381F1 /* CheckPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPassViewController.swift; sourceTree = "<group>"; };
+		04E6BF582419071C002381F1 /* PassRecoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassRecoveryViewController.swift; sourceTree = "<group>"; };
+		04E6BF5A24190787002381F1 /* PassRecoveryCheckOtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassRecoveryCheckOtpViewController.swift; sourceTree = "<group>"; };
 		04E6BF5C24190831002381F1 /* CreatePassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePassViewController.swift; sourceTree = "<group>"; };
 		04ED33B624634A60006BC601 /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -546,8 +546,8 @@
 		04E6BF5524190662002381F1 /* Forgot Pass */ = {
 			isa = PBXGroup;
 			children = (
-				04E6BF582419071C002381F1 /* SendEmailViewController.swift */,
-				04E6BF5A24190787002381F1 /* CheckPassViewController.swift */,
+				04E6BF582419071C002381F1 /* PassRecoveryViewController.swift */,
+				04E6BF5A24190787002381F1 /* PassRecoveryCheckOtpViewController.swift */,
 				04E6BF5C24190831002381F1 /* CreatePassViewController.swift */,
 				04BDE98A241B91230057C6A1 /* ForgotLastPageViewController.swift */,
 			);
@@ -1251,7 +1251,7 @@
 				B68172DF245F751E000A4119 /* FinanceStruct.swift in Sources */,
 				B6582A4624CB2C190033C60B /* WithdrawFinishController.swift in Sources */,
 				B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */,
-				04E6BF5B24190787002381F1 /* CheckPassViewController.swift in Sources */,
+				04E6BF5B24190787002381F1 /* PassRecoveryCheckOtpViewController.swift in Sources */,
 				B67B9DE923EEE19E00A3451C /* pullu_test.xcdatamodeld in Sources */,
 				B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */,
 				B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */,
@@ -1286,7 +1286,7 @@
 				B67B9DD623EEE18A00A3451C /* NotificationModel.swift in Sources */,
 				047F46A423FBBEFD005E9DFA /* WebViewController.swift in Sources */,
 				B686A24B242B7C9000F62D5E /* MenuCell.swift in Sources */,
-				04E6BF592419071C002381F1 /* SendEmailViewController.swift in Sources */,
+				04E6BF592419071C002381F1 /* PassRecoveryViewController.swift in Sources */,
 				B67B9DD923EEE18A00A3451C /* SignIn.swift in Sources */,
 				B6B43C392464C03C0099029A /* MyAdsControllerViewController.swift in Sources */,
 				B682CB742465A2EC007EFD0E /* StatisticsCell.swift in Sources */,

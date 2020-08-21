@@ -45,8 +45,8 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
     
     @objc func refresh() {
         
-        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+//        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        loadingAlert!.mode = MBProgressHUDMode.indeterminate
        
         
         
@@ -96,10 +96,23 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
                                         
                                     }
                     break
-                    case 2:
-                    break
-                    default:
-                    break
+                      case 2:
+                                                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                                                           
+                                                                                                                           alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                                                               //logout
+                                                                                                                           }))
+                                                                       self.present(alert, animated: true, completion: nil)
+                                                    break
+                                                    default:
+                                                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                                                           
+                                                                                                                           alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                                                               //logout
+                                                                                                                           }))
+                                                                       self.present(alert, animated: true, completion: nil)
+                                                    break
+                                                    
                 }
                 
                 
@@ -116,8 +129,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
                 
-             usertoken = defaults.string(forKey: "usertoken")
-             requesttoken = defaults.string(forKey: "requesttoken")
+     
               refresh()
         
         
