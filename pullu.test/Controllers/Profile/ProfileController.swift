@@ -128,7 +128,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             (obj) in
             if obj.status == 1{
                 self.profileList = obj.data
-                //self.countryID = self.profileList[0].countryID
+                self.countryID = self.profileList[0].countryID
                 DispatchQueue.main.async {
                     self.emailField.setTitle(obj.data[0].mail, for: .normal)
                     self.nameField.text = obj.data[0].name
@@ -289,7 +289,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 let phoneNum = alertController.textFields![0] as UITextField
                 if !phoneNum.text!.isEmpty{
                     
-                    self.insert.UpdateUserPhoneSendSms(userToken: self.usertoken!, requestToken: self.requesttoken!, newPhone: phoneNum.text! ){
+                    self.insert.UpdateUserPhoneSendSms(newPhone: phoneNum.text! ){
                         (status)
                         in
                         if status.response == 1
@@ -303,7 +303,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 let smsCode = alert.textFields![0] as UITextField
                                 if !smsCode.text!.isEmpty{
                                     
-                                    self.insert.UpdateUserPhoneConfirm(userToken: self.usertoken!, requestToken: self.requesttoken!, newPhone: phoneNum.text!, otp: Int(smsCode.text!)!){
+                                    self.insert.UpdateUserPhoneConfirm(newPhone: phoneNum.text!, otp: Int(smsCode.text!)!){
                                         (status)
                                         in
                                         switch status.response
@@ -352,7 +352,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 
                             }))
                             alert.addAction(UIAlertAction(title: "Yenidən göndər", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
-                                self.insert.UpdateUserPhoneSendSms(userToken: self.usertoken!, requestToken: self.requesttoken!, newPhone: phoneNum.text! ) {
+                                self.insert.UpdateUserPhoneSendSms(newPhone: phoneNum.text! ) {
                                     (status)
                                     in
                                     
@@ -462,7 +462,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
             
             uProfile.userToken = usertoken
             uProfile.requestToken = requesttoken
-            insert.updateProfile(profile: uProfile,progressView: loadingNotification)
+            insert.UpdateProfile(profile: uProfile,progressView: loadingNotification)
             {
                 (status)
                 in

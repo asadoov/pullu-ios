@@ -28,7 +28,7 @@ class ReklamStoryController: UIViewController {
           
             time+=1
             if time==31{
-                self.insert.earnMoney(advertID: self.advertID, userToken: self.usertoken,requestToken: self.requesttoken){
+                self.insert.earnMoney(advertID: self.advertID){
                     
                     (status)
                     in

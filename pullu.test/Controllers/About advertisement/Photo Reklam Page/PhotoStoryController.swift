@@ -34,14 +34,14 @@ class PhotoStoryController: UIViewController {
             
             time+=1
             if time==31{
-                 self.insert.earnMoney(advertID: self.advertID, userToken: self.userToken,requestToken:self.requestToken){
+                 self.insert.earnMoney(advertID: self.advertID){
                  
                  (status)
                  in
                  switch status.response
                  {
                  case 1:
-                     self.defaults.set(status.requestToken, forKey: "requestToken")
+                     
                     let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                         (action: UIAlertAction!) in

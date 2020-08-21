@@ -8,8 +8,7 @@
 
 import Foundation
 class NewAdvertisementStruct: Codable {
-    var mail:String?
-    var pass:String?
+    
     var isPaid:Int?
     var aTypeID:Int?
     var aCategoryID:Int?

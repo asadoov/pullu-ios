@@ -111,8 +111,8 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             newAdvertisement.aProfessionID = 0
             newAPreview.aProfession = "Hamısı"
         }
-        newAdvertisement.mail = defaults.string(forKey: "mail")
-        newAdvertisement.pass = defaults.string(forKey: "pass")
+//        newAdvertisement.mail = defaults.string(forKey: "mail")
+//        newAdvertisement.pass = defaults.string(forKey: "pass")
           self.performSegue(withIdentifier: "previewController", sender: self)
         
         

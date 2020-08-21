@@ -31,7 +31,7 @@ class ChangePassViewController: UIViewController {
                 let  mail  = defaults.string(forKey: "mail")
                        
                 let insert:DbInsert = DbInsert()
-                insert.UPass(userToken: mail!, requestToken: oldPass.text!, newPass:newPass.text! ){
+                insert.UPass(newPass:newPass.text! ){
                     
                     (status)
                     in

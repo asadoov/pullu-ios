@@ -74,6 +74,7 @@ public class DbSelect {
     
     func GetAds(isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         
+        
         let usrtkn = defaults.string(forKey: "userToken")
         let reqTkn = defaults.string(forKey: "requestToken")
         //   let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
@@ -177,7 +178,7 @@ public class DbSelect {
     }
     func GetCities(countryId:Int?,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/Cities?countryid=" + String(countryId!)
+        let url="http://pullu.az:81/api/androidmobileapp/get/Cities?countryid=" + String(countryId ?? 0)
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -319,14 +320,14 @@ public class DbSelect {
                 }
         }
         
-       
+        
         
     }
     
     //Profil
     func GetProfileInfo( completionBlock: @escaping (_ result:ResponseStruct<ProfileModel>) ->()){
         let userToken = defaults.string(forKey: "userToken")
-              let requestToken = defaults.string(forKey: "requestToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
         let url="http://pullu.az:81/api/androidmobileapp/user/get/profile"
         let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
@@ -341,9 +342,9 @@ public class DbSelect {
                     let obj  = try
                         JSONDecoder().decode(ResponseStruct<ProfileModel>.self, from: response.data!)
                     if obj.status == 1{
-                                           self.security.RefreshToken(requestToken: obj.requestToken)
-                                           
-                                       }
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
                     completionBlock(obj)
                     
                     
@@ -532,9 +533,9 @@ public class DbSelect {
                     // userList=list
                     //print(list)
                     if obj.status == 1{
-                                           self.security.RefreshToken(requestToken: obj.requestToken)
-                                           
-                                       }
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
                     completionBlock(obj)
                     
                     
@@ -719,9 +720,9 @@ public class DbSelect {
                     // userList=list
                     //print(list)
                     if obj.status == 1{
-                                           self.security.RefreshToken(requestToken: obj.requestToken)
-                                           
-                                       }
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
                     completionBlock(obj)
                     
                     
