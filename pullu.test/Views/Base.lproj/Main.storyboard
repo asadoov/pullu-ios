@@ -1787,9 +1787,8 @@ baxışı</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6I4-P8-Zhz">
-                                <rect key="frame" x="0.0" y="56" width="320" height="463"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6I4-P8-Zhz">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" id="yWe-R9-pXX" customClass="StatisticsCell" customModule="Pullu" customModuleProvider="target">
@@ -1828,6 +1827,12 @@ baxışı</string>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6I4-P8-Zhz" firstAttribute="leading" secondItem="7OR-t1-1iB" secondAttribute="leading" id="0X2-rH-vhh"/>
+                            <constraint firstItem="6I4-P8-Zhz" firstAttribute="top" secondItem="7OR-t1-1iB" secondAttribute="top" id="KCF-pi-wIa"/>
+                            <constraint firstItem="6I4-P8-Zhz" firstAttribute="trailing" secondItem="7OR-t1-1iB" secondAttribute="trailing" id="hmy-g3-PSt"/>
+                            <constraint firstItem="6I4-P8-Zhz" firstAttribute="bottom" secondItem="7OR-t1-1iB" secondAttribute="bottom" id="ke0-1d-4kX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="7OR-t1-1iB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Statistik Məlumatlar" id="AAf-9N-ehx"/>
@@ -3971,7 +3976,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Bildiriş" image="notification" id="vuM-ye-Pmy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="VHT-pD-3dO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
