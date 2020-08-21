@@ -80,7 +80,7 @@ class VideoReklamController: UIViewController {
                 self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+                //self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                // let vc = AVPlayerViewController()
                 
