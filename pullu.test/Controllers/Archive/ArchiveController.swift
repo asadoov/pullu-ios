@@ -33,9 +33,10 @@ class ArchiveController: UIViewController {
             segmentedViewController.segmentBackgroundColor = UIColor.white
             segmentedViewController.segmentTitleColor = UIColor.black
             segmentedViewController.selectedSegmentViewColor = UIColor.black
-            segmentedViewController.selectedSegmentViewHeight = 3
-            segmentedViewController.segmentViewHeight = 70
-            segmentedViewController.headerViewHeight = 95
+             segmentedViewController.selectedSegmentViewColor = UIColor.black
+                           segmentedViewController.selectedSegmentViewHeight = 3
+                           segmentedViewController.segmentViewHeight = 40
+                       segmentedViewController.headerViewHeight =  95
             
             addChild(segmentedViewController)
             container.addSubview(segmentedViewController.view)

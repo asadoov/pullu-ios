@@ -2661,12 +2661,11 @@ baxışı</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQf-5p-Ux8">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GQf-5p-Ux8">
                                 <rect key="frame" x="0.0" y="44" width="320" height="95"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="P2R-Go-9oe">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                                        <rect key="frame" x="0.0" y="-1" width="320" height="96"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3E5-KD-zGH">
@@ -2677,7 +2676,7 @@ baxışı</string>
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="catCell" id="QBY-em-2M8" customClass="CategoryViewCell" customModule="Pullu" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="6.5" width="80" height="82"/>
+                                                <rect key="frame" x="0.0" y="7" width="80" height="82"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="82"/>
@@ -2710,14 +2709,23 @@ baxışı</string>
                                     </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="27l-x5-khW"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleToFill" id="cKz-vA-g7d">
-                                <rect key="frame" x="0.0" y="167" width="320" height="352"/>
+                                <rect key="frame" x="0.0" y="147" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="cKz-vA-g7d" firstAttribute="top" secondItem="GQf-5p-Ux8" secondAttribute="bottom" constant="8" id="58C-o9-FiR"/>
+                            <constraint firstItem="GQf-5p-Ux8" firstAttribute="trailing" secondItem="a5w-sW-4fV" secondAttribute="trailing" id="QG8-zs-sAy"/>
+                            <constraint firstItem="GQf-5p-Ux8" firstAttribute="leading" secondItem="a5w-sW-4fV" secondAttribute="leading" id="kWG-mZ-tbM"/>
+                            <constraint firstItem="GQf-5p-Ux8" firstAttribute="top" secondItem="a5w-sW-4fV" secondAttribute="top" id="zfp-Bw-bld"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="a5w-sW-4fV"/>
                     </view>
                     <navigationItem key="navigationItem" title="Əsas səhifə" largeTitleDisplayMode="never" id="ptL-Gn-IBb"/>
@@ -3673,24 +3681,6 @@ baxışı</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="1VJ-yM-Dm8">
-                                                            <rect key="frame" x="12" y="12" width="105" height="29"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <accessibility key="accessibilityConfiguration">
-                                                                <accessibilityTraits key="traits" none="YES"/>
-                                                                <bool key="isElement" value="NO"/>
-                                                            </accessibility>
-                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="10"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="15"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="App icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKe-0d-2r2">
                                                             <rect key="frame" x="264" y="3" width="32" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -3722,7 +3712,6 @@ baxışı</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="aCategory" destination="1VJ-yM-Dm8" id="5ie-84-wqc"/>
                                             <outlet property="aImage" destination="nrf-6C-aZa" id="FNG-dv-F92"/>
                                             <outlet property="aPrice" destination="eun-ir-1zj" id="3x8-y3-601"/>
                                             <outlet property="aTitle" destination="Pyb-DH-Vry" id="Cr9-bE-Y5K"/>
@@ -3952,13 +3941,18 @@ baxışı</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-XH-ee4">
-                                <rect key="frame" x="0.0" y="36" width="320" height="480"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-XH-ee4">
+                                <rect key="frame" x="0.0" y="44" width="320" height="475"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vu5-XH-ee4" firstAttribute="trailing" secondItem="8Cw-HG-uq9" secondAttribute="trailing" id="27f-xD-pgW"/>
+                            <constraint firstItem="vu5-XH-ee4" firstAttribute="top" secondItem="8Cw-HG-uq9" secondAttribute="top" id="Ag3-Tj-2lm"/>
+                            <constraint firstItem="vu5-XH-ee4" firstAttribute="bottom" secondItem="8Cw-HG-uq9" secondAttribute="bottom" id="Ulm-xq-BRb"/>
+                            <constraint firstItem="vu5-XH-ee4" firstAttribute="leading" secondItem="8Cw-HG-uq9" secondAttribute="leading" id="gaN-Gl-J4G"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8Cw-HG-uq9"/>
                     </view>
                     <navigationItem key="navigationItem" title="Arxiv" largeTitleDisplayMode="never" id="Va6-k6-MRo"/>
@@ -3977,7 +3971,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Bildiriş" image="notification" id="vuM-ye-Pmy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="VHT-pD-3dO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -4495,8 +4489,8 @@ baxışı</string>
     <inferredMetricsTieBreakers>
         <segue reference="PaF-7P-zkZ"/>
         <segue reference="2gI-Nb-d9E"/>
-        <segue reference="zmV-Ft-loV"/>
-        <segue reference="bO6-d2-eQV"/>
+        <segue reference="DCy-YY-JWJ"/>
+        <segue reference="epU-oZ-BNe"/>
         <segue reference="eYI-wK-TXP"/>
         <segue reference="l6n-9p-XSQ"/>
         <segue reference="BOl-gM-Eqx"/>
