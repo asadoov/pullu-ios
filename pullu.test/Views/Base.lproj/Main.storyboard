@@ -467,7 +467,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nömrənizi qeyd edin..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ql3-lg-xhb">
-                                <rect key="frame" x="74" y="242" width="175" height="34"/>
+                                <rect key="frame" x="74" y="287" width="230" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="oSc-fM-qmE"/>
                                 </constraints>
@@ -478,7 +478,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M71-rI-Fri">
-                                <rect key="frame" x="16" y="304" width="233" height="25"/>
+                                <rect key="frame" x="16" y="395" width="288" height="33"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="Gxb-DS-yyG"/>
@@ -497,7 +497,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="050" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="erR-JI-MTQ">
-                                <rect key="frame" x="16" y="242" width="0.0" height="34"/>
+                                <rect key="frame" x="16" y="287" width="54" height="34"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="rZv-tS-Boz"/>
@@ -506,7 +506,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Xoş Gəlmisiniz" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f8a-XG-cZa">
-                                <rect key="frame" x="0.0" y="174" width="265" height="44"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3Pa-2n-jVA"/>
                                 </constraints>
@@ -515,7 +515,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Giriş edin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-cK-VAK">
-                                <rect key="frame" x="0.0" y="222" width="265" height="20"/>
+                                <rect key="frame" x="0.0" y="222" width="320" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="M0c-oa-08J"/>
                                 </constraints>
@@ -524,7 +524,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="App icon" translatesAutoresizingMaskIntoConstraints="NO" id="mvl-W8-5QT">
-                                <rect key="frame" x="123" y="114" width="19" height="33"/>
+                                <rect key="frame" x="123" y="114" width="74" height="40"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1965,32 +1965,32 @@ baxışı</string>
                                 </connections>
                             </segmentedControl>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4t-rA-Wwq">
-                                <rect key="frame" x="20" y="370.5" width="280" height="216"/>
+                                <rect key="frame" x="20" y="360.5" width="280" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="zMa-4m-5V3" id="AAK-WC-YRn"/>
                                     <outlet property="delegate" destination="zMa-4m-5V3" id="NDe-WW-X2q"/>
                                 </connections>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeM-D7-jWE">
-                                <rect key="frame" x="20" y="214" width="280" height="216"/>
+                                <rect key="frame" x="20" y="207.5" width="280" height="216"/>
                                 <connections>
                                     <outlet property="dataSource" destination="zMa-4m-5V3" id="Skx-gO-gD4"/>
                                     <outlet property="delegate" destination="zMa-4m-5V3" id="q64-UU-5Ik"/>
                                 </connections>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Başlıq" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Me9-vY-nlK">
-                                <rect key="frame" x="16" y="165" width="288" height="34"/>
+                                <rect key="frame" x="16" y="158.5" width="288" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kateqoriya" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eN-iH-qdg">
-                                <rect key="frame" x="26" y="209" width="268" height="23.5"/>
+                                <rect key="frame" x="26" y="202.5" width="268" height="20"/>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-LJ-axm">
-                                <rect key="frame" x="20" y="550" width="280" height="34"/>
+                                <rect key="frame" x="20" y="543.5" width="280" height="31"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <state key="normal" title="&gt; Davam et">
@@ -2006,13 +2006,13 @@ baxışı</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Pulsuz reklam tipində video fayl əlavəsi mümkün deil" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iRQ-zF-mk5">
-                                <rect key="frame" x="17" y="103" width="286" height="44"/>
+                                <rect key="frame" x="17" y="103" width="286" height="37.5"/>
                                 <fontDescription key="fontDescription" name="Nunito-Italic" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reklam tipi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCS-NK-TCV">
-                                <rect key="frame" x="24" y="396.5" width="272" height="23.5"/>
+                                <rect key="frame" x="24" y="386.5" width="272" height="20"/>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -3634,31 +3634,31 @@ baxışı</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="282" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GZc-aV-EEs">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GZc-aV-EEs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" rowHeight="282" id="awV-u0-aez" customClass="ReklamCellTableViewCell" customModule="Pullu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="282"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" rowHeight="185" id="awV-u0-aez" customClass="ReklamCellTableViewCell" customModule="Pullu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="185"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="awV-u0-aez" id="iKb-he-FnF">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="282"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ux-c7-BgA">
-                                                    <rect key="frame" x="15" y="11" width="290" height="261"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <view contentMode="scaleToFill" id="MbO-7H-SaF">
+                                                    <rect key="frame" x="9" y="5" width="303" height="175"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="----" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4z-b9-8el">
-                                                            <rect key="frame" x="5" y="137" width="285" height="28"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="----" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyb-DH-Vry">
+                                                            <rect key="frame" x="11" y="141" width="162" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qbp-IQ-VRx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="139"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrf-6C-aZa">
+                                                            <rect key="frame" x="-1" y="0.0" width="303" height="139"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -3670,12 +3670,16 @@ baxışı</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dw2-zg-z9W">
-                                                            <rect key="frame" x="215" y="102" width="67" height="27"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="1VJ-yM-Dm8">
+                                                            <rect key="frame" x="12" y="12" width="105" height="29"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <accessibilityTraits key="traits" none="YES"/>
+                                                                <bool key="isElement" value="NO"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="10"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -3684,35 +3688,28 @@ baxışı</string>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rC5-ZS-0Gf">
-                                                            <rect key="frame" x="5" y="232" width="108" height="32"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="App icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKe-0d-2r2">
+                                                            <rect key="frame" x="264" y="3" width="32" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="eun-ir-1zj">
+                                                            <rect key="frame" x="219" y="141" width="83" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
+                                                            <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="izlə ⮕" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ROv-Dh-O9q">
-                                                            <rect key="frame" x="240" y="223" width="50" height="38"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <accessibility key="accessibilityConfiguration">
-                                                                <accessibilityTraits key="traits" none="YES"/>
-                                                                <bool key="isElement" value="NO"/>
-                                                            </accessibility>
-                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="21"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nhf-BL-E6u">
-                                                            <rect key="frame" x="5" y="165" width="285" height="59"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zun-T3-k7g">
+                                                            <rect key="frame" x="213" y="144" width="1" height="23"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="15"/>
@@ -3722,11 +3719,11 @@ baxışı</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="aDate" destination="rC5-ZS-0Gf" id="crF-aY-NTR"/>
-                                            <outlet property="aImage" destination="qbp-IQ-VRx" id="bXs-lJ-dy7"/>
-                                            <outlet property="aInfo" destination="nhf-BL-E6u" id="dhy-B3-7DT"/>
-                                            <outlet property="aPrice" destination="Dw2-zg-z9W" id="beA-DR-6sL"/>
-                                            <outlet property="aTitle" destination="n4z-b9-8el" id="Vv4-bn-45H"/>
+                                            <outlet property="aCategory" destination="1VJ-yM-Dm8" id="5ie-84-wqc"/>
+                                            <outlet property="aImage" destination="nrf-6C-aZa" id="FNG-dv-F92"/>
+                                            <outlet property="aPrice" destination="eun-ir-1zj" id="3x8-y3-601"/>
+                                            <outlet property="aTitle" destination="Pyb-DH-Vry" id="Cr9-bE-Y5K"/>
+                                            <outlet property="aTypeImage" destination="lKe-0d-2r2" id="XND-oh-nWW"/>
                                             <outlet property="cell" destination="iKb-he-FnF" id="R3O-cS-0qS"/>
                                         </connections>
                                     </tableViewCell>
@@ -3760,31 +3757,31 @@ baxışı</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="280" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cUz-Sg-hrf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cUz-Sg-hrf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" rowHeight="280" id="V9q-qZ-PiH" customClass="ReklamCellTableViewCell" customModule="Pullu" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="280"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ItemCell" rowHeight="225" id="V9q-qZ-PiH" customClass="ReklamCellTableViewCell" customModule="Pullu" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="225"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V9q-qZ-PiH" id="RDk-V2-xpz">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oVu-Ng-bvA">
-                                                    <rect key="frame" x="15" y="11" width="290" height="261"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <view contentMode="scaleToFill" id="Wed-aT-Fxi">
+                                                    <rect key="frame" x="9" y="11" width="303" height="175"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="----" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6eM-gb-BU0">
-                                                            <rect key="frame" x="5" y="137" width="285" height="28"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="----" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bpg-3N-Y3t">
+                                                            <rect key="frame" x="11" y="141" width="162" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nyd-I8-yXX">
-                                                            <rect key="frame" x="0.0" y="0.0" width="290" height="139"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CgK-Eq-p7F">
+                                                            <rect key="frame" x="-1" y="0.0" width="303" height="139"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -3796,12 +3793,16 @@ baxışı</string>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="pDc-1l-RMa">
-                                                            <rect key="frame" x="190" y="102" width="92" height="27"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="68e-B9-zjS">
+                                                            <rect key="frame" x="12" y="12" width="105" height="29"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <accessibility key="accessibilityConfiguration">
+                                                                <accessibilityTraits key="traits" none="YES"/>
+                                                                <bool key="isElement" value="NO"/>
+                                                            </accessibility>
+                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="10"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -3810,36 +3811,28 @@ baxışı</string>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mi-zv-q6j">
-                                                            <rect key="frame" x="5" y="232" width="137" height="32"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="App icon" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKz-8D-a3o">
+                                                            <rect key="frame" x="264" y="3" width="32" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j0b-S9-mxZ">
+                                                            <rect key="frame" x="219" y="141" width="83" height="34"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-SemiBold" family="Nunito" pointSize="15"/>
-                                                            <nil key="textColor"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="18"/>
+                                                            <color key="textColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6e-GI-23b">
-                                                            <rect key="frame" x="5" y="165" width="285" height="59"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13z-mc-A6c">
+                                                            <rect key="frame" x="213" y="144" width="1" height="23"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="---" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GaB-KF-9za">
-                                                            <rect key="frame" x="229" y="8" width="53" height="27"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
-                                                            <color key="textColor" red="0.94509803920000002" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="15"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMt-eX-rTb">
-                                                            <rect key="frame" x="8" y="101" width="40" height="34"/>
+                                                            <rect key="frame" x="13" y="103" width="58" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <state key="normal" title="Button" image="eye"/>
                                                             <connections>
@@ -3847,7 +3840,7 @@ baxışı</string>
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="15"/>
@@ -3857,12 +3850,6 @@ baxışı</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="aDate" destination="3Mi-zv-q6j" id="cIh-mi-yxI"/>
-                                            <outlet property="aImage" destination="nyd-I8-yXX" id="BPS-8X-KPc"/>
-                                            <outlet property="aInfo" destination="r6e-GI-23b" id="RKK-ma-KGs"/>
-                                            <outlet property="aPrice" destination="pDc-1l-RMa" id="Y5z-aK-Lcc"/>
-                                            <outlet property="aStatus" destination="GaB-KF-9za" id="4xZ-YK-JrG"/>
-                                            <outlet property="aTitle" destination="6eM-gb-BU0" id="4Ii-Si-C3U"/>
                                             <outlet property="cell" destination="RDk-V2-xpz" id="6QE-m6-zNZ"/>
                                         </connections>
                                     </tableViewCell>
@@ -4504,9 +4491,9 @@ baxışı</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="PaF-7P-zkZ"/>
-        <segue reference="UoZ-Fm-MG6"/>
-        <segue reference="Kil-57-EVx"/>
-        <segue reference="SJ9-N0-5KI"/>
+        <segue reference="2gI-Nb-d9E"/>
+        <segue reference="zmV-Ft-loV"/>
+        <segue reference="bO6-d2-eQV"/>
         <segue reference="eYI-wK-TXP"/>
         <segue reference="l6n-9p-XSQ"/>
         <segue reference="BOl-gM-Eqx"/>
