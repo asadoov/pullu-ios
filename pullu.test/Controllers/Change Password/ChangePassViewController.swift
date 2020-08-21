@@ -11,7 +11,7 @@ import MBProgressHUD
 
 class ChangePassViewController: UIViewController {
  var loadingAlert:MBProgressHUD?
-    @IBOutlet weak var oldPass: UITextField!
+   
     @IBOutlet weak var newPass: UITextField!
     @IBOutlet weak var repeatNewPass: UITextField!
     override func viewDidLoad() {
@@ -22,13 +22,13 @@ class ChangePassViewController: UIViewController {
     
     @IBAction func changePassButton(_ sender: Any) {
         
-        if oldPass.text != "" &&  newPass.text != "" && repeatNewPass.text != ""{
+        if  newPass.text != "" && repeatNewPass.text != ""{
             if newPass.text == repeatNewPass.text{
                 loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                 loadingAlert!.mode = MBProgressHUDMode.indeterminate
                
                 let defaults = UserDefaults.standard
-                let  mail  = defaults.string(forKey: "mail")
+             
                        
                 let insert:DbInsert = DbInsert()
                 insert.UPass(newPass:newPass.text! ){
@@ -37,8 +37,8 @@ class ChangePassViewController: UIViewController {
                     in
                     self.loadingAlert!.hide(animated: true)
                                   switch status.response{
-                                  case 0:
-                                    defaults.set(self.newPass.text, forKey: "pass")
+                                  case 1:
+                                   
                                       let alert = UIAlertController(title: "Uğurludur", message: "Sizin şifrəniz dəyişdirildi!", preferredStyle: UIAlertController.Style.alert)
                                       let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                                           UIAlertAction in
@@ -47,8 +47,8 @@ class ChangePassViewController: UIViewController {
                                       }
                                       alert.addAction(okAction)
                                       self.present(alert, animated: true, completion: nil)
-                                    case 3:
-                                    let alert = UIAlertController(title: "Diqqət", message: "Zəhmət olmasa köhnə şifrənin düzgünlüyündən əmin olun", preferredStyle: UIAlertController.Style.alert)
+                                    case 2:
+                                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa Yenidən daxil olun", preferredStyle: UIAlertController.Style.alert)
                                                                          alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                                                                          self.present(alert, animated: true, completion: nil)
                                   default:
