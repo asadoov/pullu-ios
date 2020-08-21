@@ -13,8 +13,8 @@ class MyViewsController: UIViewController {
     var advertArray: [Advertisement] = [Advertisement]()
     var advertID:Int?
     var loadingAlert:MBProgressHUD?
-    var  mail:String?
-    var  pass:String?
+    var  userToken:String?
+    var  requestToken:String?
     var select:DbSelect=DbSelect()
   
     @IBOutlet weak var aTableView: UITableView!
@@ -28,8 +28,8 @@ class MyViewsController: UIViewController {
         
         
         // let userData = defaults.string(forKey: "uData")
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
+        userToken = defaults.string(forKey: "userToken")
+        requestToken = defaults.string(forKey: "requestToken")
         refresh()
     }
     
@@ -40,17 +40,17 @@ class MyViewsController: UIViewController {
         
         
         
-        if mail != nil&&pass != nil{
+        if userToken != nil&&requestToken != nil{
           //  var typeCount=0
            
-            select.getMyViews(mail: mail!, pass: pass!){
+            select.GetMyViews(){
                 
-                (list) in
-                
-                
+                (obj) in
                 
                 
-                for advert in list {
+                
+                
+                for advert in obj.data {
                     
                     //if (advert.isPaid==type) {
                     let item = advert

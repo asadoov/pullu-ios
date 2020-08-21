@@ -14,8 +14,9 @@ class TextReklamController: UIViewController {
     let defaults = UserDefaults.standard
     var advertID:Int?
     var select:DbSelect=DbSelect()
-    var userData = Array<User>()
-    var pass:String?
+    var userData = Array<UserStruct>()
+     var userToken:String?
+    var requestToken:String?
     var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advertName: UILabel!
@@ -55,15 +56,16 @@ class TextReklamController: UIViewController {
         
         do{
             let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
+            userToken = self.defaults.string(forKey: "userToken")
+            requestToken = self.defaults.string(forKey: "requestToken")
             
             self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
         }
-        select.getAdvertById(advertID: advertID,mail:self.userData[0].mail,pass:pass )
+        select.GetAdvertById(advertID: advertID)
         {
             (list)
             in
@@ -150,8 +152,8 @@ class TextReklamController: UIViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "TextStoryPage") as! ReklamStoryController
         newViewController.advertID=advertID!
-        newViewController.mail=self.userData[0].mail
-        newViewController.pass=pass!
+        newViewController.usertoken=userToken
+        newViewController.requesttoken=requestToken
         newViewController.advertDescription=self.aDescription.text
         self.present(newViewController, animated: true, completion: nil)
     }

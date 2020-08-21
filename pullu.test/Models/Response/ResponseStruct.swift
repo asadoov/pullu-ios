@@ -8,6 +8,7 @@
 
 import Foundation
 struct ResponseStruct<T:Codable>:Codable{
+    public var requestToken:String?
  public var status:Int?
     public var data:Array<T>
     

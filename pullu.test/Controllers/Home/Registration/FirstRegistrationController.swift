@@ -90,7 +90,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
         if ((phoneNum.text?.isEmpty) != nil && phoneNum.text?.count==7 && (operatorChooser.text?.isEmpty) != nil){
             let insert = DbInsert()
           phoneNumWithOperator = operatorChooser.text! + phoneNum.text!
-            insert.sendSms(phone: Int(phoneNumWithOperator)!){
+            insert.SendSms(phone: Int(phoneNumWithOperator)!){
                 (status)
                 in
                   loadingAlert.hide(animated: true)
@@ -130,7 +130,9 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
       
     
     }
-    
+    @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {
+
+    }
     
 //    @IBAction func forwardClick(_ sender: Any) {
 //        if((!email.text!.isEmpty)&&(!pass.text!.isEmpty)&&(!passRepeat.text!.isEmpty)){
@@ -186,9 +188,9 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
                 if(segue.identifier == "logInSegue"){
                     if let navController = segue.destination as? UINavigationController {
         
-                               if let chidVC = navController.topViewController as? logIn {
+                               if let chidVC = navController.topViewController as? SignIn {
                                     //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
-                                chidVC.phoneNum = Int(phoneNumWithOperator)!
+                                chidVC.phoneNum = Int64(phoneNumWithOperator)!
         
                                }
         

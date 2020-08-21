@@ -14,10 +14,10 @@ import AlamofireImage
 class AboutAdvertController: UIViewController {
     let defaults = UserDefaults.standard
     var advertID:Int?
-    var mail:String?
-    var pass:String?
+    var userToken:String?
+    var requestToken:String?
     var select:DbSelect=DbSelect()
-    var userData = Array<User>()
+    var userData = Array<UserStruct>()
       var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
@@ -78,16 +78,16 @@ class AboutAdvertController: UIViewController {
         // Do any additional setup after loading the view.
         do{
             let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
+            userToken = self.defaults.string(forKey: "userToken")
             self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            self.mail=self.userData[0].mail
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+            self.requestToken=self.defaults.string(forKey: "requestToken")
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
         }
         //print("mail: \(userData[0].mail) pass: \(pass) advertID: \(advertID)")
-        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
+        select.GetAdvertById(advertID: advertID)
         {
             (list)
             in
@@ -190,8 +190,8 @@ class AboutAdvertController: UIViewController {
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
         newViewController.imageSource=imageSource
         newViewController.advertID=advertID
-        newViewController.mail=mail
-        newViewController.pass=pass
+        newViewController.userToken=userToken
+        newViewController.requestToken=requestToken
         self.present(newViewController, animated: true, completion: nil)
         // let n=(30/slideshow.images.count)
         

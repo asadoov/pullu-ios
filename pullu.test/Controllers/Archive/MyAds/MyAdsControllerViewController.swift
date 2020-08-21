@@ -22,8 +22,8 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
      var ad: Advertisement = Advertisement()
     var advertID:Int?
     var loadingAlert:MBProgressHUD?
-    var  mail:String?
-    var  pass:String?
+    var  usertoken:String?
+    var  requesttoken:String?
     var select:DbSelect=DbSelect()
    let defaults = UserDefaults.standard
     @IBOutlet weak var aTableView: UITableView!
@@ -50,52 +50,61 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
        
         
         
-        if mail != nil&&pass != nil{
+        if usertoken != nil&&requesttoken != nil{
           //  var typeCount=0
             advertArray.removeAll()
-            select.getMyAds(mail: mail!, pass: pass!){
+            select.GetMyAds(){
                 
-                (list) in
-                
-                
-                
-                
-                for advert in list {
+                (obj) in
+                switch obj.status{
+                case 1:
                     
-                    //if (advert.isPaid==type) {
-                    let item = advert
-            
-                        
-                         self.advertArray.append(item)
-                       
-                    
-                    
-//                    DispatchQueue.main.async {
-//
-//                        if self.isPaidSegment.selectedSegmentIndex == 0{
-//                            self.advertArray = self.isPaid
-//                            typeCount=self.isPaid.count
-//                        }else {
-//                            self.advertArray = self.isNotPaid
-//                            typeCount=self.isNotPaid.count
-//                        }
-//
-//
-//
-//                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-//                        self.ReklamList.reloadData()
-//
-//                        self.myRefreshControl.endRefreshing()
-//
-//                        self.loadingAlert!.hide(animated: true)
-//
-//                        //
-//
-//                    }
-//
-                    
-                    
+                     for advert in obj.data {
+                                        
+                                        //if (advert.isPaid==type) {
+                                        let item = advert
+                                
+                                            
+                                             self.advertArray.append(item)
+                                           
+                                        
+                                        
+                    //                    DispatchQueue.main.async {
+                    //
+                    //                        if self.isPaidSegment.selectedSegmentIndex == 0{
+                    //                            self.advertArray = self.isPaid
+                    //                            typeCount=self.isPaid.count
+                    //                        }else {
+                    //                            self.advertArray = self.isNotPaid
+                    //                            typeCount=self.isNotPaid.count
+                    //                        }
+                    //
+                    //
+                    //
+                    //                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                    //                        self.ReklamList.reloadData()
+                    //
+                    //                        self.myRefreshControl.endRefreshing()
+                    //
+                    //                        self.loadingAlert!.hide(animated: true)
+                    //
+                    //                        //
+                    //
+                    //                    }
+                    //
+                                        
+                                        
+                                    }
+                    break
+                    case 2:
+                    break
+                    default:
+                    break
                 }
+                
+                
+                
+               
                 
                  self.loadingAlert!.hide(animated: true)
                 self.aTableView.reloadData()
@@ -107,8 +116,8 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
                 
-             mail = defaults.string(forKey: "mail")
-             pass = defaults.string(forKey: "pass")
+             usertoken = defaults.string(forKey: "usertoken")
+             requesttoken = defaults.string(forKey: "requesttoken")
               refresh()
         
         

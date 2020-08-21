@@ -12,11 +12,11 @@ import AVKit
 
 class VideoReklamController: UIViewController {
     var advertID:Int?
-    var mail:String?
-    var pass:String?
+    var userToken:String?
+    var requestToken:String?
     var select:DbSelect=DbSelect()
     let defaults = UserDefaults.standard
-    var userData = Array<User>()
+    var userData = Array<UserStruct>()
     //var player:AVPlayer?
     var playing = false
     var player: AVPlayer!
@@ -42,10 +42,11 @@ class VideoReklamController: UIViewController {
         // Do any additional setup after loading the view.
         do{
             let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
+            userToken = self.defaults.string(forKey: "userToken")
+            self.requestToken = self.defaults.string(forKey: "requestToken")
             self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            self.mail=self.userData[0].mail
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+            
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
@@ -53,7 +54,7 @@ class VideoReklamController: UIViewController {
         
         
         
-        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
+        select.GetAdvertById(advertID: advertID)
         {
             (list)
             in
@@ -144,8 +145,8 @@ class VideoReklamController: UIViewController {
                let newViewController = storyBoard.instantiateViewController(withIdentifier: "VideoStoryPage") as! VideoStory
               
                newViewController.advertID=advertID
-               newViewController.mail=mail
-               newViewController.pass=pass
+               newViewController.userToken=userToken
+               newViewController.requestToken=requestToken
         newViewController.url = url
                self.present(newViewController, animated: true, completion: nil)
     }

@@ -46,7 +46,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
 //        }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        select.aType(){
+            select.AType(){
             (list)
             in
             self.typeList=list
@@ -55,7 +55,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
                 self.aTypePicker.reloadAllComponents();
             }
         }
-        select.aCategory(){
+        select.ACategory(){
             (list)
             in
             self.catList=list
@@ -100,7 +100,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         {
             if isPaidFinished==true {
                 isPaidFinished=false
-                select.aType(){
+                select.AType(){
                     (list)
                     in
                     self.typeList=list

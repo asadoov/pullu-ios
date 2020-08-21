@@ -30,7 +30,7 @@ class MyViewers: UITableViewController {
         //self.navigationItem.hidesBackButton = true
 //        let newBackButton = UIBarButtonItem(title: "Geri", style: UIBarButtonItem.Style.plain, target: self, action: #selector(InterestsController.back(sender:)))
                //self.navigationItem.leftBarButtonItem = newBackButton
-        select.myAdViewers(phone: phone!, pass: pass!, aID: aID!)
+        select.MyAdViewers(aID: aID!)
             {
                 (obj)
                 in

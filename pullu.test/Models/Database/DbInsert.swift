@@ -107,12 +107,12 @@ class DbInsert {
         
         
     }
-    func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:Status) ->()){
+    func earnMoney(advertID:Int?,userToken:String?,requestToken:String?,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/earnMoney"
-        let Parameters = ["advertID": advertID!,"mail":mail!, "pass":pass!] as [String : Any]
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/earnMoney"
+        let Parameters = ["advertID": advertID!,"userToken":userToken!, "requestToken":requestToken!] as [String : Any]
         
         
         
@@ -151,7 +151,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/send/mail"
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/send/mail"
         let Parameters = ["mail": mail] as [String : Any]
         
         
@@ -185,7 +185,7 @@ class DbInsert {
            
            
            
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/reset/sms"
+           let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/send/sms"
            let Parameters = ["phone": phone] as [String : Any]
            
            
@@ -215,13 +215,13 @@ class DbInsert {
        }
     
     // forgot pass / 4 regemli shifre yoxlanishi
-    func checkSendCode(login:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func CheckForgotPassOtpSMS(phone:Int64, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/confirm"
-        let Parameters = ["login": login,"code": code] as [String : Any]
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/verify/sms/otp"
+        let Parameters = ["phone": phone,"otp": otp] as [String : Any]
         
         
         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
@@ -247,14 +247,46 @@ class DbInsert {
         }
         
     }
+    func CheckForgotPassOtpMail(mail:String, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
+           
+           
+           
+           
+           let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/verify/mail/otp"
+           let Parameters = ["mail": mail,"otp": otp] as [String : Any]
+           
+           
+           request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+               {
+                   (response)
+                   in
+                   
+                   do{
+                       
+                       
+                       let statusCode  = try
+                           JSONDecoder().decode(Status.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(statusCode)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+       }
     // forgot pass/ yeni şifrə yaratmaq
-    func createNewPass(newpass:String ,login:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func CreateNewPassBySMS(newpass:String ,phone:Int64, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/newpass"
-        let Parameters = ["newpass":newpass, "login": login,"code": code] as [String : Any]
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/bySMS/set"
+        let Parameters = ["newpass":newpass, "phone": phone,"otp": otp] as [String : Any]
         
         
         
@@ -282,6 +314,40 @@ class DbInsert {
         }
         
     }
+    func CreateNewPassByMail(newpass:String ,mail:String, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
+           
+           
+           
+           
+           let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/byMail/set"
+           let Parameters = ["newpass":newpass, "mail": mail,"otp": otp] as [String : Any]
+           
+           
+           
+           request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+               {
+                   (response)
+                   in
+                   //  print(PULLULINK)
+                   
+                   do{
+                       
+                       
+                       let statusCode  = try
+                           JSONDecoder().decode(Status.self, from: response.data!)
+                       // userList=list
+                       //print(list)
+                       
+                       completionBlock(statusCode)
+                       
+                       
+                   }
+                   catch let jsonErr{
+                       print("Error serializing json:",jsonErr)
+                   }
+           }
+           
+       }
     
     //    jsonBody:String
     
@@ -317,7 +383,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/advertisements/add"
         
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
@@ -369,8 +435,8 @@ class DbInsert {
                 //                    multipartFormData.append(("\(newAdvertisement?.aTrfID!)".data(using: .utf8)!), withName: "aTrfID")
                 multipartFormData.append(("\(newAdvertisement!.aTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTypeId")
                 multipartFormData.append(("\(newAdvertisement!.isPaid!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "isPaid")
-                multipartFormData.append(("\(newAdvertisement!.mail!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "mail")
-                multipartFormData.append(("\(newAdvertisement!.pass!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "pass")
+                multipartFormData.append(("\(newAdvertisement!.mail!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "userToken")
+                multipartFormData.append(("\(newAdvertisement!.pass!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "requestToken")
                 //multipartFormData.append(newAdvertisement., withName: "aCategoryID")
                 //multipartFormData.append(("\(newAdvertisement!.pass!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "password")
         },
@@ -453,7 +519,7 @@ class DbInsert {
         catch {
         }
         if jsonString != "" {
-            let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/profile"
+            let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/update/profile"
             
             //let json = "{\"What\":\"Ever\"}"
             
@@ -532,13 +598,13 @@ class DbInsert {
            }
            
        }
-    func verifyMobile(mail:String,pass:String,newPhone:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func UpdateUserPhoneSendSms(userToken:String,requestToken:String,newPhone:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/mobile"
-        let Parameters = ["mail": mail,"pass": pass,"newPhone": newPhone] as [String : Any]
+        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/update/phone"
+        let Parameters = ["userToken": userToken,"requestToken": requestToken,"newPhone": newPhone] as [String : Any]
         
         
         
@@ -566,13 +632,13 @@ class DbInsert {
         }
         
     }
-    func updatePhone(mail:String,pass:String,newPhone:String,code:Int ,completionBlock: @escaping (_ result:Status) ->()){
+    func UpdateUserPhoneConfirm(userToken:String,requestToken:String,newPhone:String,otp:Int ,completionBlock: @escaping (_ result:Status) ->()){
            
            
            
            
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/phone"
-        let Parameters = ["mail": mail,"pass": pass,"phone": newPhone,"code":code] as [String : Any]
+           let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/newPhone"
+        let Parameters = ["userToken": userToken,"requestToken": requestToken,"phone": newPhone,"otp":otp] as [String : Any]
            
            
            
@@ -600,13 +666,13 @@ class DbInsert {
            }
            
        }
-    func updateAd(mail:String,pass:String,aID:Int,aName:String,aDescription:String,aPrice:Int ,completionBlock: @escaping (_ result:Status) ->()){
+    func UpdateAd(userToken:String,requestToken:String,aID:Int,aName:String,aDescription:String,aPrice:Int ,completionBlock: @escaping (_ result:Status) ->()){
               
               
               
               
-              let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/ad"
-        let Parameters = ["mail": mail,"pass": pass,"aID": aID,"aName":aName,"aDescription":aDescription,"aPrice":aPrice] as [String : Any]
+              let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/update/ad"
+        let Parameters = ["userToken": userToken,"requesttoken": requestToken,"aID": aID,"aName":aName,"aDescription":aDescription,"aPrice":aPrice] as [String : Any]
               
               
               
@@ -634,13 +700,13 @@ class DbInsert {
               }
               
           }
-    func deleteAd(mail:String,pass:String,aID:Int,completionBlock: @escaping (_ result:Status) ->()){
+    func DeleteAd(userToken:String,requestToken:String,aID:Int,completionBlock: @escaping (_ result:Status) ->()){
                  
                  
                  
                  
                  let PULLULINK = "https://pullu.az/api/androidmobileapp/user/delete/ad"
-           let Parameters = ["mail": mail,"pass": pass,"aID": aID] as [String : Any]
+           let Parameters = ["mail": userToken,"pass": requestToken,"aID": aID] as [String : Any]
                  
                  
                  
@@ -668,13 +734,13 @@ class DbInsert {
                  }
                  
              }
-    func uPass(mail:String,pass:String,newPass:String,completionBlock: @escaping (_ result:Status) ->()){
+    func UPass(userToken:String,requestToken:String,newPass:String,completionBlock: @escaping (_ result:Status) ->()){
           
           
           
           
-          let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/pass"
-    let Parameters = ["mail": mail,"pass": pass,"newPass": newPass] as [String : Any]
+          let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/update/pass"
+    let Parameters = ["userToken": userToken,"requestToken": requestToken,"newPass": newPass] as [String : Any]
           
           
           
@@ -702,7 +768,7 @@ class DbInsert {
           }
           
       }
-    func sendSms(phone:Int,completionBlock: @escaping (_ result:Status) ->()){
+    func SendSms(phone:Int,completionBlock: @escaping (_ result:Status) ->()){
              
              
              

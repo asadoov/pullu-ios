@@ -23,7 +23,7 @@ class InterestsController: UITableViewController {
         //self.navigationItem.hidesBackButton = true
 //        let newBackButton = UIBarButtonItem(title: "Geri", style: UIBarButtonItem.Style.plain, target: self, action: #selector(InterestsController.back(sender:)))
                //self.navigationItem.leftBarButtonItem = newBackButton
-        select.getInterests()
+        select.GetInterests()
             {
                 (list)
                 in

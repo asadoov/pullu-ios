@@ -20,7 +20,7 @@ class BackroundController: UIViewController {
         
         super.viewDidLoad()
         
-        select.getBackgroundImages(){
+        select.GetBackgroundImages(){
             
             (list)
             in

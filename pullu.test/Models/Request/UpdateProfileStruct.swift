@@ -11,8 +11,8 @@ class UpdateProfileStruct: Codable {
      var uID: Int?
     var name: String?
     var surname: String?
-    var mail: String?
-    var pass: String?
+    var userToken: String?
+    var requestToken: String?
     var newMail: String?
     var newPass: String?
     var phone: Int?

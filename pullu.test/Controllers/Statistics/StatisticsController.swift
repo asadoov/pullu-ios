@@ -32,10 +32,10 @@ class StatisticsController: UIViewController {
         // Do any additional setup after loading the view.
         let mail = defaults.string(forKey: "mail")
         let pass = defaults.string(forKey: "pass")
-        select.getStatistics(mail: mail!, pass: pass!) {
+        select.GetStatistics() {
             (statistics)
             in
-            self.statisticsData = statistics
+            self.statisticsData = statistics.data[0]
             DispatchQueue.main.async {
                 self.statisticsTableView.reloadData()
                 //            self.allUsers.text=String(statistics.allUsers!)

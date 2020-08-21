@@ -72,7 +72,7 @@ class CheckOtp: UIViewController, UITextFieldDelegate {
                             verifyNumber = "\(pass1text.text!)\(pass2text.text!)\(pass3text.text!)\(pass4text.text!)"
                            
                            print(verifyNumber)
-                    select.verifyOtp(mobile: phoneNum, otp: Int(verifyNumber)!) {
+                    select.VerifyOtp(mobile: phoneNum, otp: Int(verifyNumber)!) {
                                (Status) in
                                
                               self.loadingAlert!.hide(animated: true)

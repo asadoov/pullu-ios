@@ -22,18 +22,35 @@ class AddBalanceController: UIViewController {
        
         // Do any additional setup after loading the view.
        
-        var pass = defaults.string(forKey: "pass")
-        var mail = defaults.string(forKey: "mail")
-        select.getFinance(mail: mail!, pass: pass!){
-            (list)
+       
+        select.GetFinance(){
+            (obj)
             in
-            self.balance.text = "Yüklənən məbləğ \(list[0].balance!) AZN"
-            self.earning.text = "Qazanılan məbləğ \(list[0].earning!) AZN"
-            self.earningValue = Double(list[0].earning!)!
+            switch obj.status{
+            case 1:
+               
+            
+            self.balance.text = "Yüklənən məbləğ \(obj.data[0].balance!) AZN"
+            self.earning.text = "Qazanılan məbləğ \(obj.data[0].earning!) AZN"
+            self.earningValue = Double(obj.data[0].earning!)!
             DispatchQueue.main.async {
                 self.loadingAlert!.hide(animated: true)
                 
             }
+                break
+            case 2:
+           
+               let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                let alert = UIAlertController(title: "Xəta", message: "", preferredStyle: UIAlertController.Style.alert)
+                                                                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                                 self.present(alert, animated: true, completion: nil)
+                break
+            }
+            
         }
         
     }

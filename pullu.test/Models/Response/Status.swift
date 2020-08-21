@@ -8,6 +8,7 @@
 
 import Foundation
 public class Status: Codable {
+    public var requestToken:String?
     public var response:Int?
     public var responseString:String?
 

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseAuth
 class UserStruct:Codable{
+     var userToken:String?
     var id:Int?
     var firebaseID:String?
     var name: String?
@@ -19,13 +20,13 @@ class UserStruct:Codable{
     var phone: Int64?
     var birthDate: String?
     var genderID: Int?
-     var countryID: Int?
+    var countryID: Int?
     var cityID: Int?
     var photoURL: String?
     var regDate: String?
     var balance:String?
     var earning:String?
-     
+    
     
     init(user: FirebaseAuth.User) {
         self.firebaseID = user.uid

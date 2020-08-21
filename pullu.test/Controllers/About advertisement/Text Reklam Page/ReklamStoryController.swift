@@ -13,8 +13,8 @@ class ReklamStoryController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var advertDescriptionLabel: UILabel!
     var advertID:Int?
-    var mail:String?
-    var pass:String?
+    var usertoken:String?
+    var requesttoken:String?
     var advertDescription:String?
   let defaults = UserDefaults.standard
     override func viewDidLoad() {
@@ -28,13 +28,14 @@ class ReklamStoryController: UIViewController {
           
             time+=1
             if time==31{
-                self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
+                self.insert.earnMoney(advertID: self.advertID, userToken: self.usertoken,requestToken: self.requesttoken){
                     
                     (status)
                     in
                      switch status.response
                                   {
-                                  case 0:
+                                  case 1:
+                                    
                                      let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                                      alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                                          (action: UIAlertAction!) in

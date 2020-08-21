@@ -11,7 +11,6 @@ struct NewUser:Codable{
     
     var name: String?
     var surname: String?
-   
     var mail: String?
     var phone: Int?
     var pass: String?

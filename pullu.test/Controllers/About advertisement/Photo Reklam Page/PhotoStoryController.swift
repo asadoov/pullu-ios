@@ -11,8 +11,8 @@ import ImageSlideshow
 class PhotoStoryController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     var advertID:Int?
-    var mail:String?
-    var pass:String?
+    var userToken:String?
+    var requestToken:String?
     let insert:DbInsert=DbInsert()
     var imageSource: [ImageSource] = []
     @IBOutlet weak var slideshow: ImageSlideshow!
@@ -34,13 +34,14 @@ class PhotoStoryController: UIViewController {
             
             time+=1
             if time==31{
-                 self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
+                 self.insert.earnMoney(advertID: self.advertID, userToken: self.userToken,requestToken:self.requestToken){
                  
                  (status)
                  in
                  switch status.response
                  {
-                 case 0:
+                 case 1:
+                     self.defaults.set(status.requestToken, forKey: "requestToken")
                     let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                         (action: UIAlertAction!) in
@@ -48,15 +49,25 @@ class PhotoStoryController: UIViewController {
                                       self.dismiss(animated: true)
                                     }))
                       self.present(alert, animated: true, completion: nil)
+                    break
+                 case 3:
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                              
+                                                                              alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                  //logout
+                                                                              }))
+                          self.present(alert, animated: true, completion: nil)
+                    break
                  default:
                                                            // let alert = UIAlertController(title: "Oops", message: "Ətraflı: Kod: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
-                                                           let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
-                                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                                                           alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                           let errorAlert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+                                                           errorAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                                                           errorAlert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
                                                                let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(status.response!)\n\(status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
                                                                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                                                                self.present(alert, animated: true, completion: nil)
                                                            }))
+                                                        self.present(errorAlert, animated: true, completion: nil)
                 
                  
                  }

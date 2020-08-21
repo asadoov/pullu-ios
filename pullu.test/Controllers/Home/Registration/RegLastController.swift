@@ -96,7 +96,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.cityList.removeAll()
                 defaultCity.name = "Şəhəri seçin"
                 self.cityList.append(defaultCity)
-                select.getCities(countryId:self.counryList[row].id!){
+                select.GetCities(countryId:self.counryList[row].id!){
                     (list)
                     in
                     
@@ -175,7 +175,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
         var defaultCountry:Country = Country()
         defaultCountry.name = "Ölkəni seçin"
         self.counryList.append(defaultCountry)
-        select.getCounties(){
+        select.GetCounties(){
             (list) in
             DispatchQueue.main.async {
                 self.loadingAlert?.hide(animated: true)

@@ -53,7 +53,6 @@ class HomePageController: UIViewController{
 //        showActivityIndicator()
    
         
-        
         //myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         //ReklamList.addSubview(myRefreshControl)
         
@@ -161,7 +160,7 @@ class HomePageController: UIViewController{
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
         
-        db.aCategory(){
+        db.ACategory(){
             (list)
             in
             self.catList=list

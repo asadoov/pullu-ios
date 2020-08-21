@@ -23,7 +23,7 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
         tariffTable.delegate = self
         tariffTable.dataSource = self
-        select.aTariff(){
+        select.ATariff(){
             (list)
             in
             self.tariffList=list

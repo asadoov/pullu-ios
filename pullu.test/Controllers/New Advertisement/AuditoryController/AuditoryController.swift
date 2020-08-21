@@ -55,7 +55,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.genderPicker.reloadAllComponents()
         self.ageRangePicker.reloadAllComponents()
         self.professionPicker.reloadAllComponents()
-        select.getCounties(){
+        select.GetCounties(){
             
             (list)
             in
@@ -65,7 +65,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.countryPicker.reloadAllComponents()
             }
         }
-        select.getAgeRange(){
+        select.GetAgeRange(){
             
             (list)
             in
@@ -76,7 +76,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.ageRangePicker.reloadAllComponents()
             }
         }
-        select.getProfessions(){
+        select.GetProfessions(){
             
             (list)
             in
@@ -173,7 +173,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             newAdvertisement.aCountryID = selectedRow
             newAPreview.aCountry = countries[row].name
             if selectedRow>0{
-                select.getCities(countryId:selectedRow){
+                select.GetCities(countryId:selectedRow){
                     (list)
                     in
                     

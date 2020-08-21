@@ -23,7 +23,7 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var userID: UILabel!
     
-     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+    let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var select:DbSelect=DbSelect()
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
@@ -75,8 +75,8 @@ class MenuController: UIViewController {
         menuItems.append(profileBtn)
         menuItems.append(staticsBtn)
         menuItems.append(financeBtn)
-//        menuItems.append(ruleBtn)
-//        menuItems.append(aboutBtn)
+        //        menuItems.append(ruleBtn)
+        //        menuItems.append(aboutBtn)
         menuItems.append(logOutBtn)
         
         
@@ -115,35 +115,35 @@ class MenuController: UIViewController {
             
             
             let list  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
             
             // userList=list
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-          
+            
             userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
             Alamofire.request(list[0].photoURL!).responseImage { response in
                 if let catPicture = response.result.value {
                     //advert.photo=catPicture.pngData()
                     
                     //  item.photo = UIImage(named: "damaged")?.pngData()
-                   
+                    
+                    
+                    if catPicture != nil {
                         
-                        if catPicture != nil {
-                            
-                            self.userImage.image=catPicture
-                            self.loadingIndicator.stopAnimating()
-                            
-                        }
-                        else {
-                            self.userImage.image=UIImage(named: "damaged")
-                            
-                        }
+                        self.userImage.image=catPicture
+                        self.loadingIndicator.stopAnimating()
                         
-                      
+                    }
+                    else {
+                        self.userImage.image=UIImage(named: "damaged")
+                        
+                    }
                     
                     
                     
-                   
+                    
+                    
+                    
                 }
                 
                 
@@ -156,15 +156,15 @@ class MenuController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
-//        navigationController?.view.backgroundColor = .clear
-//        super.viewWillAppear(animated)
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    //        navigationController?.navigationBar.shadowImage = UIImage()
+    //        navigationController?.navigationBar.isTranslucent = true
+    //        navigationController?.view.backgroundColor = .clear
+    //        super.viewWillAppear(animated)
+    //    }
     
-
+    
     
     // Get the new view controller using segue.destination.
     // Pass the selected object to the new view controller.
@@ -172,7 +172,7 @@ class MenuController: UIViewController {
     
     
     
-
+    
     
     // MARK: - Navigation
     
@@ -190,8 +190,8 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
-//        cell.object = menuItems[indexPath.row]
+        //        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
+        //        cell.object = menuItems[indexPath.row]
         // advertID=cell.object?.id!
         //print(advertID!)
         
@@ -199,47 +199,57 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             
             let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.actionSheet)
             errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
-                                                   self.navigationController?.popViewController(animated: true)
-
-                                                   do {
-                                                                                                             let uID = self.defaults.string(forKey: "uID")!
-                                                                                                                            Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
-                                                                                                             
-                                                                                                         }
-                                                                                                         catch{
-                                                                                                             
-                                                                                                             
-                                                                                                         }
-                                                                                                        
-                                                                                                         self.defaults.set(nil, forKey: "mail")
-                                                                                                         self.defaults.set(nil, forKey: "pass")
-                                                                                                         self.defaults.set(nil, forKey: "uData")
-                                                  
-                                                   self.dismiss(animated: true)
-                                                                 
-                                                 }))
-                                      errorAlert.addAction(UIAlertAction(title: "Xeyir", style: UIAlertAction.Style.cancel, handler: nil))
-                                     
-                                      self.present(errorAlert, animated: true, completion: nil)
+                //self.navigationController?.popViewController(animated: true)
+                
+                do {
+                    let uID = self.defaults.string(forKey: "uID")!
+                    Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                    
+                    self.navigationController?.popToRootViewController(animated: true)
+                    self.dismiss(animated: true) {
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                    }
+                }
+                catch{
+                    
+                    
+                }
+                /*self.dismiss(animated: false){
+                 self.defaults.set(nil, forKey: "userToken")
+                 self.defaults.set(nil, forKey: "requestToken")
+                 self.defaults.set(nil, forKey: "uData")
+                 
+                 }*/
+                //self.navigationController?.popViewController(animated: true)
+                
+                
+                
+                
+            }))
+            errorAlert.addAction(UIAlertAction(title: "Xeyr", style: UIAlertAction.Style.cancel, handler: nil))
             
-//            self.dismiss(animated: true){
-//                do {
-//                    let uID = self.defaults.string(forKey: "uID")!
-//                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
-//                    
-//                }
-//                catch{
-//                    
-//                    
-//                }
-//               
-//                self.defaults.set(nil, forKey: "mail")
-//                self.defaults.set(nil, forKey: "pass")
-//                self.defaults.set(nil, forKey: "uData")}
+            self.present(errorAlert, animated: true, completion: nil)
+            
+            //            self.dismiss(animated: true){
+            //                do {
+            //                    let uID = self.defaults.string(forKey: "uID")!
+            //                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+            //
+            //                }
+            //                catch{
+            //
+            //
+            //                }
+            //
+            //                self.defaults.set(nil, forKey: "mail")
+            //                self.defaults.set(nil, forKey: "pass")
+            //                self.defaults.set(nil, forKey: "uData")}
             
             
         }
-        
+            
         else if menuItems[indexPath.row].ID == 1{
             self.performSegue(withIdentifier: "profSegue", sender: self)
             
@@ -249,7 +259,7 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             self.performSegue(withIdentifier: "statiSegue", sender: self)
             
         }
-        
+            
         else if menuItems[indexPath.row].ID == 5{
             self.performSegue(withIdentifier: "finanSegue", sender: self)
             

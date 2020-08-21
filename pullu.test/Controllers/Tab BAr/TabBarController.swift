@@ -37,7 +37,7 @@ class TabBarController: UITabBarController {
                           
                           
                           let list  = try
-                              JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                              JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
                           
                           // userList=list
                        uID = list[0].id!

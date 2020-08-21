@@ -69,7 +69,7 @@ class EditAd: UIViewController, UITextViewDelegate {
             loadingAlert!.mode = MBProgressHUDMode.indeterminate
           
             
-            insert.updateAd(mail: mail!, pass: pass!, aID: ad.id!, aName: aNameBox.text!, aDescription: aDescriptionBox.text!, aPrice: Int(aPriceBox.text!)!){
+            insert.UpdateAd(userToken: mail!, requestToken: pass!, aID: ad.id!, aName: aNameBox.text!, aDescription: aDescriptionBox.text!, aPrice: Int(aPriceBox.text!)!){
                 
                 (status)
                 in
@@ -111,7 +111,7 @@ class EditAd: UIViewController, UITextViewDelegate {
             
             self.loadingAlert?.show(animated: true)
             
-            self.insert.deleteAd(mail: self.mail!, pass: self.pass!, aID: self.ad.id!){
+            self.insert.DeleteAd(userToken: self.mail!, requestToken: self.pass!, aID: self.ad.id!){
                 
                 (status)
                 in

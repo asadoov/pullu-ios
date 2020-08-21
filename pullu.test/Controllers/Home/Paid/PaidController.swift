@@ -13,8 +13,8 @@ class PaidController: UITableViewController {
     var loadingAlert:MBProgressHUD = MBProgressHUD()
     var advertArray: [Advertisement] = [Advertisement]()
     let  select:DbSelect=DbSelect()
-    var mail:String?
-    var pass:String?
+    var userToken:String?
+    var requestToken:String?
     
     @IBOutlet var paidTableView: UITableView!
     var paginationEnabled=true
@@ -38,8 +38,8 @@ class PaidController: UITableViewController {
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         paidTableView.addSubview(myRefreshControl)
         
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
+        userToken = defaults.string(forKey: "userToken")
+        requestToken = defaults.string(forKey: "requestToken")
         self.refresh()
 //        select.SignIn(mail: mail!, pass: pass!){
 //            (user)
@@ -182,13 +182,16 @@ class PaidController: UITableViewController {
             self.paidTableView.tableFooterView?.isHidden = false
             var typeCount=0
             
-            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 0,page: page, catID: catID,progressView: loadingAlert){
+            select.GetAds(isPaid: 0,page: page, catID: catID,progressView: loadingAlert){
                 
-                (list) in
+                (obj) in
                 self.spinner.stopAnimating()
                 self.paidTableView.tableFooterView = nil
-                if !list.data.isEmpty {
-                    for advert in list.data {
+                switch obj.status {
+ case 1:
+                if !obj.data.isEmpty {
+                    //self.defaults.set(obj.requestToken, forKey: "requestToken")
+                    for advert in obj.data {
                         
                         //if (advert.isPaid==type) {
                         let item = advert
@@ -234,7 +237,26 @@ class PaidController: UITableViewController {
                     
                     self.paginationEnabled = false
                 }
-                
+                    break
+                    
+                 case 2:
+                                   let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                       
+                                                                                       alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                           //logout
+                                                                                       }))
+                                   self.present(alert, animated: true, completion: nil)
+                                   break
+                               default:
+                                   let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                       
+                                                                                       alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                           //logout
+                                                                                       }))
+                                   self.present(alert, animated: true, completion: nil)
+                                   break
+                                   
+                }
                 
                 
                 
@@ -259,17 +281,18 @@ class PaidController: UITableViewController {
             self.myRefreshControl.beginRefreshing()
             var typeCount=0
             
-            select.getAds(username: mail ?? "", pass: pass ?? "",isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
+            select.GetAds(isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
                 
-                (list) in
+                (obj) in
                 
+                switch obj.status {
+                              case 1:
                 
-                
-                if !list.data.isEmpty{
-                    if list.status != 3{
+                if !obj.data.isEmpty{
+                    
                         self.advertArray.removeAll()
-                        
-                        for advert in list.data {
+                         
+                        for advert in obj.data {
                             
                             //if (advert.isPaid==type) {
                             let item = advert
@@ -313,18 +336,8 @@ class PaidController: UITableViewController {
                         self.loading = false
                         
                         self.paginationEnabled = true
-                    }
-                    else {
-                        
-                        self.myRefreshControl.endRefreshing()
-                        //self.loadingAlert!.hide(animated: true)
-                        let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        warningAlert.mode = MBProgressHUDMode.text
-                        //            warningAlert.isSquare=true
-                        warningAlert.label.text = "Xəta"
-                        warningAlert.detailsLabel.text = "Zəhmət olmasa biraz sonra yenidən cəht edin"
-                        warningAlert.hide(animated: true,afterDelay: 3)
-                    }
+                    
+//
                     
                     
                     
@@ -341,7 +354,28 @@ class PaidController: UITableViewController {
                     warningAlert.hide(animated: true,afterDelay: 3)
                     
                 }
-                
+                    break
+                    case 2:
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                           
+                                                                                           alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                               //logout
+                                                                                           }))
+                                       self.present(alert, animated: true, completion: nil)
+                    break
+                    default:
+                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                           
+                                                                                           alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                               //logout
+                                                                                           }))
+                                       self.present(alert, animated: true, completion: nil)
+                    break
+                    
+                    
+                    
+                }
+                 self.myRefreshControl.endRefreshing()
             }
         }
         
@@ -371,8 +405,8 @@ class PaidController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
+        userToken = defaults.string(forKey: "userToken")
+        requestToken = defaults.string(forKey: "requestToken")
         if  (defaults.string(forKey: "aID") != nil) {
             refresh()
         }

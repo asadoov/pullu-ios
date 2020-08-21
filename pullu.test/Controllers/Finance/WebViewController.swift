@@ -12,7 +12,7 @@ import WebKit
 
 class WebViewController: UIViewController, WKUIDelegate {
     let defaults = UserDefaults.standard
-    var User:User?
+    var User:UserStruct?
     var id: Int?
     var MainUrl = "https://test.smartpay.az/keeper-sl/payment/service/588?iframe=true&im_id1="
     
@@ -29,7 +29,7 @@ class WebViewController: UIViewController, WKUIDelegate {
         do{
         
         let list = try!
-            JSONDecoder().decode(Array<User>.self, from: uData!.data(using: .utf8)!)
+            JSONDecoder().decode(Array<UserStruct>.self, from: uData!.data(using: .utf8)!)
             
             id=list[0].id
 
