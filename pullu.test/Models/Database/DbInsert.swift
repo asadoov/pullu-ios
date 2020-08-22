@@ -384,7 +384,7 @@ class DbInsert {
     }
     
     
-    func addAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:Status) ->()){
+    func AddAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:Status) ->()){
         
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")

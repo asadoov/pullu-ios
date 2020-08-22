@@ -124,19 +124,19 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                     
                     
                     
-                    self.fileChooser(assets: filesAsset)
-                    {
-                        (completed)
-                        in
-                        if completed == true
-                        {
+//                    self.fileChooser(assets: filesAsset)
+//                    {
+//                        (completed)
+//                        in
+//                        if completed == true
+//                        {
                             
                             //                                self.hideActivityIndicator()
                             // self.dismiss(animated: true)
                             
                             self.performSegue(withIdentifier: "auditorySegue", sender: true)
-                        }
-                    }
+//                        }
+//                    }
                     
                     
                     
