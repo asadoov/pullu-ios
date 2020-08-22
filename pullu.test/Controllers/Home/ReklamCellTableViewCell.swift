@@ -167,18 +167,28 @@ class ReklamCellTableViewCell: UITableViewCell {
                 loadingIndicator.stopAnimating()
             }
             if object!.aTypeId == 3 {
-                
-                let sourceURL = URL(string: (object?.photoUrl![0])!)
-                let asset = AVAsset(url: sourceURL!)
-                let imageGenerator = AVAssetImageGenerator(asset: asset)
-                let time = CMTimeMake(value: 1, timescale: 60)
-                let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
-                let thumbnail = UIImage(cgImage:imageRef)
-               
-                    DispatchQueue.main.async {
-                    self.aImage.image=thumbnail
-                    }
+                do {
+                    let sourceURL = URL(string: (object?.photoUrl?[0]) ?? "")
+                     let asset = AVAsset(url: sourceURL!)
+                     let imageGenerator = AVAssetImageGenerator(asset: asset)
+                     let time = CMTimeMake(value: 1, timescale: 60)
+                     let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
+                     let thumbnail = UIImage(cgImage:imageRef)
                     
+                         DispatchQueue.main.async {
+                         self.aImage.image=thumbnail
+                         }
+                         
+                    
+                }
+                catch {
+                    
+                    DispatchQueue.main.async {
+                                            self.aImage.image=UIImage(named: "damaged")
+                                            }
+                                            
+                }
+                
                
                 //                let videoURL = URL(string: (object?.photoUrl![0])!)
                 //                self.player = AVPlayer(url: videoURL!)

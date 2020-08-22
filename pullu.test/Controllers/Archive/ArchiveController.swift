@@ -11,11 +11,11 @@ import Foundation
 import SJSegmentedScrollView
 
 class ArchiveController: UIViewController {
-
+    
     @IBOutlet weak var container: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         
         if let storyboard = self.storyboard {
             
@@ -29,34 +29,35 @@ class ArchiveController: UIViewController {
             
             let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                     segmentControllers: [myViewController,
-                                                                        myShareController])
+                                                                                         myShareController])
             segmentedViewController.segmentBackgroundColor = UIColor.white
             segmentedViewController.segmentTitleColor = UIColor.black
+            
+            segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
             segmentedViewController.selectedSegmentViewColor = UIColor.black
-             segmentedViewController.selectedSegmentViewColor = UIColor.black
-                           segmentedViewController.selectedSegmentViewHeight = 3
-                           segmentedViewController.segmentViewHeight = 40
-                       segmentedViewController.headerViewHeight =  95
+            segmentedViewController.selectedSegmentViewHeight = 3
+            segmentedViewController.segmentViewHeight = 40
+            segmentedViewController.headerViewHeight =  95
             
             addChild(segmentedViewController)
             container.addSubview(segmentedViewController.view)
             segmentedViewController.view.frame = container.bounds
             segmentedViewController.didMove(toParent: self)
-          //  container.bounds = view.frame.insetBy(dx: 10.0, dy: 10.0)
-        
+            //  container.bounds = view.frame.insetBy(dx: 10.0, dy: 10.0)
+            
         }
         // Do any additional setup after loading the view.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

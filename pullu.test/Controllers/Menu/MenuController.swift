@@ -205,15 +205,23 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
                     let uID = self.defaults.string(forKey: "uID")!
                     Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
                     
-                    self.navigationController?.popToRootViewController(animated: false)
+                    /*self.navigationController?.popToRootViewController(animated: false)
                     self.dismiss(animated: false) {
                         self.defaults.set(nil, forKey: "userToken")
                         self.defaults.set(nil, forKey: "requestToken")
                         self.defaults.set(nil, forKey: "uData")
+                    }*/
+           self.dismiss(animated: false){
+            self.defaults.set(nil, forKey: "userToken")
+                                   self.defaults.set(nil, forKey: "requestToken")
+                                   self.defaults.set(nil, forKey: "uData")
+//                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+//
+//                    })
                     }
                 }
                 catch{
-                    
+                   print("error")
                     
                 }
                 /*self.dismiss(animated: false){
