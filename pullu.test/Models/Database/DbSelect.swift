@@ -603,7 +603,7 @@ public class DbSelect {
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         
-        let Parameters = ["userToken": userToken!,"requestToken":requestToken!] as [String : Any]
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
         //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
         
         

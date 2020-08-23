@@ -131,7 +131,7 @@ class PreviewController: UIViewController {
             //  print("JSON String : " + jsonString!)
             
             //            insert.addAdvertisement(jsonBody: jsonString!)
-            insert.addAdvertisement(newAdvertisement: newAdvertisement,progressView: loadingAlert!)
+            insert.AddAdvertisement(newAdvertisement: newAdvertisement,progressView: loadingAlert!)
             {
                 (status)
                 
@@ -139,7 +139,7 @@ class PreviewController: UIViewController {
                 self.loadingAlert!.hide(animated: true)
                 switch (status.response){
                     
-                case 0:
+                case 1:
                     let alert = UIAlertController(title: "Uğurludur", message: "Bizi seçdiyiniz üçün təşəkkür edirik. Sizin reklamınız təsdiqləndikdən sonra yayımlanacaq. Daha sonra arxivim bölməsindən əlavə etdiyiniz reklamlarınıza baxa bilərsiniz.", preferredStyle: UIAlertController.Style.alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                         UIAlertAction in
@@ -149,9 +149,13 @@ class PreviewController: UIViewController {
                     }
                     alert.addAction(okAction)
                     self.present(alert, animated: true, completion: nil)
-                case 4:
+                case 3:
                     let alert = UIAlertController(title: "Bildiriş", message: "Balansınızda kifayət qədər vəsait yoxdur, lütfən balansınızı 'Maliyyə' bölməsinə keçid edərək artırın", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    case 5:
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən daxil olun", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 default:
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin.", preferredStyle: UIAlertController.Style.alert)

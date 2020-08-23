@@ -123,22 +123,22 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                     
                     
                     
-              
-                        self.fileChooser(assets: filesAsset)
-                        {
-                            (completed)
-                            in
-                            if completed == true
-                            {
-                                
-//                                self.hideActivityIndicator()
-                                // self.dismiss(animated: true)
-                                
-                                self.performSegue(withIdentifier: "auditorySegue", sender: true)
-                            }
-                        }
-                        
-                   
+                    
+//                    self.fileChooser(assets: filesAsset)
+//                    {
+//                        (completed)
+//                        in
+//                        if completed == true
+//                        {
+                            
+                            //                                self.hideActivityIndicator()
+                            // self.dismiss(animated: true)
+                            
+                            self.performSegue(withIdentifier: "auditorySegue", sender: true)
+//                        }
+//                    }
+                    
+                    
                     
                 }
                 else {
@@ -170,8 +170,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                             
                             self.hideActivityIndicator()
                             // self.dismiss(animated: true)
-                                DispatchQueue.main.async {
-                            self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: "auditorySegue", sender: true)
                             }
                         }
                     }
@@ -235,10 +235,10 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
-      var loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        var loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert.mode = MBProgressHUDMode.indeterminate
-                   loadingAlert.label.text="Media hazırlanır"
-                   loadingAlert.detailsLabel.text = "Gözləyin..."
+        loadingAlert.label.text="Media hazırlanır"
+        loadingAlert.detailsLabel.text = "Gözləyin..."
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
         
@@ -267,6 +267,12 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         
                         originalImage += 1
                 }
+                DispatchQueue.main.async {
+                    loadingAlert.hide(animated: true)
+                }
+                
+                completionBlock(true)
+                break
                 
             case 3:
                 //                PHCachingImageManager().requestAVAsset(forVideo: assets[0], options: nil) { (assets, audioMix, info) in
@@ -286,7 +292,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                 ////                                      }
                 ////                                  }
                 //                              }
-               // PHCachingImageManager() <- old wrong algorithm
+                // PHCachingImageManager() <- old wrong algorithm
                 
                 PHImageManager.default().requestAVAsset(forVideo: file, options: nil, resultHandler: { (avasset, audio, info) in
                     if let avassetURL = avasset as? AVURLAsset {
@@ -327,10 +333,8 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                         self.newAdvertisement.videoPathExtension =  orginalVideo.pathExtension
                                         self.newAPreview.videoUrl = orginalVideo
                                         print("File size AFTER compression: \(Double(compressedData.count / 1048576)) mb")
-                                            DispatchQueue.main.async {
-                                                loadingAlert.hide(animated: true)
-                                        }
-                                         completionBlock(true)
+                                        
+                                        completionBlock(true)
                                     }
                                     catch{
                                         print(error)
@@ -374,7 +378,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             if a == assets.count
             {
-               
+                
                 
             }
             a+=1
@@ -382,7 +386,6 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             
         }
-        
         
         
     }

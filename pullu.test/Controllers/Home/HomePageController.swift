@@ -78,7 +78,7 @@ class HomePageController: UIViewController{
                 let myShareController = storyboard
                     .instantiateViewController(withIdentifier: "notPaid")
                 myShareController.title = "Pulsuz"
-                
+            
                 let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                         segmentControllers: [myViewController,
                                                                             myShareController])

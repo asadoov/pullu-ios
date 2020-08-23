@@ -47,45 +47,69 @@ class MyViewsController: UIViewController {
                 
                 (obj) in
                 
-                
-                
-                
-                for advert in obj.data {
+                switch obj.status{
                     
-                    //if (advert.isPaid==type) {
-                    let item = advert
-            
-                        
-                         self.advertArray.append(item)
-                       
-                    
-                    
-//                    DispatchQueue.main.async {
-//
-//                        if self.isPaidSegment.selectedSegmentIndex == 0{
-//                            self.advertArray = self.isPaid
-//                            typeCount=self.isPaid.count
-//                        }else {
-//                            self.advertArray = self.isNotPaid
-//                            typeCount=self.isNotPaid.count
-//                        }
-//
-//
-//
-//                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-//                        self.ReklamList.reloadData()
-//
-//                        self.myRefreshControl.endRefreshing()
-//
-//                        self.loadingAlert!.hide(animated: true)
-//
-//                        //
-//
-//                    }
-//
+                case 1:
+                     for advert in obj.data {
+                                        
+                                        //if (advert.isPaid==type) {
+                                        let item = advert
+                                
+                                            
+                                             self.advertArray.append(item)
+                                           
+                                        
+                                        
+                    //                    DispatchQueue.main.async {
+                    //
+                    //                        if self.isPaidSegment.selectedSegmentIndex == 0{
+                    //                            self.advertArray = self.isPaid
+                    //                            typeCount=self.isPaid.count
+                    //                        }else {
+                    //                            self.advertArray = self.isNotPaid
+                    //                            typeCount=self.isNotPaid.count
+                    //                        }
+                    //
+                    //
+                    //
+                    //                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                    //                        self.ReklamList.reloadData()
+                    //
+                    //                        self.myRefreshControl.endRefreshing()
+                    //
+                    //                        self.loadingAlert!.hide(animated: true)
+                    //
+                    //                        //
+                    //
+                    //                    }
+                    //
+                                        
+                                        
+                                    }
+                    break
+                 case 2:
+                                  let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                                         
+                                                                                                         alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                                             //logout
+                                                                                                         }))
+                                                     self.present(alert, animated: true, completion: nil)
+                                  break
+                                  default:
+                                  let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                                                                                                         
+                                                                                                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                                                             //logout
+                                                                                                         }))
+                                                     self.present(alert, animated: true, completion: nil)
+                                  break
+                                  
+                                  
                     
                     
                 }
+                
+               
                 
                  self.loadingAlert!.hide(animated: true)
                 self.aTableView.reloadData()
