@@ -34,7 +34,7 @@ class NotPaidController: UITableViewController {
         let defaults = UserDefaults.standard
         userToken = defaults.string(forKey: "userToken")
         requestToken = defaults.string(forKey: "requestToken")
-        refresh()
+       // refresh()
     }
     
     // MARK: - Table view data source
