@@ -230,7 +230,11 @@ class NotPaidController: UITableViewController {
                     let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                                                                         
                                                                         alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                            //logout
+                                                                       self.defaults.set(nil, forKey: "userToken")
+                                                                            self.defaults.set(nil, forKey: "requestToken")
+                                                                            self.defaults.set(nil, forKey: "uData")
+                                                                            let menu:MenuController = MenuController()
+                                                                            menu.updateRootVC(status: false)
                                                                         }))
                     self.present(alert, animated: true, completion: nil)
                     break
@@ -358,7 +362,11 @@ class NotPaidController: UITableViewController {
                 let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                                                                                        
                                                                                        alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                           //logout
+                                                                                           self.defaults.set(nil, forKey: "userToken")
+                                                                                           self.defaults.set(nil, forKey: "requestToken")
+                                                                                           self.defaults.set(nil, forKey: "uData")
+                                                                                           let menu:MenuController = MenuController()
+                                                                                           menu.updateRootVC(status: false) 
                                                                                        }))
                                    self.present(alert, animated: true, completion: nil)
                 break

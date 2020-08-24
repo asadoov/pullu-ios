@@ -172,10 +172,11 @@ class ReklamCellTableViewCell: UITableViewCell {
                      let asset = AVAsset(url: sourceURL!)
                      let imageGenerator = AVAssetImageGenerator(asset: asset)
                      let time = CMTimeMake(value: 1, timescale: 60)
-                     let imageRef = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
-                     let thumbnail = UIImage(cgImage:imageRef)
+                     let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil)
+                    let thumbnail = UIImage(cgImage:((imageRef ?? UIImage(named: "damaged")!.cgImage)!))
                     
                          DispatchQueue.main.async {
+                           
                          self.aImage.image=thumbnail
                          }
                          

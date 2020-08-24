@@ -39,6 +39,13 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     var newUser: NewUser = NewUser()
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = -200
+               }
+               NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+                   self.view.frame.origin.y = 0.0
+               }
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         picker.delegate = self
         picker.dataSource = self

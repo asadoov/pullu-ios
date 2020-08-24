@@ -155,7 +155,13 @@ class PreviewController: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                     case 5:
                     let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən daxil olun", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                      self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                        let menu:MenuController = MenuController()
+                        menu.updateRootVC(status: false) 
+                    }))
                     self.present(alert, animated: true, completion: nil)
                 default:
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin.", preferredStyle: UIAlertController.Style.alert)

@@ -27,7 +27,23 @@ class MenuController: UIViewController {
     var select:DbSelect=DbSelect()
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
-    
+    func updateRootVC(status : Bool)
+         {
+             let rootVC : Any
+             
+             if (status)
+             {
+                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Tab") as! UITabBarController
+             }
+             else
+             {
+                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+             }
+             
+             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+             appDelegate.window?.rootViewController = rootVC as? UIViewController
+             
+         }
     override func viewDidLoad() {
         super.viewDidLoad()
         userImage.layer.masksToBounds = true
@@ -211,14 +227,19 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
                         self.defaults.set(nil, forKey: "requestToken")
                         self.defaults.set(nil, forKey: "uData")
                     }*/
-           self.dismiss(animated: false){
+           /*self.dismiss(animated: false){
             self.defaults.set(nil, forKey: "userToken")
                                    self.defaults.set(nil, forKey: "requestToken")
                                    self.defaults.set(nil, forKey: "uData")
 //                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
 //
 //                    })
-                    }
+                    }*/
+                    self.defaults.set(nil, forKey: "userToken")
+                    self.defaults.set(nil, forKey: "requestToken")
+                    self.defaults.set(nil, forKey: "uData")
+                    self.updateRootVC(status: false)
+                    
                 }
                 catch{
                    print("error")

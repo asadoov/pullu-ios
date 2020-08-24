@@ -16,7 +16,7 @@ class MyViewsController: UIViewController {
     var  userToken:String?
     var  requestToken:String?
     var select:DbSelect=DbSelect()
-  
+    let defaults = UserDefaults.standard
     @IBOutlet weak var aTableView: UITableView!
     
     override func viewDidLoad() {
@@ -41,8 +41,8 @@ class MyViewsController: UIViewController {
         
         
         if userToken != nil&&requestToken != nil{
-          //  var typeCount=0
-           
+            //  var typeCount=0
+            
             select.GetMyViews(){
                 
                 (obj) in
@@ -50,68 +50,71 @@ class MyViewsController: UIViewController {
                 switch obj.status{
                     
                 case 1:
-                     for advert in obj.data {
-                                        
-                                        //if (advert.isPaid==type) {
-                                        let item = advert
-                                
-                                            
-                                             self.advertArray.append(item)
-                                           
-                                        
-                                        
-                    //                    DispatchQueue.main.async {
-                    //
-                    //                        if self.isPaidSegment.selectedSegmentIndex == 0{
-                    //                            self.advertArray = self.isPaid
-                    //                            typeCount=self.isPaid.count
-                    //                        }else {
-                    //                            self.advertArray = self.isNotPaid
-                    //                            typeCount=self.isNotPaid.count
-                    //                        }
-                    //
-                    //
-                    //
-                    //                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                    //                        self.ReklamList.reloadData()
-                    //
-                    //                        self.myRefreshControl.endRefreshing()
-                    //
-                    //                        self.loadingAlert!.hide(animated: true)
-                    //
-                    //                        //
-                    //
-                    //                    }
-                    //
-                                        
-                                        
-                                    }
+                    for advert in obj.data {
+                        
+                        //if (advert.isPaid==type) {
+                        let item = advert
+                        
+                        
+                        self.advertArray.append(item)
+                        
+                        
+                        
+                        //                    DispatchQueue.main.async {
+                        //
+                        //                        if self.isPaidSegment.selectedSegmentIndex == 0{
+                        //                            self.advertArray = self.isPaid
+                        //                            typeCount=self.isPaid.count
+                        //                        }else {
+                        //                            self.advertArray = self.isNotPaid
+                        //                            typeCount=self.isNotPaid.count
+                        //                        }
+                        //
+                        //
+                        //
+                        //                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                        //                        self.ReklamList.reloadData()
+                        //
+                        //                        self.myRefreshControl.endRefreshing()
+                        //
+                        //                        self.loadingAlert!.hide(animated: true)
+                        //
+                        //                        //
+                        //
+                        //                    }
+                        //
+                        
+                        
+                    }
                     break
-                 case 2:
-                                  let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
-                                                                                                         
-                                                                                                         alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                                             //logout
-                                                                                                         }))
-                                                     self.present(alert, animated: true, completion: nil)
-                                  break
-                                  default:
-                                  let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
-                                                                                                         
-                                                                                                         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                                             //logout
-                                                                                                         }))
-                                                     self.present(alert, animated: true, completion: nil)
-                                  break
-                                  
-                                  
+                case 2:
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                        let menu:MenuController = MenuController()
+                        menu.updateRootVC(status: false)                                                                                                         }))
+                    self.present(alert, animated: true, completion: nil)
+                    break
+                default:
+                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        //logout
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    break
+                    
+                    
                     
                     
                 }
                 
-               
                 
-                 self.loadingAlert!.hide(animated: true)
+                
+                self.loadingAlert!.hide(animated: true)
                 self.aTableView.reloadData()
                 
                 
@@ -128,58 +131,58 @@ class MyViewsController: UIViewController {
         if(segue.identifier == "photoReklamPage"){
             let displayVC = segue.destination as! AboutAdvertController
             displayVC.advertID = advertID
-             displayVC.fromArchieve = true
+            displayVC.fromArchieve = true
         }
         if(segue.identifier == "textReklamPage"){
             let displayVC = segue.destination as! TextReklamController
             displayVC.advertID = advertID
-             displayVC.fromArchieve = true
+            displayVC.fromArchieve = true
         }
         if(segue.identifier == "videoReklamPage"){
             let displayVC = segue.destination as! VideoReklamController
             displayVC.advertID = advertID
             displayVC.fromArchieve = true
         }
-//        if(segue.identifier == "aCatSegue"){
-//            let displayVC = segue.destination as! CategoryViewController
-//            displayVC.object = catObject
-//        }
-
+        //        if(segue.identifier == "aCatSegue"){
+        //            let displayVC = segue.destination as! CategoryViewController
+        //            displayVC.object = catObject
+        //        }
+        
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
     
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 extension MyViewsController:UITableViewDelegate,UITableViewDataSource
 {
     
     
-//    
-//    func updateSearchResults(for searchController: UISearchController) {
-//        //searchbara her defe nese yazanda bu functionu edir
-//        //menlik bir qullugun tapshirigin?))
-//        //ishledemmedin?
-//        //be bu niye itmir??
-//        //kele sarimisane deyesen))
-//        print("blablabla")
-//    }
+    //
+    //    func updateSearchResults(for searchController: UISearchController) {
+    //        //searchbara her defe nese yazanda bu functionu edir
+    //        //menlik bir qullugun tapshirigin?))
+    //        //ishledemmedin?
+    //        //be bu niye itmir??
+    //        //kele sarimisane deyesen))
+    //        print("blablabla")
+    //    }
     
     
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        
         advertID=advertArray[indexPath.row].id!
         //print(advertID!)
         if advertArray[indexPath.row].aTypeId==2{
@@ -192,11 +195,11 @@ extension MyViewsController:UITableViewDelegate,UITableViewDataSource
         }
         if advertArray[indexPath.row].aTypeId==3{
             self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-
+            
         }
         //print(cell.object?.name)
         //cell.delegate = self
-     
+        
         
     }
     

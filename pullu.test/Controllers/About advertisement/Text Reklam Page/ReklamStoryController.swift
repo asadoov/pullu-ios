@@ -11,7 +11,8 @@ import UIKit
 class ReklamStoryController: UIViewController {
     let insert:DbInsert=DbInsert()
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var advertDescriptionLabel: UILabel!
+ 
+    @IBOutlet weak var aDescription: UITextView!
     var advertID:Int?
     var usertoken:String?
     var requesttoken:String?
@@ -20,7 +21,7 @@ class ReklamStoryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          self.defaults.set(nil, forKey: "aID")
-        advertDescriptionLabel.text=advertDescription
+        aDescription.text=advertDescription
         var time=0
        // print("advID\(advertID!) mail\(mail!) pass \(pass!)")
         // Do any additional setup after loading the view.
