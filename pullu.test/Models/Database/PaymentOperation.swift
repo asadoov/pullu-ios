@@ -14,7 +14,7 @@ public class PaymentOperation {
     func GetWithdrawServices(completionBlock: @escaping (_ result:ResponseStruct<WithdrawService>) ->()){
                 
                          //let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/otp"
-                         let PULLULINK = "http://pullu.az:81/api/payment/get/withdraw/services"
+                         let PULLULINK = "https://pullu.az/api/payment/get/withdraw/services"
                         request(PULLULINK ,method: .get, encoding: URLEncoding(destination: .queryString)).responseJSON
                             {
                                 (response)

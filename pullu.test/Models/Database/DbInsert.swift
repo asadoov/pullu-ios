@@ -47,8 +47,8 @@ class DbInsert {
      //   let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
         
         
-        // let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/signUp"
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/signUp"
+        // let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
         //        let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"interestIds":newUserData.interestIds!] as [String : Any]
         
         
@@ -114,7 +114,7 @@ class DbInsert {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/earnMoney"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/earnMoney"
         let Parameters = ["advertID": advertID!,"userToken":userToken ?? "", "requestToken":requestToken ?? ""] as [String : Any]
         
         
@@ -157,7 +157,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/send/mail"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/send/mail"
         let Parameters = ["mail": mail] as [String : Any]
         
         
@@ -191,7 +191,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/send/sms"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/send/sms"
         let Parameters = ["phone": phone] as [String : Any]
         
         
@@ -226,7 +226,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/verify/sms/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/verify/sms/otp"
         let Parameters = ["phone": phone,"otp": otp] as [String : Any]
         
         
@@ -258,7 +258,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/verify/mail/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/verify/mail/otp"
         let Parameters = ["mail": mail,"otp": otp] as [String : Any]
         
         
@@ -291,7 +291,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/bySMS/set"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/bySMS/set"
         let Parameters = ["newpass":newpass, "phone": phone,"otp": otp] as [String : Any]
         
         
@@ -325,7 +325,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/password/reset/byMail/set"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/byMail/set"
         let Parameters = ["newpass":newpass, "mail": mail,"otp": otp] as [String : Any]
         
         
@@ -390,7 +390,7 @@ class DbInsert {
         let requestToken = defaults.string(forKey: "requestToken")
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/advertisements/add"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
         
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
@@ -532,7 +532,7 @@ class DbInsert {
         catch {
         }
         if jsonString != "" {
-            let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/update/profile"
+            let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/profile"
             
             //let json = "{\"What\":\"Ever\"}"
             
@@ -619,7 +619,7 @@ class DbInsert {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/update/phone"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/phone"
         let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","newPhone": newPhone] as [String : Any]
         
         
@@ -657,7 +657,7 @@ class DbInsert {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/newPhone"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/newPhone"
         let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","phone": newPhone,"otp":otp] as [String : Any]
         
         
@@ -694,7 +694,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/update/ad"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/ad"
         let Parameters = ["userToken": userToken ?? "","requesttoken": requestToken ?? "","aID": aID,"aName":aName,"aDescription":aDescription,"aPrice":aPrice] as [String : Any]
         
         
@@ -730,7 +730,7 @@ class DbInsert {
         let requestToken = defaults.string(forKey: "requestToken")
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/delete/ad"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/delete/ad"
         let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","aID": aID] as [String : Any]
         
         
@@ -767,7 +767,7 @@ class DbInsert {
         let requestToken = defaults.string(forKey: "requestToken")
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/update/pass"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/pass"
         let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","newPass": newPass] as [String : Any]
         
         
@@ -802,7 +802,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/send/sms"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/sms"
         let Parameters = ["phone":phone] as [String : Any]
         
         
@@ -836,7 +836,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "http://pullu.az:81/api/payment/withdraw"
+        let PULLULINK = "https://pullu.az/api/payment/withdraw"
         let Parameters = ["mobile":mobile!,"pass":pass!,"account":account!,"serviceID":serviceID!,"amount":amount!] as [String : Any]
         
         

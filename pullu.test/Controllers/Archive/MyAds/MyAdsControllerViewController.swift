@@ -26,11 +26,13 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
     var  requesttoken:String?
     var select:DbSelect=DbSelect()
    let defaults = UserDefaults.standard
+     private let myRefreshControl = UIRefreshControl()
     @IBOutlet weak var aTableView: UITableView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+              aTableView.addSubview(myRefreshControl)
         // Do any additional setup after loading the view.
        
         
@@ -50,7 +52,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
        
         
         
-        if usertoken != nil&&requesttoken != nil{
+         self.myRefreshControl.beginRefreshing()
           //  var typeCount=0
             advertArray.removeAll()
             select.GetMyAds(){
@@ -124,18 +126,19 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
                 
                
                 
-                 self.loadingAlert!.hide(animated: true)
+                 //self.loadingAlert!.hide(animated: true)
+                self.myRefreshControl.endRefreshing()
                 self.aTableView.reloadData()
                 
                 
             }
-        }
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
                 
      
-              refresh()
+             // refresh()
         
         
         

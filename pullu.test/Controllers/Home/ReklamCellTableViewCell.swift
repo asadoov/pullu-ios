@@ -62,19 +62,19 @@ class ReklamCellTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         
-        aImage.image=UIImage(named: "background")
+        aImage?.image=UIImage(named: "background")
         
         loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.color = UIColor.lightGray
         // loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating()
-        aImage.addSubview(loadingIndicator)
+        aImage?.addSubview(loadingIndicator)
     }
     func reloadData() {
         if object != nil {
-            aImage.layer.borderWidth = 1
-            aImage.layer.borderColor = UIColor.gray.cgColor
+            aImage?.layer.borderWidth = 1
+            aImage?.layer.borderColor = UIColor.gray.cgColor
             
             aView?.layer.borderWidth = 1
             aView?.layer.borderColor = UIColor.gray.cgColor
@@ -88,7 +88,7 @@ class ReklamCellTableViewCell: UITableViewCell {
             var dt = dateFormatter.date(from: object!.cDate!)
             //  dateFormatter.dateFormat = "EEEE, dd MMMM"
             dateFormatter.dateFormat = "dd.MM.yyyy"
-            aTitle.text=object?.name
+            aTitle?.text=object?.name
             // aInfo.text=object?.description
             // if aType != nil { aType.text=object?.aTypeName}
             if aTypeImage != nil {
@@ -139,11 +139,11 @@ class ReklamCellTableViewCell: UITableViewCell {
             if object!.price! == "Razılaşma yolu ilə" {
                 
                 // aPrice.text="\(object!.price!)"
-                aPrice.text=" Razılaşma "
+                aPrice?.text=" Razılaşma "
             }
             else  {
                 
-                aPrice.text="\(object!.price!) AZN "
+                aPrice?.text="\(object!.price!) AZN "
             }
             //aDate.text=dateFormatter.string(from:dt!)
             //
@@ -153,7 +153,7 @@ class ReklamCellTableViewCell: UITableViewCell {
             {
                 if object?.photo != nil {
                     
-                    self.aImage.image=UIImage(data: object!.photo!)
+                    self.aImage?.image=UIImage(data: object!.photo!)
                     
                 }
                 else {

@@ -13,15 +13,15 @@ class MyViewers: UITableViewController {
     var viewerList:Array<ViewerStruct> =  Array<ViewerStruct>()
     var select:DbSelect = DbSelect()
     @IBOutlet var viewersTable: UITableView!
-    var phone:Int?
-    var pass:String?
+    
     var aID:Int?
+     private let myRefreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewersTable.dataSource = self
         viewersTable.delegate = self
-        phone = defaults.integer(forKey: "phone")
-        pass = defaults.string(forKey: "pass")
+        myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+                     viewersTable.addSubview(myRefreshControl)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,49 +30,54 @@ class MyViewers: UITableViewController {
         //self.navigationItem.hidesBackButton = true
 //        let newBackButton = UIBarButtonItem(title: "Geri", style: UIBarButtonItem.Style.plain, target: self, action: #selector(InterestsController.back(sender:)))
                //self.navigationItem.leftBarButtonItem = newBackButton
-        select.MyAdViewers(aID: aID!)
-            {
-                (obj)
-                in
-                switch (obj.status)
-                {
-                case 1:
-                    for item in obj.data{
-                                       self.viewerList.append(item)
-                                       DispatchQueue.main.async {
-                                           self.viewersTable.reloadData();
-                                       }
-                                   }
-                    break
-                case 2:
-                
-                                               let alert = UIAlertController(title: "Bildiriş", message: "Reklama hələki heç kəs baxmayıb", preferredStyle: UIAlertController.Style.alert)
-                                               alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                                               self.present(alert, animated: true, completion: nil)
-                                           
-                    break
-                case  3:
-             
-                                                                  let alert = UIAlertController(title: "Bildiriş", message: "Sizin bu reklamın statistikasına baxmağa icazəniz yoxdur", preferredStyle: UIAlertController.Style.alert)
-                                                                  alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                                                                  self.present(alert, animated: true, completion: nil)
-                    break
-                    
-                    case  4:
-                                       self.dismiss(animated: false)
-                                       break
-               
-                 default:
-                    let alert = UIAlertController(title: "Xəta", message: "Xidmət səviyyəsinin yüksəldilməsi məqsədi ilə bizimlə bu xəta barədə bölüşməyiniz xahiş olunur", preferredStyle: UIAlertController.Style.alert)
-                                   alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                                   self.present(alert, animated: true, completion: nil)
-                    break
-                }
-               
-        }
+       refresh()
     }
     
-  
+      @objc func refresh() {
+        myRefreshControl.beginRefreshing()
+        select.MyAdViewers(aID: aID!)
+                   {
+                       (obj)
+                       in
+                    self.myRefreshControl.endRefreshing()
+                       switch (obj.status)
+                       {
+                       case 1:
+                           for item in obj.data{
+                                              self.viewerList.append(item)
+                                              DispatchQueue.main.async {
+                                                  self.viewersTable.reloadData();
+                                              }
+                                          }
+                           break
+                       case 2:
+                       
+                                                      let alert = UIAlertController(title: "Bildiriş", message: "Reklama hələki heç kəs baxmayıb", preferredStyle: UIAlertController.Style.alert)
+                                                      alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                                      self.present(alert, animated: true, completion: nil)
+                                                  
+                           break
+                       case  3:
+                    
+                                                                         let alert = UIAlertController(title: "Bildiriş", message: "Sizin bu reklamın statistikasına baxmağa icazəniz yoxdur", preferredStyle: UIAlertController.Style.alert)
+                                                                         alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                                                         self.present(alert, animated: true, completion: nil)
+                           break
+                           
+                           case  4:
+                                              self.dismiss(animated: false)
+                                              break
+                      
+                        default:
+                           let alert = UIAlertController(title: "Xəta", message: "Xidmət səviyyəsinin yüksəldilməsi məqsədi ilə bizimlə bu xəta barədə bölüşməyiniz xahiş olunur", preferredStyle: UIAlertController.Style.alert)
+                                          alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                                          self.present(alert, animated: true, completion: nil)
+                           break
+                       }
+                    
+                      
+               }
+    }
     
     // MARK: - Table view data source
 

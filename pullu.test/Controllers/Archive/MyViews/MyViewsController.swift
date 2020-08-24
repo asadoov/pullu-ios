@@ -17,11 +17,13 @@ class MyViewsController: UIViewController {
     var  requestToken:String?
     var select:DbSelect=DbSelect()
     let defaults = UserDefaults.standard
+     private let myRefreshControl = UIRefreshControl()
     @IBOutlet weak var aTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        aTableView.addSubview(myRefreshControl)
         // Do any additional setup after loading the view.
         let defaults = UserDefaults.standard
         
@@ -35,12 +37,12 @@ class MyViewsController: UIViewController {
     
     @objc func refresh() {
         
-        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+//        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+//        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+//
+         self.myRefreshControl.beginRefreshing()
         
-        
-        
-        if userToken != nil&&requestToken != nil{
+     
             //  var typeCount=0
             
             select.GetMyViews(){
@@ -114,12 +116,13 @@ class MyViewsController: UIViewController {
                 
                 
                 
-                self.loadingAlert!.hide(animated: true)
+               // self.loadingAlert!.hide(animated: true)
+                self.myRefreshControl.endRefreshing()
                 self.aTableView.reloadData()
                 
                 
             }
-        }
+        
         
     }
     

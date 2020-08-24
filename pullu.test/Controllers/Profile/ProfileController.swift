@@ -8,7 +8,7 @@
 
 import UIKit
 import MBProgressHUD
-//Cavidan Mirzə
+import Alamofire
 
 class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var insert:DbInsert = DbInsert()
@@ -26,6 +26,10 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     var infoChanged=false
     var txt:UITextField?
+    
+    @IBOutlet weak var userImage: UIImageView!
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -103,9 +107,20 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     var  usertoken:String?
     var  requesttoken:String?
+     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userImage.layer.masksToBounds = true
+              userImage!.layer.borderColor = UIColor.white.cgColor
+              userImage!.layer.borderWidth = 1.5
+              userImage.layer.cornerRadius = userImage.bounds.width / 2
+              
+              loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
+              loadingIndicator.hidesWhenStopped = true
+              loadingIndicator.color = UIColor.lightGray
+              // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+              loadingIndicator.startAnimating()
+              userImage.addSubview(loadingIndicator)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
@@ -136,7 +151,34 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     self.mobileNumField.setTitle(obj.data[0].phone, for: .normal)
                     self.genderButton.setTitle(obj.data[0].gender, for: .normal)
                     self.professionButton.setTitle(obj.data[0].profession, for: .normal)
-                    
+                    Alamofire.request(obj.data[0].photoURL!).responseImage { response in
+                                   if let catPicture = response.result.value {
+                                       //advert.photo=catPicture.pngData()
+                                       
+                                       //  item.photo = UIImage(named: "damaged")?.pngData()
+                                       
+                                       
+                                       if catPicture != nil {
+                                           
+                                           self.userImage.image=catPicture
+                                           self.loadingIndicator.stopAnimating()
+                                           
+                                       }
+                                       else {
+                                           self.userImage.image=UIImage(named: "damaged")
+                                           
+                                       }
+                                       
+                                       
+                                       
+                                       
+                                       
+                                       
+                                   }
+                                   
+                                   
+                                   
+                               }
                     //                self.countryButton.setTitle(list[0].country, for: .normal)
                     self.cityButton.setTitle(obj.data[0].city, for: .normal)
                     

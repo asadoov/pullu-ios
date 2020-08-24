@@ -32,7 +32,7 @@ public class DbSelect {
     func SignIn(phone:Int64,pass:String,completionBlock: @escaping (_ result:ResponseStruct<UserStruct>) ->()){
         
         // let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
-        let PULLULINK="http://pullu.az:81/api/androidmobileapp/user/login"
+        let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
         let Parameters = ["phone": phone,"pass":pass] as [String : Any]
         //var obj:ResponseStruct<Advertisement> = ResponseStruct<Advertisement>(from: )
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
@@ -78,7 +78,7 @@ public class DbSelect {
         let usrtkn = defaults.string(forKey: "userToken")
         let reqTkn = defaults.string(forKey: "requestToken")
         //   let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/Ads"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
         
         let Parameters:[String:Any]
@@ -155,7 +155,7 @@ public class DbSelect {
     
     func GetCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/countries"
+        let url="https://pullu.az/api/androidmobileapp/get/countries"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -178,7 +178,7 @@ public class DbSelect {
     }
     func GetCities(countryId:Int?,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/Cities?countryid=" + String(countryId ?? 0)
+        let url="https://pullu.az/api/androidmobileapp/get/Cities?countryid=" + String(countryId ?? 0)
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -201,7 +201,7 @@ public class DbSelect {
     }
     func GetInterests(completionBlock: @escaping (_ result:Array<Interest>) ->()){
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/get/interests"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/get/interests"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -245,7 +245,7 @@ public class DbSelect {
     }
     func GetProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/professions"
+        let url="https://pullu.az/api/androidmobileapp/get/professions"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -268,7 +268,7 @@ public class DbSelect {
     }
     func GetAdvertById(advertID:Int?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/user/about?advertID=\(advertID!)"
+        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -293,7 +293,7 @@ public class DbSelect {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/statistics"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/statistics"
         let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
         request(PULLULINK ,method: .post, parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -329,7 +329,7 @@ public class DbSelect {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let url="http://pullu.az:81/api/androidmobileapp/user/get/profile"
+        let url="https://pullu.az/api/androidmobileapp/user/get/profile"
         let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
         request(url ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -384,7 +384,7 @@ public class DbSelect {
     }
     func AType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/atype"
+        let url="https://pullu.az/api/androidmobileapp/get/atype"
         
         GetJson(jsonUrlString: url){
             (json) in
@@ -408,7 +408,7 @@ public class DbSelect {
     }
     func ATariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/atariff"
+        let url="https://pullu.az/api/androidmobileapp/get/atariff"
         
         request(url ,method: .get,encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -452,7 +452,7 @@ public class DbSelect {
     }
     func GetAgeRange(completionBlock: @escaping (_ result:Array<AgeRangeStruct>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/age/range"
+        let url="https://pullu.az/api/androidmobileapp/get/age/range"
         
         GetJson(jsonUrlString: url){
             (json) in
@@ -477,7 +477,7 @@ public class DbSelect {
     
     func GetBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
         
-        let url="http://pullu.az:81/api/androidmobileapp/get/backgrounds"
+        let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
         
         GetJson(jsonUrlString: url){
             (json) in
@@ -504,7 +504,7 @@ public class DbSelect {
         
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/finance"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/finance"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -550,7 +550,7 @@ public class DbSelect {
     func GetMyViews(completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/views"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/views"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -598,7 +598,7 @@ public class DbSelect {
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/my/ads"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/my/ads"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -644,7 +644,7 @@ public class DbSelect {
     }
     func VerifyOtp(mobile:Int,otp:Int,completionBlock: @escaping (_ result:Status) ->()){
         
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/otp"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
@@ -689,8 +689,8 @@ public class DbSelect {
     func MyAdViewers(aID:Int,completionBlock: @escaping (_ result:ResponseStruct<ViewerStruct>) ->()){
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
-        //let PULLULINK = "http://pullu.az:81/api/androidmobileapp/accounts/verify/otp"
-        let PULLULINK = "http://pullu.az:81/api/androidmobileapp/user/get/my/ads/viewers"
+        //let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/my/ads/viewers"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
