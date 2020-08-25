@@ -18,7 +18,7 @@ class AboutAdvertController: UIViewController {
     var requestToken:String?
     var select:DbSelect=DbSelect()
     var userData = Array<UserStruct>()
-      var fromArchieve:Bool = false
+    var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
@@ -42,18 +42,18 @@ class AboutAdvertController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      earnMoney.isEnabled=false
-               self.earnMoney.isHidden=true
+        earnMoney.isEnabled=false
+        self.earnMoney.isHidden=true
         earnMoney.titleLabel!.text = "Yüklənir..."
-         self.defaults.set(nil, forKey: "aID")
-//        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-//
-//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-//        loadingIndicator.hidesWhenStopped = true
-//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-//        loadingIndicator.startAnimating();
-//        alert.view.addSubview(loadingIndicator)
-//        present(alert, animated: false, completion: nil)
+        self.defaults.set(nil, forKey: "aID")
+        //        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        //
+        //        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        //        loadingIndicator.hidesWhenStopped = true
+        //        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        //        loadingIndicator.startAnimating();
+        //        alert.view.addSubview(loadingIndicator)
+        //        present(alert, animated: false, completion: nil)
         
         //   navigationController?.navigationBar.isTranslucent = false
         
@@ -95,12 +95,8 @@ class AboutAdvertController: UIViewController {
             
             
             DispatchQueue.main.async {
-           
-              if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
-                            {
-                                  self.earnMoney.isHidden=false
-                              self.earnMoney.isEnabled=true
-                            }
+                
+                
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -116,22 +112,22 @@ class AboutAdvertController: UIViewController {
                 
                 //  self.tableView.reloadData()
                 let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-              
-                    self.slideshow.setImageInputs([
-                        
-                        ImageSource(image: UIImage(named: "background")!)
-                        
-                    ])
+                
+                self.slideshow.setImageInputs([
                     
+                    ImageSource(image: UIImage(named: "background")!)
                     
-                    loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
-                    loadingIndicator.hidesWhenStopped = true
-                    loadingIndicator.color = UIColor.lightGray
-                    // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-                    loadingIndicator.startAnimating();
-                    self.slideshow.addSubview(loadingIndicator)
-                    
-                    
+                ])
+                
+                
+                loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.color = UIColor.lightGray
+                // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                loadingIndicator.startAnimating();
+                self.slideshow.addSubview(loadingIndicator)
+                
+                
                 
                 
                 
@@ -158,23 +154,32 @@ class AboutAdvertController: UIViewController {
                             
                         }
                         
-                        if self.imageSource.count == list[0].photoUrl!.count
+                        if (self.imageSource.count == list[0].photoUrl!.count)
                         {
-                             // self.dismiss(animated: false)
-                            self.earnMoney.titleLabel!.text = "Reklamı izlə"
-                            self.earnMoney.isEnabled=true
+                            if self.imageSource.count>0{
+                                if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                                {
+                                    self.earnMoney.titleLabel!.text = "Reklamı izlə"
+                                    self.earnMoney.isHidden=false
+                                    self.earnMoney.isEnabled=true
+                                }
+                                
+                            }
                             
+                        }
+                        else {
+                            self.earnMoney.isHidden=true
                         }
                         
                     }
                     
                     
                 }
-                   
-                      
+                
+                
             }
             
-      
+            
         }
         
         

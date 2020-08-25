@@ -75,7 +75,7 @@ class EditAd: UIViewController, UITextViewDelegate {
                 in
                 self.loadingAlert!.hide(animated: true)
                 switch status.response{
-                case 0:
+                case 1:
                     let alert = UIAlertController(title: "Uğurludur", message: "Sizin reklamınız təsdiqləndikdən sonra yayımlanacaq. Daha sonra arxivim bölməsindən əlavə etdiyiniz reklamlarınıza baxa bilərsiniz.", preferredStyle: UIAlertController.Style.alert)
                     let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                         UIAlertAction in
@@ -118,7 +118,7 @@ class EditAd: UIViewController, UITextViewDelegate {
                 self.loadingAlert!.hide(animated: true)
                 self.loadingAlert!.hide(animated: true)
                 switch status.response{
-                case 0:
+                case 1:
                     let deletedAlert = UIAlertController(title: "Uğurludur", message: "Sizin reklamınız silindi.", preferredStyle: UIAlertController.Style.alert)
                     deletedAlert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
                         _ = self.navigationController?.popToRootViewController(animated: true)
