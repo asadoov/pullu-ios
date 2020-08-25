@@ -135,13 +135,16 @@ class AboutAdvertController: UIViewController {
                     
                     
                     Alamofire.request(i).responseImage { response in
+                        
+                         loadingIndicator.stopAnimating();
+                        
                         if let catPicture = response.result.value {
                             self.imageSource.append(ImageSource(image:  catPicture))
                             // imgs.append(catPicture)
                             print("Image downloaded\(catPicture)")
                             //advert.photo=catPicture.pngData()
                             DispatchQueue.main.async {
-                                loadingIndicator.stopAnimating();
+                               
                                 self.slideshow.setImageInputs(self.imageSource)
                             }
                             
@@ -152,6 +155,13 @@ class AboutAdvertController: UIViewController {
                             //self.dataArray[element].photo=catPicture.pngData()
                             //print(self.dataArray[dataArray.count-1].photo)
                             
+                        }
+                        else{
+                            self.imageSource.append(ImageSource(image: UIImage(named: "damaged")!))
+                            DispatchQueue.main.async {
+                               
+                                self.slideshow.setImageInputs(self.imageSource)
+                            }
                         }
                         
                         if (self.imageSource.count == list[0].photoUrl!.count)

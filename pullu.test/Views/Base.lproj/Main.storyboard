@@ -2255,11 +2255,8 @@ baxışı</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kpS-nw-nzA">
-                                <rect key="frame" x="16" y="44" width="288" height="32"/>
+                                <rect key="frame" x="16" y="50" width="288" height="32"/>
                                 <color key="backgroundColor" red="0.33178228139999999" green="0.41186356540000002" blue="0.49627208709999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="mDj-62-Fbu"/>
-                                </constraints>
                                 <segments>
                                     <segment title="Pulsuz"/>
                                     <segment title="Pullu"/>
@@ -2268,20 +2265,10 @@ baxışı</string>
                                     <action selector="isPaidChanged:" destination="zMa-4m-5V3" eventType="valueChanged" id="5J7-qw-SHH"/>
                                 </connections>
                             </segmentedControl>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4t-rA-Wwq">
-                                <rect key="frame" x="20" y="415" width="280" height="86"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="86" id="Y4s-u1-CsK"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="zMa-4m-5V3" id="AAK-WC-YRn"/>
-                                    <outlet property="delegate" destination="zMa-4m-5V3" id="NDe-WW-X2q"/>
-                                </connections>
-                            </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeM-D7-jWE">
-                                <rect key="frame" x="20" y="190" width="280" height="189"/>
+                                <rect key="frame" x="24" y="198" width="280" height="114"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="189" id="igv-yx-FTJ"/>
+                                    <constraint firstAttribute="height" constant="114" id="8uN-uQ-kLa"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="zMa-4m-5V3" id="Skx-gO-gD4"/>
@@ -2291,7 +2278,7 @@ baxışı</string>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Başlıq" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Me9-vY-nlK">
                                 <rect key="frame" x="16" y="128" width="288" height="34"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="z1g-r7-9oQ"/>
+                                    <constraint firstAttribute="height" constant="34" id="Ezi-MQ-w89"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -2299,25 +2286,25 @@ baxışı</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kateqoriya" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eN-iH-qdg">
                                 <rect key="frame" x="24" y="170" width="85" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="MUR-BZ-TI4"/>
+                                    <constraint firstAttribute="height" constant="20" id="2Y3-1c-tGg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Pulsuz reklam tipində video fayl əlavəsi mümkün deil" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iRQ-zF-mk5">
-                                <rect key="frame" x="17" y="83" width="286" height="37.5"/>
+                                <rect key="frame" x="17" y="89" width="286" height="37.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37.5" id="lNe-BD-ygD"/>
+                                    <constraint firstAttribute="height" constant="37.5" id="0Sf-NB-Ye8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Nunito-Italic" family="Nunito" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reklam tipi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCS-NK-TCV">
-                                <rect key="frame" x="17" y="387" width="88.5" height="20"/>
+                                <rect key="frame" x="16" y="320" width="88.5" height="23.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="WtO-y9-lPJ"/>
+                                    <constraint firstAttribute="height" constant="23.5" id="GiT-9g-kOV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Nunito-Bold" family="Nunito" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -2327,10 +2314,10 @@ baxışı</string>
                                 <rect key="frame" x="20" y="509" width="280" height="42"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="eEL-7e-HvX"/>
+                                    <constraint firstAttribute="height" constant="42" id="hft-Of-w5j"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
-                                <state key="normal" title="&gt; Davam et">
+                                <state key="normal" title="Davam et">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -2342,31 +2329,42 @@ baxışı</string>
                                     <action selector="nextBtnClick:" destination="zMa-4m-5V3" eventType="touchUpInside" id="dpV-tN-ohu"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k4t-rA-Wwq">
+                                <rect key="frame" x="20" y="351" width="280" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="e2I-nP-wmM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="zMa-4m-5V3" id="AAK-WC-YRn"/>
+                                    <outlet property="delegate" destination="zMa-4m-5V3" id="NDe-WW-X2q"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="iRQ-zF-mk5" secondAttribute="trailing" constant="17" id="2G3-H6-VOD"/>
-                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="Me9-vY-nlK" secondAttribute="trailing" constant="16" id="4pW-R5-Kz0"/>
-                            <constraint firstAttribute="bottom" secondItem="vYK-LJ-axm" secondAttribute="bottom" constant="17" id="7Ys-gm-XKh"/>
-                            <constraint firstItem="nCS-NK-TCV" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="17" id="81f-pc-nNs"/>
-                            <constraint firstItem="k4t-rA-Wwq" firstAttribute="top" secondItem="nCS-NK-TCV" secondAttribute="bottom" constant="8" id="Cs5-1M-lJf"/>
-                            <constraint firstItem="XeM-D7-jWE" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="20" id="ETg-Px-o0h"/>
-                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="XeM-D7-jWE" secondAttribute="trailing" constant="20" id="Iiu-dy-Wm8"/>
-                            <constraint firstItem="1eN-iH-qdg" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="24" id="KhJ-ZV-q3X"/>
-                            <constraint firstItem="nCS-NK-TCV" firstAttribute="top" secondItem="XeM-D7-jWE" secondAttribute="bottom" constant="8" id="OUO-rK-LfH"/>
-                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="kpS-nw-nzA" secondAttribute="trailing" constant="16" id="Rx1-mf-Coy"/>
-                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="k4t-rA-Wwq" secondAttribute="trailing" constant="20" id="TSO-75-GYW"/>
-                            <constraint firstItem="Me9-vY-nlK" firstAttribute="top" secondItem="iRQ-zF-mk5" secondAttribute="bottom" constant="7.5" id="YLk-wX-T0c"/>
-                            <constraint firstItem="XeM-D7-jWE" firstAttribute="top" secondItem="1eN-iH-qdg" secondAttribute="bottom" id="cC0-I9-eVi"/>
-                            <constraint firstItem="1eN-iH-qdg" firstAttribute="top" secondItem="Me9-vY-nlK" secondAttribute="bottom" constant="8" id="cKm-ag-NgB"/>
-                            <constraint firstItem="kpS-nw-nzA" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="16" id="daJ-bK-Ne4"/>
-                            <constraint firstItem="kpS-nw-nzA" firstAttribute="top" secondItem="FP4-E3-S7H" secondAttribute="top" id="eWK-1m-iJK"/>
-                            <constraint firstAttribute="trailing" secondItem="vYK-LJ-axm" secondAttribute="trailing" constant="20" id="fmf-Kk-5iW"/>
-                            <constraint firstItem="vYK-LJ-axm" firstAttribute="leading" secondItem="eWE-1x-yli" secondAttribute="leading" constant="20" id="gUE-he-NAZ"/>
-                            <constraint firstItem="k4t-rA-Wwq" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="20" id="mvu-Rb-vLT"/>
-                            <constraint firstItem="Me9-vY-nlK" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="16" id="snY-cJ-gMb"/>
-                            <constraint firstItem="iRQ-zF-mk5" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="17" id="vbB-dY-W85"/>
-                            <constraint firstItem="iRQ-zF-mk5" firstAttribute="top" secondItem="kpS-nw-nzA" secondAttribute="bottom" constant="8" id="yNy-BB-3Jf"/>
+                            <constraint firstItem="1eN-iH-qdg" firstAttribute="top" secondItem="Me9-vY-nlK" secondAttribute="bottom" constant="8" id="3f5-AI-zL1"/>
+                            <constraint firstItem="k4t-rA-Wwq" firstAttribute="top" secondItem="nCS-NK-TCV" secondAttribute="bottom" constant="7.5" id="3uR-HY-K40"/>
+                            <constraint firstItem="XeM-D7-jWE" firstAttribute="top" secondItem="1eN-iH-qdg" secondAttribute="bottom" constant="8" id="7Kz-Bp-A7S"/>
+                            <constraint firstItem="k4t-rA-Wwq" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="20" id="BDi-og-Z2g"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="iRQ-zF-mk5" secondAttribute="trailing" constant="17" id="EGb-UJ-Xbw"/>
+                            <constraint firstItem="Me9-vY-nlK" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="16" id="Eh3-Xw-Nqa"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="vYK-LJ-axm" secondAttribute="trailing" constant="20" id="FkA-pj-BFm"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="k4t-rA-Wwq" secondAttribute="trailing" constant="20" id="KIV-gw-boa"/>
+                            <constraint firstItem="kpS-nw-nzA" firstAttribute="top" secondItem="FP4-E3-S7H" secondAttribute="top" constant="6" id="KwD-ku-ghL"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="bottom" secondItem="vYK-LJ-axm" secondAttribute="bottom" constant="17" id="Mla-HD-h94"/>
+                            <constraint firstItem="iRQ-zF-mk5" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="17" id="QYC-bs-lLh"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="Me9-vY-nlK" secondAttribute="trailing" constant="16" id="SlK-OY-I65"/>
+                            <constraint firstItem="XeM-D7-jWE" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="24" id="TqK-bS-ICB"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="nCS-NK-TCV" secondAttribute="trailing" constant="215.5" id="aHD-TE-Mw2"/>
+                            <constraint firstItem="kpS-nw-nzA" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="16" id="aLU-E8-DTl"/>
+                            <constraint firstItem="nCS-NK-TCV" firstAttribute="top" secondItem="XeM-D7-jWE" secondAttribute="bottom" constant="8" id="aj4-MS-ZH7"/>
+                            <constraint firstItem="Me9-vY-nlK" firstAttribute="top" secondItem="iRQ-zF-mk5" secondAttribute="bottom" constant="1.5" id="bo6-aI-wpe"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="kpS-nw-nzA" secondAttribute="trailing" constant="16" id="cPJ-Bq-XQ5"/>
+                            <constraint firstItem="iRQ-zF-mk5" firstAttribute="top" secondItem="kpS-nw-nzA" secondAttribute="bottom" constant="8" id="hMM-hI-zMi"/>
+                            <constraint firstItem="nCS-NK-TCV" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="16" id="kOU-w2-VGt"/>
+                            <constraint firstItem="1eN-iH-qdg" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="24" id="l3s-dR-pAJ"/>
+                            <constraint firstItem="vYK-LJ-axm" firstAttribute="leading" secondItem="FP4-E3-S7H" secondAttribute="leading" constant="20" id="pDn-xo-erY"/>
+                            <constraint firstItem="FP4-E3-S7H" firstAttribute="trailing" secondItem="XeM-D7-jWE" secondAttribute="trailing" constant="16" id="yQC-gK-xJn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FP4-E3-S7H"/>
                     </view>
@@ -3945,7 +3943,7 @@ baxışı</string>
                                                         <fragment content="---">
                                                             <attributes>
                                                                 <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                <font key="NSFont" metaFont="message" size="11"/>
+                                                                <font key="NSFont" metaFont="label" size="11"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -4616,7 +4614,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Bildiriş" image="notification" id="vuM-ye-Pmy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="VHT-pD-3dO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -5187,7 +5185,7 @@ baxışı</string>
         <segue reference="Xxq-Xr-JLP"/>
         <segue reference="6GQ-4R-6LC"/>
         <segue reference="eR9-2K-a05"/>
-        <segue reference="6p7-oI-Juc"/>
+        <segue reference="eYI-wK-TXP"/>
         <segue reference="X1G-N5-9Gx"/>
         <segue reference="Hvc-gK-fsE"/>
     </inferredMetricsTieBreakers>

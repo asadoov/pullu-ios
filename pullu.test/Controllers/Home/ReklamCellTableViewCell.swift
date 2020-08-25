@@ -153,7 +153,7 @@ class ReklamCellTableViewCell: UITableViewCell {
             {
                 if object?.photo != nil {
                     
-                    self.aImage?.image=UIImage(data: object!.photo!)
+                    self.aImage?.image=UIImage(data:object!.photo!)
                     
                 }
                 else {

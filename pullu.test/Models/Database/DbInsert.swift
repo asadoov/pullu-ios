@@ -390,7 +390,7 @@ class DbInsert {
         let requestToken = defaults.string(forKey: "requestToken")
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
+        let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
