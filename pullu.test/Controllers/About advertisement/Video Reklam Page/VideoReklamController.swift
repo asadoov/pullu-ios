@@ -29,14 +29,14 @@ class VideoReklamController: UIViewController {
     @IBOutlet weak var advType: UILabel!
     @IBOutlet weak var balance: UILabel!
     @IBOutlet weak var advName: UILabel!
-     var fromArchieve:Bool = false
+    var fromArchieve:Bool = false
     @IBOutlet weak var sellerPhone: UITextView!
     var url:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         earnMoney.isEnabled=false
-          self.earnMoney.isHidden=true
+        self.earnMoney.isHidden=true
         earnMoney.titleLabel!.text = "Yüklənir..."
         self.defaults.set(nil, forKey: "aID")
         // Do any additional setup after loading the view.
@@ -64,12 +64,12 @@ class VideoReklamController: UIViewController {
             DispatchQueue.main.async {
                 self.earnMoney.isEnabled = true
                 
-                 if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
-                               {
-                                    self.earnMoney.isHidden=false
-                                                         self.earnMoney.isEnabled=true
-                                 
-                               }
+                if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                {
+                    self.earnMoney.isHidden=false
+                    self.earnMoney.isEnabled=true
+                    
+                }
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -82,21 +82,21 @@ class VideoReklamController: UIViewController {
                 self.advType.text=list[0].aTypeName
                 //self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
-               // let vc = AVPlayerViewController()
+                // let vc = AVPlayerViewController()
                 
                 self.url = list[0].photoUrl![0]
-               let videoURL = URL(string: self.url!)
-                                  self.player = AVPlayer(url: videoURL!)
-                      //                vc.player = self.player/
-                                      
-                                      
-                                    self.playerViewController = AVPlayerViewController()
-                                      self.playerViewController.player = self.player
-                                      self.playerViewController.view.frame = self.playerUIView.bounds
-                  self.playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                                      self.playerViewController.player?.pause()
-                                      self.playerUIView.addSubview(self.playerViewController.view)
-              
+                let videoURL = URL(string: self.url!)
+                self.player = AVPlayer(url: videoURL!)
+                //                vc.player = self.player/
+                
+                
+                self.playerViewController = AVPlayerViewController()
+                self.playerViewController.player = self.player
+                self.playerViewController.view.frame = self.playerUIView.bounds
+                self.playerViewController.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                self.playerViewController.player?.pause()
+                self.playerUIView.addSubview(self.playerViewController.view)
+                
                 //
                 
                 
@@ -108,9 +108,9 @@ class VideoReklamController: UIViewController {
                 //                    self.playerUIView.addGestureRecognizer(gesture)
                 DispatchQueue.main.async {
                     // self.playerUIView.layer.addSublayer(playerLayer)
-             
+                    
                 }
-               
+                
                 
                 
             }
@@ -119,19 +119,19 @@ class VideoReklamController: UIViewController {
         }
         
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//
-//    }
-//
-//    @objc func tapped(_ sender: UITapGestureRecognizer) {
-//        //updateStatus()
-//        let vc = AVPlayerViewController()
-//        vc.player = player
-//
-//        present(vc, animated: true) {
-//            vc.player?.play()
-//        }
-//    }
+    //    override func viewDidAppear(_ animated: Bool) {
+    //
+    //    }
+    //
+    //    @objc func tapped(_ sender: UITapGestureRecognizer) {
+    //        //updateStatus()
+    //        let vc = AVPlayerViewController()
+    //        vc.player = player
+    //
+    //        present(vc, animated: true) {
+    //            vc.player?.play()
+    //        }
+    //    }
     private func updateStatus() {
         if playing {
             player?.pause()
@@ -141,14 +141,15 @@ class VideoReklamController: UIViewController {
     }
     
     @IBAction func earnMoneyClicked(_ sender: Any) {
+        earnMoney.isHidden=true;
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-               let newViewController = storyBoard.instantiateViewController(withIdentifier: "VideoStoryPage") as! VideoStory
-              
-               newViewController.advertID=advertID
-               newViewController.userToken=userToken
-               newViewController.requestToken=requestToken
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "VideoStoryPage") as! VideoStory
+        
+        newViewController.advertID=advertID
+        newViewController.userToken=userToken
+        newViewController.requestToken=requestToken
         newViewController.url = url
-               self.present(newViewController, animated: true, completion: nil)
+        self.present(newViewController, animated: true, completion: nil)
     }
     //    func updateUI() {
     //        if playing {

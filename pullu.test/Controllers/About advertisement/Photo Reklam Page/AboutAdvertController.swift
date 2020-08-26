@@ -200,7 +200,7 @@ class AboutAdvertController: UIViewController {
     }
     
     @IBAction func earnMoney_click(_ sender: Any) {
-        
+        earnMoney.isHidden=true;
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
         newViewController.imageSource=imageSource

@@ -34,6 +34,7 @@ class MyViewers: UITableViewController {
     }
     
       @objc func refresh() {
+        viewerList.removeAll()
         myRefreshControl.beginRefreshing()
         select.MyAdViewers(aID: aID!)
                    {
