@@ -44,7 +44,7 @@ class DbInsert {
         
         
         
-     //   let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
+        //   let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
         
         
         // let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
@@ -390,7 +390,7 @@ class DbInsert {
         let requestToken = defaults.string(forKey: "requestToken")
         
         
-        let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
         
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
@@ -690,7 +690,7 @@ class DbInsert {
     }
     func UpdateAd(aID:Int,aName:String,aDescription:String,aPrice:Int ,completionBlock: @escaping (_ result:Status) ->()){
         let userToken = defaults.string(forKey: "userToken")
-               let requestToken = defaults.string(forKey: "requestToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
         
         
@@ -710,7 +710,7 @@ class DbInsert {
                     
                     let status  = try
                         JSONDecoder().decode(Status.self, from: response.data!)
-                   if status.response == 1{
+                    if status.response == 1{
                         self.security.RefreshToken(requestToken: status.requestToken)
                         
                     }
@@ -783,7 +783,7 @@ class DbInsert {
                     
                     let status  = try
                         JSONDecoder().decode(Status.self, from: response.data!)
-                   if status.response == 1{
+                    if status.response == 1{
                         self.security.RefreshToken(requestToken: status.requestToken)
                         
                     }
@@ -833,11 +833,13 @@ class DbInsert {
     }
     func Withdraw(mobile:Int64?,pass:String?,account:Int64?,serviceID:Int?,amount:Int64?,completionBlock: @escaping (_ result:Status) ->()){
         
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
         
         
         let PULLULINK = "https://pullu.az/api/payment/withdraw"
-        let Parameters = ["mobile":mobile!,"pass":pass!,"account":account!,"serviceID":serviceID!,"amount":amount!] as [String : Any]
+        let Parameters = ["userToken":userToken ?? "" ,"requestToken":requestToken ?? "","account":account!,"serviceID":serviceID!,"amount":amount!] as [String : Any]
         
         
         
@@ -850,12 +852,15 @@ class DbInsert {
                 do{
                     
                     
-                    let statusCode  = try
+                    let status  = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     //print(list)
-                    
-                    completionBlock(statusCode)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    completionBlock(status)
                     
                     
                 }

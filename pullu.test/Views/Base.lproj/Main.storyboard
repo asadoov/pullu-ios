@@ -3936,15 +3936,14 @@ baxışı</string>
                                                         <bool key="isElement" value="NO"/>
                                                     </accessibility>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="uUA-Ap-Nhq"/>
-                                                        <constraint firstAttribute="width" constant="112" id="z8n-rA-6cb"/>
+                                                        <constraint firstAttribute="height" constant="25" id="Ham-KC-c7D"/>
                                                     </constraints>
                                                     <attributedString key="attributedText">
                                                         <fragment content="---">
                                                             <attributes>
-                                                                <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                 <font key="NSFont" metaFont="label" size="11"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
                                                     </attributedString>
@@ -3988,20 +3987,20 @@ baxışı</string>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="u3E-py-srQ" firstAttribute="leading" secondItem="U9K-DF-ps1" secondAttribute="leading" constant="13" id="1xq-7q-xXU"/>
-                                                <constraint firstItem="fkU-0d-Og6" firstAttribute="top" secondItem="U9K-DF-ps1" secondAttribute="topMargin" constant="8" id="3SS-QQ-vAC"/>
                                                 <constraint firstItem="u3E-py-srQ" firstAttribute="top" secondItem="Z2b-8H-Y62" secondAttribute="bottom" constant="2" id="5zs-9p-cjT"/>
                                                 <constraint firstItem="Agz-Jp-Mds" firstAttribute="top" secondItem="Z2b-8H-Y62" secondAttribute="bottom" constant="8" id="Bek-jx-Y9E"/>
+                                                <constraint firstItem="fkU-0d-Og6" firstAttribute="leading" secondItem="U9K-DF-ps1" secondAttribute="leading" constant="16" id="CNi-7d-23r"/>
                                                 <constraint firstAttribute="height" constant="175" id="IxF-H5-1JM"/>
                                                 <constraint firstItem="Z2b-8H-Y62" firstAttribute="leading" secondItem="U9K-DF-ps1" secondAttribute="leading" id="O5G-bh-oof"/>
+                                                <constraint firstItem="fkU-0d-Og6" firstAttribute="top" secondItem="U9K-DF-ps1" secondAttribute="top" constant="16" id="RTg-FD-cxW"/>
                                                 <constraint firstItem="Z2b-8H-Y62" firstAttribute="top" secondItem="U9K-DF-ps1" secondAttribute="top" id="Rd7-Lm-wyJ"/>
                                                 <constraint firstItem="JTj-Bo-n1F" firstAttribute="top" secondItem="U9K-DF-ps1" secondAttribute="topMargin" constant="8" id="UBn-8h-ja1"/>
                                                 <constraint firstItem="6ed-W1-RXh" firstAttribute="top" secondItem="U9K-DF-ps1" secondAttribute="top" constant="148" id="VDD-ln-acY"/>
                                                 <constraint firstAttribute="trailing" secondItem="Agz-Jp-Mds" secondAttribute="trailing" constant="8" id="Zs4-la-fUV"/>
-                                                <constraint firstItem="fkU-0d-Og6" firstAttribute="leading" secondItem="U9K-DF-ps1" secondAttribute="leadingMargin" constant="8" id="bgo-pp-ua1"/>
+                                                <constraint firstItem="JTj-Bo-n1F" firstAttribute="leading" secondItem="fkU-0d-Og6" secondAttribute="trailing" constant="111" id="iq1-zj-zGA"/>
                                                 <constraint firstItem="6ed-W1-RXh" firstAttribute="leading" secondItem="u3E-py-srQ" secondAttribute="trailing" constant="158.5" id="uBy-a4-PFl"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="JTj-Bo-n1F" secondAttribute="trailing" constant="24" id="w6S-cm-BT9"/>
                                                 <constraint firstAttribute="trailing" secondItem="Z2b-8H-Y62" secondAttribute="trailing" id="xjC-SP-vik"/>
-                                                <constraint firstItem="JTj-Bo-n1F" firstAttribute="leading" secondItem="fkU-0d-Og6" secondAttribute="trailing" constant="111" id="yYp-YP-CPs"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -4564,7 +4563,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Arxiv" image="archieve" id="ZAZ-N8-Zs4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8qq-pJ-r29">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

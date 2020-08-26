@@ -61,15 +61,16 @@ class ReklamCellTableViewCell: UITableViewCell {
     //
     
     override func prepareForReuse() {
-        
-        aImage?.image=UIImage(named: "background")
-        
-        loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.color = UIColor.lightGray
-        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating()
-        aImage?.addSubview(loadingIndicator)
+        DispatchQueue.main.async {
+            self.aImage?.image=UIImage(named: "background")
+            
+            self.loadingIndicator.center=CGPoint(x: self.aImage.bounds.size.width/2, y: self.aImage.bounds.size.height/2)
+            self.loadingIndicator.hidesWhenStopped = true
+            self.loadingIndicator.color = UIColor.lightGray
+            // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            self.loadingIndicator.startAnimating()
+            self.aImage?.addSubview(self.loadingIndicator)
+        }
     }
     func reloadData() {
         if object != nil {
@@ -92,19 +93,20 @@ class ReklamCellTableViewCell: UITableViewCell {
             // aInfo.text=object?.description
             // if aType != nil { aType.text=object?.aTypeName}
             if aTypeImage != nil {
-                
-                switch object?.aTypeId {
-                case 1:
-                    //metn
-                    aTypeImage.image = UIImage(named: "text.png")
-                case 2:
-                    //shekil
-                    aTypeImage.image = UIImage(named: "image.png")
-                case 3:
-                    //video
-                    aTypeImage.image = UIImage(named: "video.png")
-                default:
-                    break
+                DispatchQueue.main.async {
+                    switch self.object?.aTypeId {
+                    case 1:
+                        //metn
+                        self.aTypeImage.image = UIImage(named: "text.png")
+                    case 2:
+                        //shekil
+                        self.aTypeImage.image = UIImage(named: "image.png")
+                    case 3:
+                        //video
+                        self.aTypeImage.image = UIImage(named: "video.png")
+                    default:
+                        break
+                    }
                 }
             }
             if aStatus != nil {
@@ -151,46 +153,76 @@ class ReklamCellTableViewCell: UITableViewCell {
             
             if object?.aTypeId == 1 || object?.aTypeId == 2
             {
+                for subView in self.aImage.subviews {
+                    subView.removeFromSuperview()
+                }
                 if object?.photo != nil {
-                    
-                    self.aImage?.image=UIImage(data:object!.photo!)
+                    DispatchQueue.main.async {
+                        self.aImage?.image=UIImage(data:self.object!.photo!)
+                    }
                     
                 }
                 else {
                     if object?.downloaded == true {
-                        aImage.image=UIImage(named: "damaged")
+                        DispatchQueue.main.async {
+                            self.aImage.image=UIImage(named: "damaged")
+                        }
                         //loadingIndicator.stopAnimating()
                     }
                     
                 }
-                
-                loadingIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                }
             }
             if object!.aTypeId == 3 {
+                
                 do {
-                    let sourceURL = URL(string: (object?.photoUrl?[0]) ?? "")
-                     let asset = AVAsset(url: sourceURL!)
-                     let imageGenerator = AVAssetImageGenerator(asset: asset)
-                     let time = CMTimeMake(value: 1, timescale: 60)
-                     let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil)
-                    let thumbnail = UIImage(cgImage:((imageRef ?? UIImage(named: "damaged")!.cgImage)!))
+                    DispatchQueue.main.async {
+                        for subView in self.aImage.subviews {
+                            subView.removeFromSuperview()
+                        }
+                        let sourceURL = URL(string: (self.object?.photoUrl?[0]) ?? "")
+                        let asset = AVAsset(url: sourceURL!)
+                        let imageGenerator = AVAssetImageGenerator(asset: asset)
+                        let time = CMTimeMake(value: 1, timescale: 60)
+                        let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil)
+                        var thumbnail:UIImage = UIImage()
+                        if imageRef != nil{
+                            
+                            thumbnail = UIImage(cgImage:imageRef!)
+                            
+                            
+                            self.aImage.image=thumbnail
+                            
+                        }
+                        else {
+                            let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: self.aImage!.frame.width - 10, height: 30))
+                            titleLabel.textAlignment = .center
+                            titleLabel.center = self.aImage.center
+                            titleLabel.text = "😵"
+                            titleLabel.textColor = UIColor.black
+                            titleLabel.font = UIFont(name:"chalkboard SE", size: 18)
+                            DispatchQueue.main.async {
+                                self.aImage.addSubview(titleLabel)
+                            }
+                            
+                        }
+                    }
                     
-                         DispatchQueue.main.async {
-                           
-                         self.aImage.image=thumbnail
-                         }
-                         
+                    
+                    
                     
                 }
                 catch {
                     
                     DispatchQueue.main.async {
-                                            self.aImage.image=UIImage(named: "damaged")
-                                            }
-                                            
+                        self.aImage.image=UIImage(named: "damaged")
+                    }
+                    
                 }
                 
-               
+                
                 //                let videoURL = URL(string: (object?.photoUrl![0])!)
                 //                self.player = AVPlayer(url: videoURL!)
                 //
@@ -201,7 +233,9 @@ class ReklamCellTableViewCell: UITableViewCell {
                 //                    self.aImage.layer.addSublayer(playerLayer)
                 //                    //                          self.player?.play()
                 //                }
-                loadingIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                }
             }
             
             

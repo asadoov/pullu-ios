@@ -124,19 +124,19 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                     
                     
                     
-//                    self.fileChooser(assets: filesAsset)
-//                    {
-//                        (completed)
-//                        in
-//                        if completed == true
-//                        {
-                            
-                            //                                self.hideActivityIndicator()
-                            // self.dismiss(animated: true)
-                            
-                            self.performSegue(withIdentifier: "auditorySegue", sender: true)
-//                        }
-//                    }
+                    //                    self.fileChooser(assets: filesAsset)
+                    //                    {
+                    //                        (completed)
+                    //                        in
+                    //                        if completed == true
+                    //                        {
+                    
+                    //                                self.hideActivityIndicator()
+                    // self.dismiss(animated: true)
+                    
+                    self.performSegue(withIdentifier: "auditorySegue", sender: true)
+                    //                        }
+                    //                    }
                     
                     
                     
@@ -235,16 +235,16 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
         }
     }
     func fileChooser(assets:[PHAsset],completionBlock: @escaping (_ result:Bool) ->()){
-        var loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+        let loadingAlert:MBProgressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert.mode = MBProgressHUDMode.indeterminate
         loadingAlert.label.text="Media hazırlanır"
-        loadingAlert.detailsLabel.text = "Gözləyin..."
+       // loadingAlert.detailsLabel.text = "Gözləyin..."
         self.newAdvertisement.files = Array<Data>()
         self.newAPreview.mediaBase64 = Array<String>()
         
         
         
-        var a = 1
+       // var a = 1
         for file in assets {
             switch newAdvertisement.aTypeID {
             case 2:
@@ -267,11 +267,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                         
                         originalImage += 1
                 }
-                DispatchQueue.main.async {
-                    loadingAlert.hide(animated: true)
-                }
                 
-                completionBlock(true)
                 break
                 
             case 3:
@@ -334,7 +330,7 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
                                         self.newAPreview.videoUrl = orginalVideo
                                         print("File size AFTER compression: \(Double(compressedData.count / 1048576)) mb")
                                         
-                                        completionBlock(true)
+                                        //completionBlock(true)
                                     }
                                     catch{
                                         print(error)
@@ -376,18 +372,16 @@ class NewASecondController: UIViewController,UIImagePickerControllerDelegate, UI
             
             
             
-            if a == assets.count
-            {
-                
-                
-            }
-            a+=1
             
             
             
         }
         
+        DispatchQueue.main.async {
+            loadingAlert.hide(animated: true)
+        }
         
+        completionBlock(true)
     }
     func compressVideo(inputURL: URL, outputURL: URL, handler:@escaping (_ exportSession: AVAssetExportSession?)-> Void) {
         let urlAsset = AVURLAsset(url: inputURL, options: nil)
