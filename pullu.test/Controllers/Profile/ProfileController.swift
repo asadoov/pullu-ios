@@ -107,20 +107,20 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     var  usertoken:String?
     var  requesttoken:String?
-     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+    let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     override func viewDidLoad() {
         super.viewDidLoad()
         userImage.layer.masksToBounds = true
-              userImage!.layer.borderColor = UIColor.white.cgColor
-              userImage!.layer.borderWidth = 1.5
-              userImage.layer.cornerRadius = userImage.bounds.width / 2
-              
-              loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
-              loadingIndicator.hidesWhenStopped = true
-              loadingIndicator.color = UIColor.lightGray
-              // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-              loadingIndicator.startAnimating()
-              userImage.addSubview(loadingIndicator)
+        userImage!.layer.borderColor = UIColor.white.cgColor
+        userImage!.layer.borderWidth = 1.5
+        userImage.layer.cornerRadius = userImage.bounds.width / 2
+        
+        loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = UIColor.lightGray
+        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        userImage.addSubview(loadingIndicator)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
@@ -138,10 +138,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         //        var mail = defaults.string(forKey: "mail")
         self.usertoken = defaults.string(forKey: "usertoken")
         self.requesttoken = defaults.string(forKey: "requesttoken")
-        
+        UIApplication.shared.beginIgnoringInteractionEvents()
         select.GetProfileInfo() {
             (obj) in
-            if obj.status == 1{
+            UIApplication.shared.endIgnoringInteractionEvents()
+            switch obj.status {
+            case 1:
                 self.profileList = obj.data
                 self.countryID = self.profileList[0].countryID
                 DispatchQueue.main.async {
@@ -152,33 +154,33 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     self.genderButton.setTitle(obj.data[0].gender, for: .normal)
                     self.professionButton.setTitle(obj.data[0].profession, for: .normal)
                     Alamofire.request(obj.data[0].photoURL!).responseImage { response in
-                                   if let catPicture = response.result.value {
-                                       //advert.photo=catPicture.pngData()
-                                       
-                                       //  item.photo = UIImage(named: "damaged")?.pngData()
-                                       
-                                       
-                                       if catPicture != nil {
-                                           
-                                           self.userImage.image=catPicture
-                                           self.loadingIndicator.stopAnimating()
-                                           
-                                       }
-                                       else {
-                                           self.userImage.image=UIImage(named: "damaged")
-                                           
-                                       }
-                                       
-                                       
-                                       
-                                       
-                                       
-                                       
-                                   }
-                                   
-                                   
-                                   
-                               }
+                        if let catPicture = response.result.value {
+                            //advert.photo=catPicture.pngData()
+                            
+                            //  item.photo = UIImage(named: "damaged")?.pngData()
+                            
+                            
+                            if catPicture.imageAsset != nil {
+                                
+                                self.userImage.image=catPicture
+                                
+                                
+                            }
+                            else {
+                                self.userImage.image=UIImage(named: "damaged")
+                                
+                            }
+                            
+                            
+                            
+                            
+                            self.loadingIndicator.stopAnimating()
+                            
+                        }
+                        
+                        
+                        
+                    }
                     //                self.countryButton.setTitle(list[0].country, for: .normal)
                     self.cityButton.setTitle(obj.data[0].city, for: .normal)
                     
@@ -195,16 +197,32 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     
                     
                 }
+                break
+            case 2:
+                let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                
+                alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    self.defaults.set(nil, forKey: "userToken")
+                    self.defaults.set(nil, forKey: "requestToken")
+                    self.defaults.set(nil, forKey: "uData")
+                    let menu:MenuController = MenuController()
+                    menu.updateRootVC(status: false)
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    //logout
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
+                
+                
+                
             }
-            else {
-                let alertController = UIAlertController(title: "Bildiriş", message: nil, preferredStyle: .alert)
-                
-                
-                let cancelAction = UIAlertAction(title: "Bağla", style: .cancel, handler: nil)
-                
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true)
-            }
+            
             
         }
         

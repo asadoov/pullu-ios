@@ -140,7 +140,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
@@ -213,9 +213,10 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
             }
             else {
                 DispatchQueue.main.async {
-                           self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                           self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
-                       }
+                    
+                    self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
+                }
                 // print("18+")
                 newUser.name = nameBox.text!
                 newUser.surname = surnameBox.text!
@@ -233,7 +234,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
                     in
                     DispatchQueue.main.async {
                         self.loadingAlert?.hide(animated: true)
-                           }
+                    }
                     do {
                         self.defaults.set(self.newUser.mail, forKey: "mail")
                         self.defaults.set(self.newUser.pass, forKey: "pass")
@@ -252,27 +253,27 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
                             break
                         case 3:
                             let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                                       warningAlert.mode = MBProgressHUDMode.text
-                                                       //            warningAlert.isSquare=true
-                                                       warningAlert.label.text = "Diqqət"
-                                                       warningAlert.detailsLabel.text = "Istifadəçi tapılmadı"
-                                                       warningAlert.hide(animated: true,afterDelay: 3)
+                            warningAlert.mode = MBProgressHUDMode.text
+                            //            warningAlert.isSquare=true
+                            warningAlert.label.text = "Diqqət"
+                            warningAlert.detailsLabel.text = "Istifadəçi tapılmadı"
+                            warningAlert.hide(animated: true,afterDelay: 3)
                             break
                         case 4:
                             let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                                       warningAlert.mode = MBProgressHUDMode.text
-                                                       //            warningAlert.isSquare=true
-                                                       warningAlert.label.text = "Diqqət"
-                                                       warningAlert.detailsLabel.text = "Istifadəçi artıq aktivdir"
-                                                       warningAlert.hide(animated: true,afterDelay: 3)
+                            warningAlert.mode = MBProgressHUDMode.text
+                            //            warningAlert.isSquare=true
+                            warningAlert.label.text = "Diqqət"
+                            warningAlert.detailsLabel.text = "Istifadəçi artıq aktivdir"
+                            warningAlert.hide(animated: true,afterDelay: 3)
                             break
-                            case 5:
+                        case 5:
                             let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                                       warningAlert.mode = MBProgressHUDMode.text
-                                                       //            warningAlert.isSquare=true
-                                                       warningAlert.label.text = "Xəta"
-                                                       warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
-                                                       warningAlert.hide(animated: true,afterDelay: 3)
+                            warningAlert.mode = MBProgressHUDMode.text
+                            //            warningAlert.isSquare=true
+                            warningAlert.label.text = "Xəta"
+                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
+                            warningAlert.hide(animated: true,afterDelay: 3)
                             break
                         default:
                             break
@@ -280,7 +281,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
                             
                         }
                         
-                       
+                        
                         
                         // print("JSON String : " + jsonString!)
                     }
@@ -301,8 +302,8 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         else {
             let alert = UIAlertController(title: "Bildiriş", message: "Bütün boşluqları doldurun!", preferredStyle: UIAlertController.Style.alert)
-                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                           self.present(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
         }
         
@@ -317,23 +318,24 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
         if let dict = notification.userInfo as NSDictionary? {
             if let list = dict["interests"] as? Array<Interest>{
                 // do something with your image
-                        chooseInterestsButton.setTitle("", for: .normal)
-                self.interestIds.removeAll()
-                for item in list{
-                    self.interestIds.append(item.id!)
-                    // print(item)
-                    if item.id == list.first?.id {
+                if list.count>0{
+                    chooseInterestsButton.setTitle("", for: .normal)
+                    self.interestIds.removeAll()
+                    for item in list{
+                        self.interestIds.append(item.id!)
+                        // print(item)
+                        if item.id == list.first?.id {
+                            
+                            chooseInterestsButton.setTitle("\(item.name!)", for: .normal)
+                        }
+                        else{
+                            
+                            chooseInterestsButton.setTitle("\(chooseInterestsButton.title(for: .normal)!), \(item.name!)", for: .normal)
+                            
+                        }
                         
-                        chooseInterestsButton.setTitle("\(item.name!)", for: .normal)
                     }
-                    else{
-                        
-                        chooseInterestsButton.setTitle("\(chooseInterestsButton.title(for: .normal)!), \(item.name!)", for: .normal)
-                        
-                    }
-                    
                 }
-                
             }
         }
     }

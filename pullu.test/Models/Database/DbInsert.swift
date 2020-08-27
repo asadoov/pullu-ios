@@ -117,7 +117,7 @@ class DbInsert {
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/earnMoney"
         let Parameters = ["advertID": advertID!,"userToken":userToken ?? "", "requestToken":requestToken ?? ""] as [String : Any]
         
-        
+         var status = Status()
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -127,7 +127,7 @@ class DbInsert {
                 do{
                     
                     
-                    let status  = try
+                   status = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     print(status)
@@ -140,6 +140,8 @@ class DbInsert {
                     
                 }
                 catch let jsonErr{
+                    status.response = 4
+                    completionBlock(status)
                     print("Error serializing json:",jsonErr)
                 }
         }
@@ -805,7 +807,7 @@ class DbInsert {
         let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/sms"
         let Parameters = ["phone":phone] as [String : Any]
         
-        
+        var statusCode = Status()
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -816,7 +818,7 @@ class DbInsert {
                 do{
                     
                     
-                    let statusCode  = try
+                    statusCode  = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     //print(list)
@@ -826,6 +828,8 @@ class DbInsert {
                     
                 }
                 catch let jsonErr{
+                    statusCode.response = 4
+                     completionBlock(statusCode)
                     print("Error serializing json:",jsonErr)
                 }
         }

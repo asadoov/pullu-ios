@@ -37,18 +37,18 @@ class MyViewsController: UIViewController {
     
     @objc func refresh() {
         
-//        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-//        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.indeterminate
 //
          self.myRefreshControl.beginRefreshing()
         
-     
+      UIApplication.shared.beginIgnoringInteractionEvents()
             //  var typeCount=0
             
             select.GetMyViews(){
                 
                 (obj) in
-                
+                 UIApplication.shared.endIgnoringInteractionEvents()
                 switch obj.status{
                     
                 case 1:
@@ -116,7 +116,7 @@ class MyViewsController: UIViewController {
                 
                 
                 
-               // self.loadingAlert!.hide(animated: true)
+                self.loadingAlert!.hide(animated: true)
                 self.myRefreshControl.endRefreshing()
                 self.aTableView.reloadData()
                 

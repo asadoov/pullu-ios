@@ -21,11 +21,12 @@ class AddBalanceController: UIViewController {
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
        
         // Do any additional setup after loading the view.
-       
+        UIApplication.shared.beginIgnoringInteractionEvents()
        
         select.GetFinance(){
             (obj)
             in
+             UIApplication.shared.endIgnoringInteractionEvents()
             switch obj.status{
             case 1:
                

@@ -35,21 +35,48 @@ class StatisticsController: UIViewController {
         select.GetStatistics() {
             (statistics)
             in
-            self.statisticsData = statistics.data[0]
-            DispatchQueue.main.async {
-                self.statisticsTableView.reloadData()
-                //            self.allUsers.text=String(statistics.allUsers!)
-                //            self.allUsersToday.text=String(statistics.allUsersToday!)
-                //            self.allAds.text=String(statistics.allAds!)
-                //            self.myTodayViews.text=String(statistics.myTodayViews!)
-                //            self.allMyViews.text=String(statistics.allMyViews!)
-                //            self.myPaidViews.text=String(statistics.myPaidViews!)
-                //            self.myNotPaidViews.text=String(statistics.myNotPaidViews!)
-                //            self.myAds.text=String(statistics.myAds!)
-                //            self.myNotPaidAds.text=String(statistics.myNotPaidAds!)
-                //            self.myPaidAds.text=String(statistics.myPaidAds!)
+            switch statistics.status{
+            case 1:
+                self.statisticsData = statistics.data[0]
+                           DispatchQueue.main.async {
+                               self.statisticsTableView.reloadData()
+                               //            self.allUsers.text=String(statistics.allUsers!)
+                               //            self.allUsersToday.text=String(statistics.allUsersToday!)
+                               //            self.allAds.text=String(statistics.allAds!)
+                               //            self.myTodayViews.text=String(statistics.myTodayViews!)
+                               //            self.allMyViews.text=String(statistics.allMyViews!)
+                               //            self.myPaidViews.text=String(statistics.myPaidViews!)
+                               //            self.myNotPaidViews.text=String(statistics.myNotPaidViews!)
+                               //            self.myAds.text=String(statistics.myAds!)
+                               //            self.myNotPaidAds.text=String(statistics.myNotPaidAds!)
+                               //            self.myPaidAds.text=String(statistics.myPaidAds!)
+                           }
+                           
+                break
+                case 2:
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                        let menu:MenuController = MenuController()
+                        menu.updateRootVC(status: false)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    break
+                default:
+                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        //logout
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                    break
+                    
+                
             }
-            
+           
         }
     }
     

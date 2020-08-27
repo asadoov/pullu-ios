@@ -139,6 +139,11 @@ class VideoReklamController: UIViewController {
             player?.play()
         }
     }
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
+    
     
     @IBAction func earnMoneyClicked(_ sender: Any) {
         earnMoney.isHidden=true;

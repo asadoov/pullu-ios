@@ -17,24 +17,96 @@ class NotPaidController: UITableViewController {
     var requestToken:String?
     private let myRefreshControl = UIRefreshControl()
     @IBOutlet var notPaidTableView: UITableView!
-    var paginationEnabled=true
+    var paginationEnabled=false
     var loading = false
     var advertID:Int?
     var currentPage = 1
     public var catID:Int = 0
-     let defaults = UserDefaults.standard
-     let spinner = UIActivityIndicatorView(style: .gray)
+    let defaults = UserDefaults.standard
+    let spinner = UIActivityIndicatorView(style: .gray)
+    @IBOutlet weak var refreshCatButton: UIButton!
+    @IBOutlet weak var catView: UIView!
+    @IBOutlet weak var categoryScroll: UICollectionView!
+    var catList:Array<CategoryStruct> = []
+    var catObject:CategoryStruct?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        if catID>0{
+            
+            categoryScroll.isHidden = true
+            
+        }
         notPaidTableView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.00)
         myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         notPaidTableView.addSubview(myRefreshControl)
         let defaults = UserDefaults.standard
         userToken = defaults.string(forKey: "userToken")
         requestToken = defaults.string(forKey: "requestToken")
-       // refresh()
+        refreshCat()
+        
+        //        if (view.window != nil) {
+        //            refresh()
+        //
+        //        }
+        //        do{
+        //            sleep(4)
+        //            refresh()
+        //        }
+    }
+    @IBAction func refreshCategoriesBtnClick(_ sender: Any) {
+        refreshCat()
+        
+    }
+    func refreshCat(){
+        
+        select.ACategory(){
+            (list)
+            in
+            self.catList=list
+            var catIndex=0
+            for item in self.catList{
+                
+                Alamofire.request(item.catImage!).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
+                        item.downloadedIco = catPicture.pngData()
+                        
+                        print("image downloaded: \(item.downloadedIco)")
+                        
+                        // self.catList[item.id!-1]=item
+                        //self.catList[catIndex]=item
+                        // self.dataArray.replaceSubrange( , with: item)
+                        catIndex+=1
+                        if catIndex == self.catList.count {
+                            self.catList.sort { $0.id! < $1.id! }
+                            
+                            
+                        }
+                        if self.catList.count>0{
+                            DispatchQueue.main.async {
+                                self.refreshCatButton?.isHidden=true
+                                self.categoryScroll.reloadData()
+                                self.refreshCatButton.isHidden=true
+                            }
+                        }
+                        else
+                        {
+                            self.refreshCatButton?.isHidden=false
+                        }
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+            }
+            //            self.catList.sort {
+            //                $0.id! < $1.id!
+            //            }
+            
+        }
     }
     
     // MARK: - Table view data source
@@ -61,10 +133,10 @@ class NotPaidController: UITableViewController {
             self.performSegue(withIdentifier: "textReklamPage", sender: self)
             
         }
-                   if advertArray[indexPath.row].aTypeId==3{
-                       self.performSegue(withIdentifier: "videoReklamPage", sender: self)
-        
-                   }
+        if advertArray[indexPath.row].aTypeId==3{
+            self.performSegue(withIdentifier: "videoReklamPage", sender: self)
+            
+        }
         
         
         
@@ -76,9 +148,9 @@ class NotPaidController: UITableViewController {
             //print("IndexRow\(indexPath.row)")
             
             
-           
             
-            currentPage += 1
+            
+            
             pagination(page: currentPage)
             //        if currentPage < totalPage {
             //            currentPage += 1
@@ -100,7 +172,7 @@ class NotPaidController: UITableViewController {
                             //  item.photo = UIImage(named: "damaged")?.pngData()
                             if indexPath.row <= self.advertArray.count {
                                 
-                                if catPicture != nil {
+                                if catPicture.imageAsset != nil {
                                     
                                     self.advertArray[indexPath.row].photo=catPicture.pngData()!
                                     
@@ -156,6 +228,7 @@ class NotPaidController: UITableViewController {
         
         
         if paginationEnabled{
+            
             //                loading = true
             //                       var loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
             //                        loadingAlert.mode = MBProgressHUDMode.indeterminate
@@ -163,24 +236,24 @@ class NotPaidController: UITableViewController {
             //                        loadingAlert.detailsLabel.text = "Reklamları yeniləyirik..."
             
             spinner.startAnimating()
-                       spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
-
-                       self.notPaidTableView.tableFooterView = spinner
-                       self.notPaidTableView.tableFooterView?.isHidden = false
+            spinner.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: tableView.bounds.width, height: CGFloat(44))
+            
+            self.notPaidTableView.tableFooterView = spinner
+            self.notPaidTableView.tableFooterView?.isHidden = false
             
             var typeCount=0
             
             select.GetAds(isPaid: 0,page: page, catID: catID,progressView: loadingAlert!){
                 
                 (obj) in
-                 self.spinner.stopAnimating()
-                 self.notPaidTableView.tableFooterView = nil
+                self.spinner.stopAnimating()
+                self.notPaidTableView.tableFooterView = nil
                 switch obj.status {
                 case 1:
                     if !obj.data.isEmpty {
-                         // self.defaults.set(obj.requestToken, forKey: "requestToken")
+                        // self.defaults.set(obj.requestToken, forKey: "requestToken")
                         for advert in obj.data {
-                          
+                            
                             //if (advert.isPaid==type) {
                             let item = advert
                             
@@ -218,8 +291,8 @@ class NotPaidController: UITableViewController {
                             
                             
                         }
-                    
                         
+                        self.currentPage += 1
                     }
                     else   {
                         
@@ -228,22 +301,22 @@ class NotPaidController: UITableViewController {
                     break
                 case 2:
                     let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
-                                                                        
-                                                                        alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                       self.defaults.set(nil, forKey: "userToken")
-                                                                            self.defaults.set(nil, forKey: "requestToken")
-                                                                            self.defaults.set(nil, forKey: "uData")
-                                                                            let menu:MenuController = MenuController()
-                                                                            menu.updateRootVC(status: false)
-                                                                        }))
+                    
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                        let menu:MenuController = MenuController()
+                        menu.updateRootVC(status: false)
+                    }))
                     self.present(alert, animated: true, completion: nil)
                     break
                 default:
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
-                                                                        
-                                                                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                            //logout
-                                                                        }))
+                    
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        //logout
+                    }))
                     self.present(alert, animated: true, completion: nil)
                     break
                     
@@ -253,7 +326,7 @@ class NotPaidController: UITableViewController {
                 
                 
                 
-                   
+                
                 
                 //loadingAlert.hide(animated: true)
                 self.loading = false
@@ -262,135 +335,140 @@ class NotPaidController: UITableViewController {
         
     }
     @objc func refresh() {
-        paginationEnabled = true
+        
+        // paginationEnabled = true
         loading = true
         advertArray.removeAll()
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
         
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
         
-     
-            // var typeCount=0
+        // var typeCount=0
+        
+        
+        select.GetAds(isPaid: 0,page: 1, catID: catID,progressView: loadingAlert!){
             
-            
-            select.GetAds(isPaid: 0,page: 1, catID: catID,progressView: loadingAlert!){
+            (obj) in
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.myRefreshControl.endRefreshing()
+            self.loading = false
+            self.loadingAlert!.hide(animated: true)
+            switch obj.status {
+            case 1:
                 
-                (obj) in
-                switch obj.status {
-                case 1:
-                  
                 if !obj.data.isEmpty{
-                      //self.defaults.set(obj.requestToken, forKey: "requestToken")
-//                    if obj.status != 3{
-                        if obj.data.count > 0{
+                    //self.defaults.set(obj.requestToken, forKey: "requestToken")
+                    //                    if obj.status != 3{
+                    if obj.data.count > 0{
+                        
+                        for advert in obj.data {
                             
-                            for advert in obj.data {
-                                                      
-                                                      //if (advert.isPaid==type) {
-                                                      let item = advert
-                                                      
-                                                      
-                                                      
-                                                      self.advertArray.append(item)
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      
-                                                      DispatchQueue.main.async {
-                                                          
-                                                          //                            if self.isPaidSegment.selectedSegmentIndex == {
-                                                          //                                self.advertArray = self.isPaid
-                                                          //                                typeCount=self.isPaid.count
-                                                          //                            }else {
-                                                          //                                self.advertArray = self.isNotPaid
-                                                          //                                typeCount=self.isNotPaid.count
-                                                          //                            }
-                                                          //
-                                                          
-                                                          
-                                                          //self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-                                                          self.notPaidTableView.reloadData()
-                                                          
-                                                          self.myRefreshControl.endRefreshing()
-                                                          
-                                                          
-                                                          
-                                                          
-                                                          
-                                                      }
-                                                      
-                                                      
-                                                      
-                                                  }
+                            //if (advert.isPaid==type) {
+                            let item = advert
+                            
+                            
+                            
+                            self.advertArray.append(item)
+                            
+                            
+                            
+                            
+                            
+                            DispatchQueue.main.async {
+                                
+                                //                            if self.isPaidSegment.selectedSegmentIndex == {
+                                //                                self.advertArray = self.isPaid
+                                //                                typeCount=self.isPaid.count
+                                //                            }else {
+                                //                                self.advertArray = self.isNotPaid
+                                //                                typeCount=self.isNotPaid.count
+                                //                            }
+                                //
+                                
+                                
+                                //self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+                                self.notPaidTableView.reloadData()
+                                
+                                self.myRefreshControl.endRefreshing()
+                                
+                                
+                                
+                                
+                                
+                            }
+                            
+                            
+                            
                         }
-                       
-                         self.myRefreshControl.endRefreshing()
-                        self.loading = false
-                        self.loadingAlert!.hide(animated: true)
-//                        self.paginationEnabled = true
-//                    }
-//
-//
-//                    else {
-////                        self.myRefreshControl.endRefreshing()
-////                        self.loadingAlert!.hide(animated: true)
-////                        let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-////                        warningAlert.mode = MBProgressHUDMode.text
-////                        //            warningAlert.isSquare=true
-////                        warningAlert.label.text = "Xəta"
-////                        warningAlert.detailsLabel.text = "Zəhmət olmasa biraz sonra yenidən cəht edin"
-////                        warningAlert.hide(animated: true,afterDelay: 3)
-//
-//                    }
+                    }
+                    if self.advertArray.count>9 {
+                        self.paginationEnabled = true
+                    }
+                    
+                    //                        self.paginationEnabled = true
+                    //                    }
+                    //
+                    //
+                    //                    else {
+                    ////                        self.myRefreshControl.endRefreshing()
+                    ////                        self.loadingAlert!.hide(animated: true)
+                    ////                        let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    ////                        warningAlert.mode = MBProgressHUDMode.text
+                    ////                        //            warningAlert.isSquare=true
+                    ////                        warningAlert.label.text = "Xəta"
+                    ////                        warningAlert.detailsLabel.text = "Zəhmət olmasa biraz sonra yenidən cəht edin"
+                    ////                        warningAlert.hide(animated: true,afterDelay: 3)
+                    //
+                    //                    }
                 }
                 else
                 {
-                                                              let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                                                              
-                                                              warningAlert.mode = MBProgressHUDMode.text
-                                                              //            warningAlert.isSquare=true
-                                                              warningAlert.label.text = "Bildiriş"
-                                                              warningAlert.detailsLabel.text = "Heç bir pulsuz reklam taapılmadı"
-                                                              warningAlert.hide(animated: true,afterDelay: 3)
-                                                              
-                                                          }
-                
-                break
-                case 2:
-                let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
-                                                                                       
-                                                                                       alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                           self.defaults.set(nil, forKey: "userToken")
-                                                                                           self.defaults.set(nil, forKey: "requestToken")
-                                                                                           self.defaults.set(nil, forKey: "uData")
-                                                                                           let menu:MenuController = MenuController()
-                                                                                           menu.updateRootVC(status: false) 
-                                                                                       }))
-                                   self.present(alert, animated: true, completion: nil)
-                break
-                default:
-                let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
-                                                                                       
-                                                                                       alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                           //logout
-                                                                                       }))
-                                   self.present(alert, animated: true, completion: nil)
-                break
-                
-                
+                    let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                    
+                    warningAlert.mode = MBProgressHUDMode.text
+                    //            warningAlert.isSquare=true
+                    warningAlert.label.text = "Bildiriş"
+                    warningAlert.detailsLabel.text = "Heç bir pulsuz reklam taapılmadı"
+                    warningAlert.hide(animated: true,afterDelay: 3)
+                    
                 }
-                self.myRefreshControl.endRefreshing()
-                                                  self.loadingAlert!.hide(animated: true)
-                           
+                
+                break
+            case 2:
+                let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                
+                alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    let menu:MenuController = MenuController()
+                                       menu.updateRootVC(status: false)
+                    self.defaults.set(nil, forKey: "userToken")
+                    self.defaults.set(nil, forKey: "requestToken")
+                    self.defaults.set(nil, forKey: "uData")
+                   
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    //logout
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
+                
                 
             }
             
             
-           
             
-            
+        }
+        
+        
+        
+        
+        
         
         
     }
@@ -401,19 +479,60 @@ class NotPaidController: UITableViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "photoReklamPage"){
-            let displayVC = segue.destination as! AboutAdvertController
-            displayVC.advertID = advertID
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? AboutAdvertController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         if(segue.identifier == "textReklamPage"){
-            let displayVC = segue.destination as! TextReklamController
-            displayVC.advertID = advertID
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? TextReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         if(segue.identifier == "videoReklamPage"){
-            let displayVC = segue.destination as! VideoReklamController
-            displayVC.advertID = advertID
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? VideoReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         
-        
+        if(segue.identifier == "aCatSegue"){
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? CategoryViewController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.object  = catObject
+                    
+                }
+                
+            }
+            
+            
+        }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
@@ -474,6 +593,39 @@ class NotPaidController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+}
+
+extension NotPaidController:UICollectionViewDelegate,UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // print(catList.count)
+        return catList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
+        cell.object = catList[indexPath.row]
+        // print(cell.object?.name)
+        catObject=cell.object
+        self.performSegue(withIdentifier: "aCatSegue", sender: self)
+        
+        cell.reloadData()
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
+        
+        
+        cell.object=catList[indexPath.row]
+        cell.reloadData()
+        // print(catList[indexPath.row].name)
+        
+        return cell
+        
+        
+    }
+    
+    
+    
     
 }
 

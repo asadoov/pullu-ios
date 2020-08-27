@@ -60,14 +60,15 @@ class CategoryViewController: UIViewController {
                         let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                                 segmentControllers: [paidController,
                                                                                     notPaidController])
-                        segmentedViewController.segmentBackgroundColor = UIColor.darkGray
-                        segmentedViewController.segmentTitleColor = UIColor.white
-                   
-                    segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
-                    segmentedViewController.selectedSegmentViewColor = UIColor.white
-                        segmentedViewController.selectedSegmentViewHeight = 3
-                        segmentedViewController.segmentViewHeight = 40
-                    segmentedViewController.headerViewHeight =  95
+                         segmentedViewController.segmentBackgroundColor = UIColor.white
+                                       segmentedViewController.segmentTitleColor = UIColor.black
+                                   
+                                  
+                                   segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
+                                   segmentedViewController.selectedSegmentViewColor = UIColor.black
+                                       segmentedViewController.selectedSegmentViewHeight = 3
+                                       segmentedViewController.segmentViewHeight = 40
+                                   segmentedViewController.headerViewHeight =  95
                         
                         addChild(segmentedViewController)
                        content.addSubview(segmentedViewController.view)
@@ -78,7 +79,11 @@ class CategoryViewController: UIViewController {
     }
     
     
-  
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
+    
     
    
     // MARK: - Navigation

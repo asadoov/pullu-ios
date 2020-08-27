@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import MBProgressHUD
 class TextReklamController: UIViewController {
     
     let defaults = UserDefaults.standard
@@ -143,6 +143,10 @@ class TextReklamController: UIViewController {
         
     }
     
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
     
     
     

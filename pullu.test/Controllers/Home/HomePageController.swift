@@ -14,29 +14,20 @@ import FirebaseMessaging
 import SJSegmentedScrollView
 class HomePageController: UIViewController{
     
-  //  @IBOutlet weak var isPaidSegment: UISegmentedControl!
+    //  @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
     
     @IBOutlet weak var categoryScroll: UICollectionView!
     
-  
+    
     
     @IBOutlet weak var ReklamCount: UILabel!
     
-    
-    //@IBOutlet weak var srchBar: UISearchBar!
-   // let searchController = UISearchController(searchResultsController: nil)
-    
-    //@IBOutlet weak var navItem: UINavigationItem!
-    
-    
-    @IBOutlet weak var catView: UIView!
     var advertArray: [Advertisement] = [Advertisement]()
     var isPaid: [Advertisement] = [Advertisement]()
     var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
-    var catList:Array<CategoryStruct> = []
-    var catObject:CategoryStruct?
+    
     private let myRefreshControl = UIRefreshControl()
     let  db:DbSelect=DbSelect()
     var mail:String?
@@ -50,69 +41,68 @@ class HomePageController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        showActivityIndicator()
-   
+        
         
         //myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         //ReklamList.addSubview(myRefreshControl)
         
-       // searchController.searchBar.placeholder = "Axtar..."
+        // searchController.searchBar.placeholder = "Axtar..."
         //searchController.obscuresBackgroundDuringPresentation = false
-       // searchController.searchResultsUpdater = self
+        // searchController.searchResultsUpdater = self
         //searchController.searchBar.searchBarStyle = .minimal
         
         if let storyboard = self.storyboard {
-                
-                let myViewController = storyboard
-                    .instantiateViewController(withIdentifier: "paid")
-                myViewController.title = "Pullu"
+            
+            let myViewController = storyboard
+                .instantiateViewController(withIdentifier: "paid")
+            myViewController.title = "Pullu"
             
             
-//            let backgroundImage = UIImageView()
-//                       backgroundImage.frame.size.width = 100
-//                       backgroundImage.image = UIImage(named: "logout")
-//                       backgroundImage.contentMode = .scaleAspectFit
-//                       backgroundImage.backgroundColor = .white
-//                       myViewController.navigationItem.titleView = backgroundImage
-                
-                let myShareController = storyboard
-                    .instantiateViewController(withIdentifier: "notPaid")
-                myShareController.title = "Pulsuz"
+            //            let backgroundImage = UIImageView()
+            //                       backgroundImage.frame.size.width = 100
+            //                       backgroundImage.image = UIImage(named: "logout")
+            //                       backgroundImage.contentMode = .scaleAspectFit
+            //                       backgroundImage.backgroundColor = .white
+            //                       myViewController.navigationItem.titleView = backgroundImage
             
-                let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
-                                                                        segmentControllers: [myViewController,
-                                                                            myShareController])
-                segmentedViewController.segmentBackgroundColor = UIColor.white
-                segmentedViewController.segmentTitleColor = UIColor.black
-            catView.layer.borderWidth = 1
-            catView.layer.borderColor = UIColor.gray.cgColor
-           
+            let myShareController = storyboard
+                .instantiateViewController(withIdentifier: "notPaid")
+            myShareController.title = "Pulsuz"
+            
+            let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
+                                                                    segmentControllers: [myViewController,
+                                                                                         myShareController])
+            segmentedViewController.segmentBackgroundColor = UIColor.white
+            segmentedViewController.segmentTitleColor = UIColor.black
+            //            catView.layer.borderWidth = 1
+            //            catView.layer.borderColor = UIColor.gray.cgColor
+            
             segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
             segmentedViewController.selectedSegmentViewColor = UIColor.black
-                segmentedViewController.selectedSegmentViewHeight = 3
-                segmentedViewController.segmentViewHeight = 40
+            segmentedViewController.selectedSegmentViewHeight = 3
+            segmentedViewController.segmentViewHeight = 40
             segmentedViewController.headerViewHeight =  95
-                
-                addChild(segmentedViewController)
-               segmentView.addSubview(segmentedViewController.view)
-                segmentedViewController.view.frame = segmentView.bounds
-                segmentedViewController.didMove(toParent: self)
             
-            }
+            addChild(segmentedViewController)
+            segmentView.addSubview(segmentedViewController.view)
+            segmentedViewController.view.frame = segmentView.bounds
+            segmentedViewController.didMove(toParent: self)
+            
+        }
         
         
         
-      navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.hidesSearchBarWhenScrolling = false
         // searchController.searchBar.barTintColor = UIColor.white
         // searchController.searchBar.tintColor = UIColor.white
         //searchController.searchBar.searchTextField.backgroundColor = UIColor.white
-//       let navigationitem = UINavigationItem(title: "")    //creates a new item with no title
-//        navigationitem.titleView = categoryScroll //your collectionview here to display as a view instead of the title that is usually there
-//        self.navigationController?.navigationBar.items = [navigationitem]
+        //       let navigationitem = UINavigationItem(title: "")    //creates a new item with no title
+        //        navigationitem.titleView = categoryScroll //your collectionview here to display as a view instead of the title that is usually there
+        //        self.navigationController?.navigationBar.items = [navigationitem]
         
-//                navItem.hidesSearchBarWhenScrolling = true
-//                navItem.searchController = searchController
-      //  navigationItem.searchController = searchController
+        //                navItem.hidesSearchBarWhenScrolling = true
+        //                navItem.searchController = searchController
+        //  navigationItem.searchController = searchController
         
         //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         //        navigationController?.navigationBar.shadowImage = UIImage()
@@ -137,22 +127,22 @@ class HomePageController: UIViewController{
         
         
         //
-//        ReklamList.delegate = self
-//        ReklamList.dataSource = self
+        //        ReklamList.delegate = self
+        //        ReklamList.dataSource = self
         
-       
+        
         
         //  self.getProducts()
         let defaults = UserDefaults.standard
         
         Messaging.messaging().subscribe(toTopic: "\(defaults.string(forKey: "uID")!)"){ error in
-                                                          if error == nil{
-                                                              print("Subscribed to topic")
-                                                          }
-                                                          else{
-                                                              print("Not Subscribed to topic")
-                                                          }
-               }
+            if error == nil{
+                print("Subscribed to topic")
+            }
+            else{
+                print("Not Subscribed to topic")
+            }
+        }
         
         // let userData = defaults.string(forKey: "uData")
         mail = defaults.string(forKey: "mail")
@@ -160,92 +150,58 @@ class HomePageController: UIViewController{
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
         
-        db.ACategory(){
-            (list)
-            in
-            self.catList=list
-            var catIndex=0
-            for item in self.catList{
-                
-                Alamofire.request(item.catImage!).responseImage { response in
-                    if let catPicture = response.result.value {
-                        //advert.photo=catPicture.pngData()
-                        item.downloadedIco = catPicture.pngData()
-                        
-                        print("image downloaded: \(item.downloadedIco)")
-                        
-                        // self.catList[item.id!-1]=item
-                        //self.catList[catIndex]=item
-                        // self.dataArray.replaceSubrange( , with: item)
-                        catIndex+=1
-                        if catIndex == self.catList.count {
-                            self.catList.sort { $0.id! < $1.id! }
-                            
-                            
-                        }
-                        DispatchQueue.main.async {
-                            self.categoryScroll.reloadData()
-                            
-                        }
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                
-            }
-            //            self.catList.sort {
-            //                $0.id! < $1.id!
-            //            }
-            
-        }
         
         
-
+        
+        
         
         
     }
+    
    
+    
     func showActivityIndicator() {
-         DispatchQueue.main.async {
-            self.loadingView = UIView()
-            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
-            self.loadingView.center = self.view.center
-            self.loadingView.backgroundColor = UIColor.black
-            self.loadingView.alpha = 0.7
-            self.loadingView.clipsToBounds = true
-            self.loadingView.layer.cornerRadius = 10
-
-            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
-            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
-            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
-
-            self.loadingView.addSubview(self.spinner)
-            self.view.addSubview(self.loadingView)
-            self.spinner.startAnimating()
+        DispatchQueue.main.async {
+            self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+            self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
+            self.loadingAlert?.show(animated: true)
+            //            self.loadingView = UIView()
+            //            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            //            self.loadingView.center = self.view.center
+            //            self.loadingView.backgroundColor = UIColor.black
+            //            self.loadingView.alpha = 0.7
+            //            self.loadingView.clipsToBounds = true
+            //            self.loadingView.layer.cornerRadius = 10
+            //
+            //            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            //            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            //            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+            //
+            //            self.loadingView.addSubview(self.spinner)
+            //            self.view.addSubview(self.loadingView)
+            //            self.spinner.startAnimating()
         }
     }
-
+    
     func hideActivityIndicator() {
-         DispatchQueue.main.async {
-            self.spinner.stopAnimating()
-            self.loadingView.removeFromSuperview()
+        DispatchQueue.main.async {
+            self.loadingAlert?.hide(animated: true)
+            //            self.spinner.stopAnimating()
+            //            self.loadingView.removeFromSuperview()
         }
     }
-   
     
     
-        override func viewWillAppear(_ animated: Bool) {
-            
-           //refresh()
-//            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//            navigationController?.navigationBar.shadowImage = UIImage()
-//            navigationController?.navigationBar.isTranslucent = true
-//            navigationController?.view.backgroundColor = .clear
-//            super.viewWillAppear(animated)
-        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        //refresh()
+        //            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //            navigationController?.navigationBar.shadowImage = UIImage()
+        //            navigationController?.navigationBar.isTranslucent = true
+        //            navigationController?.view.backgroundColor = .clear
+        //            super.viewWillAppear(animated)
+    }
     
     //    override func viewWillDisappear(_ animated: Bool) {
     //        navigationController?.navigationBar.isTranslucent = false
@@ -258,197 +214,194 @@ class HomePageController: UIViewController{
     
     
     
-//    @IBAction func isPaidChanged(_ sender: Any) {
-//        self.advertArray.removeAll()
-//
-//        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
-//            if isPaidSegment.selectedSegmentIndex == 0{
-//                if  isPaid != nil{
-//                    advertArray = isPaid
-//                    DispatchQueue.main.async {
-//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//
-//                        self.ReklamList.reloadData()
-//
-//
-//                    }
-//                }
-//                // Table was scrolled by user.
-//                //                if dataArray.count>0{
-//                //
-//                //                    for item in dataArray{
-//                //                        if item.isPaid==1{
-//                //
-//                //                            advertArray.append(item)
-//                //                        }
-//                //
-//                //                    }
-//                //
-//                //                    DispatchQueue.main.async {
-//                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//                //                        self.ReklamList.reloadData()
-//                //
-//                //
-//                //                    }
-//                //
-//                //                }
-//            }
-//
-//            if isPaidSegment.selectedSegmentIndex==1{
-//                if  isNotPaid != nil{
-//                    advertArray = isNotPaid
-//                    DispatchQueue.main.async {
-//                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//
-//                        self.ReklamList.reloadData()
-//
-//
-//                    }
-//                }
-//
-//                // Table was scrolled by user.
-//                //                if dataArray.count>0{
-//                //                    for item in dataArray{
-//                //                        if item.isPaid==0{
-//                //
-//                //                            advertArray.append(item)
-//                //                        }
-//                //
-//                //                    }
-//                //                    DispatchQueue.main.async {
-//                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
-//                //
-//                //                        self.ReklamList.reloadData()
-//                //
-//                //
-//                //                    }
-//                //                }
-//            }
-//
-//        }
-//        else  {
-//
-//            if isPaidSegment.selectedSegmentIndex == 0{
-//
-//                isPaidSegment.selectedSegmentIndex = 1
-//
-//            }
-//            if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
-//
-//        }
-//
-//
-//
-//
-//
-//
-//    }
+    //    @IBAction func isPaidChanged(_ sender: Any) {
+    //        self.advertArray.removeAll()
+    //
+    //        if (!ReklamList.isTracking && !ReklamList.isDecelerating) {
+    //            if isPaidSegment.selectedSegmentIndex == 0{
+    //                if  isPaid != nil{
+    //                    advertArray = isPaid
+    //                    DispatchQueue.main.async {
+    //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+    //
+    //                        self.ReklamList.reloadData()
+    //
+    //
+    //                    }
+    //                }
+    //                // Table was scrolled by user.
+    //                //                if dataArray.count>0{
+    //                //
+    //                //                    for item in dataArray{
+    //                //                        if item.isPaid==1{
+    //                //
+    //                //                            advertArray.append(item)
+    //                //                        }
+    //                //
+    //                //                    }
+    //                //
+    //                //                    DispatchQueue.main.async {
+    //                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+    //                //                        self.ReklamList.reloadData()
+    //                //
+    //                //
+    //                //                    }
+    //                //
+    //                //                }
+    //            }
+    //
+    //            if isPaidSegment.selectedSegmentIndex==1{
+    //                if  isNotPaid != nil{
+    //                    advertArray = isNotPaid
+    //                    DispatchQueue.main.async {
+    //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+    //
+    //                        self.ReklamList.reloadData()
+    //
+    //
+    //                    }
+    //                }
+    //
+    //                // Table was scrolled by user.
+    //                //                if dataArray.count>0{
+    //                //                    for item in dataArray{
+    //                //                        if item.isPaid==0{
+    //                //
+    //                //                            advertArray.append(item)
+    //                //                        }
+    //                //
+    //                //                    }
+    //                //                    DispatchQueue.main.async {
+    //                //                        self.ReklamCount.text="Reklam sayı \(String(self.advertArray.count))"
+    //                //
+    //                //                        self.ReklamList.reloadData()
+    //                //
+    //                //
+    //                //                    }
+    //                //                }
+    //            }
+    //
+    //        }
+    //        else  {
+    //
+    //            if isPaidSegment.selectedSegmentIndex == 0{
+    //
+    //                isPaidSegment.selectedSegmentIndex = 1
+    //
+    //            }
+    //            if isPaidSegment.selectedSegmentIndex == 1{isPaidSegment.selectedSegmentIndex = 0}
+    //
+    //        }
+    //
+    //
+    //
+    //
+    //
+    //
+    //    }
     
     
     
     
-//    @objc func refresh() {
-//
-//        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-//               loadingAlert!.mode = MBProgressHUDMode.indeterminate
-//               loadingAlert!.label.text="Gözləyin"
-//               loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
-//
-//        isPaid.removeAll()
-//        isNotPaid.removeAll()
-//        if mail != nil&&pass != nil{
-//            var typeCount=0
-//
-//            db.getAds(username: mail!, pass: pass!, catID: 0,progressView: loadingAlert!){
-//
-//                (list) in
-//
-//
-//
-//
-//                for advert in list {
-//
-//                    //if (advert.isPaid==type) {
-//                    let item = advert
-//
-//
-//
-//                    if  item.isPaid==1{
-//
-//
-//                        // self.advertArray.append(item)
-//                        self.isPaid.append(item)
-//
-//
-//
-//                    }
-//                    if  item.isPaid==0{
-//
-//
-//                        // self.advertArray.append(item)
-//                        self.isNotPaid.append(item)
-//
-//
-//
-//                    }
-//
-//
-//                    DispatchQueue.main.async {
-//
-//                        if self.isPaidSegment.selectedSegmentIndex == 0{
-//                            self.advertArray = self.isPaid
-//                            typeCount=self.isPaid.count
-//                        }else {
-//                            self.advertArray = self.isNotPaid
-//                            typeCount=self.isNotPaid.count
-//                        }
-//
-//
-//
-//                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
-//                        self.ReklamList.reloadData()
-//
-//                        self.myRefreshControl.endRefreshing()
-//
-//                                                self.loadingAlert!.hide(animated: true)
-//
-//                        //
-//
-//                    }
-//
-//
-//
-//                }
-//
-//
-//
-//
-//            }
-//        }
-//
-//    }
+    //    @objc func refresh() {
+    //
+    //        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+    //               loadingAlert!.mode = MBProgressHUDMode.indeterminate
+    //               loadingAlert!.label.text="Gözləyin"
+    //               loadingAlert!.detailsLabel.text = "Reklamları yeniləyirik..."
+    //
+    //        isPaid.removeAll()
+    //        isNotPaid.removeAll()
+    //        if mail != nil&&pass != nil{
+    //            var typeCount=0
+    //
+    //            db.getAds(username: mail!, pass: pass!, catID: 0,progressView: loadingAlert!){
+    //
+    //                (list) in
+    //
+    //
+    //
+    //
+    //                for advert in list {
+    //
+    //                    //if (advert.isPaid==type) {
+    //                    let item = advert
+    //
+    //
+    //
+    //                    if  item.isPaid==1{
+    //
+    //
+    //                        // self.advertArray.append(item)
+    //                        self.isPaid.append(item)
+    //
+    //
+    //
+    //                    }
+    //                    if  item.isPaid==0{
+    //
+    //
+    //                        // self.advertArray.append(item)
+    //                        self.isNotPaid.append(item)
+    //
+    //
+    //
+    //                    }
+    //
+    //
+    //                    DispatchQueue.main.async {
+    //
+    //                        if self.isPaidSegment.selectedSegmentIndex == 0{
+    //                            self.advertArray = self.isPaid
+    //                            typeCount=self.isPaid.count
+    //                        }else {
+    //                            self.advertArray = self.isNotPaid
+    //                            typeCount=self.isNotPaid.count
+    //                        }
+    //
+    //
+    //
+    //                        self.ReklamCount.text="Reklam sayı \(String(typeCount))"
+    //                        self.ReklamList.reloadData()
+    //
+    //                        self.myRefreshControl.endRefreshing()
+    //
+    //                                                self.loadingAlert!.hide(animated: true)
+    //
+    //                        //
+    //
+    //                    }
+    //
+    //
+    //
+    //                }
+    //
+    //
+    //
+    //
+    //            }
+    //        }
+    //
+    //    }
     
     
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if(segue.identifier == "photoReklamPage"){
-//            let displayVC = segue.destination as! AboutAdvertController
-//            displayVC.advertID = advertID
-//        }
-//        if(segue.identifier == "textReklamPage"){
-//            let displayVC = segue.destination as! TextReklamController
-//            displayVC.advertID = advertID
-//        }
-//        if(segue.identifier == "videoReklamPage"){
-//            let displayVC = segue.destination as! VideoReklamController
-//            displayVC.advertID = advertID
-//        }
-        if(segue.identifier == "aCatSegue"){
-            let displayVC = segue.destination as! CategoryViewController
-            displayVC.object = catObject
-        }
+        //        if(segue.identifier == "photoReklamPage"){
+        //            let displayVC = segue.destination as! AboutAdvertController
+        //            displayVC.advertID = advertID
+        //        }
+        //        if(segue.identifier == "textReklamPage"){
+        //            let displayVC = segue.destination as! TextReklamController
+        //            displayVC.advertID = advertID
+        //        }
+        //        if(segue.identifier == "videoReklamPage"){
+        //            let displayVC = segue.destination as! VideoReklamController
+        //            displayVC.advertID = advertID
+        //        }
+       
         
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -625,37 +578,4 @@ func cancelSpecificTask(byUrl url:URL) {
 //
 //}
 
-
-extension HomePageController:UICollectionViewDelegate,UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // print(catList.count)
-        return catList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
-        cell.object = catList[indexPath.row]
-        // print(cell.object?.name)
-        catObject=cell.object
-        self.performSegue(withIdentifier: "aCatSegue", sender: self)
-        
-        cell.reloadData()
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoryScroll.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as! CategoryViewCell
-        
-        
-        cell.object=catList[indexPath.row]
-        cell.reloadData()
-        // print(catList[indexPath.row].name)
-        
-        return cell
-        
-        
-    }
-    
-    
-    
-    
-}
 

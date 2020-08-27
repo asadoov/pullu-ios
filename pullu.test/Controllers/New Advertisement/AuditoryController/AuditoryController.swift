@@ -13,7 +13,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var cityPicker: UIPickerView!
     @IBOutlet weak var genderPicker: UIPickerView!
     @IBOutlet weak var ageRangePicker: UIPickerView!
-    @IBOutlet weak var professionPicker: UIPickerView!
+   
     var newAdvertisement:NewAdvertisementStruct = NewAdvertisementStruct()
     var newAPreview:NewAPreviewStruct = NewAPreviewStruct()
     var countries:Array<Country> = []
@@ -22,11 +22,13 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     var professions:Array<Profession> = []
     var ageRanges:Array<AgeRangeStruct> = []
     var select:DbSelect = DbSelect()
-   
+    var interestIds:Array<Int> = Array<Int>()
+    @IBOutlet weak var chooseInterestsButton: UIButton!
     
     let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
+         NotificationCenter.default.addObserver(self, selector: #selector(self.showSpinningWheel(_:)), name: NSNotification.Name(rawValue: "notificationName"), object: nil)
         
         // Do any additional setup after loading the view.
         genders.append("Bütün cinslər")
@@ -54,7 +56,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         self.cityPicker.reloadAllComponents()
         self.genderPicker.reloadAllComponents()
         self.ageRangePicker.reloadAllComponents()
-        self.professionPicker.reloadAllComponents()
+       
         select.GetCounties(){
             
             (list)
@@ -76,18 +78,43 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.ageRangePicker.reloadAllComponents()
             }
         }
-        select.GetProfessions(){
-            
-            (list)
-            in
-            
-            self.professions += list
-            DispatchQueue.main.async {
-                self.professionPicker.reloadAllComponents()
-            }
-        }
+       
         
     }
+    @objc func showSpinningWheel(_ notification: NSNotification) {
+         print(notification.userInfo ?? "")
+         if let dict = notification.userInfo as NSDictionary? {
+             if let list = dict["interests"] as? Array<Interest>{
+                 // do something with your image
+                if list.count>0{
+                    chooseInterestsButton.setTitle("", for: .normal)
+                 self.interestIds.removeAll()
+                 for item in list{
+                     self.interestIds.append(item.id!)
+                     // print(item)
+                     if item.id == list.first?.id {
+                         
+                         chooseInterestsButton.setTitle("\(item.name!)", for: .normal)
+                     }
+                     else{
+                         
+                         chooseInterestsButton.setTitle("\(chooseInterestsButton.title(for: .normal)!), \(item.name!)", for: .normal)
+                         
+                     }
+                     
+                 }
+                }
+                
+                 
+             }
+         }
+     }
+    
+    @IBAction func chooseInterestsClick(_ sender: Any) {
+         self.performSegue(withIdentifier: "chooseInterestsSegue", sender: self)
+    }
+    
+    
     
     @IBAction func finishButton(_ sender: Any) {
         
@@ -107,10 +134,10 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             newAdvertisement.aAgeRangeID = 0
             newAPreview.aAgeRange = "Hamısı"
         }
-        if newAdvertisement.aProfessionID == nil {
-            newAdvertisement.aProfessionID = 0
-            newAPreview.aProfession = "Hamısı"
-        }
+//        if newAdvertisement.aProfessionID == nil {
+//            newAdvertisement.aProfessionID = 0
+//            newAPreview.aProfession = "Hamısı"
+//        }
 //        newAdvertisement.mail = defaults.string(forKey: "mail")
 //        newAdvertisement.pass = defaults.string(forKey: "pass")
           self.performSegue(withIdentifier: "previewController", sender: self)
@@ -139,10 +166,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             return ageRanges[row].range
         }
         
-        if pickerView == professionPicker {
-            
-            return professions[row].name
-        }
+       
         return ""
         
     }
@@ -160,9 +184,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         if pickerView == ageRangePicker {
             countrows = self.ageRanges.count
         }
-        if pickerView == professionPicker {
-            countrows = self.professions.count
-        }
+       
         
         return countrows
     }
@@ -217,10 +239,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             newAdvertisement.aAgeRangeID = ageRanges[row].id
             newAPreview.aAgeRange = ageRanges[row].range
         }
-        if pickerView==professionPicker{
-            newAdvertisement.aProfessionID = professions[row].id
-            newAPreview.aProfession = professions[row].name
-        }
+        
         
     }
     

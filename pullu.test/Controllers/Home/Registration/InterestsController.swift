@@ -104,9 +104,10 @@ class InterestsController: UITableViewController {
     }
         else
         {
-            var defaultInterest:Interest = Interest()
-            defaultInterest.name = "Maraqlarınızı seçin..."
-            values.append(defaultInterest)
+//            var defaultInterest:Interest = Interest()
+//            defaultInterest.name = "Maraqlarınızı seçin..."
+//            defaultInterest.id = 0
+//            values.append(defaultInterest)
         }
         let imageDataDict:[String: Array<Interest>] = ["interests": values]
 

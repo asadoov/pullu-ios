@@ -12,5 +12,11 @@ struct ResponseStruct<T:Codable>:Codable{
  public var status:Int?
     public var data:Array<T>
     
-   
+    init() {
+        
+    requestToken = ""
+        status = 3
+        let dt = Array<T>()
+        data = dt
+    }
 }

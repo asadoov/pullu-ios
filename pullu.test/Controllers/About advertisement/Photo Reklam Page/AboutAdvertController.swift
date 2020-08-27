@@ -195,6 +195,12 @@ class AboutAdvertController: UIViewController {
         
     }
     
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
+    
+    
     @objc func didTap() {
         slideshow.presentFullScreenController(from: self)
     }

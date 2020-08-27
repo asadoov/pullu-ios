@@ -50,7 +50,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
 //        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
 //        loadingAlert!.mode = MBProgressHUDMode.indeterminate
        
-        
+         UIApplication.shared.beginIgnoringInteractionEvents()
         
          self.myRefreshControl.beginRefreshing()
           //  var typeCount=0
@@ -58,6 +58,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate {
             select.GetMyAds(){
                 
                 (obj) in
+                 UIApplication.shared.endIgnoringInteractionEvents()
                 switch obj.status{
                 case 1:
                     
