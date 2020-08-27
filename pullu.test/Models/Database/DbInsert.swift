@@ -439,7 +439,7 @@ class DbInsert {
                 multipartFormData.append(("\(newAdvertisement!.aMediaTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aMediaTypeId")
                 multipartFormData.append(("\(newAdvertisement!.aPrice!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aPrice")
                 multipartFormData.append(("\(newAdvertisement!.aTrfID ?? 0)".data(using: .utf8)!), withName: "aTrfID")
-                multipartFormData.append(("\(newAdvertisement!.aProfessionID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aProfessionID")
+                multipartFormData.append(("\(newAdvertisement!.aProfessionID ?? 0)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aProfessionID")
                 multipartFormData.append(("\(newAdvertisement!.aTitle!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTitle")
                 //                    multipartFormData.append(("\(newAdvertisement?.aTrfID!)".data(using: .utf8)!), withName: "aTrfID")
                 multipartFormData.append(("\(newAdvertisement!.aTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTypeId")
