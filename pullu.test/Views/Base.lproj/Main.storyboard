@@ -2652,10 +2652,12 @@ baxışı</string>
                                             <outlet property="delegate" destination="91e-HX-4CW" id="PU3-DE-dpy"/>
                                         </connections>
                                     </pickerView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtD-Gj-wMf">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtD-Gj-wMf">
                                         <rect key="frame" x="17" y="346" width="287" height="39"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="39" id="Etk-vE-dQO"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                         <state key="normal" title="Maraqlarınızı seçin">
                                             <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2672,6 +2674,11 @@ baxışı</string>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="rtD-Gj-wMf" secondAttribute="trailing" constant="16" id="31E-tv-Uvj"/>
+                                    <constraint firstAttribute="bottom" secondItem="rtD-Gj-wMf" secondAttribute="bottom" constant="38" id="RNf-JF-ZfW"/>
+                                    <constraint firstItem="rtD-Gj-wMf" firstAttribute="leading" secondItem="CCx-R3-onz" secondAttribute="leading" constant="17" id="fRc-uS-SVg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -4059,7 +4066,7 @@ baxışı</string>
                                                         <fragment content="---">
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="label" size="11"/>
+                                                                <font key="NSFont" metaFont="message" size="11"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -5555,12 +5562,12 @@ baxışı</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KuC-mX-360"/>
-        <segue reference="Xxq-Xr-JLP"/>
-        <segue reference="eR9-2K-a05"/>
-        <segue reference="6GQ-4R-6LC"/>
+        <segue reference="mw8-vC-BQg"/>
+        <segue reference="UoZ-Fm-MG6"/>
+        <segue reference="SJ9-N0-5KI"/>
+        <segue reference="Kil-57-EVx"/>
         <segue reference="PaF-7P-zkZ"/>
-        <segue reference="Arv-em-5zp"/>
+        <segue reference="7qv-6d-HIP"/>
         <segue reference="eYI-wK-TXP"/>
         <segue reference="l6n-9p-XSQ"/>
         <segue reference="BOl-gM-Eqx"/>
