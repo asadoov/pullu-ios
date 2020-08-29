@@ -115,7 +115,8 @@ public class DbSelect {
                     let obj:ResponseStruct<Advertisement> = try
                         JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
                     
-                    if obj.status == 1{
+                    if obj.status == 1
+                    {
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }

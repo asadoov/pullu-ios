@@ -229,7 +229,7 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 newUser.city = selectedCityID
                 newUser.interestIds = interestIds
                 newUser.otp = otp
-                insert.signUp(newUserData: newUser){
+                insert.SignUp(newUserData: newUser){
                     (statusCode)
                     in
                     DispatchQueue.main.async {

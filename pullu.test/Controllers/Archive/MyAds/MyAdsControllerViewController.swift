@@ -256,46 +256,68 @@ ad = advertArray[indexPath.row]
     
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
           let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-          do{
-              // cell.imageView?.image = nil
-              if advertArray.count > 0{
-                  Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                      if let catPicture = response.result.value {
-                          //advert.photo=catPicture.pngData()
+         do{
+           
+                  if   cell.imageView?.image == nil{
+                      do{
                           
-                          //  item.photo = UIImage(named: "damaged")?.pngData()
-                          if indexPath.row <= self.advertArray.count {
-                              
-                              if catPicture != nil {
+                          if advertArray.count > 0{
+                              Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
+
+                                   self.advertArray[indexPath.row].downloaded=true
+                                  if let catPicture = response.result.value {
+                                       
+                                    
+                                      if indexPath.row <= self.advertArray.count {
+                                          
+                                          if catPicture.imageAsset != nil {
+                                              
+                                              self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                              
+                                              
+                                          }
+                                          else {
+                                             
+                                          }
+                                          
+                                        
+                                          
+                                          
+                                          
+                                          
+                                          cell.object = self.advertArray[indexPath.row]
+                                      }
+                                      
+                                     
+                                  }
+            
                                   
-                                  self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                  
-                                  
+                                  cell.object = self.advertArray[indexPath.row]
+                                  cell.reloadData()
                               }
-                              else {
-                                  self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
-                                  
-                              }
-                              
-                              self.advertArray[indexPath.row].downloaded=true
                               
                               
-                              // dataArray[dowloadedCount]=item
                               
                               
-                              cell.object = self.advertArray[indexPath.row]
                           }
                           
                           
-                          cell.reloadData()
+                          
+                      }
+                      catch
+                      {
+                          print(indexPath.row)
                       }
                       
+                      //cell.delegate = self
+                      // cell.reloadData()
+                      //cell.object = dataArray[indexPath.row]
+                      //     cell.delegate = self
                       
                       
+                      // Configure the cell...
                   }
-                cell.delegate = self
-                  cell.object = advertArray[indexPath.row]
-              }
+              
               
               
               
@@ -304,14 +326,6 @@ ad = advertArray[indexPath.row]
           {
               print(indexPath.row)
           }
-          
-          //cell.delegate = self
-          cell.reloadData()
-          //cell.object = dataArray[indexPath.row]
-          //     cell.delegate = self
-          
-          
-          // Configure the cell...
           
           return cell
       }

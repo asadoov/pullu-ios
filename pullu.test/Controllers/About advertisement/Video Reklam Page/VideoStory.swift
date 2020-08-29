@@ -109,7 +109,7 @@ class VideoStory: UIViewController {
             
             
             if time==0{
-                self.insert.earnMoney(advertID: self.advertID){
+                self.insert.EarnMoney(advertID: self.advertID){
                     
                     (status)
                     in

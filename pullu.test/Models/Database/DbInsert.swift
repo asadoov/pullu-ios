@@ -40,7 +40,7 @@ class DbInsert {
     
     
     
-    func signUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
+    func SignUp(newUserData:NewUser,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
@@ -109,7 +109,7 @@ class DbInsert {
         
         
     }
-    func earnMoney(advertID:Int?,completionBlock: @escaping (_ result:Status) ->()){
+    func EarnMoney(advertID:Int?,completionBlock: @escaping (_ result:Status) ->()){
         
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")

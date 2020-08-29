@@ -38,6 +38,7 @@ class AboutAdvertController: UIViewController {
     
     //    @IBOutlet weak var blurClocks: UIImageView!
     @IBOutlet weak var earnMoney: UIButton!
+    var titleLabel:UILabel?
     var imageSource: [ImageSource] = []
     
     override func viewDidLoad() {
@@ -46,6 +47,9 @@ class AboutAdvertController: UIViewController {
         self.earnMoney.isHidden=true
         earnMoney.titleLabel!.text = "Yüklənir..."
         self.defaults.set(nil, forKey: "aID")
+        
+       titleLabel  = UILabel(frame: CGRect(x: 10, y: 0, width: self.slideshow!.frame.width - 10, height: 60))
+        
         //        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
         //
         //        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
@@ -136,7 +140,7 @@ class AboutAdvertController: UIViewController {
                     
                     Alamofire.request(i).responseImage { response in
                         
-                         loadingIndicator.stopAnimating();
+                        loadingIndicator.stopAnimating();
                         
                         if let catPicture = response.result.value {
                             self.imageSource.append(ImageSource(image:  catPicture))
@@ -144,7 +148,8 @@ class AboutAdvertController: UIViewController {
                             print("Image downloaded\(catPicture)")
                             //advert.photo=catPicture.pngData()
                             DispatchQueue.main.async {
-                               
+                              
+                                
                                 self.slideshow.setImageInputs(self.imageSource)
                             }
                             
@@ -156,17 +161,23 @@ class AboutAdvertController: UIViewController {
                             //print(self.dataArray[dataArray.count-1].photo)
                             
                         }
-                        else{
-                            self.imageSource.append(ImageSource(image: UIImage(named: "damaged")!))
-                            DispatchQueue.main.async {
-                               
-                                self.slideshow.setImageInputs(self.imageSource)
-                            }
+                        else {
+                            
+                            self.titleLabel!.textAlignment = .center
+                            self.titleLabel!.center = self.slideshow.center
+                            self.titleLabel!.text = "🤷🏼‍♂️"
+                            self.titleLabel!.textColor = UIColor.black
+                            self.titleLabel!.font = UIFont(name:"chalkboard SE", size: 58)
+                            
+                            self.slideshow.addSubview(self.titleLabel!)
+                            self.earnMoney.isHidden=true
                         }
+                        
                         
                         if (self.imageSource.count == list[0].photoUrl!.count)
                         {
                             if self.imageSource.count>0{
+                                self.titleLabel!.text = ""
                                 if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
                                 {
                                     self.earnMoney.titleLabel!.text = "Reklamı izlə"
@@ -175,11 +186,20 @@ class AboutAdvertController: UIViewController {
                                 }
                                 
                             }
+                            else{
+                                self.titleLabel!.textAlignment = .center
+                                self.titleLabel!.center = self.slideshow.center
+                                self.titleLabel!.text = "🤷🏼‍♂️"
+                                self.titleLabel!.textColor = UIColor.black
+                                self.titleLabel!.font = UIFont(name:"chalkboard SE", size: 58)
+                                
+                                self.slideshow.addSubview(self.titleLabel!)
+                                self.earnMoney.isHidden=true
+                                
+                            }
                             
                         }
-                        else {
-                            self.earnMoney.isHidden=true
-                        }
+                        
                         
                     }
                     

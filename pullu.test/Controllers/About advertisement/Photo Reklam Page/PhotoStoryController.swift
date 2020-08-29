@@ -34,7 +34,7 @@ class PhotoStoryController: UIViewController {
             
             time+=1
             if time==31{
-                 self.insert.earnMoney(advertID: self.advertID){
+                 self.insert.EarnMoney(advertID: self.advertID){
                  
                  (status)
                  in

@@ -3925,7 +3925,7 @@ baxışı</string>
         <scene sceneID="vLW-ty-Us1">
             <objects>
                 <tableViewController storyboardIdentifier="paid" id="Yvi-2h-47M" customClass="PaidController" customModule="Pullu" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="192" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qcb-pp-JUl">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="192" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qcb-pp-JUl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -4066,7 +4066,7 @@ baxışı</string>
                                                         <fragment content="---">
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="message" size="11"/>
+                                                                <font key="NSFont" metaFont="label" size="11"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -4176,7 +4176,7 @@ baxışı</string>
         <scene sceneID="kFM-Bs-Fh5">
             <objects>
                 <tableViewController storyboardIdentifier="notPaid" id="UBl-6G-ZHy" customClass="NotPaidController" customModule="Pullu" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="190" sectionHeaderHeight="28" sectionFooterHeight="28" id="ov3-2a-aPu">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="190" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ov3-2a-aPu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -4353,6 +4353,7 @@ baxışı</string>
                                     <outlet property="aPrice" destination="P4Z-Tu-JEl" id="oVZ-HA-oLn"/>
                                     <outlet property="aTitle" destination="PqM-O1-fKs" id="tsx-ux-iJ8"/>
                                     <outlet property="aTypeImage" destination="nii-yU-fVY" id="3Ev-1B-n6x"/>
+                                    <outlet property="aView" destination="jgN-iV-QFc" id="ZZa-vg-9ds"/>
                                     <outlet property="cell" destination="zkX-re-QWn" id="uWT-G9-4OP"/>
                                 </connections>
                             </tableViewCell>

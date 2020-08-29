@@ -36,7 +36,7 @@ class ReklamCellTableViewCell: UITableViewCell {
     @IBOutlet weak var aCategory: UILabel!
     let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var object:Advertisement?
-    
+    var titleLabel:UILabel = UILabel()
     //2. create delegate variable
     var delegate: ReklamCellDelegate?
     
@@ -44,6 +44,9 @@ class ReklamCellTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -61,19 +64,47 @@ class ReklamCellTableViewCell: UITableViewCell {
     //
     
     override func prepareForReuse() {
+        
+        //self.aImage?.image=UIImage(named: "background")!
+        
+        
         DispatchQueue.main.async {
-            self.aImage?.image=UIImage(named: "background")
+            // self.aImage?.image=nil
             
-            self.loadingIndicator.center=CGPoint(x: self.aImage.bounds.size.width/2, y: self.aImage.bounds.size.height/2)
-            self.loadingIndicator.hidesWhenStopped = true
-            self.loadingIndicator.color = UIColor.lightGray
-            // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            self.loadingIndicator.startAnimating()
-            self.aImage?.addSubview(self.loadingIndicator)
+            
+            super.prepareForReuse()
         }
     }
+    func createNotFoundImage() {
+        self.titleLabel.text = "🤷🏼‍♂️"
+        self.titleLabel.textColor = UIColor.black
+        self.titleLabel.font = UIFont(name:"chalkboard SE", size: 58)
+        
+        self.titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: self.aImage!.frame.width - 10, height: 50))
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.center = self.aImage.center
+        self.aImage.addSubview(self.titleLabel)
+    }
+    func createLoadingIndicator() {
+        self.loadingIndicator.center=CGPoint(x: self.aImage.bounds.size.width/2, y: self.aImage.bounds.size.height/2)
+        self.loadingIndicator.hidesWhenStopped = true
+        self.loadingIndicator.color = UIColor.lightGray
+        
+        self.aImage.addSubview(self.loadingIndicator)
+        self.loadingIndicator.startAnimating()
+    }
     func reloadData() {
+        
+        
+        
         if object != nil {
+            
+            createNotFoundImage()
+            createLoadingIndicator()
+            
+            
+            
+            
             aImage?.layer.borderWidth = 1
             aImage?.layer.borderColor = UIColor.gray.cgColor
             
@@ -147,160 +178,44 @@ class ReklamCellTableViewCell: UITableViewCell {
                 
                 aPrice?.text="\(object!.price!) AZN "
             }
-            //aDate.text=dateFormatter.string(from:dt!)
-            //
             
             
-            if object?.aTypeId == 1 || object?.aTypeId == 2
-            {
-                for subView in self.aImage.subviews {
-                    subView.removeFromSuperview()
-                }
-                if object?.photo != nil {
-                    DispatchQueue.main.async {
-                        self.aImage?.image=UIImage(data:self.object!.photo!)
-                    }
-                    
-                }
-                else {
-                    if object?.downloaded == true {
-                        DispatchQueue.main.async {
-                            self.aImage.image=UIImage(named: "damaged")
-                        }
-                        //loadingIndicator.stopAnimating()
-                    }
-                    
-                }
-                DispatchQueue.main.async {
-                    self.loadingIndicator.stopAnimating()
-                }
-            }
-            if object!.aTypeId == 3 {
+            
+            
+            
+            
+            
+            DispatchQueue.main.async {
+                self.aImage!.image=nil
                 
-                do {
-                    DispatchQueue.main.async {
+                if self.object?.downloaded == true{
+                    
+                    if self.object?.photo != nil {
                         for subView in self.aImage.subviews {
                             subView.removeFromSuperview()
                         }
-                        let sourceURL = URL(string: (self.object?.photoUrl?[0]) ?? "")
-                        let asset = AVAsset(url: sourceURL!)
-                        let imageGenerator = AVAssetImageGenerator(asset: asset)
-                        let time = CMTimeMake(value: 1, timescale: 60)
-                        let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil)
-                        var thumbnail:UIImage = UIImage()
-                        if imageRef != nil{
-                            
-                            thumbnail = UIImage(cgImage:imageRef!)
-                            
-                            
-                            self.aImage.image=thumbnail
-                            
-                        }
-                        else {
-                            let titleLabel = UILabel(frame: CGRect(x: 10, y: 0, width: self.aImage!.frame.width - 10, height: 30))
-                            titleLabel.textAlignment = .center
-                            titleLabel.center = self.aImage.center
-                            titleLabel.text = "😵"
-                            titleLabel.textColor = UIColor.black
-                            titleLabel.font = UIFont(name:"chalkboard SE", size: 18)
-                            DispatchQueue.main.async {
-                                self.aImage.addSubview(titleLabel)
-                            }
-                            
-                        }
+                        self.loadingIndicator.stopAnimating()
+                        self.aImage!.image=UIImage(data:self.object!.photo!)
                     }
-                    
-                    
-                    
-                    
-                }
-                catch {
-                    
-                    DispatchQueue.main.async {
-                        self.aImage.image=UIImage(named: "damaged")
+                    else {
+                        
+                        self.createNotFoundImage()
+                        self.loadingIndicator.stopAnimating()
                     }
                     
                 }
-                
-                
-                //                let videoURL = URL(string: (object?.photoUrl![0])!)
-                //                self.player = AVPlayer(url: videoURL!)
-                //
-                //                let playerLayer = AVPlayerLayer(player:self.player )
-                //
-                //                DispatchQueue.main.async {
-                //                    playerLayer.frame = self.aImage.frame
-                //                    self.aImage.layer.addSublayer(playerLayer)
-                //                    //                          self.player?.play()
-                //                }
-                DispatchQueue.main.async {
-                    self.loadingIndicator.stopAnimating()
+                else   {
+                    self.createLoadingIndicator()
+                    
+                    
+                    
                 }
             }
             
             
             
-            
-            
-            
-            
-            //        else  {
-            //
-            //
-            //            if object?.aTypeId != 3{
-            //
-            //
-            //                aImage.image=UIImage(named: "background")
-            //                let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-            //                loadingIndicator.center=CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-            //                loadingIndicator.hidesWhenStopped = true
-            //                loadingIndicator.color = UIColor.lightGray
-            //                // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-            //                loadingIndicator.startAnimating();
-            //                aImage.addSubview(loadingIndicator)
-            //            }
-            //            else   {
-            //                let label = UILabel()
-            //                label.center = CGPoint(x: aImage.bounds.size.width/2, y: aImage.bounds.size.height/2)
-            //
-            //                // you will probably want to set the font (remember to use Dynamic Type!)
-            //                label.font = UIFont.preferredFont(forTextStyle: .footnote)
-            //
-            //                // and set the text color too - remember good contrast
-            //                label.textColor = .black
-            //
-            //                // may not be necessary (e.g., if the width & height match the superview)
-            //                // if you do need to center, CGPointMake has been deprecated, so use this
-            //
-            //
-            //                // this changed in Swift 3 (much better, no?)
-            //                label.textAlignment = .center
-            //
-            //                label.text = "I am a test label"
-            //
-            //                aImage.addSubview(label)
-            //
-            //
-            //            }
-            //
-            //
-            //        }
-            
-            
-            
-            
-            // self.ReklamImage.contentMode = .scaleAspectFill
-            
-            
-            
-            /*Alamofire.request(object!.photoUrl!).responseImage { response in
-             if let catPicture = response.result.value {
-             self.ReklamImage.image=""
-             self.ReklamImage.contentMode = .scaleAspectFill
-             //print("image downloaded: \(catPicture)")
-             }
-             }*/
         }
+        
         
         
         

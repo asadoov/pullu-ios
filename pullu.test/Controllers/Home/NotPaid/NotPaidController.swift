@@ -164,43 +164,65 @@ class NotPaidController: UITableViewController {
         do{
             if loading == false  {
                 // cell.imageView?.image = nil
-                if advertArray[indexPath.row].photo == nil{
-                    Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                        if let catPicture = response.result.value {
-                            //advert.photo=catPicture.pngData()
-                            
-                            //  item.photo = UIImage(named: "damaged")?.pngData()
-                            if indexPath.row <= self.advertArray.count {
-                                
-                                if catPicture.imageAsset != nil {
+                if   cell.imageView?.image == nil{
+                    do{
+                        
+                        if advertArray.count > 0{
+                            Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
+
+                                 self.advertArray[indexPath.row].downloaded=true
+                                if let catPicture = response.result.value {
+                                     
+                                  
+                                    if indexPath.row <= self.advertArray.count {
+                                        
+                                        if catPicture.imageAsset != nil {
+                                            
+                                            self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                            
+                                            
+                                        }
+                                        else {
+                                           
+                                        }
+                                        
+                                      
+                                        
+                                        
+                                        
+                                        
+                                        cell.object = self.advertArray[indexPath.row]
+                                    }
                                     
-                                    self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                    
-                                    
+                                   
                                 }
-                                else {
-                                    self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
-                                    
-                                }
-                                
-                                self.advertArray[indexPath.row].downloaded=true
-                                
-                                
-                                // dataArray[dowloadedCount]=item
-                                
+          
                                 
                                 cell.object = self.advertArray[indexPath.row]
+                                cell.reloadData()
                             }
                             
                             
-                            cell.reloadData()
+                            
+                            
                         }
                         
                         
                         
                     }
+                    catch
+                    {
+                        print(indexPath.row)
+                    }
+                    
+                    //cell.delegate = self
+                    // cell.reloadData()
+                    //cell.object = dataArray[indexPath.row]
+                    //     cell.delegate = self
+                    
+                    
+                    // Configure the cell...
                 }
-                cell.object = advertArray[indexPath.row]
             }
             
             
@@ -212,7 +234,7 @@ class NotPaidController: UITableViewController {
         }
         
         //cell.delegate = self
-        cell.reloadData()
+      //  cell.reloadData()
         //cell.object = dataArray[indexPath.row]
         //     cell.delegate = self
         
@@ -441,11 +463,11 @@ class NotPaidController: UITableViewController {
                 
                 alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
                     let menu:MenuController = MenuController()
-                                       menu.updateRootVC(status: false)
+                    menu.updateRootVC(status: false)
                     self.defaults.set(nil, forKey: "userToken")
                     self.defaults.set(nil, forKey: "requestToken")
                     self.defaults.set(nil, forKey: "uData")
-                   
+                    
                 }))
                 self.present(alert, animated: true, completion: nil)
                 break

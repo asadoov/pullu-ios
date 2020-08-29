@@ -15,7 +15,7 @@ class TextReklamController: UIViewController {
     var advertID:Int?
     var select:DbSelect=DbSelect()
     var userData = Array<UserStruct>()
-     var userToken:String?
+    var userToken:String?
     var requestToken:String?
     var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
@@ -34,21 +34,17 @@ class TextReklamController: UIViewController {
     @IBOutlet weak var balance: UILabel!
     
     @IBOutlet weak var advertImage: UIImageView!
+    var loadingAlert:MBProgressHUD?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            earnMoney.isEnabled=false
-                 self.earnMoney.isHidden=true
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        earnMoney.isEnabled=false
+        self.earnMoney.isHidden=true
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.indeterminate
         
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
+        self.defaults.set(nil, forKey: "aID")
         
-         self.defaults.set(nil, forKey: "aID")
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
         // navigationController?.navigationBar.isTranslucent = false
         
         
@@ -73,13 +69,14 @@ class TextReklamController: UIViewController {
             
             
             DispatchQueue.main.async {
-              if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
-               {
-                   self.earnMoney.isHidden=false
-                     self.earnMoney.isEnabled=true
-                 
-               }
-              
+                self.loadingAlert?.hide(animated: true)
+                if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+                {
+                    self.earnMoney.isHidden=false
+                    self.earnMoney.isEnabled=true
+                    
+                }
+                
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -135,9 +132,9 @@ class TextReklamController: UIViewController {
                     
                     
                 }
-               
-                                      
-                self.dismiss(animated: false)
+                
+                
+                
             }
         }
         

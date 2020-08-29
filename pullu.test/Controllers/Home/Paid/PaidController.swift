@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import MBProgressHUD
+import AVKit
 class PaidController: UITableViewController {
     var loadingAlert:MBProgressHUD = MBProgressHUD()
     var advertArray: [Advertisement] = [Advertisement]()
@@ -73,59 +74,59 @@ class PaidController: UITableViewController {
     }
     
     @IBAction func refreshCategoriesBtnClick(_ sender: Any) {
-            refreshCat()
-            
-        }
-        func refreshCat(){
-            
-            select.ACategory(){
-                (list)
-                in
-                self.catList=list
-                var catIndex=0
-                for item in self.catList{
-                    
-                    Alamofire.request(item.catImage!).responseImage { response in
-                        if let catPicture = response.result.value {
-                            //advert.photo=catPicture.pngData()
-                            item.downloadedIco = catPicture.pngData()
+        refreshCat()
+        
+    }
+    func refreshCat(){
+        
+        select.ACategory(){
+            (list)
+            in
+            self.catList=list
+            var catIndex=0
+            for item in self.catList{
+                
+                Alamofire.request(item.catImage!).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
+                        item.downloadedIco = catPicture.pngData()
+                        
+                        print("image downloaded: \(item.downloadedIco)")
+                        
+                        // self.catList[item.id!-1]=item
+                        //self.catList[catIndex]=item
+                        // self.dataArray.replaceSubrange( , with: item)
+                        catIndex+=1
+                        if catIndex == self.catList.count {
+                            self.catList.sort { $0.id! < $1.id! }
                             
-                            print("image downloaded: \(item.downloadedIco)")
                             
-                            // self.catList[item.id!-1]=item
-                            //self.catList[catIndex]=item
-                            // self.dataArray.replaceSubrange( , with: item)
-                            catIndex+=1
-                            if catIndex == self.catList.count {
-                                self.catList.sort { $0.id! < $1.id! }
-                                
-                                
-                            }
-                            if self.catList.count>0{
-                                DispatchQueue.main.async {
-                                    self.refreshCatButton?.isHidden=true
-                                    self.categoryScroll.reloadData()
-                                    self.refreshCatButton.isHidden=true
-                                }
-                            }
-                            else
-                            {
-                                self.refreshCatButton?.isHidden=false
+                        }
+                        if self.catList.count>0{
+                            DispatchQueue.main.async {
+                                self.refreshCatButton?.isHidden=true
+                                self.categoryScroll.reloadData()
+                                self.refreshCatButton.isHidden=true
                             }
                         }
-                        
-                        
-                        
-                        
+                        else
+                        {
+                            self.refreshCatButton?.isHidden=false
+                        }
                     }
                     
+                    
+                    
+                    
                 }
-                //            self.catList.sort {
-                //                $0.id! < $1.id!
-                //            }
                 
             }
+            //            self.catList.sort {
+            //                $0.id! < $1.id!
+            //            }
+            
         }
+    }
     
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -176,66 +177,103 @@ class PaidController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        if   cell.imageView?.image == nil{
-            do{
-                
-                if advertArray.count > 0{
-                    
-                    Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                        if let catPicture = response.result.value {
-                            //advert.photo=catPicture.pngData()
-                            
-                            //  item.photo = UIImage(named: "damaged")?.pngData()
-                            if indexPath.row <= self.advertArray.count {
-                                
-                                if catPicture.imageAsset != nil {
+    if loading == false  {
+                  // cell.imageView?.image = nil
+                  if   cell.imageView?.image == nil{
+                      do{
+                          
+                          if advertArray.count > 0{
+                              Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
+
+                                   self.advertArray[indexPath.row].downloaded=true
+                                  if let catPicture = response.result.value {
+                                       
                                     
-                                    self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                    
-                                    
-                                }
-                                else {
-                                    self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
-                                    
-                                }
-                                
-                                self.advertArray[indexPath.row].downloaded=true
-                                
-                                
-                                // dataArray[dowloadedCount]=item
-                                
-                                
-                                cell.object = self.advertArray[indexPath.row]
-                            }
-                            
-                            
-                            cell.reloadData()
-                        }
-                        
-                        
-                        
-                    }
-                    cell.object = advertArray[indexPath.row]
-                }
-                
-                
-                
-            }
-            catch
-            {
-                print(indexPath.row)
-            }
+                                      if indexPath.row <= self.advertArray.count {
+                                          
+                                          if catPicture.imageAsset != nil {
+                                              
+                                              self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                              
+                                              
+                                          }
+                                          else {
+                                             
+                                          }
+                                          
+                                        
+                                          
+                                          
+                                          
+                                          
+                                          cell.object = self.advertArray[indexPath.row]
+                                      }
+                                      
+                                     
+                                  }
             
-            //cell.delegate = self
-            cell.reloadData()
-            //cell.object = dataArray[indexPath.row]
-            //     cell.delegate = self
-            
-            
-            // Configure the cell...
-        }
+                                  
+                                  cell.object = self.advertArray[indexPath.row]
+                                  cell.reloadData()
+                              }
+                              
+                              
+                              
+                              
+                          }
+                          
+                          
+                          
+                      }
+                      catch
+                      {
+                          print(indexPath.row)
+                      }
+                      
+                      //cell.delegate = self
+                      // cell.reloadData()
+                      //cell.object = dataArray[indexPath.row]
+                      //     cell.delegate = self
+                      
+                      
+                      // Configure the cell...
+                  }
+              }
         return cell
     }
+    func getThumbnailImage(forUrl url: URL) -> UIImage? {
+        let asset: AVAsset = AVAsset(url: url)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60) , actualTime: nil)
+            return UIImage(cgImage: thumbnailImage)
+        } catch let error {
+            print(error)
+        }
+        
+        return nil
+    }
+    private func createVideoThumbnail(from url: URL) -> UIImage? {
+        
+        let asset = AVAsset(url: url)
+        let assetImgGenerate = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        // assetImgGenerate.maximumSize = CGSize(width: self.frame.width, height: frame.height)
+        
+        let time = CMTimeMakeWithSeconds(0.0, preferredTimescale: 600)
+        do {
+            let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let thumbnail = UIImage(cgImage: img)
+            return thumbnail
+        }
+        catch {
+            print(error.localizedDescription)
+            return nil
+        }
+        
+    }
+    
     func pagination(page:Int){
         
         
@@ -324,7 +362,7 @@ class PaidController: UITableViewController {
                     self.present(alert, animated: true, completion: nil)
                     break
                 default:
-                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəhd edin", preferredStyle: UIAlertController.Style.alert)
                     
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
                         //logout
@@ -347,11 +385,11 @@ class PaidController: UITableViewController {
     
     @objc func refresh() {
         
-       
+        
         
         //  paginationEnabled = true
         loading = true
-         UIApplication.shared.beginIgnoringInteractionEvents()
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
         
         self.myRefreshControl.beginRefreshing()
@@ -360,9 +398,9 @@ class PaidController: UITableViewController {
         select.GetAds(isPaid: 1,page: 1, catID: catID,progressView: loadingAlert){
             
             (obj) in
-             UIApplication.shared.endIgnoringInteractionEvents()
-             self.myRefreshControl.endRefreshing()
-             self.loading = false
+            UIApplication.shared.endIgnoringInteractionEvents()
+            self.myRefreshControl.endRefreshing()
+            self.loading = false
             switch obj.status {
             case 1:
                 
@@ -400,7 +438,7 @@ class PaidController: UITableViewController {
                             self.myRefreshControl.endRefreshing()
                             self.paidTableView.reloadData()
                             
-                                                      
+                            
                         }
                         
                         
@@ -412,9 +450,9 @@ class PaidController: UITableViewController {
                         self.paginationEnabled = true
                     }
                     
-                   
                     
-                  
+                    
+                    
                     
                     
                     //
@@ -424,7 +462,7 @@ class PaidController: UITableViewController {
                 }
                 else  {
                     
-                   
+                    
                     // self.loadingAlert!.hide(animated: true)
                     let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                     warningAlert.mode = MBProgressHUDMode.text
@@ -439,8 +477,8 @@ class PaidController: UITableViewController {
                 let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                 
                 alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                   let menu:MenuController = MenuController()
-                   menu.updateRootVC(status: false)
+                    let menu:MenuController = MenuController()
+                    menu.updateRootVC(status: false)
                     self.defaults.set(nil, forKey: "userToken")
                     self.defaults.set(nil, forKey: "requestToken")
                     self.defaults.set(nil, forKey: "uData")
@@ -460,8 +498,8 @@ class PaidController: UITableViewController {
                 
                 
             }
-           
-         
+            
+            
         }
     }
     
@@ -472,61 +510,61 @@ class PaidController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if(segue.identifier == "photoReklamPage"){
-                 if let navController = segue.destination as? UINavigationController {
-                     
-                     if let chidVC = navController.topViewController as? AboutAdvertController {
-                         //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
-                         chidVC.advertID  = advertID
-                         
-                     }
-                     
-                 }
-                 
-                 
-             }
-             if(segue.identifier == "textReklamPage"){
-                 
-                 if let navController = segue.destination as? UINavigationController {
-                     
-                     if let chidVC = navController.topViewController as? TextReklamController {
-                         //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
-                         chidVC.advertID  = advertID
-                         
-                     }
-                     
-                 }
-                 
-                 
-             }
-             if(segue.identifier == "videoReklamPage"){
-                 if let navController = segue.destination as? UINavigationController {
-                     
-                     if let chidVC = navController.topViewController as? VideoReklamController {
-                         //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
-                         chidVC.advertID  = advertID
-                         
-                     }
-                     
-                 }
-                 
-                 
-             }
-             
-             if(segue.identifier == "aCatSegue"){
-                 
-                 if let navController = segue.destination as? UINavigationController {
-                     
-                     if let chidVC = navController.topViewController as? CategoryViewController {
-                         //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
-                         chidVC.object  = catObject
-                         
-                     }
-                     
-                 }
-                 
-                 
-             }
+        if(segue.identifier == "photoReklamPage"){
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? AboutAdvertController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
+        }
+        if(segue.identifier == "textReklamPage"){
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? TextReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
+        }
+        if(segue.identifier == "videoReklamPage"){
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? VideoReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        if(segue.identifier == "aCatSegue"){
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? CategoryViewController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.object  = catObject
+                    
+                }
+                
+            }
+            
+            
+        }
         
         
         // Get the new view controller using segue.destination.

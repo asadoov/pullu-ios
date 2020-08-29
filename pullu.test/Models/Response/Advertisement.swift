@@ -30,5 +30,10 @@ struct Advertisement : Codable {
     var tariffViewCount:Int?
     var downloaded:Bool?
     var error:Bool?
+    var thumbnail:String?
+    init() {
+       // statements\
+        downloaded = false
+    }
     
 }

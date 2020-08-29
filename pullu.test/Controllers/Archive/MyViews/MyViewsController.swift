@@ -131,20 +131,46 @@ class MyViewsController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ 
         if(segue.identifier == "photoReklamPage"){
-            let displayVC = segue.destination as! AboutAdvertController
-            displayVC.advertID = advertID
-            displayVC.fromArchieve = true
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? AboutAdvertController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         if(segue.identifier == "textReklamPage"){
-            let displayVC = segue.destination as! TextReklamController
-            displayVC.advertID = advertID
-            displayVC.fromArchieve = true
+            
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? TextReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         if(segue.identifier == "videoReklamPage"){
-            let displayVC = segue.destination as! VideoReklamController
-            displayVC.advertID = advertID
-            displayVC.fromArchieve = true
+            if let navController = segue.destination as? UINavigationController {
+                
+                if let chidVC = navController.topViewController as? VideoReklamController {
+                    //TODO: access here chid VC  like childVC.yourTableViewArray = localArrayValue
+                    chidVC.advertID  = advertID
+                    
+                }
+                
+            }
+            
+            
         }
         //        if(segue.identifier == "aCatSegue"){
         //            let displayVC = segue.destination as! CategoryViewController
@@ -223,45 +249,70 @@ extension MyViewsController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-        do{
-            // cell.imageView?.image = nil
-            if advertArray[indexPath.row].photo == nil{
-                Alamofire.request((advertArray[indexPath.row].photoUrl![0])).responseImage { response in
-                    if let catPicture = response.result.value {
-                        //advert.photo=catPicture.pngData()
+       do{
+            
+              
+                if   cell.imageView?.image == nil{
+                    do{
                         
-                        //  item.photo = UIImage(named: "damaged")?.pngData()
-                        if indexPath.row <= self.advertArray.count {
-                            
-                            if catPicture != nil {
+                        if advertArray.count > 0{
+                            Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
+
+                                 self.advertArray[indexPath.row].downloaded=true
+                                if let catPicture = response.result.value {
+                                     
+                                  
+                                    if indexPath.row <= self.advertArray.count {
+                                        
+                                        if catPicture.imageAsset != nil {
+                                            
+                                            self.advertArray[indexPath.row].photo=catPicture.pngData()!
+                                            
+                                            
+                                        }
+                                        else {
+                                           
+                                        }
+                                        
+                                      
+                                        
+                                        
+                                        
+                                        
+                                        cell.object = self.advertArray[indexPath.row]
+                                    }
+                                    
+                                   
+                                }
+          
                                 
-                                self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                
-                                
+                                cell.object = self.advertArray[indexPath.row]
+                                cell.reloadData()
                             }
-                            else {
-                                self.advertArray[indexPath.row].photo=UIImage(named: "damaged")?.pngData()
-                                
-                            }
-                            
-                            self.advertArray[indexPath.row].downloaded=true
                             
                             
-                            // dataArray[dowloadedCount]=item
                             
                             
-                            cell.object = self.advertArray[indexPath.row]
                         }
                         
                         
-                        cell.reloadData()
+                        
+                    }
+                    catch
+                    {
+                        print(indexPath.row)
                     }
                     
+                    //cell.delegate = self
+                    // cell.reloadData()
+                    //cell.object = dataArray[indexPath.row]
+                    //     cell.delegate = self
                     
                     
+                    // Configure the cell...
                 }
-            }
-            cell.object = advertArray[indexPath.row]
+            
+            
             
             
         }
@@ -269,9 +320,6 @@ extension MyViewsController:UITableViewDelegate,UITableViewDataSource
         {
             print(indexPath.row)
         }
-        
-        //cell.delegate = self
-        cell.reloadData()
         //cell.object = dataArray[indexPath.row]
         //     cell.delegate = self
         
