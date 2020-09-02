@@ -16,6 +16,8 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     var data = ["050","051","055","070","099"]
     var picker = UIPickerView()
     var phoneNumWithOperator = ""
+    
+    @IBOutlet weak var signInButton: UIButton!
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -39,6 +41,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     var newUser: NewUser = NewUser()
     override func viewDidLoad() {
         super.viewDidLoad()
+           self.signInButton.layer.cornerRadius = self.signInButton.frame.height.self / 2.0
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
             self.view.frame.origin.y = -200
         }
@@ -74,7 +77,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
         }
     }
     
-    @IBAction func girishButton(_ sender: Any) {
+    @IBAction func signInButtonClick(_ sender: Any) {
         let loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert.mode = MBProgressHUDMode.indeterminate
         //            warningAlert.isSquare=true

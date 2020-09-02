@@ -17,12 +17,13 @@ class SignIn: UIViewController {
     var loadingAlert:MBProgressHUD?
     
     @IBOutlet weak var pass: UITextField!
+    @IBOutlet weak var signInButton: UIButton!
     
     var phoneNum:Int64?
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+           self.signInButton.layer.cornerRadius = self.signInButton.frame.height.self / 2.0
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
             self.view.frame.origin.y = -200
         }

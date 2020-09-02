@@ -93,22 +93,22 @@ class CheckOtp: UIViewController, UITextFieldDelegate {
                                    self.present(alert, animated: true, completion: nil)
                                    
                                    break
-                                case 3:
-                                                            let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
-                                                                                                       alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                                                                                                       alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                                                                                                           let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(Status.response!)\n\(Status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
-                                                                                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                                                                                                           self.present(alert, animated: true, completion: nil)
-                                                                                                       }))
-                                                                                                       self.present(alert, animated: true, completion: nil)
-                                                            break
-                                case 4:
+//                                case 3:
+//                                                            let alert = UIAlertController(title: "Oops", message: "Hall hazırda serverlərimizdə problem yaşanır və biz artıq bunun üzərində çalışırıq", preferredStyle: UIAlertController.Style.alert)
+//                                                                                                       alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+//                                                                                                       alert.addAction(UIAlertAction(title: "Ətraflı", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+//                                                                                                           let alert = UIAlertController(title: "Ətraflı", message: "Lütfən bu mesajı screenshot edib developerə göndərəsiniz\n xəta kodu: \(Status.response!)\n\(Status.responseString ?? "")", preferredStyle: UIAlertController.Style.alert)
+//                                                                                                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+//                                                                                                           self.present(alert, animated: true, completion: nil)
+//                                                                                                       }))
+//                                                                                                       self.present(alert, animated: true, completion: nil)
+//                                                            break
+                             default :
                                                                  let alert = UIAlertController(title: "Xəta", message: "Biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
                                                                  alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
                                                                  self.present(alert, animated: true, completion: nil)
-                                
-                               default : break
+                                break
+                               
                                }
                            }
                 }
