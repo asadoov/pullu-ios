@@ -660,12 +660,12 @@ public class DbSelect {
     }
     func VerifyOtp(mobile:Int,otp:Int,completionBlock: @escaping (_ result:Status) ->()){
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/registration/verify/otp"
         
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         
-        let Parameters = ["mobile": mobile,"code":otp] as [String : Any]
+        let Parameters = ["phone": mobile,"otp":otp] as [String : Any]
         //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
         
         
@@ -685,12 +685,12 @@ public class DbSelect {
                 do{
                     
                     
-                    let statusCode  = try
+                    let status  = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     //print(list)
                     
-                    completionBlock(statusCode)
+                    completionBlock(status)
                     
                     
                 }

@@ -88,7 +88,7 @@ class CheckOtp: UIViewController, UITextFieldDelegate {
                         
                                    
                                    case 2:
-                                   let alert = UIAlertController(title: "Bildiriş", message: "Kod yalnışdır!", preferredStyle: UIAlertController.Style.alert)
+                                   let alert = UIAlertController(title: "Bildiriş", message: "OTP yalnışdır!", preferredStyle: UIAlertController.Style.alert)
                                    alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
                                    self.present(alert, animated: true, completion: nil)
                                    
