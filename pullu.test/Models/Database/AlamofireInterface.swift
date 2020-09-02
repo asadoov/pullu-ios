@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import MBProgressHUD
 class AlamofireInterface {
-    var dbSelect: dbSelect!
+    var dbSelect: DbSelect!
     func getRequest(params:[String:Any]?,url:String?,completionBlock: @escaping (_ result:Data) ->()){
            
            

@@ -22,7 +22,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
     
     
     
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var catList:Array<CategoryStruct>=[]
     var typeList:Array<TypeStruct>=[]
     var isPaidFinished=true
@@ -38,15 +38,15 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         loadingIndicator.startAnimating();
         alert.view.addSubview(loadingIndicator)
         present(alert, animated: false, completion: nil)
-        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = -200
-        }
-        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-            self.view.frame.origin.y = 0.0
-        }
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = -200
+//        }
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = 0.0
+//        }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        select.aType(){
+            select.AType(){
             (list)
             in
             self.typeList=list
@@ -55,7 +55,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
                 self.aTypePicker.reloadAllComponents();
             }
         }
-        select.aCategory(){
+        select.ACategory(){
             (list)
             in
             self.catList=list
@@ -100,7 +100,7 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
         {
             if isPaidFinished==true {
                 isPaidFinished=false
-                select.aType(){
+                select.AType(){
                     (list)
                     in
                     self.typeList=list

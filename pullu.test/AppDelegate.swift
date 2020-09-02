@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  pullu.test
 //
-//  Created by Javidan Mirza on 1/7/20.
-//  Copyright © 2020 Javidan Mirza. All rights reserved.
+//  Created by Rufat Asadzade on 1/7/20.
+//  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import UIKit
@@ -20,8 +20,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
  var window: UIWindow?
 let gcmMessageIDKey = "gcm.message_id"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-      
+        let menu:MenuController = MenuController()
+      if (ConnectionCheck.isConnectedToNetwork() ) {
+                      print("Connected")
+                      if defaults.string(forKey: "uData") != nil {
+                          DispatchQueue.main.async {
+                              //self.performSegue(withIdentifier: "homePageSegue", sender: self)
+                            menu.updateRootVC(status: true)
+                          }
+                      }
+                      
+                      
+                  }
+                  else{
+                      DispatchQueue.main.async {
+                        let rootVC : Any
+                        
+                      
+                            rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "noInternet")
+                        
+                        
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = rootVC as? UIViewController
+                          //self.performSegue(withIdentifier: "offline", sender: self)
+                      }
+                      print("disConnected")
+                  }
         
         FirebaseApp.configure()
          Messaging.messaging().delegate = self

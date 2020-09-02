@@ -8,11 +8,11 @@
 
 import Foundation
 class UpdateProfileStruct: Codable {
-     var uID: Int?
+    var userToken: String?
+    var requestToken: String?
+    var uID: Int?
     var name: String?
     var surname: String?
-    var mail: String?
-    var pass: String?
     var newMail: String?
     var newPass: String?
     var phone: Int?

@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 import MBProgressHUD
-public class dbSelect {
+public class DbSelect {
     
-    
+    let defaults = UserDefaults.standard
+    let security:Security = Security()
     func GetJson(jsonUrlString:String,completionBlock: @escaping (_ result:Data) ->()){
         
         
@@ -28,61 +29,14 @@ public class dbSelect {
         
     }
     
-    func SignIn(username:String,pass:String,completionBlock: @escaping (_ result:Array<User>) ->()){
+    func SignIn(phone:Int64,pass:String,completionBlock: @escaping (_ result:ResponseStruct<UserStruct>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/login?mail="+username+"&pass="+pass
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
-                
-                
-                var list  = try
-                    JSONDecoder().decode(Array<User>.self, from: json)
-                // userList=list
-                
-                completionBlock(list)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
-            
-            
-        }
-        
-    }
-    
-    func getAds(username:String,pass:String,catID:Int?,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
-        
-        let Parameters:[String:Any]
-        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
-        if catID! > 0 {
-            Parameters = ["mail": username,"pass":pass,"catID":catID!] as [String : Any]
-            //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
-        }else{
-            Parameters = ["mail": username,"pass":pass] as [String : Any]
-            
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
-                DispatchQueue.main.async {
-            progressView.progress = Float(progress.fractionCompleted)
-            }
-            print("progess!", Float(progress.fractionCompleted))
-        }
-            
-            
-            
-            
-            .responseJSON
+        // let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
+        let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
+        let Parameters = ["phone": phone,"pass":pass] as [String : Any]
+        //var obj:ResponseStruct<Advertisement> = ResponseStruct<Advertisement>(from: )
+        var obj = ResponseStruct<UserStruct>()
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
             {
                 (response)
                 in
@@ -91,21 +45,101 @@ public class dbSelect {
                 do{
                     
                     
-                    var list  = try
-                        JSONDecoder().decode(Array<Advertisement>.self, from: response.data!)
+                     obj = try
+                        JSONDecoder().decode(ResponseStruct<UserStruct>.self, from: response.data!)
                     // userList=list
-                    //print(list)
+                    switch obj.status{
+                    case 1:
+                        self.defaults.set(obj.data[0].userToken, forKey: "userToken")
+                        self.defaults.set(obj.requestToken, forKey: "requestToken")
+                        break
+                    default:
+                        break
+                        
+                    }
                     
-                    completionBlock(list)
+                    completionBlock(obj)
                     
                     
                 }
                 catch let jsonErr{
+                    obj.status = 3
+                    completionBlock(obj)
                     print("Error serializing json:",jsonErr)
+                    //completionBlock(obj)
                 }
         }
         
+        
+        
+    }
     
+    func GetAds(isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+        
+        
+        let usrtkn = defaults.string(forKey: "userToken")
+        let reqTkn = defaults.string(forKey: "requestToken")
+        //   let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
+        // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
+        
+        let Parameters:[String:Any]
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        if catID! > 0 {
+            Parameters = ["userToken": usrtkn!,"requesttoken":reqTkn!,"pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
+            //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        }else{
+            Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid] as [String : Any]
+            
+        }
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
+            DispatchQueue.main.async {
+                progressView.progress = Float(progress.fractionCompleted)
+            }
+            print("progess!", Float(progress.fractionCompleted))
+        }
+            
+            
+            
+            
+        .responseJSON
+            {
+                (response)
+                in
+                
+                
+                do{
+                    
+                    
+                    let obj:ResponseStruct<Advertisement> = try
+                        JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
+                    
+                    if obj.status == 1
+                    {
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                    // userList=list
+                    //print(list)
+                    //list[0].error = false
+                    completionBlock(obj)
+                    
+                    
+                }
+                catch let jsonErr {
+                  
+                    let obj = ResponseStruct<Advertisement>()
+                   
+                    completionBlock(obj)
+                  //  progressView.hide(animated: true)
+                    print("Error serializing json:",jsonErr)
+                    
+                    
+                }
+        }
+        
+        
         
         //        GetJson(jsonUrlString: url){
         //            (json) in
@@ -127,7 +161,7 @@ public class dbSelect {
         
     }
     
-    func getCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
+    func GetCounties(completionBlock: @escaping (_ result:Array<Country>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/countries"
         GetJson(jsonUrlString: url){
@@ -150,9 +184,9 @@ public class dbSelect {
         }
         
     }
-    func getCities(countryId:Int?,completionBlock: @escaping (_ result:Array<City>) ->()){
+    func GetCities(countryId:Int?,completionBlock: @escaping (_ result:Array<City>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/get/Cities?countryid=" + String(countryId!)
+        let url="https://pullu.az/api/androidmobileapp/get/Cities?countryid=" + String(countryId ?? 0)
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -173,8 +207,51 @@ public class dbSelect {
         }
         
     }
-    
-    func getProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
+    func GetInterests(completionBlock: @escaping (_ result:Array<Interest>) ->()){
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/get/interests"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        //let Parameters = ["mobile": mobile,"code":otp] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        request(PULLULINK ,method: .get, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let list  = try
+                        JSONDecoder().decode(Array<Interest>.self, from: response.data!)
+                    
+                    // userList=list
+                    
+                    completionBlock(list)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+        
+        
+    }
+    func GetProfessions(completionBlock: @escaping (_ result:Array<Profession>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/professions"
         GetJson(jsonUrlString: url){
@@ -197,9 +274,9 @@ public class dbSelect {
         }
         
     }
-    func getAdvertById(advertID:Int?,mail:String?,pass:String?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
+    func GetAdvertById(advertID:Int?, completionBlock: @escaping (_ result:Array<Advertisement>) ->()){
         
-        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)&mail=\(mail!)&pass=\(pass!)"
+        let url="https://pullu.az/api/androidmobileapp/user/about?advertID=\(advertID!)"
         GetJson(jsonUrlString: url){
             (json) in
             do{
@@ -220,55 +297,82 @@ public class dbSelect {
         }
         
     }
-    func getStatistics(mail:String?,pass:String?, completionBlock: @escaping (_ result:Statistics) ->()){
+    func GetStatistics(completionBlock: @escaping (_ result:ResponseStruct<Statistics>) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
-        let url="https://pullu.az/api/androidmobileapp/user/get/statistics?mail=\(mail!)&pass=\(pass!)"
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/statistics"
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
+        var obj = ResponseStruct<Statistics>()
+        request(PULLULINK ,method: .post, parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
                 
-                
-                let statistics  = try
-                    JSONDecoder().decode(Statistics.self, from: json)
-                
-                // userList=list
-                
-                completionBlock(statistics)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
-            
+                do{
+                    
+                    
+                     obj  = try
+                        JSONDecoder().decode(ResponseStruct<Statistics>.self, from: response.data!)
+                    
+                    // userList=list
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                    completionBlock(obj)
+                    
+                }
+                catch let jsonErr{
+                    completionBlock(obj)
+                    print("Error serializing json:",jsonErr)
+                }
         }
+        
+        
         
     }
     
     //Profil
-    func getProfileInfo(mail:String? , pass:String?, completionBlock: @escaping (_ result:Array<ProfileModel>) ->()){
+    func GetProfileInfo( completionBlock: @escaping (_ result:ResponseStruct<ProfileModel>) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
-        let url="https://pullu.az/api/androidmobileapp/user/get/profile?mail=\(mail!)&pass=\(pass!)"
-        GetJson(jsonUrlString: url){
-            (json) in
-            do{
+        let url="https://pullu.az/api/androidmobileapp/user/get/profile"
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
+        var obj = ResponseStruct<ProfileModel>()
+        request(url ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
                 
-                
-                let profile  = try
-                    JSONDecoder().decode(Array<ProfileModel>.self, from: json)
-                
-                // userList=list
-                
-                completionBlock(profile)
-                
-            }
-            catch let jsonErr{
-                print("Error serializing json:",jsonErr)
-            }
+                do{
+                    
+                    
+                     obj = try
+                        JSONDecoder().decode(ResponseStruct<ProfileModel>.self, from: response.data!)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                   
+                    
+                    
+                }
+                catch let jsonErr{
+                 
+                    print("Error serializing json:",jsonErr)
+                }
+                   completionBlock(obj)
         }
+        
+        
+        
     }
     
     //
-    func aCategory(completionBlock: @escaping (_ result:Array<CategoryStruct>) ->()){
+    func ACategory(completionBlock: @escaping (_ result:Array<CategoryStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/aCategory"
         GetJson(jsonUrlString: url){
@@ -291,7 +395,7 @@ public class dbSelect {
         }
         
     }
-    func aType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
+    func AType(completionBlock: @escaping (_ result:Array<TypeStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/atype"
         
@@ -315,7 +419,7 @@ public class dbSelect {
         }
         
     }
-    func aTariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
+    func ATariff(completionBlock: @escaping (_ result:Array<TariffStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/atariff"
         
@@ -359,7 +463,7 @@ public class dbSelect {
         //           }
         
     }
-    func getAgeRange(completionBlock: @escaping (_ result:Array<AgeRangeStruct>) ->()){
+    func GetAgeRange(completionBlock: @escaping (_ result:Array<AgeRangeStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/age/range"
         
@@ -384,7 +488,7 @@ public class dbSelect {
         
     }
     
-    func getBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
+    func GetBackgroundImages(completionBlock: @escaping (_ result:Array<BackroundImageStruct>) ->()){
         
         let url="https://pullu.az/api/androidmobileapp/get/backgrounds"
         
@@ -408,47 +512,244 @@ public class dbSelect {
         }
         
     }
-    func getFinance(mail:String,pass:String,completionBlock: @escaping (_ result:Array<FinanceStruct>) ->()){
-  
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/finance"
-           
-          
-           //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
-
-              let Parameters = ["mail": mail,"pass":pass] as [String : Any]
-               //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
-          
-           
-           
-           
-           
-           
-           
-           
-           request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
-               {
-                   (response)
-                   in
-                   //  print(PULLULINK)
+    func GetFinance(completionBlock: @escaping (_ result:ResponseStruct<FinanceStruct>) ->()){
+        
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/finance"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        let Parameters = ["userToken": userToken!,"requestToken":requestToken!] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        
+        
+        
+        
+         var obj = ResponseStruct<FinanceStruct>()
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                  obj  = try
+                        JSONDecoder().decode(ResponseStruct<FinanceStruct>.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
                    
-                   do{
-                       
-                       
-                       var list  = try
-                           JSONDecoder().decode(Array<FinanceStruct>.self, from: response.data!)
-                       // userList=list
-                       //print(list)
-                       
-                       completionBlock(list)
-                       
-                       
-                   }
-                   catch let jsonErr{
-                       print("Error serializing json:",jsonErr)
-                   }
-           }
-           
-           
-       }
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+                 completionBlock(obj)
+        }
+        
+        
+    }
+    func GetMyViews(completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/views"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        let Parameters = ["userToken": userToken!,"requestToken":requestToken!] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        
+        
+        
+        
+         var obj = ResponseStruct<Advertisement>()
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                   obj  = try
+                        JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                   
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+                 completionBlock(obj)
+        }
+        
+        
+    }
+    func GetMyAds(completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/my/ads"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        
+        
+        
+        
+        var obj = ResponseStruct<Advertisement>()
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                   obj = try
+                        JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                   
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                    
+                }
+                 completionBlock(obj)
+        }
+        
+        
+    }
+    func VerifyOtp(mobile:Int,otp:Int,completionBlock: @escaping (_ result:Status) ->()){
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/otp"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        let Parameters = ["mobile": mobile,"code":otp] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+        
+    }
     
+    func MyAdViewers(aID:Int,completionBlock: @escaping (_ result:ResponseStruct<ViewerStruct>) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        //let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/otp"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/my/ads/viewers"
+        
+        
+        //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
+        
+        let Parameters = ["userToken": userToken!,"requestToken":requestToken!,"aID":aID] as [String : Any]
+        //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
+        
+        var obj = ResponseStruct<ViewerStruct>()
+        
+        
+        
+        
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                     obj  = try
+                        JSONDecoder().decode(ResponseStruct<ViewerStruct>.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                    
+                    
+                    
+                }
+                catch let jsonErr{
+                    obj.status = 5
+                    print("Error serializing json:",jsonErr)
+                }
+                completionBlock(obj)
+        }
+        
+        
+    }
 }

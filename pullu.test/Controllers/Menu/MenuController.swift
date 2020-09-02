@@ -8,9 +8,12 @@
 
 import UIKit
 import FirebaseMessaging
+import MBProgressHUD
+import Alamofire
 class MenuController: UIViewController {
     let defaults = UserDefaults.standard
     
+    @IBOutlet weak var userImage: UIImageView!
     
     @IBOutlet weak var nameSurname: UILabel!
     
@@ -20,12 +23,41 @@ class MenuController: UIViewController {
     
     @IBOutlet weak var userID: UILabel!
     
-    var select:dbSelect=dbSelect()
+    let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+    var select:DbSelect=DbSelect()
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
-    
+    func updateRootVC(status : Bool)
+         {
+             let rootVC : Any
+             
+             if (status)
+             {
+                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Tab") as! UITabBarController
+             }
+             else
+             {
+                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+             }
+             
+             let appDelegate = UIApplication.shared.delegate as! AppDelegate
+             appDelegate.window?.rootViewController = rootVC as? UIViewController
+             
+         }
     override func viewDidLoad() {
         super.viewDidLoad()
+        userImage.layer.masksToBounds = true
+        userImage!.layer.borderColor = UIColor.white.cgColor
+        userImage!.layer.borderWidth = 1.5
+        userImage.layer.cornerRadius = userImage.bounds.width / 2
+        
+        loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = UIColor.lightGray
+        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        userImage.addSubview(loadingIndicator)
+        
         let logOutBtn:MenuStruct = MenuStruct()
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
@@ -34,33 +66,33 @@ class MenuController: UIViewController {
         let profileBtn:MenuStruct = MenuStruct()
         profileBtn.ID=1
         profileBtn.name="Profil"
-        profileBtn.icon  =  UIImage(named: "logout")?.pngData()
+        profileBtn.icon  =  UIImage(named: "profile")?.pngData()
         
         let staticsBtn:MenuStruct = MenuStruct()
         staticsBtn.ID=2
         staticsBtn.name="Statistik Məlumatlar"
-        staticsBtn.icon  =  UIImage(named: "logout")?.pngData()
+        staticsBtn.icon  =  UIImage(named: "Shape")?.pngData()
         
         let ruleBtn:MenuStruct = MenuStruct()
         ruleBtn.ID=3
         ruleBtn.name="Qayda və şərtlər"
-        ruleBtn.icon  =  UIImage(named: "logout")?.pngData()
+        ruleBtn.icon  =  UIImage(named: "rules")?.pngData()
         
         let aboutBtn:MenuStruct = MenuStruct()
         aboutBtn.ID=4
         aboutBtn.name="Proqram haqqında"
-        aboutBtn.icon  =  UIImage(named: "logout")?.pngData()
+        aboutBtn.icon  =  UIImage(named: "aboutUs")?.pngData()
         
-        let financeBtn:MenuStruct = MenuStruct()
-        financeBtn.ID=5
-        financeBtn.name="Maliyə"
-        financeBtn.icon  =  UIImage(named: "logout")?.pngData()
+//        let financeBtn:MenuStruct = MenuStruct()
+//        financeBtn.ID=5
+//        financeBtn.name="Maliyyə"
+//        financeBtn.icon  =  UIImage(named: "balance")?.pngData()
         
         menuItems.append(profileBtn)
         menuItems.append(staticsBtn)
-        menuItems.append(financeBtn)
-//        menuItems.append(ruleBtn)
-//        menuItems.append(aboutBtn)
+      //  menuItems.append(financeBtn)
+        //        menuItems.append(ruleBtn)
+        //        menuItems.append(aboutBtn)
         menuItems.append(logOutBtn)
         
         
@@ -99,13 +131,40 @@ class MenuController: UIViewController {
             
             
             let list  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
             
             // userList=list
             nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-          
-            userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
             
+            userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
+            Alamofire.request(list[0].photoURL!).responseImage { response in
+                if let catPicture = response.result.value {
+                    //advert.photo=catPicture.pngData()
+                    
+                    //  item.photo = UIImage(named: "damaged")?.pngData()
+                    
+                    
+                    if catPicture != nil {
+                        
+                        self.userImage.image=catPicture
+                        self.loadingIndicator.stopAnimating()
+                        
+                    }
+                    else {
+                        self.userImage.image=UIImage(named: "damaged")
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
             
         }
         catch let jsonErr{
@@ -113,15 +172,15 @@ class MenuController: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        navigationController?.navigationBar.isTranslucent = true
-//        navigationController?.view.backgroundColor = .clear
-//        super.viewWillAppear(animated)
-//    }
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    //        navigationController?.navigationBar.shadowImage = UIImage()
+    //        navigationController?.navigationBar.isTranslucent = true
+    //        navigationController?.view.backgroundColor = .clear
+    //        super.viewWillAppear(animated)
+    //    }
     
-
+    
     
     // Get the new view controller using segue.destination.
     // Pass the selected object to the new view controller.
@@ -129,17 +188,7 @@ class MenuController: UIViewController {
     
     
     
-
-    @IBAction func signOut(_ sender: Any) {
-      
-     
-        self.defaults.set(nil, forKey: "uID")
-        self.defaults.set(nil, forKey: "mail")
-        self.defaults.set(nil, forKey: "pass")
-        self.defaults.set(nil, forKey: "uData")
-        self.dismiss(animated: true)
-        
-    }
+    
     
     // MARK: - Navigation
     
@@ -157,47 +206,96 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
-        cell.object = menuItems[indexPath.row]
+        //        let cell: MenuCell = (tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath) as! MenuCell)
+        //        cell.object = menuItems[indexPath.row]
         // advertID=cell.object?.id!
         //print(advertID!)
         
-        if cell.object?.ID==0{
-            self.dismiss(animated: true){
+        if menuItems[indexPath.row].ID==0{
+            
+            let errorAlert = UIAlertController(title: "Diqqət", message: "Çıxış etmək istədiyinizdən əminsinizmi?", preferredStyle: UIAlertController.Style.actionSheet)
+            errorAlert.addAction(UIAlertAction(title: "Bəli", style: UIAlertAction.Style.destructive, handler: { (action: UIAlertAction!) in
+                //self.navigationController?.popViewController(animated: true)
+                
                 do {
                     let uID = self.defaults.string(forKey: "uID")!
-                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                    Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+                    
+                    /*self.navigationController?.popToRootViewController(animated: false)
+                    self.dismiss(animated: false) {
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                    }*/
+           /*self.dismiss(animated: false){
+            self.defaults.set(nil, forKey: "userToken")
+                                   self.defaults.set(nil, forKey: "requestToken")
+                                   self.defaults.set(nil, forKey: "uData")
+//                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+//
+//                    })
+                    }*/
+                    self.defaults.set(nil, forKey: "userToken")
+                    self.defaults.set(nil, forKey: "requestToken")
+                    self.defaults.set(nil, forKey: "uData")
+                    self.updateRootVC(status: false)
                     
                 }
                 catch{
-                    
+                   print("error")
                     
                 }
-               
-                self.defaults.set(nil, forKey: "mail")
-                self.defaults.set(nil, forKey: "pass")
-                self.defaults.set(nil, forKey: "uData")}
+                /*self.dismiss(animated: false){
+                 self.defaults.set(nil, forKey: "userToken")
+                 self.defaults.set(nil, forKey: "requestToken")
+                 self.defaults.set(nil, forKey: "uData")
+                 
+                 }*/
+                //self.navigationController?.popViewController(animated: true)
+                
+                
+                
+                
+            }))
+            errorAlert.addAction(UIAlertAction(title: "Xeyr", style: UIAlertAction.Style.cancel, handler: nil))
+            
+            self.present(errorAlert, animated: true, completion: nil)
+            
+            //            self.dismiss(animated: true){
+            //                do {
+            //                    let uID = self.defaults.string(forKey: "uID")!
+            //                                   Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
+            //
+            //                }
+            //                catch{
+            //
+            //
+            //                }
+            //
+            //                self.defaults.set(nil, forKey: "mail")
+            //                self.defaults.set(nil, forKey: "pass")
+            //                self.defaults.set(nil, forKey: "uData")}
             
             
         }
-        
-        else if cell.object?.ID == 1{
+            
+        else if menuItems[indexPath.row].ID == 1{
             self.performSegue(withIdentifier: "profSegue", sender: self)
             
         }
             
-        else if cell.object?.ID == 2{
+        else if menuItems[indexPath.row].ID == 2{
             self.performSegue(withIdentifier: "statiSegue", sender: self)
             
         }
-        
-        else if cell.object?.ID == 5{
+            
+        else if menuItems[indexPath.row].ID == 5{
             self.performSegue(withIdentifier: "finanSegue", sender: self)
             
         }
         // print(cell.object?.name)
         //cell.delegate = self
-        cell.reloadData()
+        //cell.reloadData()
         
     }
     
@@ -225,7 +323,7 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             
             cell.object = menuItems[indexPath.row]
             
-            
+            // cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         catch
         {

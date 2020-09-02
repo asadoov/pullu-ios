@@ -8,7 +8,7 @@
 
 import UIKit
 import MBProgressHUD
-//Cavidan Mirzə
+import Alamofire
 
 class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var insert:DbInsert = DbInsert()
@@ -26,6 +26,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     var infoChanged=false
     var txt:UITextField?
+    
+    @IBOutlet weak var userImage: UIImageView!
+    
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var changePassButton: UIButton!
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -97,15 +103,30 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     
     var defaults = UserDefaults.standard
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     var profileList: [ProfileModel] = [ProfileModel]()
     var uProfile = UpdateProfileStruct()
     
-    var  mail:String?
-    var  pass:String?
+    var  usertoken:String?
+    var  requesttoken:String?
+    let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.async {
+                self.saveButton.layer.cornerRadius = self.saveButton.frame.height.self / 2.0
+            self.changePassButton.layer.cornerRadius = self.changePassButton.frame.height.self / 2.0
+               }
+        userImage.layer.masksToBounds = true
+        userImage!.layer.borderColor = UIColor.white.cgColor
+        userImage!.layer.borderWidth = 1.5
+        userImage.layer.cornerRadius = userImage.bounds.width / 2
         
+        loadingIndicator.center=CGPoint(x: userImage.bounds.size.width/2, y: userImage.bounds.size.height/2)
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.color = UIColor.lightGray
+        // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating()
+        userImage.addSubview(loadingIndicator)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         
@@ -121,37 +142,93 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
         // let userData = defaults.string(forKey: "uData")
         //        var pass = defaults.string(forKey: "pass")
         //        var mail = defaults.string(forKey: "mail")
-        self.mail = defaults.string(forKey: "mail")
-        self.pass = defaults.string(forKey: "pass")
-        
-        select.getProfileInfo(mail: mail, pass: pass) {
-            (list) in
-            self.profileList = list
-            self.countryID = self.profileList[0].countryID
-            DispatchQueue.main.async {
-                self.emailField.setTitle(list[0].mail, for: .normal)
-                self.nameField.text = list[0].name
-                self.surnameField.text = list[0].surname
-                self.mobileNumField.setTitle(list[0].phone, for: .normal)
-                self.genderButton.setTitle(list[0].gender, for: .normal)
-                self.professionButton.setTitle(list[0].profession, for: .normal)
+        self.usertoken = defaults.string(forKey: "usertoken")
+        self.requesttoken = defaults.string(forKey: "requesttoken")
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        select.GetProfileInfo() {
+            (obj) in
+            UIApplication.shared.endIgnoringInteractionEvents()
+            switch obj.status {
+            case 1:
+                self.profileList = obj.data
+                self.countryID = self.profileList[0].countryID
+                DispatchQueue.main.async {
+                    self.emailField.setTitle(obj.data[0].mail, for: .normal)
+                    self.nameField.text = obj.data[0].name
+                    self.surnameField.text = obj.data[0].surname
+                    self.mobileNumField.setTitle(obj.data[0].phone, for: .normal)
+                    self.genderButton.setTitle(obj.data[0].gender, for: .normal)
+                    self.professionButton.setTitle(obj.data[0].profession, for: .normal)
+                    Alamofire.request(obj.data[0].photoURL!).responseImage { response in
+                        if let catPicture = response.result.value {
+                            //advert.photo=catPicture.pngData()
+                            
+                            //  item.photo = UIImage(named: "damaged")?.pngData()
+                            
+                            
+                            if catPicture.imageAsset != nil {
+                                
+                                self.userImage.image=catPicture
+                                
+                                
+                            }
+                            else {
+                                self.userImage.image=UIImage(named: "damaged")
+                                
+                            }
+                            
+                            
+                            
+                            
+                            self.loadingIndicator.stopAnimating()
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    //                self.countryButton.setTitle(list[0].country, for: .normal)
+                    self.cityButton.setTitle(obj.data[0].city, for: .normal)
+                    
+                    
+                    let bFormattedDate = dateFormatter.date(from: obj.data[0].bDate!)
+                    let createdFormattedDate = dateFormatter.date(from: obj.data[0].cDate!)
+                    dateFormatter.dateFormat = "dd.MM.yyyy"
+                    self.dogumTarixField.text = dateFormatter.string(from:bFormattedDate!)
+                    self.createdDate.text = dateFormatter.string(from:createdFormattedDate!)
+                    
+                    let defaults = UserDefaults.standard
+                    
+                    
+                    
+                    
+                }
+                break
+            case 2:
+                let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                 
-                //                self.countryButton.setTitle(list[0].country, for: .normal)
-                self.cityButton.setTitle(list[0].city, for: .normal)
+                alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    self.defaults.set(nil, forKey: "userToken")
+                    self.defaults.set(nil, forKey: "requestToken")
+                    self.defaults.set(nil, forKey: "uData")
+                    let menu:MenuController = MenuController()
+                    menu.updateRootVC(status: false)
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
+            default:
+                let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
                 
-                
-                var bFormattedDate = dateFormatter.date(from: list[0].bDate!)
-                var createdFormattedDate = dateFormatter.date(from: list[0].cDate!)
-                dateFormatter.dateFormat = "dd.MM.yyyy"
-                self.dogumTarixField.text = dateFormatter.string(from:bFormattedDate!)
-                self.createdDate.text = dateFormatter.string(from:createdFormattedDate!)
-                
-                let defaults = UserDefaults.standard
-                
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    //logout
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
                 
                 
                 
             }
+            
             
         }
         
@@ -204,7 +281,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     @IBAction func professionButtonClick(_ sender: Any) {
         
-        select.getProfessions(){
+        select.GetProfessions(){
             (list)
             in
             self.professionList = list
@@ -239,7 +316,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
     
     @IBAction func cityButtonClick(_ sender: Any) {
         
-        select.getCities(countryId: countryID){
+        select.GetCities(countryId: countryID){
             (list)
             in
             self.cityList = list
@@ -278,12 +355,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 let phoneNum = alertController.textFields![0] as UITextField
                 if !phoneNum.text!.isEmpty{
                     
-                    self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! ){
+                    self.insert.UpdateUserPhoneSendSms(newPhone: phoneNum.text! ){
                         (status)
                         in
-                        if status.response == 0
+                        if status.response == 1
                         {
-                            let alert = UIAlertController(title: "SMS KOD", message: "Sizə bir neçə dəqiqə ərzində gələn 4 rəqəmli sms verifikasiya kodunu daxil edin", preferredStyle: UIAlertController.Style.alert)
+                            let alert = UIAlertController(title: "SMS KOD", message: "'\(phoneNum.text!)' nömrəsinə göndərilən 4 rəqəmli sms verifikasiya kodunu daxil edin", preferredStyle: UIAlertController.Style.alert)
                             alert.addTextField { (textField : UITextField!) -> Void in
                                 textField.placeholder = "XXXX"
                                 textField.keyboardType = .numberPad
@@ -292,12 +369,12 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 let smsCode = alert.textFields![0] as UITextField
                                 if !smsCode.text!.isEmpty{
                                     
-                                    self.insert.updatePhone(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)!, code: Int(smsCode.text!)!){
+                                    self.insert.UpdateUserPhoneConfirm(newPhone: phoneNum.text!, otp: Int(smsCode.text!)!){
                                         (status)
                                         in
                                         switch status.response
                                         {
-                                        case 0:
+                                        case 1:
                                             let successAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                                             successAlert.mode = MBProgressHUDMode.text
                                             successAlert.label.text = "Nömrəniz uğurla dəyişdirildi!"
@@ -308,6 +385,9 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                             
                                         case 2:
                                             alert.message="Verifikasiya kodunun düzgünlüyünü yoxlayın və təkrar sınayın"
+                                            self.present(alert, animated: true, completion: nil)
+                                        case 4:
+                                            alert.message="Bu nömrə ilə artıq qeydiyyatdan keçilib"
                                             self.present(alert, animated: true, completion: nil)
                                             
                                         default:
@@ -338,7 +418,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                                 
                             }))
                             alert.addAction(UIAlertAction(title: "Yenidən göndər", style: UIAlertAction.Style.default, handler: {(action: UIAlertAction!) in
-                                self.insert.verifyMobile(mail: self.mail!, pass: self.pass!, newPhone: Int(phoneNum.text!)! )  {
+                                self.insert.UpdateUserPhoneSendSms(newPhone: phoneNum.text! ) {
                                     (status)
                                     in
                                     
@@ -435,7 +515,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 
                 
                 let list  = try
-                    JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                    JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
                 
                 // userList=list
                 uProfile.uID = list[0].id
@@ -446,9 +526,9 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                 print("Error serializing json:",jsonErr)
             }
             
-            uProfile.mail = mail
-            uProfile.pass = pass
-            insert.updateProfile(profile: uProfile,progressView: loadingNotification)
+            uProfile.userToken = usertoken
+            uProfile.requestToken = requesttoken
+            insert.UpdateProfile(profile: uProfile,progressView: loadingNotification)
             {
                 (status)
                 in
@@ -456,7 +536,7 @@ class ProfileController: UIViewController, UIPickerViewDelegate, UIPickerViewDat
                     loadingNotification.hide(animated: true)
                     
                 }
-                if status.response == 0{
+                if status.response == 1{
                     
                     let successAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
                     successAlert.mode = MBProgressHUDMode.text

@@ -8,22 +8,24 @@
 
 import UIKit
 import Alamofire
-
+import MBProgressHUD
 class TextReklamController: UIViewController {
     
     let defaults = UserDefaults.standard
     var advertID:Int?
-    var select:dbSelect=dbSelect()
-    var userData = Array<User>()
-    var pass:String?
-    
+    var select:DbSelect=DbSelect()
+    var userData = Array<UserStruct>()
+    var userToken:String?
+    var requestToken:String?
+    var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advertName: UILabel!
     
     @IBOutlet weak var aDescription: UITextView!
     @IBOutlet weak var sellerFullname: UILabel!
     
-    @IBOutlet weak var sellerPhone: UILabel!
+    @IBOutlet weak var sellerPhone: UITextView!
+    
     
     @IBOutlet weak var earnMoney: UIButton!
     
@@ -32,20 +34,19 @@ class TextReklamController: UIViewController {
     @IBOutlet weak var balance: UILabel!
     
     @IBOutlet weak var advertImage: UIImageView!
+    var loadingAlert:MBProgressHUD?
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
+//        earnMoney.isEnabled=false
+//        self.earnMoney.isHidden=true
         
         
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+        loadingAlert!.mode = MBProgressHUDMode.indeterminate
+        
+        self.defaults.set(nil, forKey: "aID")
+        
         // navigationController?.navigationBar.isTranslucent = false
         
         
@@ -53,15 +54,16 @@ class TextReklamController: UIViewController {
         
         do{
             let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
+            userToken = self.defaults.string(forKey: "userToken")
+            requestToken = self.defaults.string(forKey: "requestToken")
             
             self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
         }
-        select.getAdvertById(advertID: advertID,mail:self.userData[0].mail,pass:pass )
+        select.GetAdvertById(advertID: advertID)
         {
             (list)
             in
@@ -69,9 +71,14 @@ class TextReklamController: UIViewController {
             
             
             DispatchQueue.main.async {
-                if list[0].isPaid==1{
-                    self.earnMoney.isHidden=false
-                }
+                self.loadingAlert?.hide(animated: true)
+//                if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+//                {
+//                    self.earnMoney.isHidden=false
+//                    self.earnMoney.isEnabled=true
+//
+//                }
+                
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -79,10 +86,10 @@ class TextReklamController: UIViewController {
                 
                 self.advertName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advertType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+                //self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 
                 let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
@@ -128,12 +135,17 @@ class TextReklamController: UIViewController {
                     
                 }
                 
-                self.dismiss(animated: false)
+                
+                
             }
         }
         
     }
     
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
     
     
     
@@ -144,8 +156,8 @@ class TextReklamController: UIViewController {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "TextStoryPage") as! ReklamStoryController
         newViewController.advertID=advertID!
-        newViewController.mail=self.userData[0].mail
-        newViewController.pass=pass!
+        newViewController.usertoken=userToken
+        newViewController.requesttoken=requestToken
         newViewController.advertDescription=self.aDescription.text
         self.present(newViewController, animated: true, completion: nil)
     }

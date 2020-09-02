@@ -11,7 +11,9 @@ import Alamofire
 import MBProgressHUD
 
 class DbInsert {
-    var dbSelect: dbSelect!
+    let defaults = UserDefaults.standard
+    let security:Security = Security()
+    var dbSelect: DbSelect!
     var alamofire:AlamofireInterface!
     
     
@@ -42,18 +44,45 @@ class DbInsert {
         
         
         
-        let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
+        //   let urlTest = "http://13.92.237.16/api/androidmobileapp/user/signUp?name=uuu&surname=uuuu&mail=uu@uu.uu&pass=123&phone=123&username=uuuu&bDate=07-12-1989&gender=Kişi&country=Azərbaycan&city=Naxçıvan&profession=Texnologiya sektoru"
         
         
+        // let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/signUp"
-        let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"profession":newUserData.sector!]
+        //        let Parameters = ["name": newUserData.name!, "surname": newUserData.surname!, "mail":newUserData.mail!, "pass": newUserData.pass!,"phone":newUserData.phone!,"bDate":newUserData.bDate!,"gender":newUserData.gender!,"country":newUserData.country!,"city":newUserData.city!,"interestIds":newUserData.interestIds!] as [String : Any]
         
         
         
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+        
+        var jsonString = ""
+        let jsonEncoder = JSONEncoder()
+        do {
+            let jsonData = try jsonEncoder.encode(newUserData)
+            jsonString = String(data: jsonData, encoding: .utf8)!
+            
+            
+            //print("JSON String : " + jsonString)
+        }
+        catch {
+        }
+        if jsonString != "" {
+            // let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/profile"
+            
+            //let json = "{\"What\":\"Ever\"}"
+            
+            let url = URL(string: PULLULINK)!
+            let jsonData = jsonString.data(using: .utf8, allowLossyConversion: false)!
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = HTTPMethod.post.rawValue
+            request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
+            request.httpBody = jsonData
+            
+            let req =    Alamofire.request(request).responseJSON
             {
                 (response)
                 in
+                print(response.description)
                 
                 do{
                     
@@ -70,22 +99,25 @@ class DbInsert {
                 catch let jsonErr{
                     print("Error serializing json:",jsonErr)
                 }
+            }
+            
+            
         }
         
         
         
         
         
-        
     }
-    func earnMoney(advertID:Int?,mail:String?,pass:String?,completionBlock: @escaping (_ result:Status) ->()){
+    func EarnMoney(advertID:Int?,completionBlock: @escaping (_ result:Status) ->()){
         
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/earnMoney"
+        let Parameters = ["advertID": advertID!,"userToken":userToken ?? "", "requestToken":requestToken ?? ""] as [String : Any]
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/earnMoney"
-        let Parameters = ["advertID": advertID!,"mail":mail!, "pass":pass!] as [String : Any]
-        
-        
+         var status = Status()
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -95,16 +127,21 @@ class DbInsert {
                 do{
                     
                     
-                    let status  = try
+                   status = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     print(status)
-                    
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
                     completionBlock(status)
                     
                     
                 }
                 catch let jsonErr{
+                    status.response = 4
+                    completionBlock(status)
                     print("Error serializing json:",jsonErr)
                 }
         }
@@ -122,7 +159,7 @@ class DbInsert {
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/send/mail"
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/send/mail"
         let Parameters = ["mail": mail] as [String : Any]
         
         
@@ -150,14 +187,81 @@ class DbInsert {
         }
         
     }
+    
+    func sendPassChangeSMS(phone:Int64 ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/send/sms"
+        let Parameters = ["phone": phone] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    
     // forgot pass / 4 regemli shifre yoxlanishi
-    func checkSendCode(mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func CheckForgotPassOtpSMS(phone:Int64, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/confirm"
-        let Parameters = ["mail": mail,"code": code] as [String : Any]
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/verify/sms/otp"
+        let Parameters = ["phone": phone,"otp": otp] as [String : Any]
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func CheckForgotPassOtpMail(mail:String, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/verify/mail/otp"
+        let Parameters = ["mail": mail,"otp": otp] as [String : Any]
         
         
         request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
@@ -184,13 +288,47 @@ class DbInsert {
         
     }
     // forgot pass/ yeni şifrə yaratmaq
-    func createNewPass(newpass:String ,mail:String, code:String ,completionBlock: @escaping (_ result:Status) ->()){
+    func CreateNewPassBySMS(newpass:String ,phone:Int64, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/password/reset/newpass"
-        let Parameters = ["newpass":newpass, "mail": mail,"code": code] as [String : Any]
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/bySMS/set"
+        let Parameters = ["newpass":newpass, "phone": phone,"otp": otp] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func CreateNewPassByMail(newpass:String ,mail:String, otp:String ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/password/reset/byMail/set"
+        let Parameters = ["newpass":newpass, "mail": mail,"otp": otp] as [String : Any]
         
         
         
@@ -248,9 +386,10 @@ class DbInsert {
     }
     
     
-    func addAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:UIProgressView, completionBlock: @escaping (_ result:Status) ->()){
+    func AddAdvertisement(newAdvertisement:NewAdvertisementStruct?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:Status) ->()){
         
-        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
         
         
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
@@ -273,13 +412,18 @@ class DbInsert {
                 multipartFormData.append(("\(newAdvertisement!.aCategoryID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aCategoryID")
                 if newAdvertisement!.files != nil  {
                     for file in newAdvertisement!.files! {
-                        let mimeType = self.mimeType(for: file)
-                        let ext = mimeType.components(separatedBy: "/")
-                        //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
-                        //                    {
+                        switch newAdvertisement!.aTypeID {
+                        case 3:
+                            multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(newAdvertisement!.videoPathExtension!)", mimeType: newAdvertisement!.videoPathExtension!)       
+                        default:
+                            let mimeType = self.mimeType(for: file)
+                            let ext = mimeType.components(separatedBy: "/")
+                            //                    if mimeType == "image/jpeg" || mimeType == "image/png" || mimeType == "image/gif"
+                            //                    {
+                            
+                            
+                            multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)                        }
                         
-                        
-                        multipartFormData.append(file, withName: "files", fileName: "\(Date().timeIntervalSince1970).\(ext[1])", mimeType: mimeType)
                         //}
                         
                     }
@@ -295,13 +439,13 @@ class DbInsert {
                 multipartFormData.append(("\(newAdvertisement!.aMediaTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aMediaTypeId")
                 multipartFormData.append(("\(newAdvertisement!.aPrice!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aPrice")
                 multipartFormData.append(("\(newAdvertisement!.aTrfID ?? 0)".data(using: .utf8)!), withName: "aTrfID")
-                multipartFormData.append(("\(newAdvertisement!.aProfessionID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aProfessionID")
+                multipartFormData.append(("\(newAdvertisement!.aProfessionID ?? 0)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aProfessionID")
                 multipartFormData.append(("\(newAdvertisement!.aTitle!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTitle")
                 //                    multipartFormData.append(("\(newAdvertisement?.aTrfID!)".data(using: .utf8)!), withName: "aTrfID")
                 multipartFormData.append(("\(newAdvertisement!.aTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTypeId")
                 multipartFormData.append(("\(newAdvertisement!.isPaid!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "isPaid")
-                multipartFormData.append(("\(newAdvertisement!.mail!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "mail")
-                multipartFormData.append(("\(newAdvertisement!.pass!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "pass")
+                multipartFormData.append(("\(userToken ?? "")".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "userToken")
+                multipartFormData.append(("\(requestToken ?? "")".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "requestToken")
                 //multipartFormData.append(newAdvertisement., withName: "aCategoryID")
                 //multipartFormData.append(("\(newAdvertisement!.pass!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "password")
         },
@@ -314,7 +458,7 @@ class DbInsert {
                         DispatchQueue.main.async {
                             
                             //
-                            progressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                            progressView.progress = Float(progress.fractionCompleted)
                         }
                     })
                     upload.responseData { response in
@@ -322,12 +466,15 @@ class DbInsert {
                         do{
                             
                             
-                            let statusCode  = try
+                            let status  = try
                                 JSONDecoder().decode(Status.self, from: response.data!)
                             // userList=list
+                            if status.response == 1{
+                                self.security.RefreshToken(requestToken: status.requestToken)
+                                
+                            }
                             
-                            
-                            completionBlock(statusCode)
+                            completionBlock(status)
                             
                             
                         }
@@ -370,8 +517,11 @@ class DbInsert {
         
     }
     
-    func updateProfile(profile:UpdateProfileStruct,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Status) ->()){
-        
+    func UpdateProfile(profile:UpdateProfileStruct,progressView:MBProgressHUD,completionBlock: @escaping (_ result:Status) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        profile.userToken = userToken ?? ""
+        profile.requestToken = requestToken ?? ""
         var jsonString = ""
         let jsonEncoder = JSONEncoder()
         do {
@@ -396,31 +546,33 @@ class DbInsert {
             request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
             request.httpBody = jsonData
             
-        let req =    Alamofire.request(request).responseJSON
-                {
-                    (response)
-                    in
-                    //  print(PULLULINK)
+            let req =    Alamofire.request(request).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
                     
-                    do{
-                        
-                        
-                        let statusCode  = try
-                            JSONDecoder().decode(Status.self, from: response.data!)
-                        // userList=list
-                        //print(list)
-                        
-                        completionBlock(statusCode)
-                        
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
                         
                     }
-                    catch let jsonErr{
-                        print("Error serializing json:",jsonErr)
-                    }
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
             }
             req.downloadProgress { (progress) in
-                    DispatchQueue.main.async {
-                progressView.progress = Float(progress.fractionCompleted)
+                DispatchQueue.main.async {
+                    progressView.progress = Float(progress.fractionCompleted)
                 }
                 //print("progess!", Float(progress.fractionCompleted))
             }
@@ -430,50 +582,16 @@ class DbInsert {
         
     }
     func activateAccount(code:Int ,completionBlock: @escaping (_ result:Status) ->()){
-           
-           
-           
-           
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/activate/user"
-           let Parameters = ["code": code] as [String : Any]
-           
-           
-           
-           request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
-               {
-                   (response)
-                   in
-                   //  print(PULLULINK)
-                   
-                   do{
-                       
-                       
-                       let statusCode  = try
-                           JSONDecoder().decode(Status.self, from: response.data!)
-                       // userList=list
-                       //print(list)
-                       
-                       completionBlock(statusCode)
-                       
-                       
-                   }
-                   catch let jsonErr{
-                       print("Error serializing json:",jsonErr)
-                   }
-           }
-           
-       }
-    func verifyMobile(mail:String,pass:String,newPhone:Int ,completionBlock: @escaping (_ result:Status) ->()){
         
         
         
         
-        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/mobile"
-        let Parameters = ["mail": mail,"pass": pass,"newPhone": newPhone] as [String : Any]
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/activate/user"
+        let Parameters = ["code": code] as [String : Any]
         
         
         
-        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
                 (response)
                 in
@@ -497,38 +615,263 @@ class DbInsert {
         }
         
     }
-    func updatePhone(mail:String,pass:String,newPhone:Int,code:Int ,completionBlock: @escaping (_ result:Status) ->()){
-           
-           
-           
-           
-           let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/phone"
-        let Parameters = ["mail": mail,"pass": pass,"phone": newPhone,"code":code] as [String : Any]
-           
-           
-           
-           request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
-               {
-                   (response)
-                   in
-                   //  print(PULLULINK)
-                   
-                   do{
-                       
-                       
-                       let statusCode  = try
-                           JSONDecoder().decode(Status.self, from: response.data!)
-                       // userList=list
-                       //print(list)
-                       
-                       completionBlock(statusCode)
-                       
-                       
-                   }
-                   catch let jsonErr{
-                       print("Error serializing json:",jsonErr)
-                   }
-           }
-           
-       }
+    func UpdateUserPhoneSendSms(newPhone:String ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/phone"
+        let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","newPhone": newPhone] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func UpdateUserPhoneConfirm(newPhone:String,otp:Int ,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/verify/newPhone"
+        let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","phone": newPhone,"otp":otp] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func UpdateAd(aID:Int,aName:String,aDescription:String,aPrice:Int ,completionBlock: @escaping (_ result:Status) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/update/ad"
+        let Parameters = ["userToken": userToken ?? "","requesttoken": requestToken ?? "","aID": aID,"aName":aName,"aDescription":aDescription,"aPrice":aPrice] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func DeleteAd(aID:Int,completionBlock: @escaping (_ result:Status) ->()){
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/user/delete/ad"
+        let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","aID": aID] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func UPass(newPass:String,completionBlock: @escaping (_ result:Status) ->()){
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/update/pass"
+        let Parameters = ["userToken": userToken ?? "","requestToken": requestToken ?? "","newPass": newPass] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func SendSms(phone:Int,completionBlock: @escaping (_ result:Status) ->()){
+        
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/androidmobileapp/accounts/send/sms"
+        let Parameters = ["phone":phone] as [String : Any]
+        
+        var statusCode = Status()
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    statusCode  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    
+                    completionBlock(statusCode)
+                    
+                    
+                }
+                catch let jsonErr{
+                    statusCode.response = 4
+                     completionBlock(statusCode)
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
+    func Withdraw(mobile:Int64?,pass:String?,account:Int64?,serviceID:Int?,amount:Int64?,completionBlock: @escaping (_ result:Status) ->()){
+        
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        
+        
+        let PULLULINK = "https://pullu.az/api/payment/withdraw"
+        let Parameters = ["userToken":userToken ?? "" ,"requestToken":requestToken ?? "","account":account!,"serviceID":serviceID!,"amount":amount!] as [String : Any]
+        
+        
+        
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                //  print(PULLULINK)
+                
+                do{
+                    
+                    
+                    let status  = try
+                        JSONDecoder().decode(Status.self, from: response.data!)
+                    // userList=list
+                    //print(list)
+                    if status.response == 1{
+                        self.security.RefreshToken(requestToken: status.requestToken)
+                        
+                    }
+                    completionBlock(status)
+                    
+                    
+                }
+                catch let jsonErr{
+                    print("Error serializing json:",jsonErr)
+                }
+        }
+        
+    }
 }

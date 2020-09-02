@@ -7,17 +7,17 @@
 //
 
 import Foundation
-struct NewUser{
+struct NewUser:Codable{
     
     var name: String?
     var surname: String?
-   
     var mail: String?
-    var phone: String?
+    var phone: Int?
     var pass: String?
     var bDate: String?
-    var gender: String?
-    var country: String?
-    var city: String?
-    var sector: String?
+    var gender: Int?
+    var country: Int?
+    var city: Int?
+    var interestIds: Array<Int>?
+    var otp:Int?
 }

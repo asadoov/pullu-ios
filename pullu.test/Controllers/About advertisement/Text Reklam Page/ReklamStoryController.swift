@@ -11,15 +11,17 @@ import UIKit
 class ReklamStoryController: UIViewController {
     let insert:DbInsert=DbInsert()
     @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var advertDescriptionLabel: UILabel!
+ 
+    @IBOutlet weak var aDescription: UITextView!
     var advertID:Int?
-    var mail:String?
-    var pass:String?
+    var usertoken:String?
+    var requesttoken:String?
     var advertDescription:String?
-
+  let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
-        advertDescriptionLabel.text=advertDescription
+         self.defaults.set(nil, forKey: "aID")
+        aDescription.text=advertDescription
         var time=0
        // print("advID\(advertID!) mail\(mail!) pass \(pass!)")
         // Do any additional setup after loading the view.
@@ -27,17 +29,18 @@ class ReklamStoryController: UIViewController {
           
             time+=1
             if time==31{
-                self.insert.earnMoney(advertID: self.advertID, mail: self.mail,pass:self.pass){
+                self.insert.EarnMoney(advertID: self.advertID){
                     
                     (status)
                     in
                      switch status.response
                                   {
-                                  case 0:
+                                  case 1:
+                                    
                                      let alert = UIAlertController(title: "Təbriklər!", message: "Siz reklamın tarifinə uyğun qazanc əldə etdiniz! Maliyə bölməsinə keçid edərək cari balansızı öyrənə bilərsiniz", preferredStyle: UIAlertController.Style.alert)
                                                      alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: {
                                                          (action: UIAlertAction!) in
-                                                         
+                                                          self.defaults.set(self.advertID, forKey: "aID")
                                                        self.dismiss(animated: true)
                                                      }))
                                        self.present(alert, animated: true, completion: nil)

@@ -14,11 +14,11 @@ import AlamofireImage
 class AboutAdvertController: UIViewController {
     let defaults = UserDefaults.standard
     var advertID:Int?
-    var mail:String?
-    var pass:String?
-    var select:dbSelect=dbSelect()
-    var userData = Array<User>()
-    
+    var userToken:String?
+    var requestToken:String?
+    var select:DbSelect=DbSelect()
+    var userData = Array<UserStruct>()
+    var fromArchieve:Bool = false
     @IBOutlet weak var viewCount: UILabel!
     @IBOutlet weak var advName: UILabel!
     
@@ -32,23 +32,32 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var sellerFullname: UILabel!
     
-    @IBOutlet weak var sellerPhone: UILabel!
+    @IBOutlet weak var sellerPhone: UITextView!
+    
     @IBOutlet weak var slideshow: ImageSlideshow!
     
     //    @IBOutlet weak var blurClocks: UIImageView!
     @IBOutlet weak var earnMoney: UIButton!
+    var titleLabel:UILabel?
     var imageSource: [ImageSource] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+//        earnMoney.isEnabled=false
+//        self.earnMoney.isHidden=true
+//        earnMoney.titleLabel!.text = "Yüklənir..."
+        self.defaults.set(nil, forKey: "aID")
         
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
+       titleLabel  = UILabel(frame: CGRect(x: 10, y: 0, width: self.slideshow!.frame.width - 10, height: 60))
+        
+        //        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
+        //
+        //        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        //        loadingIndicator.hidesWhenStopped = true
+        //        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        //        loadingIndicator.startAnimating();
+        //        alert.view.addSubview(loadingIndicator)
+        //        present(alert, animated: false, completion: nil)
         
         //   navigationController?.navigationBar.isTranslucent = false
         
@@ -73,16 +82,16 @@ class AboutAdvertController: UIViewController {
         // Do any additional setup after loading the view.
         do{
             let udata = self.defaults.string(forKey: "uData")
-            pass = self.defaults.string(forKey: "pass")
+            userToken = self.defaults.string(forKey: "userToken")
             self.userData  = try
-                JSONDecoder().decode(Array<User>.self, from: udata!.data(using: .utf8)!)
-            self.mail=self.userData[0].mail
+                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+            self.requestToken=self.defaults.string(forKey: "requestToken")
         }
         catch let jsonErr{
             print("Error serializing json:",jsonErr)
         }
         //print("mail: \(userData[0].mail) pass: \(pass) advertID: \(advertID)")
-        select.getAdvertById(advertID: advertID,mail: userData[0].mail,pass:pass )
+        select.GetAdvertById(advertID: advertID)
         {
             (list)
             in
@@ -90,10 +99,8 @@ class AboutAdvertController: UIViewController {
             
             
             DispatchQueue.main.async {
-           
-                if list[0].isPaid==1{
-                    self.earnMoney.isHidden=false
-                }
+                
+                
                 //  self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
                 //self.tableView.reloadData()
                 
@@ -101,30 +108,30 @@ class AboutAdvertController: UIViewController {
                 
                 self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
-                self.sellerPhone.text=list[0].sellerPhone!
+                self.sellerPhone.text="+994\(list[0].sellerPhone!)"
                 self.aDescription.text = list[0].description!
                 self.advType.text=list[0].aTypeName
-                self.balance.text = "\(self.userData[0].earning!) AZN"
+               // self.balance.text = "\(self.userData[0].earning!) AZN"
                 self.viewCount.text = "Baxış sayı \(list[0].views!)"
                 
                 //  self.tableView.reloadData()
                 let loadingIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
-              
-                    self.slideshow.setImageInputs([
-                        
-                        ImageSource(image: UIImage(named: "background")!)
-                        
-                    ])
+                
+                self.slideshow.setImageInputs([
                     
+                    ImageSource(image: UIImage(named: "background")!)
                     
-                    loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
-                    loadingIndicator.hidesWhenStopped = true
-                    loadingIndicator.color = UIColor.lightGray
-                    // loadingIndicator.style = UIActivityIndicatorView.Style.gray
-                    loadingIndicator.startAnimating();
-                    self.slideshow.addSubview(loadingIndicator)
-                    
-                    
+                ])
+                
+                
+                loadingIndicator.center=CGPoint(x: self.slideshow.bounds.size.width/2, y: self.slideshow.bounds.size.height/2)
+                loadingIndicator.hidesWhenStopped = true
+                loadingIndicator.color = UIColor.lightGray
+                // loadingIndicator.style = UIActivityIndicatorView.Style.gray
+                loadingIndicator.startAnimating();
+                self.slideshow.addSubview(loadingIndicator)
+                
+                
                 
                 
                 
@@ -132,13 +139,17 @@ class AboutAdvertController: UIViewController {
                     
                     
                     Alamofire.request(i).responseImage { response in
+                        
+                        loadingIndicator.stopAnimating();
+                        
                         if let catPicture = response.result.value {
                             self.imageSource.append(ImageSource(image:  catPicture))
                             // imgs.append(catPicture)
                             print("Image downloaded\(catPicture)")
                             //advert.photo=catPicture.pngData()
                             DispatchQueue.main.async {
-                                loadingIndicator.stopAnimating();
+                              
+                                
                                 self.slideshow.setImageInputs(self.imageSource)
                             }
                             
@@ -150,35 +161,78 @@ class AboutAdvertController: UIViewController {
                             //print(self.dataArray[dataArray.count-1].photo)
                             
                         }
+                        else {
+                            
+                            self.titleLabel!.textAlignment = .center
+                            self.titleLabel!.center = self.slideshow.center
+                            self.titleLabel!.text = "🤷🏼‍♂️"
+                            self.titleLabel!.textColor = UIColor.black
+                            self.titleLabel!.font = UIFont(name:"chalkboard SE", size: 58)
+                            
+                            self.slideshow.addSubview(self.titleLabel!)
+                            //self.earnMoney.isHidden=true
+                        }
                         
+                        
+                        if (self.imageSource.count == list[0].photoUrl!.count)
+                        {
+                            if self.imageSource.count>0{
+                                self.titleLabel!.text = ""
+//                                if list[0].isPaid == 1 && list[0].userID != self.userData[0].id && self.fromArchieve == false
+//                                {
+//                                    self.earnMoney.titleLabel!.text = "Reklamı izlə"
+//                                    self.earnMoney.isHidden=false
+//                                    self.earnMoney.isEnabled=true
+//                                }
+                                
+                            }
+                            else{
+                                self.titleLabel!.textAlignment = .center
+                                self.titleLabel!.center = self.slideshow.center
+                                self.titleLabel!.text = "🤷🏼‍♂️"
+                                self.titleLabel!.textColor = UIColor.black
+                                self.titleLabel!.font = UIFont(name:"chalkboard SE", size: 58)
+                                
+                                self.slideshow.addSubview(self.titleLabel!)
+                                self.earnMoney.isHidden=true
+                                
+                            }
+                            
+                        }
                         
                         
                     }
                     
                     
                 }
-                     self.dismiss(animated: false)
-                      
+                
+                
             }
             
-      
+            
         }
         
         
     }
+    
+    @IBAction func exitButtonClick(_ sender: Any) {
+        dismiss(animated: true)
+        
+    }
+    
     
     @objc func didTap() {
         slideshow.presentFullScreenController(from: self)
     }
     
     @IBAction func earnMoney_click(_ sender: Any) {
-        
+        earnMoney.isHidden=true;
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "PhotoStoryPage") as! PhotoStoryController
         newViewController.imageSource=imageSource
         newViewController.advertID=advertID
-        newViewController.mail=mail
-        newViewController.pass=pass
+        newViewController.userToken=userToken
+        newViewController.requestToken=requestToken
         self.present(newViewController, animated: true, completion: nil)
         // let n=(30/slideshow.images.count)
         

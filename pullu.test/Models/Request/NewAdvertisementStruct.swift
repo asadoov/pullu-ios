@@ -8,8 +8,7 @@
 
 import Foundation
 class NewAdvertisementStruct: Codable {
-    var mail:String?
-    var pass:String?
+    
     var isPaid:Int?
     var aTypeID:Int?
     var aCategoryID:Int?
@@ -25,4 +24,5 @@ class NewAdvertisementStruct: Codable {
     var aProfessionID:Int?
     var aBackgroundUrl:String?
     var files:Array<Data>?
+        var videoPathExtension:String?
 }

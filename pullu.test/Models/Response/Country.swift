@@ -9,7 +9,7 @@
 import Foundation
 struct Country:Codable{
     
-    var ID: Int?
+    var id: Int?
     var name: String?
     
    

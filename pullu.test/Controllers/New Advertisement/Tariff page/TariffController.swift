@@ -10,7 +10,7 @@ import UIKit
 
 class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
-    var select:dbSelect=dbSelect()
+    var select:DbSelect=DbSelect()
     
     var tariffList:Array<TariffStruct>=[]
     var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()
@@ -23,7 +23,7 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
         
         tariffTable.delegate = self
         tariffTable.dataSource = self
-        select.aTariff(){
+        select.ATariff(){
             (list)
             in
             self.tariffList=list
@@ -31,6 +31,11 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
                 self.tariffTable.reloadData()
             }
         }
+//        func viewDidLoad() {
+//            super.viewDidLoad()
+//            self.tariffTable.backgroundColor = UIColor.lightGray
+//        }
+
         
         // Do any additional setup after loading the view.
     }
@@ -61,6 +66,8 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
             print(indexPath.row)
         }
         
+       
+        
         //cell.delegate = self
         cell.reloadData()
         //cell.object = dataArray[indexPath.row]
@@ -76,9 +83,10 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
         return 1
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 100
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         for indexPath in tableView.indexPathsForSelectedRows ?? [] {
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -92,6 +100,17 @@ class TariffController: UIViewController,UITableViewDelegate,UITableViewDataSour
         self.performSegue(withIdentifier: "newASecond", sender: true)
         
     }
+    
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        // Initialization code
+//
+//        let mScreenSize = UIScreen.main.bounds
+//        let mSeparatorHeight = CGFloat(3.0) // Change height of speatator as you want
+//        let mAddSeparator = UIView.init(frame: CGRect(x: 0, y: self.tariffTable.size.height - mSeparatorHeight, width: mScreenSize.width, height: mSeparatorHeight))
+//        mAddSeparator.backgroundColor = UIColor.brown // Change backgroundColor of separator
+//        self.addSubview(mAddSeparator)
+//    }
     
     
     
