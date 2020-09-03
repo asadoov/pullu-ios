@@ -28,7 +28,7 @@ class MyViewsController: UIViewController {
         let defaults = UserDefaults.standard
         
         addWarningLabel()
-          warningLabel.text = "Heç bir reklam tapılmadı..."
+          warningLabel.text = "Heç bir elan tapılmadı..."
         
         // let userData = defaults.string(forKey: "uData")
         userToken = defaults.string(forKey: "userToken")

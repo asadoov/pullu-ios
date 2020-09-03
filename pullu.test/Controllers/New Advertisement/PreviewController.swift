@@ -298,7 +298,7 @@ extension PreviewController:UITableViewDelegate,UITableViewDataSource
         case 3:
             cell.textLabel?.text =  "Hədəf yaş aralığı: \(newAPreview.aAgeRange ?? "")"
         case 4:
-            cell.textLabel?.text = "Hədəf ixtisas: \(newAPreview.aProfession ?? "")"
+            cell.textLabel?.text = "Hədəf maraqlar: \(newAPreview.aInterests ?? "")"
         default: break
             
         }

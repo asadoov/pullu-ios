@@ -19,7 +19,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     var countries:Array<Country> = []
     var cities:Array<City> = []
     var genders:Array<String> = []
-    var professions:Array<Profession> = []
+    
     var ageRanges:Array<AgeRangeStruct> = []
     var select:DbSelect = DbSelect()
     var interestIds:Array<Int> = Array<Int>()
@@ -47,10 +47,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
         chooseAge.range = "Bütün yaşlar"
         self.ageRanges.append(chooseAge)
         
-        var chooseProfession:Profession = Profession()
-        chooseProfession.id = 0
-        chooseProfession.name = "Bütün ixtisaslar"
-        self.professions.append(chooseProfession)
+       
         
         self.countryPicker.reloadAllComponents()
         self.cityPicker.reloadAllComponents()
@@ -91,14 +88,17 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
                  self.interestIds.removeAll()
                  for item in list{
                      self.interestIds.append(item.id!)
+                    
                      // print(item)
                      if item.id == list.first?.id {
                          
                          chooseInterestsButton.setTitle("\(item.name!)", for: .normal)
+                        newAPreview.aInterests = "\(item.name!)"
                      }
                      else{
                          
                          chooseInterestsButton.setTitle("\(chooseInterestsButton.title(for: .normal)!), \(item.name!)", for: .normal)
+                        newAPreview.aInterests! += ", \(item.name!)"
                          
                      }
                      
@@ -118,6 +118,9 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     @IBAction func finishButton(_ sender: Any) {
         
+        if self.interestIds.count>0{
+            newAdvertisement.aInterestIds = self.interestIds
+        
         if newAdvertisement.aCountryID == nil {
             newAdvertisement.aCountryID = 0
             newAPreview.aCountry = "Hamısı"
@@ -134,6 +137,7 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
             newAdvertisement.aAgeRangeID = 0
             newAPreview.aAgeRange = "Hamısı"
         }
+        
 //        if newAdvertisement.aProfessionID == nil {
 //            newAdvertisement.aProfessionID = 0
 //            newAPreview.aProfession = "Hamısı"
@@ -141,6 +145,18 @@ class AuditoryController: UIViewController, UIPickerViewDataSource, UIPickerView
 //        newAdvertisement.mail = defaults.string(forKey: "mail")
 //        newAdvertisement.pass = defaults.string(forKey: "pass")
           self.performSegue(withIdentifier: "previewController", sender: self)
+        }
+        else
+        {
+            let alert = UIAlertController(title: "Bildiriş", message: "Elanın maraq dairəsini seçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+                              
+                              alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                 
+                              }))
+                              self.present(alert, animated: true, completion: nil)
+                             
+            
+        }
         
         
     }

@@ -36,7 +36,7 @@ class NotPaidController: UITableViewController {
         
         DispatchQueue.main.async {
             self.addWarningLabel()
-            self.warningLabel.text = "Heç bir reklam tapılmadı..."
+            self.warningLabel.text = "Heç bir elan tapılmadı..."
             
          self.refreshCatButton.layer.cornerRadius = self.refreshCatButton.frame.height.self / 2.0
         }

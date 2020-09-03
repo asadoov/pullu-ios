@@ -55,7 +55,7 @@ class HomePageController: UIViewController{
             
             let myViewController = storyboard
                 .instantiateViewController(withIdentifier: "paid")
-            myViewController.title = "Pullu"
+            myViewController.title = "Ən maraqlı"
             
             
             //            let backgroundImage = UIImageView()
@@ -67,7 +67,7 @@ class HomePageController: UIViewController{
             
             let myShareController = storyboard
                 .instantiateViewController(withIdentifier: "notPaid")
-            myShareController.title = "Pulsuz"
+            myShareController.title = "Sadə"
             
             let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                     segmentControllers: [myViewController,

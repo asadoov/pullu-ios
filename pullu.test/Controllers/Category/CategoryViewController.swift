@@ -43,7 +43,7 @@ class CategoryViewController: UIViewController {
                         
                         let paidController = storyboard
                             .instantiateViewController(withIdentifier: "paid") as! PaidController
-                        paidController.title = "Pullu"
+                        paidController.title = "Ən maraqlı"
             paidController.catID = object!.id!
                     
         //            let backgroundImage = UIImageView()
@@ -55,7 +55,7 @@ class CategoryViewController: UIViewController {
                         
                         let notPaidController = storyboard
                             .instantiateViewController(withIdentifier: "notPaid") as! NotPaidController
-                        notPaidController.title = "Pulsuz"
+                        notPaidController.title = "Sadə"
             notPaidController.catID = object!.id!
                         let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                                 segmentControllers: [paidController,

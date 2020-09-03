@@ -37,7 +37,7 @@ class PaidController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
            addWarningLabel()
-         warningLabel.text = "Heç bir reklam tapılmadı..."
+         warningLabel.text = "Heç bir elan tapılmadı..."
         DispatchQueue.main.async {
            
             self.refreshCatButton.layer.cornerRadius = self.refreshCatButton.frame.height.self / 2.0

@@ -36,7 +36,7 @@ class MyAdsController: UIViewController,ReklamCellDelegate{
               aTableView.addSubview(myRefreshControl)
         addResultButtonView()
         addWarningLabel()
-          warningLabel.text = "Heç bir reklam tapılmadı..."
+          warningLabel.text = "Heç bir elan tapılmadı..."
         // Do any additional setup after loading the view.
        
         

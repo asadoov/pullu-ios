@@ -117,7 +117,7 @@ class DbInsert {
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/earnMoney"
         let Parameters = ["advertID": advertID!,"userToken":userToken ?? "", "requestToken":requestToken ?? ""] as [String : Any]
         
-         var status = Status()
+        var status = Status()
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -127,7 +127,7 @@ class DbInsert {
                 do{
                     
                     
-                   status = try
+                    status = try
                         JSONDecoder().decode(Status.self, from: response.data!)
                     // userList=list
                     print(status)
@@ -393,7 +393,7 @@ class DbInsert {
         
         
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/advertisements/add"
-        
+        var status = Status()
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/advertisements/add"
         //        var request = URLRequest(url: URL(string: PULLULINK)!)
         //        request.httpMethod = HTTPMethod.post.rawValue
@@ -439,7 +439,12 @@ class DbInsert {
                 multipartFormData.append(("\(newAdvertisement!.aMediaTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aMediaTypeId")
                 multipartFormData.append(("\(newAdvertisement!.aPrice!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aPrice")
                 multipartFormData.append(("\(newAdvertisement!.aTrfID ?? 0)".data(using: .utf8)!), withName: "aTrfID")
-                multipartFormData.append(("\(newAdvertisement!.aProfessionID ?? 0)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aProfessionID")
+                if (newAdvertisement?.aInterestIds!.count)!>0{
+                for id in newAdvertisement!.aInterestIds! {
+                    multipartFormData.append(("\(id)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aInterestIds")
+                }
+                }
+                
                 multipartFormData.append(("\(newAdvertisement!.aTitle!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTitle")
                 //                    multipartFormData.append(("\(newAdvertisement?.aTrfID!)".data(using: .utf8)!), withName: "aTrfID")
                 multipartFormData.append(("\(newAdvertisement!.aTypeID!)".data(using: String.Encoding.utf8, allowLossyConversion: false))!, withName: "aTypeId")
@@ -466,7 +471,7 @@ class DbInsert {
                         do{
                             
                             
-                            let status  = try
+                            status  = try
                                 JSONDecoder().decode(Status.self, from: response.data!)
                             // userList=list
                             if status.response == 1{
@@ -479,10 +484,14 @@ class DbInsert {
                             
                         }
                         catch let jsonErr{
+                            status.response = 6
+                            completionBlock(status)
                             print("Error serializing json:",jsonErr)
                         }
                     }
                 case .failure(let encodingError):
+                    status.response = 6
+                    completionBlock(status)
                     print(encodingError)
                     
                 }
@@ -829,7 +838,7 @@ class DbInsert {
                 }
                 catch let jsonErr{
                     statusCode.response = 4
-                     completionBlock(statusCode)
+                    completionBlock(statusCode)
                     print("Error serializing json:",jsonErr)
                 }
         }

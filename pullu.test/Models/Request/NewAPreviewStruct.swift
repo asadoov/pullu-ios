@@ -21,7 +21,7 @@ class NewAPreviewStruct {
     var aCity:String?
     var aGender:Int?
     var aAgeRange:String?
-    var aProfession:String?
+    var aInterests:String?
     var mediaBase64:Array<String>?
     var videoUrl:URL?
 
