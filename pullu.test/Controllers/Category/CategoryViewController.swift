@@ -43,7 +43,7 @@ class CategoryViewController: UIViewController {
                         
                         let paidController = storyboard
                             .instantiateViewController(withIdentifier: "paid") as! PaidController
-                        paidController.title = "Ən maraqlı"
+                        paidController.title = "Vip"
             paidController.catID = object!.id!
                     
         //            let backgroundImage = UIImageView()

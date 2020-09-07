@@ -17,9 +17,9 @@ class ForgotLastPageViewController: UIViewController {
     }
    
  
-//    @IBAction func extBtn(_ sender: Any) {
-//        self.dismiss(animated:true)
-//    }
+    @IBAction func extBtn(_ sender: Any) {
+        self.dismiss(animated:true)
+    }
     
     
     

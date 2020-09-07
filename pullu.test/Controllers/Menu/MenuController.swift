@@ -83,14 +83,14 @@ class MenuController: UIViewController {
         aboutBtn.name="Proqram haqqında"
         aboutBtn.icon  =  UIImage(named: "aboutUs")?.pngData()
         
-//        let financeBtn:MenuStruct = MenuStruct()
-//        financeBtn.ID=5
-//        financeBtn.name="Maliyyə"
-//        financeBtn.icon  =  UIImage(named: "balance")?.pngData()
+        let financeBtn:MenuStruct = MenuStruct()
+        financeBtn.ID=5
+        financeBtn.name="Maliyyə"
+        financeBtn.icon  =  UIImage(named: "balance")?.pngData()
         
         menuItems.append(profileBtn)
         menuItems.append(staticsBtn)
-      //  menuItems.append(financeBtn)
+//        menuItems.append(financeBtn)
         //        menuItems.append(ruleBtn)
         //        menuItems.append(aboutBtn)
         menuItems.append(logOutBtn)

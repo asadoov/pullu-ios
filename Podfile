@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '11.0'
 use_frameworks!
 #use_modular_headers!
-target 'pullu.test' do
+target 'pullu' do
   # Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
 

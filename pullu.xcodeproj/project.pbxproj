@@ -18,6 +18,7 @@
 		04E6BF5D24190831002381F1 /* CreatePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6BF5C24190831002381F1 /* CreatePassViewController.swift */; };
 		04ED33B724634A60006BC601 /* ArchiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED33B624634A60006BC601 /* ArchiveController.swift */; };
 		04F0152F24B4E35700FFA122 /* ResponseStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0152E24B4E35700FFA122 /* ResponseStruct.swift */; };
+		A92E4DD5847B1437A998D0D9 /* Pods_pullu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1417977CFBAB9C3F414B48FF /* Pods_pullu.framework */; };
 		B60501BD23F0299600928B7F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60501BC23F0299600928B7F /* NotificationCell.swift */; };
 		B60C14AE2460384A005D70CF /* AlamofireInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60C14AD2460384A005D70CF /* AlamofireInterface.swift */; };
 		B618DCCF2432089B0020C2D8 /* AgeRangeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618DCCE2432089B0020C2D8 /* AgeRangeStruct.swift */; };
@@ -117,7 +118,6 @@
 		B6CBDDDE2433C13600D533B3 /* PreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDDD2433C13600D533B3 /* PreviewController.swift */; };
 		B6CBDDE22433C62600D533B3 /* NewAPreviewStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CBDDE12433C62600D533B3 /* NewAPreviewStruct.swift */; };
 		B6E0C38A245A1ABC00AFB528 /* UpdateProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */; };
-		EFC7B1AA2DED4D2BE6821E46 /* Pods_pullu_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834F6BED4721ADEBDFAF031C /* Pods_pullu_test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -170,8 +170,9 @@
 		04ED33B624634A60006BC601 /* ArchiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveController.swift; sourceTree = "<group>"; };
 		04EFB7DA23C7190700042E5C /* HomePageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		04F0152E24B4E35700FFA122 /* ResponseStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStruct.swift; sourceTree = "<group>"; };
-		834F6BED4721ADEBDFAF031C /* Pods_pullu_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A361E0E95A9446DD3B34B3B6 /* Pods-pullu.test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.release.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.release.xcconfig"; sourceTree = "<group>"; };
+		1417977CFBAB9C3F414B48FF /* Pods_pullu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pullu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA24310CAE07661880C973F1 /* Pods-pullu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.release.xcconfig"; path = "Target Support Files/Pods-pullu/Pods-pullu.release.xcconfig"; sourceTree = "<group>"; };
+		AE6EF26A83683C964E815818 /* Pods-pullu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.debug.xcconfig"; path = "Target Support Files/Pods-pullu/Pods-pullu.debug.xcconfig"; sourceTree = "<group>"; };
 		B602324423DAD4F30073B7FF /* ReklamStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReklamStoryController.swift; sourceTree = "<group>"; };
 		B60501BC23F0299600928B7F /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		B60C14AD2460384A005D70CF /* AlamofireInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireInterface.swift; sourceTree = "<group>"; };
@@ -451,7 +452,6 @@
 		B6E0C389245A1ABC00AFB528 /* UpdateProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileStruct.swift; sourceTree = "<group>"; };
 		B6EEC70E23C76A5300B9AEC9 /* ConnectionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
 		B6EEC71223C76DA200B9AEC9 /* ConnectionCheckController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCheckController.swift; sourceTree = "<group>"; };
-		C66AB13D81CB19BF3BA901F6 /* Pods-pullu.test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pullu.test.debug.xcconfig"; path = "Target Support Files/Pods-pullu.test/Pods-pullu.test.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,7 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFC7B1AA2DED4D2BE6821E46 /* Pods_pullu_test.framework in Frameworks */,
+				A92E4DD5847B1437A998D0D9 /* Pods_pullu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +759,7 @@
 				B6CBE8B323EC438B002414CC /* libleveldb-library.a */,
 				B6CBE8B423EC438B002414CC /* libnanopb.a */,
 				B6CBE8B623EC438B002414CC /* libPromisesObjC.a */,
-				834F6BED4721ADEBDFAF031C /* Pods_pullu_test.framework */,
+				1417977CFBAB9C3F414B48FF /* Pods_pullu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1107,8 +1107,8 @@
 		CA3D62115FD4EA1DDBE1E8D2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C66AB13D81CB19BF3BA901F6 /* Pods-pullu.test.debug.xcconfig */,
-				A361E0E95A9446DD3B34B3B6 /* Pods-pullu.test.release.xcconfig */,
+				AE6EF26A83683C964E815818 /* Pods-pullu.debug.xcconfig */,
+				AA24310CAE07661880C973F1 /* Pods-pullu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1120,12 +1120,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 045829AE23C452D5004F6FA9 /* Build configuration list for PBXNativeTarget "pullu" */;
 			buildPhases = (
-				97C5031B3A0CAE559DE42C8B /* [CP] Check Pods Manifest.lock */,
+				BCE55E6F403F6BEB288C5FC2 /* [CP] Check Pods Manifest.lock */,
 				0458299323C452D3004F6FA9 /* Sources */,
 				0458299423C452D3004F6FA9 /* Frameworks */,
 				0458299523C452D3004F6FA9 /* Resources */,
 				B688E5B023ED9458003D04D0 /* Embed Frameworks */,
-				AACBBBA3A037A12F7F82D4DB /* [CP] Embed Pods Frameworks */,
+				9FD0311AF30A40E29E5CD8E0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1200,7 +1200,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		97C5031B3A0CAE559DE42C8B /* [CP] Check Pods Manifest.lock */ = {
+		9FD0311AF30A40E29E5CD8E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu/Pods-pullu-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-pullu/Pods-pullu-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu/Pods-pullu-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCE55E6F403F6BEB288C5FC2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1215,28 +1232,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-pullu.test-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-pullu-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AACBBBA3A037A12F7F82D4DB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-pullu.test/Pods-pullu.test-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1481,13 +1481,13 @@
 		};
 		045829AF23C452D5004F6FA9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C66AB13D81CB19BF3BA901F6 /* Pods-pullu.test.debug.xcconfig */;
+			baseConfigurationReference = AE6EF26A83683C964E815818 /* Pods-pullu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1495,7 +1495,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innapp.pullu;
 				PRODUCT_NAME = Pullu;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1506,13 +1506,13 @@
 		};
 		045829B023C452D5004F6FA9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A361E0E95A9446DD3B34B3B6 /* Pods-pullu.test.release.xcconfig */;
+			baseConfigurationReference = AA24310CAE07661880C973F1 /* Pods-pullu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = pullu.test/pullu.test.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FWZD2Y3WSU;
 				INFOPLIST_FILE = pullu.test/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1520,7 +1520,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.innapp.pullu;
 				PRODUCT_NAME = Pullu;
 				PROVISIONING_PROFILE_SPECIFIER = "";

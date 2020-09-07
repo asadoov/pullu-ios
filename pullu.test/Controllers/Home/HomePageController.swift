@@ -55,7 +55,7 @@ class HomePageController: UIViewController{
             
             let myViewController = storyboard
                 .instantiateViewController(withIdentifier: "paid")
-            myViewController.title = "Ən maraqlı"
+            myViewController.title = "Vip"
             
             
             //            let backgroundImage = UIImageView()

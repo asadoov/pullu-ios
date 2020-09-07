@@ -298,7 +298,7 @@ class DbInsert {
         
         
         
-        request(PULLULINK ,method: .get,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+        request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
                 (response)
                 in

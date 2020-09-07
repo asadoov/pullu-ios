@@ -14,7 +14,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     let defaults = UserDefaults.standard
     var User:UserStruct?
     var id: Int?
-    var MainUrl = "https://test.smartpay.az/keeper-sl/payment/service/588?iframe=true&im_id1="
+    var MainUrl = "https://smartpay.az/payment/service/765?iframe=true&im_id1="
     
 
     @IBOutlet weak var webView: WKWebView!
