@@ -33,7 +33,7 @@ public class DbSelect {
         
         // let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
         let PULLULINK="https://pullu.az/api/androidmobileapp/user/login"
-        let Parameters = ["phone": phone,"pass":pass] as [String : Any]
+        let Parameters = ["phone": phone,"pass":pass,"platformID":1] as [String : Any]
         //var obj:ResponseStruct<Advertisement> = ResponseStruct<Advertisement>(from: )
         var obj = ResponseStruct<UserStruct>()
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
@@ -74,6 +74,9 @@ public class DbSelect {
         
     }
     
+    
+    
+    
     func GetAds(isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         
         
@@ -86,7 +89,7 @@ public class DbSelect {
         let Parameters:[String:Any]
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         if catID! > 0 {
-            Parameters = ["userToken": usrtkn!,"requesttoken":reqTkn!,"pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
+            Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
             //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
         }else{
             Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid] as [String : Any]
@@ -333,6 +336,42 @@ public class DbSelect {
         
         
     }
+    func SearchAds( completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+        let userToken = defaults.string(forKey: "userToken")
+        let requestToken = defaults.string(forKey: "requestToken")
+        
+        let url="https://pullu.az/api/androidmobileapp/user/search/ads"
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? "","pageNo":1,"isPaid":3,"catID":0,"searchQuery":"a"] as [String : Any]
+        var obj = ResponseStruct<Advertisement>()
+        request(url ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
+            {
+                (response)
+                in
+                
+                do{
+                    
+                    
+                     obj = try
+                        JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
+                    if obj.status == 1{
+                        self.security.RefreshToken(requestToken: obj.requestToken)
+                        
+                    }
+                   
+                    
+                    
+                }
+                catch let jsonErr{
+                 
+                    print("Error serializing json:",jsonErr)
+                }
+                   completionBlock(obj)
+        }
+        
+        
+        
+    }
+    
     
     //Profil
     func GetProfileInfo( completionBlock: @escaping (_ result:ResponseStruct<ProfileModel>) ->()){
@@ -569,7 +608,7 @@ public class DbSelect {
         
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
         
-        let Parameters = ["userToken": userToken!,"requestToken":requestToken!] as [String : Any]
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? ""] as [String : Any]
         //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
         
         

@@ -17,7 +17,7 @@ class MyViewsController: UIViewController {
     var  requestToken:String?
     var select:DbSelect=DbSelect()
     let defaults = UserDefaults.standard
-     private let myRefreshControl = UIRefreshControl()
+    private let myRefreshControl = UIRefreshControl()
     @IBOutlet weak var aTableView: UITableView!
     let warningLabel = UILabel()
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class MyViewsController: UIViewController {
         let defaults = UserDefaults.standard
         
         addWarningLabel()
-          warningLabel.text = "Heç bir elan tapılmadı..."
+        warningLabel.text = "Heç bir elan tapılmadı..."
         
         // let userData = defaults.string(forKey: "uData")
         userToken = defaults.string(forKey: "userToken")
@@ -36,47 +36,47 @@ class MyViewsController: UIViewController {
         refresh()
     }
     private func addWarningLabel() {
-                 
-
-             //self.notFoundLabel.backgroundColor = .orange
-            // self.notFoundLabel.center = viewersTable.center
-              
-             self.aTableView.addSubview(self.warningLabel)
-
-                 // set position
-             self.warningLabel.translatesAutoresizingMaskIntoConstraints = false
-             self.warningLabel.centerXAnchor.constraint(equalTo: self.aTableView.centerXAnchor).isActive = true
-             self.warningLabel.centerYAnchor.constraint(equalTo: self.aTableView.centerYAnchor).isActive = true
-  self.warningLabel.isHidden = true
-     //       DispatchQueue.main.async {
-     //              // self.notFoundLabel.layer.cornerRadius = self.notFoundLabel.frame.height.self / 2.0
-     //        self.notFoundLabel.numberOfLines = 0
-     //        self.notFoundLabel.lineBreakMode = .byWordWrapping
-     //        self.notFoundLabel.adjustsFontSizeToFitWidth = true
-     //              }
-     //              self.notFoundLabel.clipsToBounds = true
-                 
-             }
+        
+        
+        //self.notFoundLabel.backgroundColor = .orange
+        // self.notFoundLabel.center = viewersTable.center
+        
+        self.aTableView.addSubview(self.warningLabel)
+        
+        // set position
+        self.warningLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.warningLabel.centerXAnchor.constraint(equalTo: self.aTableView.centerXAnchor).isActive = true
+        self.warningLabel.centerYAnchor.constraint(equalTo: self.aTableView.centerYAnchor).isActive = true
+        self.warningLabel.isHidden = true
+        //       DispatchQueue.main.async {
+        //              // self.notFoundLabel.layer.cornerRadius = self.notFoundLabel.frame.height.self / 2.0
+        //        self.notFoundLabel.numberOfLines = 0
+        //        self.notFoundLabel.lineBreakMode = .byWordWrapping
+        //        self.notFoundLabel.adjustsFontSizeToFitWidth = true
+        //              }
+        //              self.notFoundLabel.clipsToBounds = true
+        
+    }
     
     @objc func refresh() {
         
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate
-//
-         self.myRefreshControl.beginRefreshing()
+        //
+        self.myRefreshControl.beginRefreshing()
         
-      UIApplication.shared.beginIgnoringInteractionEvents()
-            //  var typeCount=0
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        //  var typeCount=0
+        
+        select.GetMyViews(){
             
-            select.GetMyViews(){
+            (obj) in
+            UIApplication.shared.endIgnoringInteractionEvents()
+            switch obj.status{
                 
-                (obj) in
-                 UIApplication.shared.endIgnoringInteractionEvents()
-                switch obj.status{
-                    
-                case 1:
-                    if obj.data.count > 0 {
-                        self.warningLabel.isHidden = true
+            case 1:
+                if obj.data.count > 0 {
+                    self.warningLabel.isHidden = true
                     
                     for advert in obj.data {
                         
@@ -114,12 +114,16 @@ class MyViewsController: UIViewController {
                         
                         
                     }
-                    }
-                    else {
-                         self.warningLabel.isHidden = false
-                    }
-                    break
-                case 2:
+                }
+                else {
+                    self.warningLabel.isHidden = false
+                }
+                break
+            case 2:
+                self.userToken = self.defaults.string(forKey: "userToken")
+                self.requestToken = self.defaults.string(forKey: "requestToken")
+                if self.userToken != nil && self.requestToken != nil {
+                    
                     let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                     
                     alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
@@ -127,31 +131,45 @@ class MyViewsController: UIViewController {
                         self.defaults.set(nil, forKey: "requestToken")
                         self.defaults.set(nil, forKey: "uData")
                         let menu:MenuController = MenuController()
-                        menu.updateRootVC(status: false)                                                                                                         }))
-                    self.present(alert, animated: true, completion: nil)
-                    break
-                default:
-                    let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
-                    
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                        //logout
+                        menu.updateRootVC(status: false)
                     }))
                     self.present(alert, animated: true, completion: nil)
-                    break
-                    
-                    
-                    
-                    
                 }
+                else {
+                 let alert = UIAlertController(title: "Diqqət!", message: "Arxiv bölümünə daxil olmaq üçün, qeydiyyatdan keçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+                                    
+                                    alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                        self.defaults.set(nil, forKey: "userToken")
+                                        self.defaults.set(nil, forKey: "requestToken")
+                                        self.defaults.set(nil, forKey: "uData")
+                                        let menu:MenuController = MenuController()
+                                        menu.updateRootVC(status: false)
+                                    }))
+                                    self.present(alert, animated: true, completion: nil)
+                }
+                break
+            default:
+                let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                    //logout
+                }))
+                self.present(alert, animated: true, completion: nil)
+                break
                 
                 
-                
-                self.loadingAlert!.hide(animated: true)
-                self.myRefreshControl.endRefreshing()
-                self.aTableView.reloadData()
                 
                 
             }
+            
+            
+            
+            self.loadingAlert!.hide(animated: true)
+            self.myRefreshControl.endRefreshing()
+            self.aTableView.reloadData()
+            
+            
+        }
         
         
     }
@@ -161,7 +179,7 @@ class MyViewsController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- 
+        
         if(segue.identifier == "photoReklamPage"){
             if let navController = segue.destination as? UINavigationController {
                 
@@ -279,68 +297,68 @@ extension MyViewsController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ReklamCellTableViewCell = (tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! ReklamCellTableViewCell)
-       do{
+        do{
             
-              
-                if   cell.imageView?.image == nil{
-                    do{
-                        
-                        if advertArray.count > 0{
-                            Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
-
-                                 self.advertArray[indexPath.row].downloaded=true
-                                if let catPicture = response.result.value {
-                                     
-                                  
-                                    if indexPath.row <= self.advertArray.count {
+            
+            if   cell.imageView?.image == nil{
+                do{
+                    
+                    if advertArray.count > 0{
+                        Alamofire.request((advertArray[indexPath.row].thumbnail!)).responseImage { response in
+                            
+                            self.advertArray[indexPath.row].downloaded=true
+                            if let catPicture = response.result.value {
+                                
+                                
+                                if indexPath.row <= self.advertArray.count {
+                                    
+                                    if catPicture.imageAsset != nil {
                                         
-                                        if catPicture.imageAsset != nil {
-                                            
-                                            self.advertArray[indexPath.row].photo=catPicture.pngData()!
-                                            
-                                            
-                                        }
-                                        else {
-                                           
-                                        }
-                                        
-                                      
+                                        self.advertArray[indexPath.row].photo=catPicture.pngData()!
                                         
                                         
+                                    }
+                                    else {
                                         
-                                        
-                                        cell.object = self.advertArray[indexPath.row]
                                     }
                                     
-                                   
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    cell.object = self.advertArray[indexPath.row]
                                 }
-          
                                 
-                                cell.object = self.advertArray[indexPath.row]
-                                cell.reloadData()
+                                
                             }
                             
                             
-                            
-                            
+                            cell.object = self.advertArray[indexPath.row]
+                            cell.reloadData()
                         }
                         
                         
                         
-                    }
-                    catch
-                    {
-                        print(indexPath.row)
+                        
                     }
                     
-                    //cell.delegate = self
-                    // cell.reloadData()
-                    //cell.object = dataArray[indexPath.row]
-                    //     cell.delegate = self
                     
                     
-                    // Configure the cell...
                 }
+                catch
+                {
+                    print(indexPath.row)
+                }
+                
+                //cell.delegate = self
+                // cell.reloadData()
+                //cell.object = dataArray[indexPath.row]
+                //     cell.delegate = self
+                
+                
+                // Configure the cell...
+            }
             
             
             

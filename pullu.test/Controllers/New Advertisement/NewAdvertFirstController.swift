@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     var newAdvertisement:NewAdvertisementStruct=NewAdvertisementStruct()
@@ -21,54 +21,67 @@ class NewAdvertFirstController: UIViewController,UIPickerViewDataSource,UIPicker
     @IBOutlet weak var titleTxt: UITextField!
     
     
-    
+    var loadingAlert:MBProgressHUD?
     var select:DbSelect=DbSelect()
     var catList:Array<CategoryStruct>=[]
     var typeList:Array<TypeStruct>=[]
     var isPaidFinished=true
+    var userToken:String?
+    var requestToken:String?
+    let defaults = UserDefaults.standard
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        let alert = UIAlertController(title: nil, message: "Yüklənir...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.gray
-        loadingIndicator.startAnimating();
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: false, completion: nil)
-//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
-//            self.view.frame.origin.y = -200
-//        }
-//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
-//            self.view.frame.origin.y = 0.0
-//        }
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        self.userToken = self.defaults.string(forKey: "userToken")
+        self.requestToken = self.defaults.string(forKey: "requestToken")
+        if self.userToken != nil && self.requestToken != nil {
+            loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingAlert!.mode = MBProgressHUDMode.indeterminate
+            
+            //        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+            //            self.view.frame.origin.y = -200
+            //        }
+            //        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+            //            self.view.frame.origin.y = 0.0
+            //        }
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+            view.addGestureRecognizer(tap)
             select.AType(){
-            (list)
-            in
-            self.typeList=list
-            self.typeList.remove(at: 2)
-            DispatchQueue.main.async {
-                self.aTypePicker.reloadAllComponents();
+                (list)
+                in
+                self.typeList=list
+                self.typeList.remove(at: 2)
+                DispatchQueue.main.async {
+                    self.aTypePicker.reloadAllComponents();
+                }
             }
+            select.ACategory(){
+                (list)
+                in
+                self.catList=list
+                DispatchQueue.main.async {
+                    self.aCatPicker.reloadAllComponents();
+                    // self.dismiss(animated: true)
+                    self.loadingAlert?.hide(animated: true)
+                }
+            }
+            
+            //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            //              navigationController?.navigationBar.shadowImage = UIImage()
+            //        navigationController?.navigationBar.isTranslucent = true
         }
-        select.ACategory(){
-            (list)
-            in
-            self.catList=list
-            DispatchQueue.main.async {
-                self.aCatPicker.reloadAllComponents();
-                self.dismiss(animated: true)
-                
-            }
+        else {
+            let alert = UIAlertController(title: "Diqqət!", message: "Elan yerləşdirmək üçün, qeydiyyatdan keçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+                                                                   
+                                                                   alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                                       self.defaults.set(nil, forKey: "userToken")
+                                                                       self.defaults.set(nil, forKey: "requestToken")
+                                                                       self.defaults.set(nil, forKey: "uData")
+                                                                       let menu:MenuController = MenuController()
+                                                                       menu.updateRootVC(status: false)
+                                                                   }))
+                                                                   self.present(alert, animated: true, completion: nil)
         }
         
-        //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        //              navigationController?.navigationBar.shadowImage = UIImage()
-        //        navigationController?.navigationBar.isTranslucent = true
         
     }
     

@@ -12,14 +12,31 @@ class PassCreatorController: UIViewController {
     @IBOutlet weak var passTextBox: UITextField!
     
     @IBOutlet weak var passRepeatTextBox: UITextField!
-     var phoneNum = 0
+    @IBOutlet weak var saveButton: UIButton!
+    var phoneNum = 0
     var otp = 0
     var password = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+         self.saveButton.layer.cornerRadius = self.saveButton.frame.height.self / 2.0
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+                  self.view.frame.origin.y = -100
+              }
+              NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+                  self.view.frame.origin.y = 0.0
+              }
+              let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+              
+              //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+              //tap.cancelsTouchesInView = false
+              
+              view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
+    @objc func dismissKeyboard() {
+           //Causes the view (or one of its embedded text fields) to resign the first responder status.
+           view.endEditing(true)
+       }
     
     @IBAction func nextButtonClick(_ sender: Any) {
         if !passTextBox.text!.isEmpty && !passRepeatTextBox.text!.isEmpty

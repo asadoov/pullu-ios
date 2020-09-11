@@ -29,6 +29,7 @@ class AboutAdvertController: UIViewController {
     
     @IBOutlet weak var balance: UILabel!
     
+    @IBOutlet weak var aPrice: UILabel!
     
     @IBOutlet weak var sellerFullname: UILabel!
     
@@ -46,6 +47,7 @@ class AboutAdvertController: UIViewController {
 //        earnMoney.isEnabled=false
 //        self.earnMoney.isHidden=true
 //        earnMoney.titleLabel!.text = "Yüklənir..."
+        self.sellerPhone.layer.cornerRadius = self.sellerPhone.frame.height.self / 2.0
         self.defaults.set(nil, forKey: "aID")
         
        titleLabel  = UILabel(frame: CGRect(x: 10, y: 0, width: self.slideshow!.frame.width - 10, height: 60))
@@ -80,16 +82,17 @@ class AboutAdvertController: UIViewController {
         slideshow.pageIndicator=pageControl
         
         // Do any additional setup after loading the view.
-        do{
-            let udata = self.defaults.string(forKey: "uData")
-            userToken = self.defaults.string(forKey: "userToken")
-            self.userData  = try
-                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
-            self.requestToken=self.defaults.string(forKey: "requestToken")
-        }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
+//         let udata = self.defaults.string(forKey: "uData")
+//        do{
+//           
+//            userToken = self.defaults.string(forKey: "userToken")
+//            self.userData  = try
+//                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+//            self.requestToken=self.defaults.string(forKey: "requestToken")
+//        }
+//        catch let jsonErr{
+//            print("Error serializing json:",jsonErr)
+//        }
         //print("mail: \(userData[0].mail) pass: \(pass) advertID: \(advertID)")
         select.GetAdvertById(advertID: advertID)
         {
@@ -105,7 +108,7 @@ class AboutAdvertController: UIViewController {
                 //self.tableView.reloadData()
                 
                 // self.ReklamCount.text = String(self.dataArray.count)+" yeni reklam"
-                
+                self.aPrice.text = "\(list[0].price ?? "") AZN"
                 self.advName.text=list[0].name!
                 self.sellerFullname.text=list[0].sellerFullName!
                 self.sellerPhone.text="+994\(list[0].sellerPhone!)"

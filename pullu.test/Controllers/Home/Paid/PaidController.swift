@@ -32,14 +32,14 @@ class PaidController: UITableViewController {
     @IBOutlet weak var categoryScroll: UICollectionView!
     @IBOutlet weak var refreshCatButton: UIButton!
     let warningLabel = UILabel()
-  
+    let refreshButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-           addWarningLabel()
-         warningLabel.text = "Heç bir elan tapılmadı..."
+        addWarningLabel()
+        warningLabel.text = "Heç bir elan tapılmadı..."
         DispatchQueue.main.async {
-           
+            
             self.refreshCatButton.layer.cornerRadius = self.refreshCatButton.frame.height.self / 2.0
         }
         
@@ -61,7 +61,7 @@ class PaidController: UITableViewController {
         userToken = defaults.string(forKey: "userToken")
         requestToken = defaults.string(forKey: "requestToken")
         refreshCat()
-        self.refresh()
+        addResultButtonView()
         //        select.SignIn(mail: mail!, pass: pass!){
         //            (user)
         //            in
@@ -279,7 +279,37 @@ class PaidController: UITableViewController {
         }
         
     }
-    
+    private func addResultButtonView() {
+        
+        
+        self.refreshButton.backgroundColor = .orange
+        self.refreshButton.setTitle("Yenilə", for: .normal)
+        
+        self.paidTableView.addSubview(self.refreshButton)
+        
+        // set position
+        self.refreshButton.translatesAutoresizingMaskIntoConstraints = false
+        self.refreshButton.centerXAnchor.constraint(equalTo: self.paidTableView.centerXAnchor).isActive = true
+        self.refreshButton.centerYAnchor.constraint(equalTo: self.paidTableView.centerYAnchor).isActive = true
+        //          resultButton.topAnchor.constraint(equalTo: notPaidTableView.safeAreaLayoutGuide.topAnchor).isActive = true
+        //        resultButton.leftAnchor.constraint(equalTo: notPaidTableView.safeAreaLayoutGuide.leftAnchor).isActive = true
+        //        resultButton.rightAnchor.constraint(equalTo: notPaidTableView.safeAreaLayoutGuide.rightAnchor).isActive = true
+        //        resultButton.bottomAnchor.constraint(equalTo: notPaidTableView.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        //        resultButton.widthAnchor.constraint(equalTo: notPaidTableView.safeAreaLayoutGuide.widthAnchor).isActive = true
+        self.refreshButton.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+        self.refreshButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        self.refreshButton.heightAnchor.constraint(equalToConstant: 50).isActive = true // specify the height of the view
+        DispatchQueue.main.async {
+            self.refreshButton.layer.cornerRadius = self.refreshButton.frame.height.self / 2.0
+        }
+        self.refreshButton.clipsToBounds = true
+        
+    }
+    @objc func buttonAction(sender: UIButton!) {
+        refresh()
+        refreshButton.isHidden = true
+        //print("Button tapped")
+    }
     func pagination(page:Int){
         
         
@@ -359,16 +389,37 @@ class PaidController: UITableViewController {
                     break
                     
                 case 2:
-                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
                     
-                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                        self.defaults.set(nil, forKey: "userToken")
-                        self.defaults.set(nil, forKey: "requestToken")
-                        self.defaults.set(nil, forKey: "uData")
-                        let menu:MenuController = MenuController()
-                        menu.updateRootVC(status: false)
-                    }))
-                    self.present(alert, animated: true, completion: nil)
+                    self.userToken = self.defaults.string(forKey: "userToken")
+                    self.requestToken = self.defaults.string(forKey: "requestToken")
+                    if self.userToken != nil && self.requestToken != nil {
+                        
+                        let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                            self.defaults.set(nil, forKey: "userToken")
+                            self.defaults.set(nil, forKey: "requestToken")
+                            self.defaults.set(nil, forKey: "uData")
+                            let menu:MenuController = MenuController()
+                            menu.updateRootVC(status: false)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    else {
+                    let alert = UIAlertController(title: "Diqqət!", message: "PULLU elanlara baxmaq üçün, qeydiyyatdan keçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+                              
+                              alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                  self.defaults.set(nil, forKey: "userToken")
+                                  self.defaults.set(nil, forKey: "requestToken")
+                                  self.defaults.set(nil, forKey: "uData")
+                                  let menu:MenuController = MenuController()
+                                  menu.updateRootVC(status: false)
+                              }))
+                              self.present(alert, animated: true, completion: nil)
+                        
+                    }
+                    
+                    
                     break
                 default:
                     let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəhd edin", preferredStyle: UIAlertController.Style.alert)
@@ -404,7 +455,7 @@ class PaidController: UITableViewController {
         self.warningLabel.translatesAutoresizingMaskIntoConstraints = false
         self.warningLabel.centerXAnchor.constraint(equalTo: self.paidTableView.centerXAnchor).isActive = true
         self.warningLabel.centerYAnchor.constraint(equalTo: self.paidTableView.centerYAnchor).isActive = true
-          self.warningLabel.isHidden = true
+        self.warningLabel.isHidden = true
         //       DispatchQueue.main.async {
         //              // self.notFoundLabel.layer.cornerRadius = self.notFoundLabel.frame.height.self / 2.0
         //        self.notFoundLabel.numberOfLines = 0
@@ -507,17 +558,35 @@ class PaidController: UITableViewController {
                 }
                 break
             case 2:
-                let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
-                
-                alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
-                    let menu:MenuController = MenuController()
-                    menu.updateRootVC(status: false)
-                    self.defaults.set(nil, forKey: "userToken")
-                    self.defaults.set(nil, forKey: "requestToken")
-                    self.defaults.set(nil, forKey: "uData")
+                self.userToken = self.defaults.string(forKey: "userToken")
+                self.requestToken = self.defaults.string(forKey: "requestToken")
+                if self.userToken != nil && self.requestToken != nil {
                     
-                }))
-                self.present(alert, animated: true, completion: nil)
+                    let alert = UIAlertController(title: "Sessiyanız başa çatıb", message: "Zəhmət olmasa yenidən giriş edin", preferredStyle: UIAlertController.Style.alert)
+                    
+                    alert.addAction(UIAlertAction(title: "Giriş et", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                        self.defaults.set(nil, forKey: "userToken")
+                        self.defaults.set(nil, forKey: "requestToken")
+                        self.defaults.set(nil, forKey: "uData")
+                        let menu:MenuController = MenuController()
+                        menu.updateRootVC(status: false)
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                else {
+                 
+                    let alert = UIAlertController(title: "Diqqət!", message: "PULLU elanlara baxmaq üçün, qeydiyyatdan keçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+                                                
+                                                alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                                                    self.defaults.set(nil, forKey: "userToken")
+                                                    self.defaults.set(nil, forKey: "requestToken")
+                                                    self.defaults.set(nil, forKey: "uData")
+                                                    let menu:MenuController = MenuController()
+                                                    menu.updateRootVC(status: false)
+                                                }))
+                                                self.present(alert, animated: true, completion: nil)
+                }
+                
                 break
             default:
                 let alert = UIAlertController(title: "Xəta", message: "Zəhmət olmasa biraz sonra yenidən cəht edin", preferredStyle: UIAlertController.Style.alert)

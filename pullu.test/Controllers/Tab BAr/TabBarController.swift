@@ -33,6 +33,10 @@ class TabBarController: UITabBarController {
         
         
         let udata=defaults.string(forKey: "uData")
+        if udata != nil{
+            
+            
+        
                       do{
                           
                           
@@ -121,7 +125,7 @@ class TabBarController: UITabBarController {
                       
                   }
               }
-              
+        }
        
     }
     /*

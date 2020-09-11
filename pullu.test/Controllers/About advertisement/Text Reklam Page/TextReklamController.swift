@@ -40,7 +40,7 @@ class TextReklamController: UIViewController {
         
 //        earnMoney.isEnabled=false
 //        self.earnMoney.isHidden=true
-        
+          self.sellerPhone.layer.cornerRadius = self.sellerPhone.frame.height.self / 2.0
         
         loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
         loadingAlert!.mode = MBProgressHUDMode.indeterminate

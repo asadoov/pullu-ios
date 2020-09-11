@@ -16,10 +16,11 @@ class HomePageController: UIViewController{
     
     //  @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
-    
+    let defaults = UserDefaults.standard
     @IBOutlet weak var categoryScroll: UICollectionView!
     
     
+    @IBOutlet weak var floatingLabel: UILabel!
     
     @IBOutlet weak var ReklamCount: UILabel!
     
@@ -27,7 +28,7 @@ class HomePageController: UIViewController{
     var isPaid: [Advertisement] = [Advertisement]()
     var isNotPaid: [Advertisement] = [Advertisement]()
     var advertID:Int?
-    
+   // var floatingLabel:UILabel?
     private let myRefreshControl = UIRefreshControl()
     let  db:DbSelect=DbSelect()
     var mail:String?
@@ -36,12 +37,13 @@ class HomePageController: UIViewController{
     var spinner = UIActivityIndicatorView(style: .whiteLarge)
     var loadingView: UIView = UIView()
     var loadingAlert:MBProgressHUD?
-    
+    var uInfo:Array<UserStruct> = []
     @IBOutlet weak var segmentView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        //        let searchController = UISearchController(searchResultsController: nil)
+        //               navigationItem.searchController = searchController
+        //        searchController.searchBar.scopeButtonTitles = ["Bütün","Vip","Sadə"]
         
         //myRefreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         //ReklamList.addSubview(myRefreshControl)
@@ -54,8 +56,8 @@ class HomePageController: UIViewController{
         if let storyboard = self.storyboard {
             
             let myViewController = storyboard
-                .instantiateViewController(withIdentifier: "paid")
-            myViewController.title = "Vip"
+                .instantiateViewController(withIdentifier: "notPaid")
+            myViewController.title = "Pulsuz"
             
             
             //            let backgroundImage = UIImageView()
@@ -66,8 +68,8 @@ class HomePageController: UIViewController{
             //                       myViewController.navigationItem.titleView = backgroundImage
             
             let myShareController = storyboard
-                .instantiateViewController(withIdentifier: "notPaid")
-            myShareController.title = "Sadə"
+                .instantiateViewController(withIdentifier: "paid")
+            myShareController.title = "Pullu"
             
             let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
                                                                     segmentControllers: [myViewController,
@@ -133,32 +135,62 @@ class HomePageController: UIViewController{
         
         
         //  self.getProducts()
-        let defaults = UserDefaults.standard
-        
-        Messaging.messaging().subscribe(toTopic: "\(defaults.string(forKey: "uID")!)"){ error in
-            if error == nil{
-                print("Subscribed to topic")
-            }
-            else{
-                print("Not Subscribed to topic")
-            }
-        }
-        
-        // let userData = defaults.string(forKey: "uData")
-        mail = defaults.string(forKey: "mail")
-        pass = defaults.string(forKey: "pass")
+        //        let defaults = UserDefaults.standard
+        //
+        //        Messaging.messaging().subscribe(toTopic: "\(defaults.string(forKey: "uID")!)"){ error in
+        //            if error == nil{
+        //                print("Subscribed to topic")
+        //            }
+        //            else{
+        //                print("Not Subscribed to topic")
+        //            }
+        //        }
+        //
+        //        // let userData = defaults.string(forKey: "uData")
+        //        mail = defaults.string(forKey: "mail")
+        //        pass = defaults.string(forKey: "pass")
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
         
         
-        
-        
-        
-        
+        let udata=defaults.string(forKey: "uData")
+      
+        if udata != nil {
+            do{
+                      
+                      
+                      uInfo  = try
+                          JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+                  }
+                  catch{
+                      
+                  }
+           // addFloatingLabel()
+            DispatchQueue.main.async {
+                self.floatingLabel?.text = "Balans: \(self.uInfo[0].balance!) AZN"
+                self.floatingLabel.layer.cornerRadius = self.floatingLabel!.frame.height.self / 1.0
+                self.floatingLabel.isHidden = false
+            }
+        }
+        else
+        {floatingLabel.isHidden = true}
+                
         
     }
     
-   
+    @IBAction func searchButtonClick(_ sender: Any) {
+        self.performSegue(withIdentifier: "searchSegue", sender: self)
+    }
+    func addFloatingLabel(){
+        floatingLabel = UILabel()
+       floatingLabel?.frame = CGRect(x: 285, y: 485, width: 200, height: 15)
+        floatingLabel?.backgroundColor = .orange
+        floatingLabel!.layer.cornerRadius = floatingLabel!.frame.height.self / 2.0
+        floatingLabel?.text = "Balans: \(uInfo[0].balance!) AZN"
+        self.view.addSubview(floatingLabel!)
+        
+    }
+    
     
     func showActivityIndicator() {
         DispatchQueue.main.async {
@@ -401,7 +433,7 @@ class HomePageController: UIViewController{
         //            let displayVC = segue.destination as! VideoReklamController
         //            displayVC.advertID = advertID
         //        }
-       
+        
         
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.

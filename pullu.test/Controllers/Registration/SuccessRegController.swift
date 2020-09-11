@@ -1,28 +1,32 @@
 //
-//  ForgotLastPageViewController.swift
+//  SuccessRegController.swift
 //  pullu.test
 //
-//  Created by Rufat Asadzade on 3/13/20.
+//  Created by Rufat on 2/5/20.
 //  Copyright © 2020 Rufat Asadzade. All rights reserved.
 //
 
 import UIKit
 
-class ForgotLastPageViewController: UIViewController {
+class SuccessRegController: UIViewController {
+
+   
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+    }
 
-        // Do any additional setup after loading the view.
-    }
-   
- 
-    @IBAction func extBtn(_ sender: Any) {
-        self.dismiss(animated:true)
+    @IBAction func signInButtonClick(_ sender: Any) {
+        self.dismiss(animated: true)
+        
     }
     
     
-    
+//    @IBAction func backToLogin_Click(_ sender: Any) {
+//        self.dismiss(animated:true)
+//    }
     
     /*
     // MARK: - Navigation

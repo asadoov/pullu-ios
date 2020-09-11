@@ -36,12 +36,18 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     
     
     
+    @IBAction func closeButton(_ sender: Any) {
+      
+        let menu:MenuController = MenuController()
+        menu.updateRootVC(status: true)
+        
+    }
     
     
     var newUser: NewUser = NewUser()
     override func viewDidLoad() {
         super.viewDidLoad()
-           self.signInButton.layer.cornerRadius = self.signInButton.frame.height.self / 2.0
+        self.signInButton.layer.cornerRadius = self.signInButton.frame.height.self / 2.0
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
             self.view.frame.origin.y = -200
         }

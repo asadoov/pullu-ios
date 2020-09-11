@@ -18,112 +18,129 @@ class NotificationViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var notificationTable: UITableView!
     var loadingAlert:MBProgressHUD?
     var uID=0
-    
+    var userToken:String?
+    var requestToken:String?
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-        loadingAlert!.mode = MBProgressHUDMode.indeterminate
-        loadingAlert!.label.text="Bildirişlər yüklənir..."
-        //loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
-        
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        
-        self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
-        //        scheduleNotification()
-        let udata=defaults.string(forKey: "uData")
-        do{
+        self.userToken = self.defaults.string(forKey: "userToken")
+        self.requestToken = self.defaults.string(forKey: "requestToken")
+        if self.userToken != nil && self.requestToken != nil {
+            loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loadingAlert!.mode = MBProgressHUDMode.indeterminate
+            loadingAlert!.label.text="Bildirişlər yüklənir..."
+            //loadingAlert!.detailsLabel.text = "Reklamları gətirirk..."
             
+            navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationController?.navigationBar.shadowImage = UIImage()
+            navigationController?.navigationBar.isTranslucent = true
             
-            let list  = try
-                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
-            
-            // userList=list
-            uID = list[0].id!
-            
-            
-        }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
-        }
-        
-        
-        Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
-            
-            if error != nil
-            {
-                print(error)
+            self.tabBarController?.viewControllers?[3].tabBarItem.badgeValue = nil
+            //        scheduleNotification()
+            let udata=defaults.string(forKey: "uData")
+            do{
+                
+                
+                let list  = try
+                    JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+                
+                // userList=list
+                uID = list[0].id!
+                
+                
             }
-            else
-            {
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
+            
+            
+            Auth.auth().signIn(withEmail: "asadzade99@gmail.com", password: "123456") { (user, error) in
                 
-                
-                
-                let userID = Auth.auth().currentUser!.uid
-                self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
-                self.ref.observe(.value, with: { [weak self]  (snapshot) in
-                    //print("value: \(snapshot)")
-                    self!.notifications.removeAll()
-                    for item in snapshot.children {
-                        let task = NotificationModel(snapshot: item as! DataSnapshot)
-                        
-                        
-                        self!.notifications.append(task)
-                        if task.seen == false{
-                            (item as AnyObject).ref.updateChildValues(["seen":true])
-                            // self!.sendNotification(body: task.title!)
+                if error != nil
+                {
+                    print(error)
+                }
+                else
+                {
+                    
+                    
+                    
+                    let userID = Auth.auth().currentUser!.uid
+                    self.ref = Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID))
+                    self.ref.observe(.value, with: { [weak self]  (snapshot) in
+                        //print("value: \(snapshot)")
+                        self!.notifications.removeAll()
+                        for item in snapshot.children {
+                            let task = NotificationModel(snapshot: item as! DataSnapshot)
+                            
+                            
+                            self!.notifications.append(task)
+                            if task.seen == false{
+                                (item as AnyObject).ref.updateChildValues(["seen":true])
+                                // self!.sendNotification(body: task.title!)
+                                
+                            }
+                            
                             
                         }
                         
+                        self!.loadingAlert!.hide(animated: true)
+                        self!.notifications.reverse()
+                        self?.notificationTable.reloadData()
                         
-                    }
+                        //  print(_notification[0].title!)
+                    })
+                    //self.ref.updateChildValues(["seen":true])
                     
-                    self!.loadingAlert!.hide(animated: true)
-                    self!.notifications.reverse()
-                    self?.notificationTable.reloadData()
+                    // guard var currentUser = Auth.auth().currentUser else {return}
+                    //self.userr = User(user: currentUser)
+                    // print(self.userr)
+                    // print(user)
                     
-                    //  print(_notification[0].title!)
-                })
-                //self.ref.updateChildValues(["seen":true])
-                
-                // guard var currentUser = Auth.auth().currentUser else {return}
-                //self.userr = User(user: currentUser)
-                // print(self.userr)
-                // print(user)
-                
-                
-                
-                
-                //   Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID)).childByAutoId().key.updateChildValues(["seen": true])
-                // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
-                
-                /*         do{
-                 
-                 
-                 let notification  = try
-                 JSONDecoder().decode(NotificationModel.self, from: Data((value as! String).utf8) )
-                 
-                 // userList=list
-                 if notification.userID=="123"{
-                 print(notification.data)
-                 
-                 }
-                 //completionBlock(statistics)
-                 
-                 }
-                 catch let jsonErr{
-                 print("Error serializing json:",jsonErr)
-                 }
-                 
-                 */
-                
-                
+                    
+                    
+                    
+                    //   Database.database().reference(withPath: "users").child(userID).child("notifications").child(String(self.uID)).childByAutoId().key.updateChildValues(["seen": true])
+                    // ref = Database.database().reference(withPath: "users").child(String(user.uid)).child("tasks")
+                    
+                    /*         do{
+                     
+                     
+                     let notification  = try
+                     JSONDecoder().decode(NotificationModel.self, from: Data((value as! String).utf8) )
+                     
+                     // userList=list
+                     if notification.userID=="123"{
+                     print(notification.data)
+                     
+                     }
+                     //completionBlock(statistics)
+                     
+                     }
+                     catch let jsonErr{
+                     print("Error serializing json:",jsonErr)
+                     }
+                     
+                     */
+                    
+                    
+                }
             }
+            notificationTable.delegate = self
+            notificationTable.dataSource = self
         }
-        notificationTable.delegate = self
-        notificationTable.dataSource = self
+        else{
+            let alert = UIAlertController(title: "Diqqət!", message: "Elan yerləşdirmək üçün, qeydiyyatdan keçməniz vacibdir", preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+                self.defaults.set(nil, forKey: "userToken")
+                self.defaults.set(nil, forKey: "requestToken")
+                self.defaults.set(nil, forKey: "uData")
+                let menu:MenuController = MenuController()
+                menu.updateRootVC(status: false)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     //    func sendNotification(body:String) {

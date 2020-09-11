@@ -20,6 +20,8 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
     @IBOutlet weak var countryBox: UITextField!
     @IBOutlet weak var cityBox: UITextField!
     @IBOutlet weak var chooseInterestsButton: UIButton!
+    @IBOutlet weak var createUserButton: UIButton!
+    
     let defaults = UserDefaults.standard
     
     var defaultCity:City = City()
@@ -143,6 +145,15 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.chooseInterestsButton.layer.cornerRadius = self.chooseInterestsButton.frame.height.self / 2.0
+        self.createUserButton.layer.cornerRadius = self.createUserButton.frame.height.self / 2.0
+               
+        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+                         self.view.frame.origin.y = -100
+                     }
+                     NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+                         self.view.frame.origin.y = 0.0
+                     }
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         DispatchQueue.main.async {
@@ -199,106 +210,105 @@ class RegLastController: UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     
     @IBAction func finishRegClick(_ sender: Any) {
-        if (!nameBox.text!.isEmpty && !surnameBox.text!.isEmpty && !mailBox.text!.isEmpty && !bDateBox.text!.isEmpty && !genderBox.text!.isEmpty && !countryBox.text!.isEmpty && !cityBox.text!.isEmpty && interestIds.count > 0)
+        if (!nameBox.text!.isEmpty && !surnameBox.text!.isEmpty && !bDateBox.text!.isEmpty && !genderBox.text!.isEmpty && !countryBox.text!.isEmpty && !cityBox.text!.isEmpty)
         {
             
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM-dd-yyyy"
-            let dateString = dateFormatter.string(from: bDatePicker.date)
-            if calcAge(birthday: dateString) <= 18 {
-                let alert = UIAlertController(title: "Bildiriş", message: "Yaşınız 18 dən yuxarı olmalıdı", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-            }
+            if  interestIds.count > 0{     let dateFormatter = DateFormatter()
+                       dateFormatter.dateFormat = "MM-dd-yyyy"
+                       let dateString = dateFormatter.string(from: bDatePicker.date)
+                       if calcAge(birthday: dateString) <= 18 {
+                           let alert = UIAlertController(title: "Bildiriş", message: "Yaşınız 18 dən yuxarı olmalıdı", preferredStyle: UIAlertController.Style.alert)
+                           alert.addAction(UIAlertAction(title: "Tamam", style: UIAlertAction.Style.default, handler: nil))
+                           self.present(alert, animated: true, completion: nil)
+                       }
+                       else {
+                           DispatchQueue.main.async {
+                               
+                               self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                               self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
+                           }
+                           // print("18+")
+                           newUser.name = nameBox.text!
+                           newUser.surname = surnameBox.text!
+                           newUser.mail = mailBox.text ?? ""
+                           newUser.phone = phoneNum
+                           newUser.pass = password
+                           newUser.gender = selectedGenderID
+                           newUser.bDate = bDateBox.text!
+                           newUser.country = selectedCountryID
+                           newUser.city = selectedCityID
+                           newUser.interestIds = interestIds
+                           newUser.otp = otp
+                           insert.SignUp(newUserData: newUser){
+                               (statusCode)
+                               in
+                               DispatchQueue.main.async {
+                                   self.loadingAlert?.hide(animated: true)
+                               }
+                               do {
+                                   self.defaults.set(self.newUser.mail, forKey: "mail")
+                                   self.defaults.set(self.newUser.pass, forKey: "pass")
+                                   
+                                   switch statusCode.response {
+                                   case 1:
+                                       self.performSegue(withIdentifier: "successRegPage", sender: self)
+                                       break
+                                  
+                                 
+                                   case 3:
+                                       let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                       warningAlert.mode = MBProgressHUDMode.text
+                                       //            warningAlert.isSquare=true
+                                       warningAlert.label.text = "Diqqət"
+                                       warningAlert.detailsLabel.text = "Istifadəçi tapılmadı"
+                                       warningAlert.hide(animated: true,afterDelay: 3)
+                                       break
+                                   case 4:
+                                       let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                       warningAlert.mode = MBProgressHUDMode.text
+                                       //            warningAlert.isSquare=true
+                                       warningAlert.label.text = "Diqqət"
+                                       warningAlert.detailsLabel.text = "Istifadəçi artıq aktivdir"
+                                       warningAlert.hide(animated: true,afterDelay: 3)
+                                       break
+                                 
+                                   default:
+                                       let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                                             warningAlert.mode = MBProgressHUDMode.text
+                                                             //            warningAlert.isSquare=true
+                                                             warningAlert.label.text = "Xəta"
+                                                             warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
+                                                             warningAlert.hide(animated: true,afterDelay: 3)
+                                                             break
+                                    
+                                       
+                                       
+                                   }
+                                   
+                                   
+                                   
+                                   // print("JSON String : " + jsonString!)
+                               }
+                               catch {
+                                   let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
+                                   warningAlert.mode = MBProgressHUDMode.text
+                                   //            warningAlert.isSquare=true
+                                   warningAlert.label.text = "Xəta"
+                                   warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
+                                   warningAlert.hide(animated: true,afterDelay: 3)
+                                   
+                                   
+                                   
+                               }
+                               
+                           }
+                       }}
             else {
-                DispatchQueue.main.async {
-                    
-                    self.loadingAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                    self.loadingAlert!.mode = MBProgressHUDMode.indeterminate
-                }
-                // print("18+")
-                newUser.name = nameBox.text!
-                newUser.surname = surnameBox.text!
-                newUser.mail = mailBox.text!
-                newUser.phone = phoneNum
-                newUser.pass = password
-                newUser.gender = selectedGenderID
-                newUser.bDate = bDateBox.text!
-                newUser.country = selectedCountryID
-                newUser.city = selectedCityID
-                newUser.interestIds = interestIds
-                newUser.otp = otp
-                insert.SignUp(newUserData: newUser){
-                    (statusCode)
-                    in
-                    DispatchQueue.main.async {
-                        self.loadingAlert?.hide(animated: true)
-                    }
-                    do {
-                        self.defaults.set(self.newUser.mail, forKey: "mail")
-                        self.defaults.set(self.newUser.pass, forKey: "pass")
-                        
-                        switch statusCode.response {
-                        case 1:
-                            self.performSegue(withIdentifier: "successRegPage", sender: self)
-                            break
-                        case 2:
-                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            warningAlert.mode = MBProgressHUDMode.text
-                            //            warningAlert.isSquare=true
-                            warningAlert.label.text = "Xəta"
-                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
-                            warningAlert.hide(animated: true,afterDelay: 3)
-                            break
-                        case 3:
-                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            warningAlert.mode = MBProgressHUDMode.text
-                            //            warningAlert.isSquare=true
-                            warningAlert.label.text = "Diqqət"
-                            warningAlert.detailsLabel.text = "Istifadəçi tapılmadı"
-                            warningAlert.hide(animated: true,afterDelay: 3)
-                            break
-                        case 4:
-                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            warningAlert.mode = MBProgressHUDMode.text
-                            //            warningAlert.isSquare=true
-                            warningAlert.label.text = "Diqqət"
-                            warningAlert.detailsLabel.text = "Istifadəçi artıq aktivdir"
-                            warningAlert.hide(animated: true,afterDelay: 3)
-                            break
-                        case 5:
-                            let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                            warningAlert.mode = MBProgressHUDMode.text
-                            //            warningAlert.isSquare=true
-                            warningAlert.label.text = "Xəta"
-                            warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
-                            warningAlert.hide(animated: true,afterDelay: 3)
-                            break
-                        default:
-                            break
-                            
-                            
-                        }
-                        
-                        
-                        
-                        // print("JSON String : " + jsonString!)
-                    }
-                    catch {
-                        let warningAlert = MBProgressHUD.showAdded(to: self.view, animated: true)
-                        warningAlert.mode = MBProgressHUDMode.text
-                        //            warningAlert.isSquare=true
-                        warningAlert.label.text = "Xəta"
-                        warningAlert.detailsLabel.text = "Biraz sonra birdaha cəhd edin"
-                        warningAlert.hide(animated: true,afterDelay: 3)
-                        
-                        
-                        
-                    }
-                    
-                }
+                let alert = UIAlertController(title: "Bildiriş", message: "Zəhmət olmasa maraqlarınızı seçin", preferredStyle: UIAlertController.Style.alert)
+                           alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                           self.present(alert, animated: true, completion: nil)
             }
+       
         }
         else {
             let alert = UIAlertController(title: "Bildiriş", message: "Bütün boşluqları doldurun!", preferredStyle: UIAlertController.Style.alert)

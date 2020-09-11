@@ -28,24 +28,25 @@ class MenuController: UIViewController {
     var profM = ProfileModel()
     var menuItems:Array<MenuStruct> = Array<MenuStruct>()
     func updateRootVC(status : Bool)
-         {
-             let rootVC : Any
-             
-             if (status)
-             {
-                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Tab") as! UITabBarController
-             }
-             else
-             {
-                 rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
-             }
-             
-             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-             appDelegate.window?.rootViewController = rootVC as? UIViewController
-             
-         }
+    {
+        let rootVC : Any
+        
+        if (status)
+        {
+            rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Tab") as! UITabBarController
+        }
+        else
+        {
+            rootVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login")
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = rootVC as? UIViewController
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+         let udata=defaults.string(forKey: "uData")
         userImage.layer.masksToBounds = true
         userImage!.layer.borderColor = UIColor.white.cgColor
         userImage!.layer.borderWidth = 1.5
@@ -57,7 +58,8 @@ class MenuController: UIViewController {
         // loadingIndicator.style = UIActivityIndicatorView.Style.gray
         loadingIndicator.startAnimating()
         userImage.addSubview(loadingIndicator)
-        
+        if udata != nil
+               {
         let logOutBtn:MenuStruct = MenuStruct()
         logOutBtn.ID=0
         logOutBtn.name="Çıxış"
@@ -90,7 +92,7 @@ class MenuController: UIViewController {
         
         menuItems.append(profileBtn)
         menuItems.append(staticsBtn)
-//        menuItems.append(financeBtn)
+        //        menuItems.append(financeBtn)
         //        menuItems.append(ruleBtn)
         //        menuItems.append(aboutBtn)
         menuItems.append(logOutBtn)
@@ -126,52 +128,68 @@ class MenuController: UIViewController {
         
         
         
-        let udata=defaults.string(forKey: "uData")
-        do{
-            
-            
-            let list  = try
-                JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
-            
-            // userList=list
-            nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
-            
-            userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
-            Alamofire.request(list[0].photoURL!).responseImage { response in
-                if let catPicture = response.result.value {
-                    //advert.photo=catPicture.pngData()
-                    
-                    //  item.photo = UIImage(named: "damaged")?.pngData()
-                    
-                    
-                    if catPicture != nil {
+       
+       
+            do{
+                
+                
+                let list  = try
+                    JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+                
+                // userList=list
+                nameSurname.text = "\(list[0].name!) \(list[0].surname!)"
+                
+                userID.text = "İstifadəci nömrəniz: \(list[0].id!)"
+                Alamofire.request(list[0].photoURL!).responseImage { response in
+                    if let catPicture = response.result.value {
+                        //advert.photo=catPicture.pngData()
                         
-                        self.userImage.image=catPicture
-                        self.loadingIndicator.stopAnimating()
+                        //  item.photo = UIImage(named: "damaged")?.pngData()
+                        
+                        
+                        if catPicture != nil {
+                            
+                            self.userImage.image=catPicture
+                            self.loadingIndicator.stopAnimating()
+                            
+                        }
+                        else {
+                            self.userImage.image=UIImage(named: "damaged")
+                            
+                        }
+                        
+                        
+                        
+                        
+                        
                         
                     }
-                    else {
-                        self.userImage.image=UIImage(named: "damaged")
-                        
-                    }
-                    
-                    
-                    
                     
                     
                     
                 }
                 
-                
-                
             }
-            
+            catch let jsonErr{
+                print("Error serializing json:",jsonErr)
+            }
         }
-        catch let jsonErr{
-            print("Error serializing json:",jsonErr)
+        else {
+            let signupButton:MenuStruct = MenuStruct()
+                   signupButton.ID=6
+                   signupButton.name="Giriş"
+                   signupButton.icon  =  UIImage(named: "profile")?.pngData()
+            menuItems.append(signupButton)
+            self.loadingIndicator.stopAnimating()
+           
+            nameSurname.text = "Bura hələki boşdur"
+            
+            userID.text = "Tətbiqdən daha səmərəli yararlanmaq üçün, şəxsi kabinetinizə daxil olun"
+            
         }
         // Do any additional setup after loading the view.
     }
+    
     //    override func viewWillAppear(_ animated: Bool) {
     //        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     //        navigationController?.navigationBar.shadowImage = UIImage()
@@ -222,19 +240,19 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
                     Messaging.messaging().unsubscribe(fromTopic: "\(uID)")
                     
                     /*self.navigationController?.popToRootViewController(animated: false)
-                    self.dismiss(animated: false) {
-                        self.defaults.set(nil, forKey: "userToken")
-                        self.defaults.set(nil, forKey: "requestToken")
-                        self.defaults.set(nil, forKey: "uData")
-                    }*/
-           /*self.dismiss(animated: false){
-            self.defaults.set(nil, forKey: "userToken")
-                                   self.defaults.set(nil, forKey: "requestToken")
-                                   self.defaults.set(nil, forKey: "uData")
-//                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
-//
-//                    })
-                    }*/
+                     self.dismiss(animated: false) {
+                     self.defaults.set(nil, forKey: "userToken")
+                     self.defaults.set(nil, forKey: "requestToken")
+                     self.defaults.set(nil, forKey: "uData")
+                     }*/
+                    /*self.dismiss(animated: false){
+                     self.defaults.set(nil, forKey: "userToken")
+                     self.defaults.set(nil, forKey: "requestToken")
+                     self.defaults.set(nil, forKey: "uData")
+                     //                    self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                     //
+                     //                    })
+                     }*/
                     self.defaults.set(nil, forKey: "userToken")
                     self.defaults.set(nil, forKey: "requestToken")
                     self.defaults.set(nil, forKey: "uData")
@@ -242,7 +260,7 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
                     
                 }
                 catch{
-                   print("error")
+                    print("error")
                     
                 }
                 /*self.dismiss(animated: false){
@@ -293,6 +311,20 @@ extension MenuController:UITableViewDelegate,UITableViewDataSource
             self.performSegue(withIdentifier: "finanSegue", sender: self)
             
         }
+        else if menuItems[indexPath.row].ID == 6{
+//                    let alert = UIAlertController(title: "Diqqət!", message: "Tətbiqdən tam yararlanmaq üçün qeydiyyatdan keçin", preferredStyle: UIAlertController.Style.alert)
+//
+//                              alert.addAction(UIAlertAction(title: "Qeydiyyat", style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) in
+//
+//                              }))
+//                              self.present(alert, animated: true, completion: nil)
+            self.defaults.set(nil, forKey: "userToken")
+                                             self.defaults.set(nil, forKey: "requestToken")
+                                             self.defaults.set(nil, forKey: "uData")
+                                             let menu:MenuController = MenuController()
+                                             menu.updateRootVC(status: false)
+                   
+               }
         // print(cell.object?.name)
         //cell.delegate = self
         //cell.reloadData()
