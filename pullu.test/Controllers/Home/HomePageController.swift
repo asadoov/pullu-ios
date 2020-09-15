@@ -151,29 +151,29 @@ class HomePageController: UIViewController{
         //        pass = defaults.string(forKey: "pass")
         // let udata=defaults.string(forKey: "uData")
         //print("\(mail)\n\(pass)\n\(udata)")
+           
         
-        
-        let udata=defaults.string(forKey: "uData")
-      
-        if udata != nil {
-            do{
-                      
-                      
-                      uInfo  = try
-                          JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
-                  }
-                  catch{
-                      
-                  }
-           // addFloatingLabel()
-            DispatchQueue.main.async {
-                self.floatingLabel?.text = "Balans: \(self.uInfo[0].balance!) AZN"
-                self.floatingLabel.layer.cornerRadius = self.floatingLabel!.frame.height.self / 1.0
-                self.floatingLabel.isHidden = false
-            }
-        }
-        else
-        {floatingLabel.isHidden = true}
+//        let udata=defaults.string(forKey: "uData")
+//      
+//        if udata != nil {
+//            do{
+//                      
+//                      
+//                      uInfo  = try
+//                          JSONDecoder().decode(Array<UserStruct>.self, from: udata!.data(using: .utf8)!)
+//                  }
+//                  catch{
+//                      
+//                  }
+//           // addFloatingLabel()
+//            DispatchQueue.main.async {
+//                self.floatingLabel?.text = "Balans: \(self.uInfo[0].balance!) AZN"
+//                self.floatingLabel.layer.cornerRadius = self.floatingLabel!.frame.height.self / 1.0
+//                self.floatingLabel.isHidden = false
+//            }
+//        }
+//        else
+//        {floatingLabel.isHidden = true}
                 
         
     }

@@ -16,6 +16,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     var data = ["050","051","055","070","099"]
     var picker = UIPickerView()
     var phoneNumWithOperator = ""
+    @IBOutlet weak var questButton: UIButton!
     
     @IBOutlet weak var signInButton: UIButton!
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -35,6 +36,10 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     }
     
     
+    @IBAction func questButtonClick(_ sender: Any) {
+        let menu:MenuController = MenuController()
+             menu.updateRootVC(status: true)
+    }
     
     @IBAction func closeButton(_ sender: Any) {
       
@@ -48,6 +53,7 @@ class FirstRegistrationController: UIViewController,UIPickerViewDataSource,UIPic
     override func viewDidLoad() {
         super.viewDidLoad()
         self.signInButton.layer.cornerRadius = self.signInButton.frame.height.self / 2.0
+         self.questButton.layer.cornerRadius = self.questButton.frame.height.self / 2.0
         NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
             self.view.frame.origin.y = -200
         }

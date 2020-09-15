@@ -19,8 +19,22 @@ class ChangePassViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        self.savePassButton.layer.cornerRadius = self.savePassButton.frame.height.self / 2.0
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillShowNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = -200
+//        }
+//        NotificationCenter.default.addObserver(forName: UITextField.keyboardWillHideNotification, object: nil, queue: nil) { (nc) in
+//            self.view.frame.origin.y = 0.0
+//        }
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        
+            view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
+    @objc func dismissKeyboard() {
+          //Causes the view (or one of its embedded text fields) to resign the first responder status.
+          view.endEditing(true)
+      }
     
     @IBAction func changePassButton(_ sender: Any) {
         
