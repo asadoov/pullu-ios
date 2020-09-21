@@ -77,7 +77,7 @@ public class DbSelect {
     
     
     
-    func GetAds(isPaid:Int,page:Int,catID:Int?,progressView:MBProgressHUD, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+    func GetAds(isPaid:Int,page:Int,catID:Int?, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         
         
         let usrtkn = defaults.string(forKey: "userToken")
@@ -97,9 +97,9 @@ public class DbSelect {
         }
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
-            DispatchQueue.main.async {
-                progressView.progress = Float(progress.fractionCompleted)
-            }
+//            DispatchQueue.main.async {
+//                progressView.progress = Float(progress.fractionCompleted)
+//            }
             print("progess!", Float(progress.fractionCompleted))
         }
             

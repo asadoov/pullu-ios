@@ -56,8 +56,8 @@ class HomePageController: UIViewController{
         if let storyboard = self.storyboard {
             
             let myViewController = storyboard
-                .instantiateViewController(withIdentifier: "notPaid")
-            myViewController.title = "Pulsuz"
+                .instantiateViewController(withIdentifier: "ads")
+            //myViewController.title = "Pulsuz"
             
             
             //            let backgroundImage = UIImageView()
@@ -67,24 +67,24 @@ class HomePageController: UIViewController{
             //                       backgroundImage.backgroundColor = .white
             //                       myViewController.navigationItem.titleView = backgroundImage
             
-            let myShareController = storyboard
-                .instantiateViewController(withIdentifier: "paid")
-            myShareController.title = "Pullu"
+//            let myShareController = storyboard
+//                .instantiateViewController(withIdentifier: "paid")
+//            myShareController.title = "Pullu"
             
             let segmentedViewController = SJSegmentedViewController(headerViewController: nil,
-                                                                    segmentControllers: [myViewController,
-                                                                                         myShareController])
-            segmentedViewController.segmentBackgroundColor = UIColor.white
-            segmentedViewController.segmentTitleColor = UIColor.black
+                                                                    segmentControllers: [myViewController
+                                                                                         ])
+//            segmentedViewController.segmentBackgroundColor = UIColor.white
+//            segmentedViewController.segmentTitleColor = UIColor.black
             //            catView.layer.borderWidth = 1
             //            catView.layer.borderColor = UIColor.gray.cgColor
             
-            segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
-            segmentedViewController.selectedSegmentViewColor = UIColor.black
-            segmentedViewController.selectedSegmentViewHeight = 3
-            segmentedViewController.segmentViewHeight = 40
-            segmentedViewController.headerViewHeight =  95
-            
+//            segmentedViewController.segmentTitleFont = UIFont.systemFont(ofSize: 18)
+//            segmentedViewController.selectedSegmentViewColor = UIColor.black
+//            segmentedViewController.selectedSegmentViewHeight = 3
+//            segmentedViewController.segmentViewHeight = 40
+//            segmentedViewController.headerViewHeight =  95
+//
             addChild(segmentedViewController)
             segmentView.addSubview(segmentedViewController.view)
             segmentedViewController.view.frame = segmentView.bounds
