@@ -45,7 +45,7 @@ public class DbSelect {
                 do{
                     
                     
-                     obj = try
+                    obj = try
                         JSONDecoder().decode(ResponseStruct<UserStruct>.self, from: response.data!)
                     // userList=list
                     switch obj.status{
@@ -77,29 +77,27 @@ public class DbSelect {
     
     
     
-    func GetAds(isPaid:Int,page:Int,catID:Int?, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+    func GetAds(page:Int,searchQuery:String, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         
         
         let usrtkn = defaults.string(forKey: "userToken")
         let reqTkn = defaults.string(forKey: "requestToken")
+        let isPaid = defaults.string(forKey: "isPaid")
+        let catID = defaults.string(forKey: "catID")
+        let minPrice = defaults.string(forKey: "minPrice")
+        let maxPrice = defaults.string(forKey: "maxPrice")
         //   let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
         let PULLULINK = "https://pullu.az/api/androidmobileapp/user/get/Ads"
         // let PULLULINK = "http://127.0.0.1:44301/api/androidmobileapp/user/get/Ads"
         
         let Parameters:[String:Any]
         //var url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)"
-        if catID! > 0 {
-            Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid,"catID":catID!] as [String : Any]
-            //          url = "https://pullu.az/api/androidmobileapp/user/get/Ads?mail=\(username)&pass=\(pass)&catID=\(catID!)"
-        }else{
-            Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid] as [String : Any]
-            
-        }
+        Parameters = ["userToken": usrtkn ?? "","requesttoken":reqTkn ?? "","pageNo":page,"isPaid":isPaid ?? 3, "catID":catID ?? 0, "minPrice":minPrice ?? 0, "maxPrice":maxPrice ?? 0,"searchQuery":searchQuery ?? ""] as [String : Any]
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).downloadProgress { (progress) in
-//            DispatchQueue.main.async {
-//                progressView.progress = Float(progress.fractionCompleted)
-//            }
+            //            DispatchQueue.main.async {
+            //                progressView.progress = Float(progress.fractionCompleted)
+            //            }
             print("progess!", Float(progress.fractionCompleted))
         }
             
@@ -131,11 +129,11 @@ public class DbSelect {
                     
                 }
                 catch let jsonErr {
-                  
+                    
                     let obj = ResponseStruct<Advertisement>()
-                   
+                    
                     completionBlock(obj)
-                  //  progressView.hide(animated: true)
+                    //  progressView.hide(animated: true)
                     print("Error serializing json:",jsonErr)
                     
                     
@@ -316,7 +314,7 @@ public class DbSelect {
                 do{
                     
                     
-                     obj  = try
+                    obj  = try
                         JSONDecoder().decode(ResponseStruct<Statistics>.self, from: response.data!)
                     
                     // userList=list
@@ -336,12 +334,12 @@ public class DbSelect {
         
         
     }
-    func SearchAds( completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
+    func SearchAds(sQuery:String?, completionBlock: @escaping (_ result:ResponseStruct<Advertisement>) ->()){
         let userToken = defaults.string(forKey: "userToken")
         let requestToken = defaults.string(forKey: "requestToken")
         
         let url="https://pullu.az/api/androidmobileapp/user/search/ads"
-        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? "","pageNo":1,"isPaid":3,"catID":0,"searchQuery":"a"] as [String : Any]
+        let Parameters = ["userToken": userToken ?? "","requestToken":requestToken ?? "","searchQuery":sQuery!] as [String : Any]
         var obj = ResponseStruct<Advertisement>()
         request(url ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString)).responseJSON
             {
@@ -351,21 +349,21 @@ public class DbSelect {
                 do{
                     
                     
-                     obj = try
+                    obj = try
                         JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
                     if obj.status == 1{
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }
-                   
+                    
                     
                     
                 }
                 catch let jsonErr{
-                 
+                    
                     print("Error serializing json:",jsonErr)
                 }
-                   completionBlock(obj)
+                completionBlock(obj)
         }
         
         
@@ -389,21 +387,21 @@ public class DbSelect {
                 do{
                     
                     
-                     obj = try
+                    obj = try
                         JSONDecoder().decode(ResponseStruct<ProfileModel>.self, from: response.data!)
                     if obj.status == 1{
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }
-                   
+                    
                     
                     
                 }
                 catch let jsonErr{
-                 
+                    
                     print("Error serializing json:",jsonErr)
                 }
-                   completionBlock(obj)
+                completionBlock(obj)
         }
         
         
@@ -568,7 +566,7 @@ public class DbSelect {
         
         
         
-         var obj = ResponseStruct<FinanceStruct>()
+        var obj = ResponseStruct<FinanceStruct>()
         
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
@@ -580,7 +578,7 @@ public class DbSelect {
                 do{
                     
                     
-                  obj  = try
+                    obj  = try
                         JSONDecoder().decode(ResponseStruct<FinanceStruct>.self, from: response.data!)
                     // userList=list
                     //print(list)
@@ -588,14 +586,14 @@ public class DbSelect {
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }
-                   
+                    
                     
                     
                 }
                 catch let jsonErr{
                     print("Error serializing json:",jsonErr)
                 }
-                 completionBlock(obj)
+                completionBlock(obj)
         }
         
         
@@ -615,7 +613,7 @@ public class DbSelect {
         
         
         
-         var obj = ResponseStruct<Advertisement>()
+        var obj = ResponseStruct<Advertisement>()
         
         
         request(PULLULINK ,method: .post,parameters: Parameters, encoding: URLEncoding(destination: .queryString),headers: nil).responseJSON
@@ -627,7 +625,7 @@ public class DbSelect {
                 do{
                     
                     
-                   obj  = try
+                    obj  = try
                         JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
                     // userList=list
                     //print(list)
@@ -635,14 +633,14 @@ public class DbSelect {
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }
-                   
+                    
                     
                     
                 }
                 catch let jsonErr{
                     print("Error serializing json:",jsonErr)
                 }
-                 completionBlock(obj)
+                completionBlock(obj)
         }
         
         
@@ -676,7 +674,7 @@ public class DbSelect {
                 do{
                     
                     
-                   obj = try
+                    obj = try
                         JSONDecoder().decode(ResponseStruct<Advertisement>.self, from: response.data!)
                     // userList=list
                     //print(list)
@@ -684,7 +682,7 @@ public class DbSelect {
                         self.security.RefreshToken(requestToken: obj.requestToken)
                         
                     }
-                   
+                    
                     
                     
                 }
@@ -692,7 +690,7 @@ public class DbSelect {
                     print("Error serializing json:",jsonErr)
                     
                 }
-                 completionBlock(obj)
+                completionBlock(obj)
         }
         
         
@@ -770,7 +768,7 @@ public class DbSelect {
                 do{
                     
                     
-                     obj  = try
+                    obj  = try
                         JSONDecoder().decode(ResponseStruct<ViewerStruct>.self, from: response.data!)
                     // userList=list
                     //print(list)

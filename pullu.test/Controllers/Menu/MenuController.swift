@@ -205,6 +205,9 @@ class MenuController: UIViewController {
     
     
     
+    @IBAction func exitMenu(_ sender: Any) {
+        dismiss(animated: true)
+    }
     
     
     

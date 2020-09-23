@@ -261,7 +261,7 @@ class NotPaidCollection: UICollectionViewController {
             self.myRefreshControl.beginRefreshing()
             var typeCount=0
             
-            select.GetAds(isPaid: 1,page: 1, catID: catID){
+            select.GetAds(page: 1,searchQuery: ""){
                 
                 (obj) in
                 UIApplication.shared.endIgnoringInteractionEvents()
@@ -528,7 +528,7 @@ func pagination(page:Int){
 //         self.notPaidCollection.tableFooterView?.isHidden = false
          var typeCount=0
          
-         select.GetAds(isPaid: 0,page: page, catID: catID){
+         select.GetAds(page: page,searchQuery: ""){
              
              (obj) in
              self.spinner.stopAnimating()

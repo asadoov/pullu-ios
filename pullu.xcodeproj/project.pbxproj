@@ -33,6 +33,7 @@
 		B62B854B23FD56C40069C08F /* CategoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854A23FD56C40069C08F /* CategoryStruct.swift */; };
 		B62B854D23FD6BEA0069C08F /* TypeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62B854C23FD6BEA0069C08F /* TypeStruct.swift */; };
 		B647950D24BDFE3600490D09 /* CheckOtp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B647950C24BDFE3600490D09 /* CheckOtp.swift */; };
+		B64A9D5D251B5A3F000A7C8F /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A9D5C251B5A3F000A7C8F /* FilterController.swift */; };
 		B6582A4624CB2C190033C60B /* WithdrawFinishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6582A4524CB2C190033C60B /* WithdrawFinishController.swift */; };
 		B65FE46B23EF40440020C21F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65FE46A23EF40440020C21F /* TabBarController.swift */; };
 		B6632AB2247C1B6F00C96395 /* ChangePassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6632AB1247C1B6F00C96395 /* ChangePassViewController.swift */; };
@@ -247,6 +248,7 @@
 		B63908FF24FFBC58003BEBD7 /* az */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = az; path = az.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		B639B45F23F0925900DDCED4 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B647950C24BDFE3600490D09 /* CheckOtp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckOtp.swift; sourceTree = "<group>"; };
+		B64A9D5C251B5A3F000A7C8F /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		B652A1B423EDA46C00D75422 /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B652A1B623EDA51F00D75422 /* gRPCCertificates-Cpp.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = "gRPCCertificates-Cpp.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B652A1B723EDA51F00D75422 /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -858,6 +860,7 @@
 		B66546A025095283001507CD /* Ads */ = {
 			isa = PBXGroup;
 			children = (
+				B68E5F4924094DAF002B9168 /* CategoryViewCell.swift */,
 				B66546A325095311001507CD /* AdsController.swift */,
 				B66546A52509580A001507CD /* AdCell.swift */,
 				B681449E251768B600DBB560 /* AdsHeader.swift */,
@@ -872,8 +875,8 @@
 				B61FF7DB2464A17E00316F9C /* Paid */,
 				B66CA1B023C88D6C0089C894 /* ReklamCellTableViewCell.swift */,
 				04EFB7DA23C7190700042E5C /* HomePageController.swift */,
-				B68E5F4924094DAF002B9168 /* CategoryViewCell.swift */,
 				B67253B3250A27BC006352E4 /* aCollectionViewCell.swift */,
+				B64A9D5C251B5A3F000A7C8F /* FilterController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1357,6 +1360,7 @@
 				B67B9DE523EEE18A00A3451C /* SecondRegistrationController.swift in Sources */,
 				04D6EF1B23FBFF54007380BA /* BalanceController.swift in Sources */,
 				B6A40A8D23FE613B0043495D /* TariffStruct.swift in Sources */,
+				B64A9D5D251B5A3F000A7C8F /* FilterController.swift in Sources */,
 				B6C4961A24C46B8A004CE501 /* WithdrawService.swift in Sources */,
 				B67B9DE623EEE18A00A3451C /* ThirdRegistrationController.swift in Sources */,
 				B6264A9B24BF022700328386 /* PassCreatorController.swift in Sources */,

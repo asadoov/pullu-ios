@@ -12,10 +12,11 @@ import AlamofireImage
 import MBProgressHUD
 import FirebaseMessaging
 import SJSegmentedScrollView
-class HomePageController: UIViewController{
+class HomePageController: UIViewController,UISearchBarDelegate{
     
     //  @IBOutlet weak var isPaidSegment: UISegmentedControl!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     let defaults = UserDefaults.standard
     @IBOutlet weak var categoryScroll: UICollectionView!
     
@@ -41,6 +42,7 @@ class HomePageController: UIViewController{
     @IBOutlet weak var segmentView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         //        let searchController = UISearchController(searchResultsController: nil)
         //               navigationItem.searchController = searchController
         //        searchController.searchBar.scopeButtonTitles = ["Bütün","Vip","Sadə"]
@@ -177,10 +179,32 @@ class HomePageController: UIViewController{
                 
         
     }
-    
-    @IBAction func searchButtonClick(_ sender: Any) {
-        self.performSegue(withIdentifier: "searchSegue", sender: self)
+  
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("searchText \(searchBar.text)")
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       if searchText == "" {
+        let sQuery:[String: String] = ["searchQuery": searchBar.text!]
+        
+        // post a notification
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationName"), object: nil, userInfo: sQuery)
+          // print("UISearchBar.text cleared!")
+       }
+   }
+    @IBAction func searchClicked(_ sender: Any) {
+        let sQuery:[String: String] = ["searchQuery": searchBar.text!]
+              
+              // post a notification
+              NotificationCenter.default.post(name: NSNotification.Name(rawValue: "notificationName"), object: nil, userInfo: sQuery)
+    }
+    
+    @IBAction func menuClick(_ sender: Any) {
+        self.performSegue(withIdentifier: "menuSeque", sender: self)
+    }
+    
+    
     func addFloatingLabel(){
         floatingLabel = UILabel()
        floatingLabel?.frame = CGRect(x: 285, y: 485, width: 200, height: 15)

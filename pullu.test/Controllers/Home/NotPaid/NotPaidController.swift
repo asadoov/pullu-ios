@@ -331,7 +331,7 @@ class NotPaidController: UITableViewController {
             
             var typeCount=0
             
-            select.GetAds(isPaid: 0,page: page, catID: catID){
+            select.GetAds(page: page,searchQuery: ""){
                 
                 (obj) in
                 self.spinner.stopAnimating()
@@ -495,7 +495,7 @@ class NotPaidController: UITableViewController {
         // var typeCount=0
         
         
-        select.GetAds(isPaid: 0,page: 1, catID: catID){
+        select.GetAds(page: 1,searchQuery: ""){
             
             (obj) in
             UIApplication.shared.endIgnoringInteractionEvents()
