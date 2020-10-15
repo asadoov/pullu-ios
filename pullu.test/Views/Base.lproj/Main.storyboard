@@ -364,7 +364,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Şifrə" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u7v-y0-iHs">
-                                <rect key="frame" x="23" y="266" width="272" height="34"/>
+                                <rect key="frame" x="23" y="272" width="272" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="061-14-1Ak"/>
                                 </constraints>
@@ -372,7 +372,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WaI-c2-rrZ">
-                                <rect key="frame" x="174" y="331" width="97" height="32"/>
+                                <rect key="frame" x="175" y="337" width="96" height="29"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="14"/>
                                 <state key="normal" title="Şifrəni unuttum">
                                     <color key="titleColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -399,7 +399,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-qA-gW5">
-                                <rect key="frame" x="17" y="380" width="287" height="34"/>
+                                <rect key="frame" x="17" y="383" width="287" height="31"/>
                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2540,7 +2540,7 @@ baxışı</string>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Razılaşma yolu ilə" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIi-81-U6u">
-                                <rect key="frame" x="119" y="335" width="131.5" height="18"/>
+                                <rect key="frame" x="119" y="339" width="131.5" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="0ir-cb-DPy"/>
                                 </constraints>
@@ -2584,7 +2584,7 @@ baxışı</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZa-BC-neq">
-                                <rect key="frame" x="205" y="410" width="99" height="36"/>
+                                <rect key="frame" x="205" y="414" width="99" height="32"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="17"/>
                                 <state key="normal" title="Media seçimi"/>
                                 <userDefinedRuntimeAttributes>
@@ -2646,7 +2646,7 @@ baxışı</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F37-nF-oF6">
-                                <rect key="frame" x="16" y="476" width="288" height="34"/>
+                                <rect key="frame" x="16" y="479" width="288" height="31"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Nunito-Regular" family="Nunito" pointSize="16"/>
                                 <state key="normal" title="Bitir">
@@ -2663,10 +2663,10 @@ baxışı</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCx-R3-onz">
-                                <rect key="frame" x="0.0" y="44" width="320" height="423"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="426"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pf7-iO-6kz">
-                                        <rect key="frame" x="0.0" y="106" width="320" height="65"/>
+                                        <rect key="frame" x="0.0" y="107" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="91e-HX-4CW" id="bYa-VF-wkS"/>
@@ -2674,7 +2674,7 @@ baxışı</string>
                                         </connections>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z2y-tk-twv">
-                                        <rect key="frame" x="0.0" y="176" width="320" height="69"/>
+                                        <rect key="frame" x="0.0" y="177" width="320" height="70"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="91e-HX-4CW" id="Bx3-1r-ESg"/>
@@ -2682,7 +2682,7 @@ baxışı</string>
                                         </connections>
                                     </pickerView>
                                     <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hP0-fH-2Cd">
-                                        <rect key="frame" x="0.0" y="253" width="320" height="67"/>
+                                        <rect key="frame" x="0.0" y="255" width="320" height="67"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <connections>
                                             <outlet property="dataSource" destination="91e-HX-4CW" id="p63-a2-gKU"/>
@@ -2698,7 +2698,7 @@ baxışı</string>
                                         </connections>
                                     </pickerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtD-Gj-wMf">
-                                        <rect key="frame" x="17" y="346" width="287" height="39"/>
+                                        <rect key="frame" x="17" y="349" width="287" height="39"/>
                                         <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="Etk-vE-dQO"/>
@@ -3170,7 +3170,7 @@ baxışı</string>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="50y-nJ-7Fb">
-                                <rect key="frame" x="263" y="469" width="41" height="42"/>
+                                <rect key="frame" x="262" y="469" width="42" height="42"/>
                                 <color key="backgroundColor" red="0.63585393581118865" green="0.70254957268279827" blue="0.94333755970001221" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="vAv-5j-Zaj"/>
@@ -3753,7 +3753,7 @@ baxışı</string>
                                 <attributedString key="attributedText">
                                     <fragment content="---">
                                         <attributes>
-                                            <font key="NSFont" metaFont="message" size="11"/>
+                                            <font key="NSFont" metaFont="label" size="11"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -4666,7 +4666,7 @@ baxışı</string>
                                                         <fragment content="---">
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                <font key="NSFont" metaFont="message" size="11"/>
+                                                                <font key="NSFont" metaFont="label" size="11"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="8" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -5382,7 +5382,7 @@ baxışı</string>
                     <tabBarItem key="tabBarItem" title="Arxiv" image="archieve" id="ZAZ-N8-Zs4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8qq-pJ-r29">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

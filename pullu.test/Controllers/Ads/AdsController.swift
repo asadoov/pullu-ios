@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import  MBProgressHUD
+
 private let reuseIdentifier = "Cell"
 
 class AdsController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
